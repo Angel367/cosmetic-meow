@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+{% include 'base_elements/header.html' %}
+{% block main %}{% endblock main %}
+{% include 'base_elements/footer.html' %}
+</body>
+</html>
