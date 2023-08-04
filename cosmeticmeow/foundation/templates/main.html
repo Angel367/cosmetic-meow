@@ -1,5 +1,161 @@
 {% extends 'base_elements/base.html' %}
 {% block title %}Главная{% endblock title %}
 {% block main %}
-
+<main>
+    <article>
+{#        главная секция: фото, инфа, отзыв#}
+        <section>
+            <div>
+                <img src="">
+            </div>
+            <h1>
+                Beauty Bazaar:
+                Your Online Glam Guide
+            </h1>
+            <p>
+                Welcome to Cosmetic Products,
+                your go-to destination for all
+                your beauty needs, where you can
+                easily browse and purchase a wide
+                range of beauty products from
+                various brands.
+            </p>
+        </section>
+        <section>
+            <a>Посмотреть продукцию</a>
+            <div>
+{#                Cards of review#}
+                <div>
+                    <div>4.8</div>
+                    <div>s t a r s</div>
+                    <div>2,394 Ratings</div>
+                    <div>Google Reviews</div>
+                </div>
+                <div>
+                    <div>A+</div>
+                    <div>s t a r s</div>
+                    <div>125 Reviews</div>
+                    <div>BBB Rating</div>
+                </div>
+            </div>
+        </section>
+        <section>
+            <h2>
+                Trusted by numerous
+                Beauty enthusiasts
+            </h2>
+            <div>
+                <span>
+                    Jessica Simon
+                </span>
+                <div>
+                    This website offers a wide
+                    variety of beauty products
+                    from various companies, making
+                    it convenient and enjoyable for
+                    customers to explore and purchase
+                    their favorite items.
+                </div>
+            </div>
+        </section>
+    </article>
+    <article>
+        <h2>Наши преимущества</h2>
+        <a>Узнать о компании</a>
+        <div>
+            <div>
+                <div>
+                    <img src="">
+                </div>
+                <div>
+                    Convenient and easy online
+                    shopping experience for all
+                    beauty enthusiasts.
+                </div>
+            </div>
+            <div>
+                <div>
+                    <img src="">
+                </div>
+                <div>
+                    Access to a wide variety of
+                    beauty products from various
+                    companies, all in one place.
+                </div>
+            </div>
+            <div>
+                <div>
+                    <img src="">
+                </div>
+                <div>
+                    Ability to compare prices
+                    and read reviews from other
+                    customers before making a purchase.
+                </div>
+            </div>
+        </div>
+    </article>
+    <article>
+{#        характеристика и фото #}
+        <div>
+            <h2>Топ компания на планете</h2>
+            <p>Лучшая продукция</p>
+        </div>
+        <div><img src=""></div>
+    </article>
+    <article>
+        <h2>Партнеры</h2>
+        <ul>
+            <li><img src=""></li>
+            <li><img src=""></li>
+            <li><img src=""></li>
+            <li><img src=""></li>
+            <li><img src=""></li>
+        </ul>
+{#        партнеры и тд #}
+    </article>
+    <article>
+{#   Курсы     #}
+        <div>
+            <img src="">
+        </div>
+        <div>
+            <h2>Наши курсы и трененги</h2>
+            <div>
+                <div></div>
+                <div>Opportunity to discover
+                    new and unique beauty brands
+                    that may not be readily
+                    available in local stores.</div>
+            </div>
+            <div>
+                <div></div>
+                <div>Option to place orders for
+                    desired products and have
+                    them delivered right to your
+                    doorstep.
+                </div>
+            </div>
+            <a>Записаться на курсы</a>
+        </div>
+    </article>
+    <article>
+         <div>
+            <img src="">
+        </div>
+        <div>
+            <h2>Нужно больше информации?</h2>
+            <div>
+                Подпишитесь и узнавайте о
+                новинках, акциях и скидках
+                первыми!
+            </div>
+            <form action="" method="post">
+                {% csrf_token %}
+                <input type="email" placeholder="Enter your email Address">
+                <button type="submit">Подписаться</button>
+            </form>
+{#        Подписаться #}
+    </article>
+</main>
 {% endblock main %}
