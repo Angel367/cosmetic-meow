@@ -6,8 +6,8 @@
 {% endblock head %}
 {% block main %}
 <main>
-    <article class="column">
-        <div class="fix header">
+    <article class="column relative" id="main_art1">
+        <div id="img_main_art" class="fix header">
                 <img src="{% static 'img/main/main_article.png' %}" alt="background_article1">
             </div>
 {#        главная секция: фото, инфа, отзыв#}
@@ -17,14 +17,14 @@
                 Beauty Bazaar:
                 Your Online Glam Guide
             </h1>
-            <p>
+            <div>
                 Welcome to Cosmetic Products,
                 your go-to destination for all
                 your beauty needs, where you can
                 easily browse and purchase a wide
                 range of beauty products from
                 various brands.
-            </p>
+            </div>
         </section>
         <section class="column left">
             <a href="#">Посмотреть продукцию</a>
@@ -64,7 +64,7 @@
             </div>
         </section>
     </article>
-    <article class="column">
+    <article class="column" id="main_art2">
         <h2>Наши преимущества</h2>
         <a href="#">Узнать о компании</a>
         <div class="row">
@@ -171,5 +171,10 @@
         </div>
 {#        Подписаться #}
     </article>
+
 </main>
 {% endblock main %}
+{% block js%}
+<script type="application/javascript" src="{% static 'js/main.js' %}"  >
+</script>
+{% endblock js %}
