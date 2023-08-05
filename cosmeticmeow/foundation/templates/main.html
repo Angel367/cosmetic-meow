@@ -1,13 +1,18 @@
 {% extends 'base_elements/base.html' %}
+{% load static %}
 {% block title %}Главная{% endblock title %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+{% endblock head %}
 {% block main %}
 <main>
-    <article>
-{#        главная секция: фото, инфа, отзыв#}
-        <section>
-            <div>
-                <img src="">
+    <article class="column">
+        <div class="fix header">
+                <img src="{% static 'img/main/main_article.png' %}" alt="background_article1">
             </div>
+{#        главная секция: фото, инфа, отзыв#}
+        <section class="column left">
+
             <h1>
                 Beauty Bazaar:
                 Your Online Glam Guide
@@ -21,25 +26,25 @@
                 various brands.
             </p>
         </section>
-        <section>
-            <a>Посмотреть продукцию</a>
-            <div>
+        <section class="column left">
+            <a href="#">Посмотреть продукцию</a>
+            <div class="row rating">
 {#                Cards of review#}
-                <div>
+                <div class="column">
                     <div>4.8</div>
-                    <div>s t a r s</div>
+                    <div>★★★★★</div>
                     <div>2,394 Ratings</div>
                     <div>Google Reviews</div>
                 </div>
-                <div>
+                <div class="column">
                     <div>A+</div>
-                    <div>s t a r s</div>
+                    <div>★★★★★</div>
                     <div>125 Reviews</div>
                     <div>BBB Rating</div>
                 </div>
             </div>
         </section>
-        <section>
+        <section class="column left">
             <h2>
                 Trusted by numerous
                 Beauty enthusiasts
@@ -59,13 +64,13 @@
             </div>
         </section>
     </article>
-    <article>
+    <article class="column">
         <h2>Наши преимущества</h2>
-        <a>Узнать о компании</a>
-        <div>
-            <div>
+        <a href="#">Узнать о компании</a>
+        <div class="row">
+            <div class="column">
                 <div>
-                    <img src="">
+                    <img src="{% static 'img/main/ben1.png' %}" alt="">
                 </div>
                 <div>
                     Convenient and easy online
@@ -73,9 +78,9 @@
                     beauty enthusiasts.
                 </div>
             </div>
-            <div>
+            <div class="column">
                 <div>
-                    <img src="">
+                    <img src="{% static 'img/main/ben2.png' %}" alt="">
                 </div>
                 <div>
                     Access to a wide variety of
@@ -83,9 +88,9 @@
                     companies, all in one place.
                 </div>
             </div>
-            <div>
+            <div class="column">
                 <div>
-                    <img src="">
+                    <img src="{% static 'img/main/ben3.png' %}" alt="">
                 </div>
                 <div>
                     Ability to compare prices
@@ -95,66 +100,75 @@
             </div>
         </div>
     </article>
-    <article>
+    <article class="relative column">
 {#        характеристика и фото #}
-        <div>
+        <div class="left">
             <h2>Топ компания на планете</h2>
             <p>Лучшая продукция</p>
         </div>
-        <div><img src=""></div>
+        <div class="fix right">
+            <img src="{% static 'img/main/top_company.png' %}" alt="">
+        </div>
     </article>
-    <article>
+    <article class="row">
         <h2>Партнеры</h2>
-        <ul>
-            <li><img src=""></li>
-            <li><img src=""></li>
-            <li><img src=""></li>
-            <li><img src=""></li>
-            <li><img src=""></li>
-        </ul>
+
+        <a href="#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>
+        <a href="#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>
+        <a href="#"><img src="{% static 'img/main/partner.png' %}"alt=""></a>
+        <a href="#"><img src="{% static 'img/main/partner.png' %}"alt=""></a>
+        <a href="#"><img src="{% static 'img/main/partner.png' %}"alt=""></a>
+
+
 {#        партнеры и тд #}
     </article>
-    <article>
+    <article class="relative " >
 {#   Курсы     #}
-        <div>
-            <img src="">
+        <div class="fix left">
+            <img alt="course" src="{% static 'img/main/course.png' %}">
         </div>
-        <div>
+        <div class="column right">
             <h2>Наши курсы и трененги</h2>
             <div>
-                <div></div>
+                <div class="row">
+                    <img alt="" src="{% static 'img/main/icon_course1.png' %}">
+                </div>
                 <div>Opportunity to discover
                     new and unique beauty brands
                     that may not be readily
-                    available in local stores.</div>
+                    available in local stores.
+                </div>
             </div>
-            <div>
-                <div></div>
+            <div class="row">
+                <div>
+<img alt="" src="{% static 'img/main/icon_course2.png' %}">
+                </div>
                 <div>Option to place orders for
                     desired products and have
                     them delivered right to your
                     doorstep.
                 </div>
             </div>
-            <a>Записаться на курсы</a>
+            <a href="#">Записаться на курсы <img alt="" src="{% static 'img/main/icon_course.png' %}"></a>
         </div>
-    </article>
-    <article>
-         <div>
-            <img src="">
+    </article >
+    <article class="relative column ">
+         <div class="fix right">
+            <img alt=""  src="{% static 'img/main/subscribe.png' %}">
         </div>
-        <div>
+        <div class="left">
             <h2>Нужно больше информации?</h2>
             <div>
                 Подпишитесь и узнавайте о
                 новинках, акциях и скидках
                 первыми!
             </div>
-            <form action="" method="post">
+            <form action="" method="post" class="column">
                 {% csrf_token %}
-                <input type="email" placeholder="Enter your email Address">
-                <button type="submit">Подписаться</button>
+                <input type="email" placeholder="Enter your email Address" maxlength="40">
+                <button type="submit" name="subscribe">Подписаться</button>
             </form>
+        </div>
 {#        Подписаться #}
     </article>
 </main>

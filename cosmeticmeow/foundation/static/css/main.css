@@ -1,0 +1,67 @@
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap:4em;
+}
+main article section{
+    z-index: 1;
+}
+main .fix{
+
+    position: absolute;
+    top: 0;
+    max-width: 100%;
+
+}
+main .right{
+    right: 0;
+    width: 70%;
+}
+main .left{
+    left:0;
+    width: 50%;
+}
+main .rating{
+    background: #FFFFFF80;
+    border-radius: .5rem;
+    padding: 1rem 2rem;
+}
+main .header{
+    height: inherit;
+    left:0;
+    right: 0;
+    z-index: -1;
+}
+main .header img{
+    width: 100%;
+}
+
+main .fix.right img, main .fix.left img{
+    width: 100%;
+
+}
+.relative{
+    position: relative;
+}
+main .column {
+    display: flex;
+    flex-direction: column;
+}
+main .column.right > div{
+    width: 50%;
+}
+main .row{
+    display: flex;
+    justify-content: center;
+
+    gap: 2rem;
+
+}
+main article{
+    max-width: 100%;
+}
+
+.row a img{
+    width: 100%;
+}

@@ -1,13 +1,19 @@
+{% load static %}
 <header>
+    <div class="logo">
+        <img alt="[logo]" src="{% static 'img/base_elements/logo.png'%}">
+    </div>
     <nav>
-        <div>[logo]</div>
-        <ul>
-            <li>Продукция</li>
-            <li>Обучение</li>
-            <li>Разработка</li>
-            <li>О нас</li>
-            <li>Личный кабинет</li>
-            <li>[кор]</li>
-        </ul>
+        <a href="#">Продукция</a>
+        <a href="#">Обучение</a>
+        <a href="#">Разработка</a>
+        <a href="#">О нас</a>
+        <a href="#">Личный кабинет</a>
+        <a href="#" class="basket">
+            <img src="{% static 'img/base_elements/basket.png'%}" alt="">
+            <span>({{ basket_count }}0)</span>
+        </a>
+
+{#            <a href="#" class="basket"><i class="fa fa-shopping-basket" aria-hidden="true"></i> ({{ basket_count }}0)</a>#}
     </nav>
 </header>
