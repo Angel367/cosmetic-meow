@@ -1,5 +1,8 @@
 from django.db import models
 
+from foundation.models import CustomUser
+
+
 # Create your models here.
 
 
@@ -21,3 +24,15 @@ class ProductImage(models.Model):
 
     def __str__(self):
         return self.product.name + " Image"
+
+
+class Order(models.Model):
+    customer = models.ForeignKey(
+        CustomUser,
+        on_delete=models.SET_DEFAULT,
+        default=None #CustomUser.objects.get(id=1)
+    )
+
+
+class Cart(models.Model):
+    pass
