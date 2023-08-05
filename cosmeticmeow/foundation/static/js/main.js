@@ -1,6 +1,16 @@
-img = document.getElementById('img_main_art')
-console.log(document.getElementById('main_art1').offsetTop)
-img.style.top = (-document.getElementById('main_art1').offsetTop) + 'px'
-console.log(img.clientHeight)
-img.style.height = (img.clientHeight + document.getElementById('main_art1').offsetTop) + 'px'
-console.log(img.clientHeight)
+window.onload = function() {
+console.log(
+    window.getComputedStyle(
+        document
+    .getElementById('main_art1')
+    ).paddingTop
+)
+document.getElementById('main_art1')
+    .style.paddingTop = (window.getComputedStyle(
+        document
+    .getElementById('main_art1')
+    ).paddingTop
+     + document
+    .getElementById('main_header')
+    .offsetHeight) + 'px'
+}

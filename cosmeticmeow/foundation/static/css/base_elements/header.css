@@ -1,5 +1,7 @@
 header{
-    padding: 1rem 2rem;
+    position: absolute;
+    top: 0;
+    width: 100%;
     /*background: blue;*/
     color:#4D4D4D;
     display: flex;
@@ -11,9 +13,11 @@ header .logo{
     /*background: darkblue;*/
     width: 3rem;
     height: 3rem;
+    padding: 1rem 3.5rem;
+
 }
 header nav{
-    padding: 0 1.5rem;
+    padding: 1rem 3.5rem;
     color: inherit;
     display: flex;
     flex-direction: row;

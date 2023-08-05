@@ -1,7 +1,7 @@
 main .column {
     display: flex;
     flex-direction: column;
-    /*gap: 2em;*/
+    gap: 2em;
 }
 main .column.right > div{
     width: 50%;
@@ -21,11 +21,14 @@ main article{
 .row a img{
     width: 100%;
 }
-section h1{
+section h1 span, section h1{
     font-size: 3.5rem;
-    font-weight: 600;
+    font-weight: 800;
     margin: 0;
+    display: block;
+
 }
+
 section > div{
     font-size: 1.2rem;
 }
@@ -33,14 +36,16 @@ section h2{
     font-size: 1.6rem;
 }
 section a{
-    font-size: 1.4rem;
+    font-size: 1.4em;
     text-decoration: none;
     color: black;
+    border-bottom: black solid 3px;
 }
 main{
     display: flex;
     flex-direction: column;
     justify-content: center;
+
 }
 main article section{
     z-index: 1;
@@ -48,11 +53,8 @@ main article section{
     margin: 0;
 }
 main .fix{
-
     position: absolute;
     top: 0;
-
-
 }
 main .right{
     right: 0;
@@ -67,28 +69,31 @@ main .rating{
     border-radius: .5rem;
     padding: 1rem 2rem;
 }
-main .header{
-    display: flex;
-    left: 0;
-    justify-content: center;
-    align-items: flex-start;
-    z-index: -1;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
-main .header img{
-    object-fit: cover;
-    min-width: 100vw
-
-}
 main #main_art1{
+    z-index: -1;
     height: max-content;
+    background-image: url("../img/main/main_article.png");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-main .fix.right img, main .fix.left img{
-    width: 100%;
-
+main .fix.right {
+    background-image: url("../img/main/course.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 50%;
+}
+main .fix.left:nth-child(1) {
+    background-image: url("../img/main/top_company.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 70%;
+}
+main .fix.left:nth-child(2) {
+    background-image: url("../img/main/subscribe.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 70%;
 }
 .relative{
     position: relative;
