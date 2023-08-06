@@ -1,50 +1,67 @@
+h2{
+    margin: 0;
+}
 main .column {
     display: flex;
     flex-direction: column;
-    gap: 2em;
+    gap: 1.6rem;
 }
-main .column.right > div{
+main .right > div, .right > section{
     width: 50%;
+}
+section div span{
+    font-size: 1.3rem;
+    display: block;
+    color: #444444;
 }
 main .row{
     display: flex;
-    justify-content: center;
-
+    justify-content: space-between;
+    align-items: center;
     gap: 2rem;
 
 }
 main article{
     max-width: 100%;
-    padding: 4rem 6rem
+    padding: 2rem 6rem
 }
 
 .row a img{
     width: 100%;
+    height: 2rem;
 }
 section h1 span, section h1{
     font-size: 3.5rem;
     font-weight: 800;
-    margin: 0;
+
     display: block;
 
+}
+section h1{
+    margin:2rem 0 0;
 }
 
 section > div{
     font-size: 1.2rem;
 }
 section h2{
-    font-size: 1.6rem;
+    font-size: 1.7rem;
+    margin: 0;
 }
-section a{
-    font-size: 1.4em;
+section a, #main_art2 a, .relative.row.fix.right a, main #course a{
+    font-size: 1.5rem;
     text-decoration: none;
     color: black;
+    width: fit-content;
     border-bottom: black solid 3px;
 }
+
 main{
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
 
 }
 main article section{
@@ -52,49 +69,170 @@ main article section{
     padding: 0;
     margin: 0;
 }
-main .fix{
-    position: absolute;
-    top: 0;
-}
-main .right{
-    right: 0;
-    width: 70%;
-}
-main .left{
-    left:0;
+main .left > div{
     width: 50%;
+}
+
+.left  section{
+    width: 60%;
 }
 main .rating{
     background: #FFFFFF80;
     border-radius: .5rem;
     padding: 1rem 2rem;
+    justify-content: space-evenly;
+    width: 60%;
 }
+main .rating > div > div{
+    font-size: 1rem;
+}
+main .rating > div > div:nth-child(2){
+    color: gold;
+}
+main .rating > div > div:first-child{
+    font-size: 3rem;
+}
+
 main #main_art1{
+    padding: 4rem 6rem;
     z-index: -1;
     height: max-content;
     background-image: url("../img/main/main_article.png");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: top center;
+
 }
 
-main .fix.right {
+main #course .fix {
     background-image: url("../img/main/course.png");
     background-repeat: no-repeat;
-    background-size: cover;
-    width: 50%;
+    background-size: 45%;
+    background-position: left;
+    align-items: flex-end;
+    padding-right: 1rem;
 }
-main .fix.left:nth-child(1) {
+main #course  {
+    padding-left: 0;
+    padding-right: 0;
+}
+main #course .fix > div{
+        width: 45%;
+        /*padding: 0 2rem;*/
+}
+main #course .fix > div h2{
+    font-size: 4rem;
+    font-weight: 700;
+}
+main #course a{
+    border-bottom: none;
+    align-self: center;
+    justify-self: center;
+}
+main #course a span{
+    border-bottom: #673657 solid 3px;
+    font-size: 3rem;
+}
+main #course a img {
+    height: 2.5rem;
+    width: 2.5rem;
+}
+main #course .fix > div > div{
+    justify-content: center;
+}
+ .with-img{
+    flex-shrink: 3;
+}
+main #course .fix > div > div > .row{
+    justify-content: center;
+}
+
+
+main .fix.row.relative.left {
     background-image: url("../img/main/top_company.png");
     background-repeat: no-repeat;
-    background-size: cover;
-    width: 70%;
+    background-size: contain;
+    background-position: right;
+    /*width: 70%;*/
+    padding: 9rem 3rem;
+
 }
-main .fix.left:nth-child(2) {
+main .fix.row.relative.left h2{
+    font-weight: 700;
+    font-size: 4.5rem;
+
+}
+main .fix.row.relative.left p{
+    font-weight: 500;
+    font-size: 2.5rem;
+}
+
+main .fix.column {
     background-image: url("../img/main/subscribe.png");
     background-repeat: no-repeat;
-    background-size: cover;
-    width: 70%;
+    background-size: contain;
+    /*width: 70%;*/
+    padding: 3rem 6rem;
+    background-position: right;
+
+}
+main .fix.column h2{
+    font-weight: 500;
+    font-size: 3rem;
+}
+main .fix.column div{
+    /*width: 45%;*/
+    gap:1rem;
+}
+main .fix.column form{
+    margin-top: 2rem;
+}
+main .fix.column div div, main .fix.column input::placeholder{
+    font-size: 1.5rem;
+    width: 100%;
+}
+
+main .fix.column input{
+    border: none;
+    width: 80%;
+    border-bottom: #673657 solid 2px;
+    background: none;
+    font-size: 1.5rem;
+}
+main .fix.column button{
+    color: white;
+    border: none;
+    padding: .7rem;
+    background: #673657;
+    width: fit-content;
+    font-size: 1.8rem;
 }
 .relative{
     position: relative;
 }
+#main_art2 h2{
+    font-weight: 600;
+    margin: 0;
+    font-size: 3rem;
+}
+#main_art2 a{
+    font-size: 1.4rem;
+}
+
+#main_art2 .column{
+    justify-content: center;
+    gap: 1rem;
+
+}
+#main_art2 .column div{
+    text-align: center;
+    font-size: 1.3rem;
+}
+#main_art2 .column div {
+    max-width: 20vw;
+    height: auto;
+}
+#main_art2 .column div img{
+    width: 12vw;
+}
+

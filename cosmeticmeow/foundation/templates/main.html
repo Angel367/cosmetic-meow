@@ -6,12 +6,10 @@
 {% endblock head %}
 {% block main %}
 <main>
-    <article class="column relative" id="main_art1">
-{#        <div id="img_main_art" class="fix header">#}
-{#                <img src="{% static 'img/main/main_article.png' %}" alt="background_article1">#}
-{#            </div>#}
+    <article class="column relative left" id="main_art1">
+
 {#        главная секция: фото, инфа, отзыв#}
-        <section class="column left">
+        <section class="column ">
 
             <h1>
                 <span>Beauty Bazaar:</span>
@@ -26,7 +24,7 @@
                 various brands.
             </div>
         </section>
-        <section class="column left">
+        <section class="column">
             <a href="#">Посмотреть продукцию</a>
             <div class="row rating">
 {#                Cards of review#}
@@ -44,14 +42,14 @@
                 </div>
             </div>
         </section>
-        <section class="column left">
+        <section class="column ">
             <h2>
                 Trusted by numerous
                 Beauty enthusiasts
             </h2>
             <div>
                 <span>
-                    Jessica Simon
+                    Jessica</span> <span>Simon
                 </span>
                 <div>
                     This website offers a wide
@@ -64,9 +62,11 @@
             </div>
         </section>
     </article>
-    <article class="column" id="main_art2">
+    <article class="column relative" id="main_art2">
+        <div class="row">
         <h2>Наши преимущества</h2>
         <a href="#">Узнать о компании</a>
+        </div>
         <div class="row">
             <div class="column">
                 <div>
@@ -100,47 +100,45 @@
             </div>
         </div>
     </article>
-    <article class="relative column">
+    <article class="fix left relative row">
 {#        характеристика и фото #}
-        <div class="left">
+        <div class="left column">
             <h2>Топ компания на планете</h2>
             <p>Лучшая продукция</p>
         </div>
-        <div class="fix right">
-            <img src="{% static 'img/main/top_company.png' %}" alt="">
-        </div>
-    </article>
-    <article class="row">
-        <h2>Партнеры</h2>
 
+    </article>
+    <article class="row partner">
+        <h2>Партнеры</h2>
         <a href="#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>
         <a href="#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>
-        <a href="#"><img src="{% static 'img/main/partner.png' %}"alt=""></a>
-        <a href="#"><img src="{% static 'img/main/partner.png' %}"alt=""></a>
-        <a href="#"><img src="{% static 'img/main/partner.png' %}"alt=""></a>
+        <a href="#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>
+        <a href="#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>
+        <a href="#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>
 
 
 {#        партнеры и тд #}
     </article>
-    <article class="relative " >
+    <article id="course" class="relative column" >
 {#   Курсы     #}
-        <div class="fix left">
-{#            <img alt="course" src="{% static 'img/main/course.png' %}">#}
-        </div>
-        <div class="column right">
+
+        <div class="column fix ">
+            <div>
             <h2>Наши курсы и трененги</h2>
             <div>
                 <div class="row">
-{#                    <img alt="" src="{% static 'img/main/icon_course1.png' %}">#}
+                <div class="with-img">
+                    <img alt="" src="{% static 'img/main/icon_course1.png' %}">
                 </div>
                 <div>Opportunity to discover
                     new and unique beauty brands
                     that may not be readily
                     available in local stores.
                 </div>
+                </div>
             </div>
-            <div class="row">
-                <div>
+            <div class="row" >
+                <div class="with-img">
 <img alt="" src="{% static 'img/main/icon_course2.png' %}">
                 </div>
                 <div>Option to place orders for
@@ -149,14 +147,15 @@
                     doorstep.
                 </div>
             </div>
-            <a href="#">Записаться на курсы <img alt="" src="{% static 'img/main/icon_course.png' %}"></a>
+</div>
         </div>
+        <a href="#"><span>Записаться на курсы</span>
+            <img alt="" src="{% static 'img/main/icon_course.png' %}">
+        </a>
     </article >
-    <article class="relative column ">
-         <div class="fix right">
-{#            <img alt=""  src="{% static 'img/main/subscribe.png' %}">#}
-        </div>
-        <div class="left">
+    <article class="relative column fix left">
+
+        <div class=" column">
             <h2>Нужно больше информации?</h2>
             <div>
                 Подпишитесь и узнавайте о
