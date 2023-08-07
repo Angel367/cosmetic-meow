@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import ContentFile
 
-# Register your models here.
+
+admin.site.register(ContentFile)

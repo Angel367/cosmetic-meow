@@ -47,9 +47,9 @@ class Product(models.Model):
     short_description = models.TextField(max_length=500)
     long_description = models.TextField(max_length=5000)
     price = models.DecimalField(max_digits=10, decimal_places=2)  # Без НДС
-    discountPrice = models.DecimalField(max_digits=10, decimal_places=2, default=price)
+    discountPrice = models.DecimalField(blank=True, max_digits=10, decimal_places=2, default=price)
     is_active = models.BooleanField(default=True)
-    #is active for sale
+    # is active for sale
     amount = models.IntegerField(default=1)
 
     def get_images(self):
@@ -57,6 +57,9 @@ class Product(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.discountPrice:
+            self.discountPrice = self.price
+        if self.pk is not None and self.discountPrice == Product.objects.get(pk=self.pk).price:
+            super(Product, self).save(*args, **kwargs)
             self.discountPrice = self.price
         super(Product, self).save(*args, **kwargs)
 

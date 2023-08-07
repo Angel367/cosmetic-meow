@@ -13,7 +13,7 @@ class GenderChoices(models.TextChoices):
 
 
 class CustomUser(AbstractUser):
-    gender = models.CharField(choices=GenderChoices, max_length=1, default=GenderChoices.NOT_SPECIFIED)
+    gender = models.CharField(choices=GenderChoices.choices, max_length=1, default=GenderChoices.NOT_SPECIFIED)
     # first name    имя
     # last name     фамилия
     middle_name = models.CharField(max_length=150, blank=True)  # Аналогично first/last name, отчество
