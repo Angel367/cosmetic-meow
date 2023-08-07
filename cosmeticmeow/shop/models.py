@@ -34,7 +34,7 @@ class Order(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=50, blank=False, null=False, verbose_name="имя")
+    name = models.CharField(max_length=50, blank=False, null=False, verbose_name="категория")
 
     class Meta:
         verbose_name = "категория"
@@ -47,7 +47,7 @@ class Product(models.Model):
     short_description = models.TextField(max_length=500)
     long_description = models.TextField(max_length=5000)
     price = models.DecimalField(max_digits=10, decimal_places=2)  # Без НДС
-    discountPrice = models.DecimalField(blank=True, max_digits=10, decimal_places=2, default=price)
+    discountPrice = models.DecimalField(blank=False, max_digits=10, decimal_places=2, default=price)
     is_active = models.BooleanField(default=True)
     # is active for sale
     amount = models.IntegerField(default=1)
@@ -56,8 +56,18 @@ class Product(models.Model):
         return ProductImage.objects.filter(product=self)
 
     def save(self, *args, **kwargs):
-        if not self.discountPrice:
+        if self.pk and self.price != Product.objects.get(pk=self.pk).price:
+            PriceChange.objects.create(
+                product=self,
+                new_price=self.price
+            )
+        if not self.pk:
             self.discountPrice = self.price
+            super(Product, self).save(*args, **kwargs)
+            PriceChange.objects.create(
+                product=self,
+                new_price=self.price
+            )
         if self.pk is not None and self.discountPrice == Product.objects.get(pk=self.pk).price:
             super(Product, self).save(*args, **kwargs)
             self.discountPrice = self.price
@@ -87,7 +97,7 @@ class ProductImage(models.Model):
 
 class PriceChange(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    date_time_change = models.DateTimeField()
+    date_time_change = models.DateTimeField(auto_now_add=True)
     new_price = models.DecimalField(max_digits=10, decimal_places=2)
 
     class Meta:
