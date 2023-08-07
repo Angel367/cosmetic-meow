@@ -22,6 +22,7 @@ class Product(models.Model):
     order = models.ForeignKey(Order, on_delete=models.PROTECT, null=True, default=None)
     # TODO protect? Или другой вариант..? По задумке у продукта есть is_active и они никогда не удаляются
     is_active = models.BooleanField(default=True)
+    #is active for sale
 
     def get_images(self):
         return ProductImage.objects.filter(product=self)
