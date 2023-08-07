@@ -1,8 +1,8 @@
 {% load static %}
 <footer>
-    <div class="img">
-        <img id="img_footer" alt="footer_background" src="{% static 'img/base_elements/footer.png' %}">
-    </div>
+{#    <div class="img">#}
+{#        <img id="img_footer" alt="footer_background" src="{% static 'img/base_elements/footer.png' %}">#}
+{#    </div>#}
     <div class="footer">
         <div>
             <h2>Продукция</h2>
@@ -99,11 +99,13 @@
         <a href="#">Site Map</a>
     </div>
 </footer>
-<script type="application/javascript">
-    img = document.getElementById('img_footer')
-    console.log(img.clientWidth, window.innerWidth)
-    if (window.innerWidth > img.clientWidth)
-        img.style.width = window.innerWidth + 'px'
-    console.log(img.clientWidth, window.innerWidth)
-
-</script>
+{#<script type="application/javascript">#}
+{#    window.onload = function() {#}
+{#        alert('Страница загружена');#}
+{#        const img = document.getElementById('img_footer');#}
+{#        console.log(img.clientWidth, window.innerWidth)#}
+{#        if (window.innerWidth > img.clientWidth)#}
+{#            img.style.width = window.innerWidth + 'px'#}
+{#        console.log(img.clientWidth, window.innerWidth)#}
+{#    }#}
+{#</script>#}

@@ -49,6 +49,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)  # Без НДС
     discountPrice = models.DecimalField(max_digits=10, decimal_places=2, default=price)
     is_active = models.BooleanField(default=True)
+    #is active for sale
     amount = models.IntegerField(default=1)
 
     def get_images(self):
