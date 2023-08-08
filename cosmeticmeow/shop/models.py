@@ -2,7 +2,7 @@ from django.db import models
 from foundation.models import CustomUser
 
 
-# TODO для работы с покупаткелем и работником скалада
+# TODO для работы с покупаткелем и работником скалада(сейчас админ)
 
 
 class OrderStatusChoices(models.TextChoices):
@@ -30,6 +30,25 @@ class Order(models.Model):
         verbose_name = "заказ"
         verbose_name_plural = "заказы"
         ordering = ["-id"]
+
+
+class Attribute(models.Model):
+    name = models.CharField(max_length=50, blank=False, null=False)
+
+    class Meta:
+        verbose_name = "атрибут"
+        verbose_name_plural = "атрибуты"
+        ordering = ["name"]
+
+
+class AttributeValue(models.Model):
+    name = models.CharField(max_length=50, blank=False, null=False, verbose_name="атрибут")
+    attribute = models.ForeignKey(Attribute, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = "значение_атрибута"
+        verbose_name_plural = "значения_атрибута"
+        ordering = ["name"]
 
 
 class Category(models.Model):
@@ -138,7 +157,8 @@ class Feedback(models.Model):
 
 class Shipment(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    track_number = models.CharField(max_length=20, blank=True, null=True)
+    # TODO  track_number = models.CharField(max_length=20, blank=True, null=True)
+    fix_price = models.DecimalField(max_digits=10, decimal_places=2, default=100)
 
     class Meta:
         verbose_name = "доставка"

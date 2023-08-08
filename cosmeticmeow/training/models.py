@@ -1,24 +1,5 @@
 from django.db import models
 from shop.models import Product, CustomUser
-# Create your models here.
-
-
-# class Teacher(models.Model):
-#     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-#
-#     class Meta:
-#         verbose_name = "учитель"
-#         verbose_name_plural = "учители"
-#         ordering = ["-id"]
-
-
-# class Student(models.Model):
-#     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-#
-#     class Meta:
-#         verbose_name = "студент"
-#         verbose_name_plural = "студенты"
-#         ordering = ["-id"]
 
 
 class Course(models.Model):  # онлайн вебинары, запись или текстовые файлы и текст
@@ -29,7 +10,7 @@ class Course(models.Model):  # онлайн вебинары, запись ил�
 
     def save(self, **kwargs):
         self.product.is_course = True
-        self.save()
+        super().save(self, **kwargs)
 
     class Meta:
         verbose_name = "курс"
@@ -47,17 +28,26 @@ class CourseUser(models.Model):
         verbose_name_plural = "курсы для пользователей"
         ordering = ["-purchase_date"]
 #     status прохождения:
-#     is not started
-#     finished for x% ???
-#     waiting exam
-#     passed exam
-#     finished successful
+#     is not started 0 уроков закончено
+#     finished for x% ??? n finished_lesson / n all
+#     finished successful n finished_lesson = n all
 #     # время доступа :
-#       forever or date_of_end_subscr
+#       forever! or date_of_end_subscr(на будущ)
+
+
+class Module(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+
+    class Meta:
+        verbose_name = "тема"
+        verbose_name_plural = "темы"
+        ordering = ["course"]
 
 
 class Lesson(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    module = models.ForeignKey(Module, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     description = models.TextField()
     content = models.TextField()
@@ -71,6 +61,7 @@ class Lesson(models.Model):
 class StudentLesson(models.Model):
     student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
+    is_finished = models.BooleanField(blank=True, default=False)
 
     class Meta:
         verbose_name = "урок студента"
@@ -89,7 +80,7 @@ class ContentFile(models.Model):
 
 # кол-во тестов в курсе? 1, 0 или больше
 class Test(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     duration = models.DurationField()
 
     class Meta:

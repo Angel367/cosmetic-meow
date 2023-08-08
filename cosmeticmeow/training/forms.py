@@ -30,7 +30,7 @@ class LessonWithContentFile(ModelForm):
         widgets = {
             'file': ClearableFileInput(attrs={'multiple': True})
         }
-
+# TODO MODULE AND FIX FORMS
 
 class TestForm(ModelForm):
     class Meta:

@@ -1,17 +1,27 @@
 from django import forms
-from .models import Product, ProductImage, Category, Feedback
+from .models import Product, ProductImage, Category, Feedback, Attribute, AttributeValue
 
 
 class FeedbackForm(forms.ModelForm):
     class Meta:
         model = Feedback
-        exclude = 'is_active'
+        fields = [
+            "text", 'sender'
+        ]
 
 
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        exclude = 'is_active'
+        fields = [
+            'name',
+            'short_description',
+            'long_description',
+            'price',
+            'discountPrice',
+            'categories',
+            'amount'
+        ]
 
 
 class ProductWithImageForm(forms.ModelForm):
@@ -29,4 +39,16 @@ class ProductWithImageForm(forms.ModelForm):
 class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
-        fields = "__all__"
+        fields = ['name']
+
+
+class AttributeForm(forms.ModelForm):
+    class Meta:
+        model = Attribute
+        fields = ['name']
+
+
+class AttributeValueForm(forms.ModelForm):
+    class Meta:
+        model = AttributeValue
+        fields = ['name']
