@@ -20,7 +20,8 @@ class FeedbackTestCase(TestCase):
 
     def test_inactive_feedback_not_in_queryset(self):
         feedback_active = Feedback.objects.create(text="Active feedback", sender="active@example.com", is_active=True)
-        feedback_inactive = Feedback.objects.create(text="Inactive feedback", sender="inactive@example.com", is_active=False)
+        feedback_inactive = Feedback.objects.create(text="Inactive feedback", sender="inactive@example.com",
+                                                    is_active=False)
         queryset = Feedback.objects.filter(is_active=True)
         self.assertIn(feedback_active, queryset)
         self.assertNotIn(feedback_inactive, queryset)

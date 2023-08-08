@@ -1,10 +1,12 @@
 from django.test import TestCase
 
 from shop.models import Product, PriceChange
+from foundation.models import CustomUser
 
 
 class ProductTestCase(TestCase):
     def setUp(self):
+        CustomUser.objects.create()
         product = Product(name="Палетка", price=123.12)
         product.save()
 
