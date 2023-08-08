@@ -52,7 +52,7 @@ class Product(models.Model):
     is_active = models.BooleanField(default=True)
     is_course = models.BooleanField(blank=True, default=False)
     # is active for sale
-    categories = models.ManyToManyField(Category, blank=True, null=True)
+    categories = models.ManyToManyField(Category, blank=True)
     amount = models.IntegerField(default=1)
 
     def get_images(self):
