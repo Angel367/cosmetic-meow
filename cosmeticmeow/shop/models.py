@@ -2,9 +2,7 @@ from django.db import models
 from foundation.models import CustomUser
 
 
-#
-#TODO для работы с покупаткелем и работником скалада
-
+# TODO для работы с покупаткелем и работником скалада
 
 
 class OrderStatusChoices(models.TextChoices):
@@ -88,6 +86,7 @@ class Product(models.Model):
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='shop/product_images/', blank=True, null=True)
+
     # TODO дефолтная картинка
 
     def __str__(self):

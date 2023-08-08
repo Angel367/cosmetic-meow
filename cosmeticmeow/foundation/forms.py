@@ -15,7 +15,7 @@ class CustomUserCreateForm(UserCreationForm):
                   'first_name',
                   'middle_name',
                   'gender',
-                  'username', #TODO email?
+                  'username',  # TODO email?
                   'phone_number',
                   'password1',
                   'password2'
@@ -28,7 +28,7 @@ class CustomUserUpdateForm(UserChangeForm):
                   'first_name',
                   'middle_name',
                   'gender',
-                  'username', #TODO email?
+                  'username',  # TODO email?
                   'phone_number',
                   ]
 
@@ -36,9 +36,9 @@ class CustomUserUpdateForm(UserChangeForm):
 class CustomUserAuth(AuthenticationForm):
     class Meta:
         fields = [
-                  'username',#TODO email?
-                  'password',
-                  ]
+            'username',  # TODO email?
+            'password',
+        ]
 
 
 class CustomUserChangePassword(PasswordChangeForm):
