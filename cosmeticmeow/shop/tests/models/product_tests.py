@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from .models import Product, PriceChange
+from shop.models import Product, PriceChange
 
 
 class ProductTestCase(TestCase):
