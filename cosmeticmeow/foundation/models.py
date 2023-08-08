@@ -24,6 +24,10 @@ class CustomUser(AbstractUser):
         blank=True,
         null=True)
 
+    @property
+    def full_name(self):
+        return '%s %s %s' % (self.last_name, self.middle_name, self.first_name)
+
     class Meta:
         verbose_name = "пользователь"
         verbose_name_plural = "пользователи"
@@ -32,7 +36,7 @@ class CustomUser(AbstractUser):
 
 class Subscriber(models.Model):
     email = models.EmailField(blank=False, null=False, unique=True)
-    active = models.BooleanField(blank=False, null=False, default=True)
+    is_active = models.BooleanField(blank=False, null=False, default=True)
 
     class Meta:
         verbose_name = "подписчик"

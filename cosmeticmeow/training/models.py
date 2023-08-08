@@ -3,29 +3,33 @@ from shop.models import Product, CustomUser
 # Create your models here.
 
 
-class Teacher(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+# class Teacher(models.Model):
+#     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+#
+#     class Meta:
+#         verbose_name = "учитель"
+#         verbose_name_plural = "учители"
+#         ordering = ["-id"]
 
-    class Meta:
-        verbose_name = "учитель"
-        verbose_name_plural = "учители"
-        ordering = ["-id"]
 
-
-class Student(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-
-    class Meta:
-        verbose_name = "студент"
-        verbose_name_plural = "студенты"
-        ordering = ["-id"]
+# class Student(models.Model):
+#     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+#
+#     class Meta:
+#         verbose_name = "студент"
+#         verbose_name_plural = "студенты"
+#         ordering = ["-id"]
 
 
 class Course(models.Model):  # онлайн вебинары, запись или текстовые файлы и текст
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
     is_active = models.BooleanField(default=True)
-    teacher = models.ForeignKey(Teacher, on_delete=models.PROTECT, null=True)
+    teacher = models.ForeignKey(CustomUser, on_delete=models.PROTECT, null=True)
     # is active for training
+
+    def save(self, **kwargs):
+        self.product.is_course = True
+        self.save()
 
     class Meta:
         verbose_name = "курс"
@@ -35,7 +39,7 @@ class Course(models.Model):  # онлайн вебинары, запись ил�
 
 class CourseUser(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     purchase_date = models.DateField(auto_now_add=True)
 
     class Meta:
@@ -65,7 +69,7 @@ class Lesson(models.Model):
 
 
 class StudentLesson(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
 
     class Meta:
@@ -109,7 +113,7 @@ class Question(models.Model):
 class Answer(models.Model):
     text = models.TextField()
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     time_saved = models.DateTimeField(auto_now_add=True)
     is_right = models.BooleanField()
 

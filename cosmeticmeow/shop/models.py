@@ -1,9 +1,10 @@
 from django.db import models
-
 from foundation.models import CustomUser
 
 
-# Create your models here.
+#
+#TODO для работы с покупаткелем и работником скалада
+
 
 
 class OrderStatusChoices(models.TextChoices):
@@ -49,7 +50,9 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)  # Без НДС
     discountPrice = models.DecimalField(blank=True, max_digits=10, decimal_places=2, default=price)
     is_active = models.BooleanField(default=True)
+    is_course = models.BooleanField(blank=True, default=False)
     # is active for sale
+    categories = models.ManyToManyField(Category, blank=True, null=True)
     amount = models.IntegerField(default=1)
 
     def get_images(self):
@@ -74,7 +77,8 @@ class Product(models.Model):
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='shop/product_images/')
+    image = models.ImageField(upload_to='shop/product_images/', blank=True, null=True)
+    # TODO дефолтная картинка
 
     def __str__(self):
         return self.product.name + " Image"
