@@ -6,6 +6,7 @@ class Course(models.Model):  # онлайн вебинары, запись ил�
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
     is_active = models.BooleanField(default=True)
     teacher = models.ForeignKey(CustomUser, on_delete=models.PROTECT, null=True)
+
     # is active for training
 
     def save(self, **kwargs):

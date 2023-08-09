@@ -1,8 +1,9 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from foundation.models import CustomUser
 
 
-# TODO для работы с покупаткелем и работником скалада(сейчас админ)
+# TODO для работы с покупателем и работником склада (сейчас админ)
 
 
 class OrderStatusChoices(models.TextChoices):
@@ -25,6 +26,24 @@ class Order(models.Model):
         choices=OrderStatusChoices.choices,
         default=OrderStatusChoices.CART,
     )
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def check_prices(self):
+        new_price = 0
+        for orderedProduct in OrderedProduct.objects.filter(order=self):
+            new_price += float(orderedProduct.product.price)
+        if new_price != self.price:
+            self.update_prices()
+            self.price = new_price
+            return True
+        return False
+
+    def update_prices(self):
+        for orderedProduct in OrderedProduct.objects.filter(order=self):
+            if orderedProduct.price != orderedProduct.product.price:
+                orderedProduct.price = orderedProduct.product.price
+
+    # TODO Написать нормально
 
     class Meta:
         verbose_name = "заказ"
@@ -71,6 +90,16 @@ class Product(models.Model):
     # is active for sale
     categories = models.ManyToManyField(Category, blank=True)
     amount = models.IntegerField(default=1)
+    tax_rate = models.FloatField(
+        validators=[MinValueValidator(0.00), MaxValueValidator(1.00)],
+        default=0.20,
+        blank=False
+    )
+    views_amount = models.IntegerField(default=0, blank=False)
+    creation_date = models.DateField(auto_now_add=True)
+
+    def get_price_with_tax(self):
+        return float(self.price) + float(self.price) * self.tax_rate
 
     def get_images(self):
         return ProductImage.objects.filter(product=self)
@@ -104,9 +133,8 @@ class Product(models.Model):
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='shop/product_images/', blank=True, null=True)
-
-    # TODO дефолтная картинка
+    image = models.ImageField(upload_to='shop/product_images/', default='shop/default_images/default_product_image.png',
+                              blank=True, null=True)
 
     def __str__(self):
         return self.product.name + " Image"
