@@ -3,7 +3,7 @@ from django.db import models
 from foundation.models import CustomUser
 
 
-# TODO для работы с покупаткелем и работником скалада(сейчас админ)
+# TODO для работы с покупателем и работником склада (сейчас админ)
 
 
 class OrderStatusChoices(models.TextChoices):
