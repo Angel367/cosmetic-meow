@@ -47,7 +47,7 @@ class Module(models.Model):
 
 
 class Lesson(models.Model):
-    module = models.ForeignKey(Module, on_delete=models.CASCADE)
+    module = models.ForeignKey(Module, on_delete=models.CASCADE, blank=True)
     name = models.CharField(max_length=100)
     description = models.TextField()
     content = models.TextField()

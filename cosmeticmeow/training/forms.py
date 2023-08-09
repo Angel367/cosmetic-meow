@@ -10,7 +10,7 @@ class CourseForm(ModelForm):   # user form add
         field_classes = {
             'product': ProductWithImageForm
         }
-#   TODO      только определенная группа пользователей == учителя
+#   TODO только определенная группа пользователей == учителя
 # можно виджеты применить для фильтр
 
 
@@ -31,6 +31,7 @@ class LessonWithContentFile(ModelForm):
             'file': ClearableFileInput(attrs={'multiple': True})
         }
 # TODO MODULE AND FIX FORMS
+
 
 class TestForm(ModelForm):
     class Meta:

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Product, ProductImage, Category, Feedback, Attribute, AttributeValue
+from .models import Product, ProductImage, Category, Feedback, Attribute, AttributeValue, OrderedProduct
 
 
 class FeedbackForm(forms.ModelForm):
@@ -8,6 +8,24 @@ class FeedbackForm(forms.ModelForm):
         fields = [
             "text", 'sender'
         ]
+
+
+class IdHiddenProductOrderedForm(forms.ModelForm):
+    class Meta:
+        model = OrderedProduct
+        fields = ['id']
+        widgets = {
+            'id': forms.HiddenInput()
+        }
+
+
+class IdHiddenProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['id']
+        widgets = {
+            'id': forms.HiddenInput()
+        }
 
 
 class ProductForm(forms.ModelForm):
