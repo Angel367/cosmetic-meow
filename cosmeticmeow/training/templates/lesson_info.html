@@ -1,0 +1,17 @@
+{% extends '../../foundation/templates/base_elements/base.html' %}
+{% block head %}Урок "{{ lesson.name }}"{% endblock head %}
+
+{% block main %}
+        {{ lesson.name }}
+    {{ lesson.long_description }}
+    {% for test in tests %}
+{#        {% include 'test.html' with test=test %}#}
+{{ test.duration }}
+    {% endfor %}
+    {% for file in files %}
+        <a href="{{ file }}" download >Скачать</a>
+    {% endfor %}
+    <form method="post" action="{% url 'lesson_info' lesson_id=lesson.id, module_id=lesson.module.id, course_id=lesson.module.course.id %}">
+
+    </form>
+{% endblock main %}

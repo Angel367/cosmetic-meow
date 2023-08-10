@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>{{ course.teacher_id }}</h1>
-</body>
-</html>
+{% extends '../../foundation/templates/base_elements/base.html' %}
+{% block head %}Все модули курса {{ course.name }}{% endblock head %}
+
+{% block main %}
+    {{ course.name }}
+    {{ course.long_description }}
+    {% for module in modules %}
+        {% include 'module.html' with module=module %}
+    {% endfor %}
+{% endblock main %}

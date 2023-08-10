@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends '../../foundation/templates/base_elements/base.html' %}
+{% block head %}
+    {% if are_bought %} Мои {% else %} Все {% endif %}
+    курсы{% endblock head %}
+
+{% block main %}
 {% for course in page_obj %}
-    {# Each "contact" is a Contact model object. #}
-    {{ course }}<br>
-    ...
+    {% include 'course_small_product.html' with course=course %}
 {% endfor %}
 
 <div class="pagination">

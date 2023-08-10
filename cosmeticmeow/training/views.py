@@ -41,19 +41,27 @@ class CourseListView(ListView):
 class ModuleListView(ListView, PermCourseStudent):
     model = Module
     paginate_by = 9
-    template_name = 'courses.html'
+    template_name = 'course_info.html'
 
     def get_queryset(self):
         return Module.objects.filter(course=self.kwargs['course_id'])
+
+    def get_context_data(self, **kwargs):
+        kwargs['course'] = Course.objects.filter(id=self.kwargs['course_id'])
+        return super().get_context_data()
 
 
 class LessonListView(ListView, PermCourseStudent):
     model = Lesson
     paginate_by = 9
-    template_name = 'courses.html'
+    template_name = 'module_info.html'
+
+    def get_context_data(self, **kwargs):
+        kwargs['module'] = Module.objects.get(id=self.kwargs['module_id'])
+        return super().get_context_data()
 
     def get_queryset(self):
-        return Lesson.objects.filter(module=self.kwargs['course_id'])
+        return Lesson.objects.filter(module=self.kwargs['module_id'])
 
 
 class MyCourseListView(ListView, PermCourseStudent):
@@ -67,25 +75,29 @@ class MyCourseListView(ListView, PermCourseStudent):
 
 class CourseInfoView(DetailView):
     model = Course
-    template_name = 'course_info.html'
+    template_name = 'course_product.html'
     pk_url_kwarg = 'course_id'
 
 
 class MyCourseInfoView(PermCourseStudent, DetailView):
     model = Course
-    template_name = 'my_course.html'
+    template_name = 'course_product.html'
     pk_url_kwarg = 'course_id'
+
+    def get_context_data(self, **kwargs):
+        kwargs['is_bought'] = True
+        return super().get_context_data()
 
 
 class MyModuleInfoView(DetailView, PermCourseStudent):
     model = Module
-    template_name = 'my_course.html'
+    template_name = 'course_info.html'
     pk_url_kwarg = 'module_id'
 
 
 class MyLessonInfoView(PermCourseStudent, DetailView):
     model = Lesson
-    template_name = 'my_course.html'
+    template_name = 'lesson_info.html'
     pk_url_kwarg = 'lesson_id'
 
     def post(self, request, *args, **kwargs):

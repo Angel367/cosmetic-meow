@@ -1,0 +1,6 @@
+<div>
+    <div>{{ module.name }}</div>
+    <a href="{% url 'module_info' module_id=module.id, course_id=module.course.id %}">
+        Изучить тему
+    </a>
+</div>

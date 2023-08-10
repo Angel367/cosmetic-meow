@@ -1,0 +1,12 @@
+<div>
+    {{ course.name }}
+    {{ course.short_description }}
+    <form method="post" action="">
+    {% if is_bought %}
+        <a href="{% url 'course_info_my' course_id=course.id %}">Приступить к изучению</a>
+    {% else %}
+        <input name="course_id" value="{{ course.id }}">
+        <button name="bye">Купить</button>
+    {% endif %}
+    </form>
+</div>
