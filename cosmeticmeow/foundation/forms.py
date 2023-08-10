@@ -1,6 +1,6 @@
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm, PasswordChangeForm
-from .models import Subscriber
+from .models import Subscriber, CustomUser
 
 
 class SubscriberForm(ModelForm):
@@ -11,6 +11,7 @@ class SubscriberForm(ModelForm):
 
 class CustomUserCreateForm(UserCreationForm):
     class Meta:
+        model = CustomUser
         fields = ['last_name',
                   'first_name',
                   'middle_name',

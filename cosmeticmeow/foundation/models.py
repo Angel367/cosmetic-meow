@@ -1,6 +1,12 @@
+from django.conf import settings
+from django.contrib.auth.base_user import BaseUserManager
 from django.core.validators import RegexValidator
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.utils.functional import lazy
+
+from foundation.managers import CustomUserManager
+
 
 # Create your models here.
 
@@ -13,16 +19,21 @@ class GenderChoices(models.TextChoices):
 
 
 class CustomUser(AbstractUser):
+    username = None
     gender = models.CharField(choices=GenderChoices.choices, max_length=1, default=GenderChoices.NOT_SPECIFIED)
     # first name    имя
     # last name     фамилия
     middle_name = models.CharField(max_length=150, blank=True)  # Аналогично first/last name, отчество
-    # email
+    email = models.EmailField('Почта', unique=True, blank=False)
+    is_email_verified = models.BooleanField(blank=False, default=False)
+    REQUIRED_FIELDS = []
     phone_number = models.CharField(
         max_length=12,
         validators=[RegexValidator(regex=r'^\+7\d{10}$')],
         blank=True,
         null=True)
+    USERNAME_FIELD = "email"
+    objects = CustomUserManager()
 
     @property
     def full_name(self):

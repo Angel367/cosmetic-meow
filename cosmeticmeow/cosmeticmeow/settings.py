@@ -46,8 +46,16 @@ INSTALLED_APPS = MY_APPS + [
     'django.contrib.staticfiles',
 ]
 
-# User settings:
+# Authentication and user settings #
+
+LOGIN_URL = "/login/"
+
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/'
+
 AUTH_USER_MODEL = "foundation.CustomUser"
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
