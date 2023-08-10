@@ -23,6 +23,7 @@ class CourseStudent(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     purchase_date = models.DateField(auto_now_add=True)
+    is_finished = models.BooleanField(blank=True, default=False)
 
 
     class Meta:
@@ -59,12 +60,11 @@ class Lesson(models.Model):
     module = models.ForeignKey(Module, on_delete=models.CASCADE, blank=True)
     name = models.CharField(max_length=100)
     description = models.TextField()
-    content = models.TextField()
     id_in_module = models.IntegerField(blank=True)
 
     def save(self, *args, **kwargs):
         _id = Lesson.objects.filter(module=self.module).__len__()
-        self.id_in_course = _id + 1
+        self.id_in_module = _id + 1
         super(Lesson, self).save(*args, **kwargs)
 
     class Meta:
