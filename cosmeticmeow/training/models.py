@@ -2,16 +2,16 @@ from django.db import models
 from shop.models import Product, CustomUser
 
 
-class Course(models.Model):  # онлайн вебинары, запись или текстовые файлы и текст
-    product = models.ForeignKey(Product, on_delete=models.PROTECT)
-    is_active = models.BooleanField(default=True)
+class Course(Product):  # онлайн вебинары, запись или текстовые файлы и текст
+    #product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    # is_active = models.BooleanField(default=True)
     teacher = models.ForeignKey(CustomUser, on_delete=models.PROTECT, null=True)
 
     # is active for training
 
-    def save(self, **kwargs):
-        self.product.is_course = True
-        super().save(self, **kwargs)
+    def save(self, *args, **kwargs):
+        self.is_course = True
+        super(Course, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "курс"
@@ -19,15 +19,17 @@ class Course(models.Model):  # онлайн вебинары, запись ил�
         ordering = ["-id"]
 
 
-class CourseUser(models.Model):
+class CourseStudent(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     purchase_date = models.DateField(auto_now_add=True)
+
 
     class Meta:
         verbose_name = "курс для пользователя"
         verbose_name_plural = "курсы для пользователей"
         ordering = ["-purchase_date"]
+        unique_together = ('course', 'student')
 #     status прохождения:
 #     is not started 0 уроков закончено
 #     finished for x% ??? n finished_lesson / n all
@@ -40,11 +42,17 @@ class Module(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     description = models.TextField()
+    id_in_course = models.IntegerField(blank=True)
+
+    def save(self, *args, **kwargs):
+        _id = Module.objects.filter(course=self.course).__len__()
+        self.id_in_course = _id + 1
+        super(Module, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "тема"
         verbose_name_plural = "темы"
-        ordering = ["course"]
+        ordering = ["-id"]
 
 
 class Lesson(models.Model):
@@ -52,11 +60,28 @@ class Lesson(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     content = models.TextField()
+    id_in_module = models.IntegerField(blank=True)
+
+    def save(self, *args, **kwargs):
+        _id = Lesson.objects.filter(module=self.module).__len__()
+        self.id_in_course = _id + 1
+        super(Lesson, self).save(*args, **kwargs)
 
     class Meta:
         verbose_name = "урок"
         verbose_name_plural = "уроки"
         ordering = ["-id"]
+
+
+class StudentModule(models.Model):
+    student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    module = models.ForeignKey(Module, on_delete=models.CASCADE)
+    is_finished = models.BooleanField(blank=True, default=False)
+
+    class Meta:
+        verbose_name = "тема студента"
+        verbose_name_plural = "темы студентов"
+        unique_together = ('module', 'student')
 
 
 class StudentLesson(models.Model):
@@ -67,6 +92,7 @@ class StudentLesson(models.Model):
     class Meta:
         verbose_name = "урок студента"
         verbose_name_plural = "уроки студентов"
+        unique_together = ('lesson', 'student')
 
 
 class ContentFile(models.Model):

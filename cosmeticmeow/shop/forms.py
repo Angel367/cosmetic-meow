@@ -42,16 +42,16 @@ class ProductForm(forms.ModelForm):
         ]
 
 
-class ProductWithImageForm(forms.ModelForm):
-    class Meta:
-        model = ProductImage
-        fields = ['product', 'image']
-        field_classes = {
-            'product': ProductForm
-        }
-        widgets = {
-            'image': forms.ClearableFileInput(attrs={'multiple': True})
-        }
+# class ProductWithImageForm(forms.ModelForm):
+#     class Meta:
+#         model = ProductImage
+#         fields = ['product', 'image']
+#         field_classes = {
+#             'product': ProductForm
+#         }
+#         # widgets = {
+#         #     'image': forms.ClearableFileInput(attrs={'multiple': True})
+#         # }
 
 
 class CategoryForm(forms.ModelForm):
