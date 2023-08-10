@@ -104,23 +104,23 @@ class Product(models.Model):
     def get_images(self):
         return ProductImage.objects.filter(product=self)
 
-    def save(self, *args, **kwargs):
-        if self.pk and self.price != Product.objects.get(pk=self.pk).price:
-            PriceChange.objects.create(
-                product=self,
-                new_price=self.price
-            )
-        if not self.pk:
-            self.discountPrice = self.price
-            super(Product, self).save(*args, **kwargs)
-            PriceChange.objects.create(
-                product=self,
-                new_price=self.price
-            )
-        if self.pk is not None and self.discountPrice == Product.objects.get(pk=self.pk).price:
-            super(Product, self).save(*args, **kwargs)
-            self.discountPrice = self.price
-        super(Product, self).save(*args, **kwargs)
+    # def save(self, *args, **kwargs):
+    #     if self.pk and self.price != Product.objects.get(pk=self.pk).price:
+    #         PriceChange.objects.create(
+    #             product=self,
+    #             new_price=self.price
+    #         )
+    #     if not self.pk:
+    #         self.discountPrice = self.price
+    #         super(Product, self).save(*args, **kwargs)
+    #         PriceChange.objects.create(
+    #             product=self,
+    #             new_price=self.price
+    #         )
+    #     if self.pk is not None and self.discountPrice == Product.objects.get(pk=self.pk).price:
+    #         super(Product, self).save(*args, **kwargs)
+    #         self.discountPrice = self.price
+    #     super(Product, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.name
