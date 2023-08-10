@@ -6,6 +6,4 @@ def has_course_access_teacher(user, course):
 
 
 def has_course_access_student(user, course):
-    return CourseStudent.objects.get(student=user, course=course) is not None or course.teacher == user
-    # TODO: Не вернёт ошибку если таких несколько - не посрать ли нам?
-    # TODO: я думаю что надо поставить юник тугезер и все
+    return CourseStudent.objects.filter(student=user, course=course).first() is not None or course.teacher == user

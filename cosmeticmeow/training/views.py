@@ -4,25 +4,26 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views import View
-from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import DetailView, ListView, CreateView, UpdateView
+
+from .forms import *
 from .models import *
 from .permissions import *
-from .forms import *
 
 
-class PermCourseTeacher(View, UserPassesTestMixin):
+class PermCourseTeacher(LoginRequiredMixin, UserPassesTestMixin, View):
     def test_func(self):
         return has_course_access_teacher(self.request.user, get_object_or_404(Course, id=self.kwargs['course_id']))
 
 
-class PermCourseStudent(View, UserPassesTestMixin):
+class PermCourseStudent(LoginRequiredMixin, UserPassesTestMixin, View):
     def test_func(self):
         return has_course_access_student(self.request.user, get_object_or_404(Course, id=self.kwargs['course_id']))
 
     def handle_no_permission(self):
         if self.raise_exception:
             raise PermissionDenied(self.get_permission_denied_message())
-        return redirect('/courses/' + self.kwargs['course_id'] + '/')
+        return redirect('/courses/' + str(self.kwargs['course_id']) + '/')
 
 
 # TODO если нет премишена кинуть на стр с покупкой этого курса
@@ -93,19 +94,18 @@ class MyLessonInfoView(PermCourseStudent, DetailView):
             s_l_mark.is_finished = True
             if (Module.objects.filter(id=self.object.module.id)
                     .count() > self.object.id_in_module):
-                id = Lesson.objects.get(id_in_module=self.object.id_in_module+1).id
+                id = Lesson.objects.get(id_in_module=self.object.id_in_module + 1).id
                 return redirect(reverse('lesson_info',
                                         args=(self.object.module.course.id,
                                               self.object.module.id,
-                                              id)) )
-            elif (Course.objects.filter(id=self.object.module.course.id)
-                    .count() > self.object.module.id_in_course):
+                                              id)))
+            elif Course.objects.filter(id=self.object.module.course.id).count() > self.object.module.id_in_course:
                 s_m_mark = StudentModule.objects.get(module=self.object.module, student=request.user)
                 s_m_mark.is_finished = True
-                id = Module.objects.get(id_in_course=self.object.module.id_in_course+1).id
+                id = Module.objects.get(id_in_course=self.object.module.id_in_course + 1).id
                 return redirect(reverse('module_info',
                                         args=(self.object.module.course.id,
-                                              id)) )
+                                              id)))
             else:
                 s_m_mark = StudentModule.objects.get(module=self.object.module, student=request.user)
                 s_m_mark.is_finished = True
@@ -115,8 +115,6 @@ class MyLessonInfoView(PermCourseStudent, DetailView):
                                         args=(self.object.module.course.id,
                                               )))
         return render(request, self.template_name, self.get_context_data())
-
-
 
 
 class LessonInfoViewWithCreate(PermCourseTeacher, DetailView):
@@ -196,6 +194,13 @@ class CreateCourse(CreateView, PermCourseTeacher):
         'amount'
     ]
 
+    def form_valid(self, form):
+        super().form_valid(form)
+        new_course = Course.objects.get(id=self.object.id)
+        new_course.teacher = self.request.user
+        new_course.save()
+        return HttpResponseRedirect(self.get_success_url())
+
     def get_success_url(self):
         return reverse('course_info', args=(self.object.id,))
 
@@ -207,11 +212,11 @@ class UpdateModule(UpdateView, PermCourseTeacher):
 
     def get_object(self, queryset=None):
         return get_object_or_404(Module,
-            id=self.kwargs.get('module_id'))
+                                 id=self.kwargs.get('module_id'))
 
     def form_valid(self, form):
-        self.object.name=form.cleaned_data['name']
-        self.object.description=form.cleaned_data['description']
+        self.object.name = form.cleaned_data['name']
+        self.object.description = form.cleaned_data['description']
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
@@ -227,15 +232,15 @@ class CreateModule(CreateView, PermCourseTeacher):
 
     def form_valid(self, form):
         self.object = Module(course=get_object_or_404(Course,
-            id=self.kwargs.get('course_id')),
-                     name=form.cleaned_data['name'],
-                     description=form.cleaned_data['description'])
+                                                      id=self.kwargs.get('course_id')),
+                             name=form.cleaned_data['name'],
+                             description=form.cleaned_data['description'])
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
         return reverse('module_info',
-                       args=(self.object.course.id,self.object.id,))
+                       args=(self.object.course.id, self.object.id,))
 
 
 class UpdateLesson(UpdateView, PermCourseTeacher):
@@ -245,11 +250,11 @@ class UpdateLesson(UpdateView, PermCourseTeacher):
 
     def get_object(self, queryset=None):
         return get_object_or_404(Lesson,
-            id=self.kwargs.get('lesson_id'))
+                                 id=self.kwargs.get('lesson_id'))
 
     def form_valid(self, form):
-        self.object.name=form.cleaned_data['name']
-        self.object.description=form.cleaned_data['description']
+        self.object.name = form.cleaned_data['name']
+        self.object.description = form.cleaned_data['description']
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
@@ -267,7 +272,7 @@ class CreateLesson(CreateView, PermCourseTeacher):
 
     def form_valid(self, form):
         self.object = Lesson(module=get_object_or_404(Module,
-            id=self.kwargs.get('module_id')),
+                                                      id=self.kwargs.get('module_id')),
                              name=form.cleaned_data['name'],
                              description=form.cleaned_data['description'])
         self.object.save()

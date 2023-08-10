@@ -3,7 +3,7 @@ from shop.models import Product, CustomUser
 
 
 class Course(Product):  # онлайн вебинары, запись или текстовые файлы и текст
-    #product = models.ForeignKey(Product, on_delete=models.PROTECT)
+    # product = models.ForeignKey(Product, on_delete=models.PROTECT)
     # is_active = models.BooleanField(default=True)
     teacher = models.ForeignKey(CustomUser, on_delete=models.PROTECT, null=True)
 
@@ -24,7 +24,6 @@ class CourseStudent(models.Model):
     student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     purchase_date = models.DateField(auto_now_add=True)
     is_finished = models.BooleanField(blank=True, default=False)
-
 
     class Meta:
         verbose_name = "курс для пользователя"
