@@ -1,5 +1,5 @@
-{% extends '../../foundation/templates/base_elements/base.html' %}
-{% block head %}Все модули курса {{ course.name }}{% endblock head %}
+{% extends 'base_elements/base.html' %}
+{% block title %}Все модули курса {{ course.name }}{% endblock title %}
 
 {% block main %}
     {{ course.name }}

@@ -325,64 +325,67 @@ if __name__ == "__main__":
     from shop.models import *
     from training.models import *
 
-    num_users = 50
-    num_orders = 10
-    num_categories = 5
-    num_products = 20
-    num_feedbacks = 10
-    num_shipments = 8
-    num_attributes = 5
-    num_values_per_attribute = 3
-    num_price_changes = 10
-    num_ordered_products = 30
-    num_courses = 15
-    num_course_students = 50
-    num_modules_per_course = 10
-    num_lessons_per_module = 15
-    num_student_modules = 10
-    num_student_lessons = 20
-    num_tests = 5
-    num_questions_per_test = 4
-    num_answers_per_question = 4
-
-    generate_users(num_users)
-    generate_orders(num_orders)
-    generate_categories(num_categories)
-    generate_products(num_products)
-    generate_feedbacks(num_feedbacks)
-
-    generate_attributes(num_attributes)
-    generate_attribute_values(num_values_per_attribute)
-
-    products = Product.objects.all()
-    orders = Order.objects.all()
-    generate_shipments(num_shipments, orders)
-    generate_price_changes(num_price_changes, products)
-    generate_ordered_products(num_ordered_products, orders, products)
-
-    teachers = CustomUser.objects.filter(is_staff=True)
-    students = CustomUser.objects.filter(is_staff=False)
-
-    generate_courses(num_courses, teachers)
-    generate_course_students(Course.objects.all(), students)
-
-    courses = Course.objects.all()
-    generate_modules_courses(courses)
-
-    modules = Module.objects.all()
-    generate_lessons_modules(modules)
-
-    generate_student_modules(students, modules)
-
-    lessons = Lesson.objects.all()
-    generate_student_lessons(students, lessons)
-
-    tests = Test.objects.all()
-    generate_tests(lessons)
-
-    questions = Question.objects.all()
-    generate_questions(tests)
-
-    generate_answers(questions, students)
-
-    print("Data generation complete.")
+    # num_users = 50
+    # num_orders = 10
+    # num_categories = 5
+    # num_products = 20
+    # num_feedbacks = 10
+    # num_shipments = 8
+    # num_attributes = 5
+    # num_values_per_attribute = 3
+    # num_price_changes = 10
+    # num_ordered_products = 30
+    # num_courses = 15
+    # num_course_students = 50
+    # num_modules_per_course = 10
+    # num_lessons_per_module = 15
+    # num_student_modules = 10
+    # num_student_lessons = 20
+    # num_tests = 5
+    # num_questions_per_test = 4
+    # num_answers_per_question = 4
+    #
+    # generate_users(num_users)
+    # generate_orders(num_orders)
+    # generate_categories(num_categories)
+    # generate_products(num_products)
+    # generate_feedbacks(num_feedbacks)
+    #
+    # generate_attributes(num_attributes)
+    # generate_attribute_values(num_values_per_attribute)
+    #
+    # products = Product.objects.all()
+    # orders = Order.objects.all()
+    # generate_shipments(num_shipments, orders)
+    # generate_price_changes(num_price_changes, products)
+    # generate_ordered_products(num_ordered_products, orders, products)
+    #
+    # teachers = CustomUser.objects.filter(is_staff=True)
+    # students = CustomUser.objects.filter(is_staff=False)
+    #
+    # generate_courses(num_courses, teachers)
+    # generate_course_students(Course.objects.all(), students)
+    #
+    # courses = Course.objects.all()
+    # generate_modules_courses(courses)
+    #
+    # modules = Module.objects.all()
+    # generate_lessons_modules(modules)
+    #
+    # generate_student_modules(students, modules)
+    #
+    # lessons = Lesson.objects.all()
+    # generate_student_lessons(students, lessons)
+    #
+    # tests = Test.objects.all()
+    # generate_tests(lessons)
+    #
+    # questions = Question.objects.all()
+    # generate_questions(tests)
+    #
+    # generate_answers(questions, students)
+    #
+    # print("Data generation complete.")
+    user = CustomUser.objects.get(email="matthewhayes@example.net")
+    user.set_password("12345678")
+    user.save()

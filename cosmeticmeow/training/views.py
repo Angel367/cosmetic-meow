@@ -64,13 +64,13 @@ class LessonListView(ListView, PermCourseStudent):
         return Lesson.objects.filter(module=self.kwargs['module_id'])
 
 
-class MyCourseListView(ListView, PermCourseStudent):
+class MyCourseListView(LoginRequiredMixin,ListView):
     model = Course
     paginate_by = 9
     template_name = 'courses.html'
 
     def get_queryset(self):
-        return Course.objects.filter(student__in=self.request.user)
+        return CourseStudent.objects.filter(student=self.request.user)
 
 
 class CourseInfoView(DetailView):

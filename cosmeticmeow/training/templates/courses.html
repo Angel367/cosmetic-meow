@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-{% extends '../../foundation/templates/base_elements/base.html' %}
-{% block head %}
+{% extends 'base_elements/base.html' %}
+{% block title %}
     {% if are_bought %} Мои {% else %} Все {% endif %}
-    курсы{% endblock head %}
+    курсы {% endblock title %}
 
 {% block main %}
 {% for course in page_obj %}
@@ -26,5 +26,4 @@
         {% endif %}
     </span>
 </div>
-</body>
-</html>
+{% endblock main %}

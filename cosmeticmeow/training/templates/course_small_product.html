@@ -2,6 +2,7 @@
     {{ course.name }}
     {{ course.short_description }}
     <form method="post" action="">
+    {% csrf_token %}
     {% if is_bought %}
         <a href="{% url 'course_info_my' course_id=course.id %}">Приступить к изучению</a>
     {% else %}
