@@ -24,6 +24,7 @@ for /r %%i in (migrations\*.py) do (
 rem Запускаем makemigrations и migrate
 python manage.py makemigrations
 python manage.py migrate
+python test_data_fill.py
 cd ..
 
 rem Деактивация виртуального окружения

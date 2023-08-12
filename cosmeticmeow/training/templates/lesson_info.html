@@ -3,7 +3,7 @@
 
 {% block main %}
         {{ lesson.name }}
-    {{ lesson.long_description }}
+    {{ lesson.description }}
     {% for test in tests %}
 {#        {% include 'test.html' with test=test %}#}
 {{ test.duration }}
@@ -11,8 +11,8 @@
     {% for file in files %}
         <a href="{{ file }}" download >Скачать</a>
     {% endfor %}
-    <form method="post" action="{% url 'lesson_info' lesson_id=lesson.id, module_id=lesson.module.id, course_id=lesson.module.course.id %}">
+    <form method="post" action="{% url 'lesson_info' lesson_id=lesson.id module_id=lesson.module.id course_id=lesson.module.course.id %}">
 {% csrf_token %}
-    <button name="is_finished"></button>
+    <button name="is_finished">Далее</button>
     </form>
 {% endblock main %}

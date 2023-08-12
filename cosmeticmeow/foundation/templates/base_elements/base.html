@@ -4,10 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock title %}</title>
+{% block head_header_footer %} {% endblock head_header_footer %}
     {% block head %}{% endblock head %}
-    <link rel="stylesheet" href="{% static 'css/base_elements/base.css' %}">
-    <link rel="stylesheet" href="{% static 'css/base_elements/header.css' %}">
-    <link rel="stylesheet" href="{% static 'css/base_elements/footer.css' %}">
+
+        <link rel="stylesheet" href="{% static 'css/base_elements/base.css' %}">
+
     <link href="https://fonts.googleapis.com/css?family=Montserrat:100" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,9 +16,9 @@
     <script src="https://kit.fontawesome.com/98db032af2.js" crossorigin="anonymous"></script>
 </head>
 <body>
-{% include 'base_elements/header.html' %}
+{% block header %}{% endblock header %}
 {% block main %}{% endblock main %}
-{% include 'base_elements/footer.html' %}
+{% block footer %}{% endblock footer %}
 {% block js %}{% endblock js %}
 </body>
 </html>

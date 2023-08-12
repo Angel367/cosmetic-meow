@@ -23,15 +23,18 @@ def generate_users(num_users):
         phone_number = fake.phone_number()
         is_staff = fake.boolean()
 
-        CustomUser.objects.create(
+        user = CustomUser(
             first_name=first_name,
             last_name=last_name,
             middle_name=middle_name,
             email=email,
             is_email_verified=is_email_verified,
             phone_number=phone_number,
-            is_staff=is_staff
+            is_staff=is_staff,
+
         )
+        user.set_password("12345678")
+        user.save()
 
 
 def generate_subscribers(num_subscribers):
@@ -43,6 +46,12 @@ def generate_subscribers(num_subscribers):
             email=email,
             is_active=is_active,
         )
+
+
+def generate_categories(num_categories):
+    for _ in range(num_categories):
+        name = fake.word()
+        Category.objects.create(name=name)
 
 
 def generate_orders(num_orders):
@@ -58,12 +67,6 @@ def generate_orders(num_orders):
             order_status=order_status,
             price=price,
         )
-
-
-def generate_categories(num_categories):
-    for _ in range(num_categories):
-        name = fake.word()
-        Category.objects.create(name=name)
 
 
 def generate_products(num_products):
@@ -198,7 +201,7 @@ def generate_courses(num_courses, teachers):
 
 def generate_course_students(courses, students):
     for course in courses:
-        num_students = random.randint(5, 20)
+        num_students = random.randint(1, 3)
         selected_students = random.sample(list(students), num_students)
 
         for student in selected_students:
@@ -245,36 +248,34 @@ def generate_lessons_modules(modules):
             )
 
 
-def generate_student_modules(students, modules):
-    for student in students:
-        num_modules = random.randint(1, 10)  # Adjust as needed
-        selected_modules = random.sample(list(modules), num_modules)
-
-        for module in selected_modules:
-            is_finished = fake.boolean()
-
-            StudentModule.objects.create(
-                student=student,
-                module=module,
-                is_finished=is_finished,
-            )
-
-
-def generate_student_lessons(students, lessons):
-    for student in students:
-        num_lessons = random.randint(1, 15)  # Adjust as needed
-        selected_lessons = random.sample(list(lessons), num_lessons)
-
-        for lesson in selected_lessons:
-            is_finished = fake.boolean()
-
-            StudentLesson.objects.get_or_create(
-                student=student,
-                lesson=lesson,
-                defaults={
-                    'is_finished': is_finished,
-                }
-            )
+# def generate_student_modules(studentscourses, modules):
+#     for studentcourse in studentscourses:
+#
+#         for module in selected_modules:
+#             is_finished = fake.boolean()
+#
+#             StudentModule.objects.create(
+#                 student=student,
+#                 module=module,
+#                 is_finished=is_finished,
+#             )
+#
+#
+# def generate_student_lessons(students, lessons):
+#     for student in students:
+#         num_lessons = random.randint(1, 15)  # Adjust as needed
+#         selected_lessons = random.sample(list(lessons), num_lessons)
+#
+#         for lesson in selected_lessons:
+#             is_finished = fake.boolean()
+#
+#             StudentLesson.objects.get_or_create(
+#                 student=student,
+#                 lesson=lesson,
+#                 defaults={
+#                     'is_finished': is_finished,
+#                 }
+#             )
 
 
 def generate_tests(lessons):
@@ -293,12 +294,9 @@ def generate_questions(tests):
 
         for _ in range(num_questions):
             text = fake.sentence()
-            right_answer = fake.paragraph()
-
             Question.objects.create(
                 text=text,
-                rightAnswer=right_answer,
-                test=test,
+                test=test
             )
 
 
@@ -308,14 +306,14 @@ def generate_answers(questions, students):
 
         for student in students:
             selected_student = student
-            time_saved = fake.date_time_this_year()
+
             is_right = fake.boolean()
 
             Answer.objects.create(
                 text=fake.paragraph(),
                 question=question,
-                student=selected_student,
-                time_saved=time_saved,
+
+
                 is_right=is_right,
             )
 
@@ -325,67 +323,65 @@ if __name__ == "__main__":
     from shop.models import *
     from training.models import *
 
-    # num_users = 50
-    # num_orders = 10
-    # num_categories = 5
-    # num_products = 20
-    # num_feedbacks = 10
-    # num_shipments = 8
-    # num_attributes = 5
-    # num_values_per_attribute = 3
-    # num_price_changes = 10
-    # num_ordered_products = 30
-    # num_courses = 15
-    # num_course_students = 50
-    # num_modules_per_course = 10
-    # num_lessons_per_module = 15
-    # num_student_modules = 10
-    # num_student_lessons = 20
-    # num_tests = 5
-    # num_questions_per_test = 4
-    # num_answers_per_question = 4
-    #
-    # generate_users(num_users)
-    # generate_orders(num_orders)
-    # generate_categories(num_categories)
-    # generate_products(num_products)
-    # generate_feedbacks(num_feedbacks)
-    #
-    # generate_attributes(num_attributes)
-    # generate_attribute_values(num_values_per_attribute)
-    #
-    # products = Product.objects.all()
-    # orders = Order.objects.all()
-    # generate_shipments(num_shipments, orders)
-    # generate_price_changes(num_price_changes, products)
-    # generate_ordered_products(num_ordered_products, orders, products)
-    #
-    # teachers = CustomUser.objects.filter(is_staff=True)
-    # students = CustomUser.objects.filter(is_staff=False)
-    #
-    # generate_courses(num_courses, teachers)
-    # generate_course_students(Course.objects.all(), students)
-    #
-    # courses = Course.objects.all()
-    # generate_modules_courses(courses)
-    #
-    # modules = Module.objects.all()
-    # generate_lessons_modules(modules)
-    #
+    num_users = 10
+    num_orders = 10
+    num_categories = 5
+    num_products = 20
+    num_feedbacks = 10
+    num_shipments = 8
+    num_attributes = 5
+    num_values_per_attribute = 3
+    num_price_changes = 10
+    num_ordered_products = 30
+    num_courses = 15
+    num_course_students = 10
+    num_modules_per_course = 10
+    num_lessons_per_module = 15
+    num_student_modules = 10
+    num_student_lessons = 20
+    num_tests = 5
+    num_questions_per_test = 2
+    num_answers_per_question = 2
+
+    generate_users(num_users)
+    generate_orders(num_orders)
+    generate_categories(num_categories)
+    generate_products(num_products)
+    generate_feedbacks(num_feedbacks)
+
+    generate_attributes(num_attributes)
+    generate_attribute_values(num_values_per_attribute)
+
+    products = Product.objects.all()
+    orders = Order.objects.all()
+    generate_shipments(num_shipments, orders)
+    generate_price_changes(num_price_changes, products)
+    generate_ordered_products(num_ordered_products, orders, products)
+
+    teachers = CustomUser.objects.filter(is_staff=True)
+    students = CustomUser.objects.filter(is_staff=False)
+
+    generate_courses(num_courses, teachers)
+
+
+    courses = Course.objects.all()
+    generate_modules_courses(courses)
+
+    modules = Module.objects.all()
+    generate_lessons_modules(modules)
+
     # generate_student_modules(students, modules)
-    #
-    # lessons = Lesson.objects.all()
+
+    lessons = Lesson.objects.all()
     # generate_student_lessons(students, lessons)
-    #
-    # tests = Test.objects.all()
-    # generate_tests(lessons)
-    #
-    # questions = Question.objects.all()
-    # generate_questions(tests)
-    #
-    # generate_answers(questions, students)
-    #
-    # print("Data generation complete.")
-    user = CustomUser.objects.get(email="matthewhayes@example.net")
-    user.set_password("12345678")
-    user.save()
+
+    tests = Test.objects.all()
+    generate_tests(lessons)
+    generate_course_students(Course.objects.all(), students)
+    print("main part finished")
+    questions = Question.objects.all()
+    generate_questions(tests)
+    generate_answers(questions, students)
+
+    print("Data generation complete.")
+
