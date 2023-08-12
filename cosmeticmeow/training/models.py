@@ -228,8 +228,10 @@ class StudentAnswer(models.Model):
         ordering = ["-id"]
 # TODO certificate class (form certificate by templatetext, templateimg, db user_data
 # TODO course is_bought in all courses
+# for example by tuple (id, is_bought
 # TODO access to only first not finished lesson and all finished
 # TODO file and test view
+# test duration..? 
 # TODO adding into basket
 # TODO crud-action for teacher
 
