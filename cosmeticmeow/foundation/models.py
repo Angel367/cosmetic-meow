@@ -34,6 +34,8 @@ class CustomUser(AbstractUser):
         null=True)
     USERNAME_FIELD = "email"
     objects = CustomUserManager()
+    isMethodist = models.BooleanField(blank=False, default=False)
+    isManager = models.BooleanField(blank=False, default=False)
 
     @property
     def full_name(self):

@@ -42,8 +42,15 @@ class Order(models.Model):
         for orderedProduct in OrderedProduct.objects.filter(order=self):
             if orderedProduct.price != orderedProduct.product.price:
                 orderedProduct.price = orderedProduct.product.price
+                # TODO Написать нормально
 
-    # TODO Написать нормально
+    def add_product(self, product):    # TODO: Проверить что происходит если это первое добавление в заказ (новый заказ)
+        new_ordered_product = OrderedProduct(
+            order=self,
+            product=product
+        )
+        new_ordered_product.save()
+
 
     class Meta:
         verbose_name = "заказ"
