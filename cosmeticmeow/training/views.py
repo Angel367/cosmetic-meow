@@ -39,8 +39,10 @@ class ModuleListView(PermCourseStudent, ListView):
     def get_context_data(self, **kwargs):
         cntxt = super().get_context_data()
         cntxt['course'] = Course.objects.get(id=self.kwargs['course_id'])
+
         course_student = CourseStudent.objects.get(student=self.request.user, course=self.kwargs['course_id'])
         # print(course_student.is_finished and Certificate.objects.filter(course_student=course_student).exists())
+        cntxt['course_student']=course_student
         if course_student.is_finished and Certificate.objects.filter(course_student=course_student).exists():
             cntxt['certificate'] = Certificate.objects.get(course_student=course_student).get_absolute_file_upload_url()
         return cntxt
@@ -109,7 +111,7 @@ class MyLessonInfoView(PermLessonStudent, DetailView):
                 file = file.get_absolute_file_upload_url()
             k['files'] = files
         k['student_test'] = StudentTest.objects.filter(student=self.request.user,
-                                                           test=Test.objects.get(lesson=self.get_object())).first()
+                                                           test=Test.objects.filter(lesson=self.get_object()).first()).first()
         # print(k['student_test'] )
         return k
 
@@ -134,15 +136,17 @@ class MyLessonInfoView(PermLessonStudent, DetailView):
             s_m_mark = StudentModule.objects.get(module=self.get_object().module, student=request.user)
             s_c_mark = CourseStudent.objects.get(course=self.get_object().module.course, student=request.user)
             if s_l_mark.set_finished():
-                id = s_l_mark.get_next_lesson().id
+                id = s_l_mark.get_next_lesson()
                 if id:
+                    id = id.id
                     return redirect(reverse('lesson_info',
                                             args=(self.get_object().module.course.id,
                                                   self.get_object().module.id,
                                                   id)))
                 elif s_m_mark.set_finished():
-                    id = s_m_mark.get_next_module().id
+                    id = s_m_mark.get_next_module()
                     if id:
+                        id = id.id
                         return redirect(reverse('lessons_all',
                                                 args=(self.get_object().module.course.id,
                                                       id)))
@@ -191,9 +195,10 @@ class MyQuestionInfoView(PermTestStudent, DetailView):
             if form.is_valid():
                 s_a = StudentAnswer.objects.get_or_create(student=request.user,
                                                    answer_id=form.cleaned_data.get("student_answer"))
-                questions = list(Question.objects.filter(test=s_a.answer.question.test))
+
+                questions = list(Question.objects.filter(test=s_a[0].answer.question.test))
                 sas = list(StudentAnswer.objects.filter(student=request.user,
-                                                        answer__question__test=s_a.answer.question.test))
+                                                        answer__question__test=s_a[0].answer.question.test))
                 sas = [sa.answer.question for sa in sas]
                 qs = [question for question in questions if question not in sas ]
                 if qs.__len__() > 1:

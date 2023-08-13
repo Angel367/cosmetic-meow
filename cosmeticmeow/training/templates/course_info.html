@@ -4,7 +4,7 @@
 {% block main %}
     {{ course.name }}
     {{ course.long_description }}
-    {{ course.status }}%
+    {{ course_student.status }}%
     <a download href="{{ certificate }}">Сертификат</a>
     {% for module in page_obj %}
     {% include 'module.html' with module=module %}

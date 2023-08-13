@@ -19,20 +19,23 @@ def has_module_access_student(user, module):
     if module.id_in_course > 1: # если модуль по счету не первый,
         # проверяем закончен ли прошлый модуль
         is_access = StudentModule.objects.filter(student=user,
+                                                 module__course=module.course,
                                                  module__id_in_course=module.id_in_course - 1).first().is_finished
     else: # иначе студент зашел на 1 модуль
         is_access = True
-    return has_course_access_student(user, module.course) & is_access
+    return has_course_access_student(user, module.course) and is_access
 
 
 def has_lesson_access_student(user, lesson):
     if lesson.id_in_module > 1: # если модуль по счету не первый,
         # проверяем закончен ли прошлый модуль
         is_access = StudentLesson.objects.filter(student=user,
+                                                 lesson__module=lesson.module,
                                                  lesson__id_in_module=lesson.id_in_module - 1).first().is_finished
     else: # иначе студент зашел на 1 модуль
         is_access = True
-    return has_module_access_student(user, lesson.module) & is_access
+
+    return has_module_access_student(user, lesson.module) and is_access
 
 
 def has_test_access_student(user, test, question):

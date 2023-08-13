@@ -41,8 +41,9 @@ class CourseStudent(models.Model):
         return self.is_finished
 
     def status(self):
-        return 100 * StudentModule.objects.filter(course=self.course, is_finished=True).count() \
-            / StudentModule.objects.filter(course=self.course).count()
+
+        return int(100 * StudentModule.objects.filter(student=self.student, module__course=self.course, is_finished=True).count() \
+            / StudentModule.objects.filter(student=self.student,module__course=self.course).count())
 
     class Meta:
         verbose_name = "курс для пользователя"
@@ -309,7 +310,7 @@ class Certificate(models.Model):
         verbose_name_plural = "сертификаты"
         ordering = ["id"]
 
-# TODO access to only first not finished lesson and all finished - testing
-#  TODO testing test_view + add timer + course.status
-# TODO crud-action for teacher + add img into course
+# TODO testing add timer with redirect
+# TODO add img into course
+# TODO crud-action for teacher
 # TODO adding into basket -- egor
