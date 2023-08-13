@@ -1,9 +1,10 @@
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, CreateView
 from .forms import CustomUserCreateForm
-from .models import CustomUser
+from .decorators import user_not_authenticated
 
 
 # Create your views here.
@@ -23,6 +24,7 @@ class CustomLogoutView(LogoutView):
     next_page = '/'  # Замените 'home' на имя вашей домашней страницы
 
 
+@method_decorator(user_not_authenticated, name="dispatch")
 class CustomRegistrationView(CreateView):
     form_class = CustomUserCreateForm
     template_name = 'authentication/registration.html'
