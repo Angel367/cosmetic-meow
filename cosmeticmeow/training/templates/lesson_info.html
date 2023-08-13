@@ -9,10 +9,11 @@
     {% endfor %}
     <form method="post" action="{% url 'lesson_info' lesson_id=lesson.id module_id=lesson.module.id course_id=lesson.module.course.id %}">
 {% csrf_token %}
-        {% if  student_test.is_test_right  %}
+        {% if  student_test.is_finished or not test %}
+            {% if test %} Тест завершен{% endif %}
     <button name="is_finished">Далее</button>
     {% else %}
-    {{ test.id }}
+
     {{ test.duration }}
     <button name="start_test">Начать тест</button>
     {% endif %}

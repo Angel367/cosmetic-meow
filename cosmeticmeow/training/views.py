@@ -18,11 +18,13 @@ class CourseListView(ListView):
 
     def get_context_data(self, **kwargs):
         cntxt = super().get_context_data()
-        if self.request.user.is_authenticated:
-            is_bought = {}
-            for course in list(self.get_queryset()):
+        is_bought = {}
+        for course in list(self.get_queryset()):
+            if not self.request.user.is_authenticated:
+                is_bought[course.id] = False
+            else:
                 is_bought[course.id] = CourseStudent.objects.filter(course=course, student=self.request.user).exists()
-            cntxt['is_bought'] = is_bought
+        cntxt['is_bought'] = is_bought
         return cntxt
 
 
@@ -106,12 +108,19 @@ class MyLessonInfoView(PermLessonStudent, DetailView):
             for file in files:
                 file = file.get_absolute_file_upload_url()
             k['files'] = files
-            k['student_test'] = StudentTest.objects.filter(student=self.request.user,
-                                                           test=Test.objects.get(lesson=self.get_object()))
+        k['student_test'] = StudentTest.objects.filter(student=self.request.user,
+                                                           test=Test.objects.get(lesson=self.get_object())).first()
+        # print(k['student_test'] )
         return k
 
     def post(self, request, *args, **kwargs):
         if 'start_test' in request.POST:
+            test = Test.objects.get(lesson=self.get_object())
+            t = StudentTest.objects.get_or_create(student=self.request.user, test=test)
+            # print(t)
+            if not t[1]:
+                return render(request, self.template_name, self.get_context_data())
+            t[0].test_time_start()
             qs = Question.objects.filter(test=Test.objects.filter(lesson=self.get_object()).first()).first()
             return redirect(reverse('question',
                                     args=(self.get_object().module.course.id,
@@ -150,16 +159,19 @@ class MyQuestionInfoView(PermTestStudent, DetailView):
     template_name = 'question.html'
     pk_url_kwarg = 'question_id'
 
-    # TODO timer
     # cxt: test, count_q, count_s_a
-    def get_object(self, queryset=None):
-        return get_object_or_404(Question, id=self.kwargs['question_id'])
+
+    # def get_object(self, queryset=None):
+    #     return get_object_or_404(Question, id=self.kwargs['question_id'])
 
     def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
         q = self.get_object()
+
         form = StudentAnswerForm()
         answers = Answer.objects.filter(question=q)
         choices_q = tuple((answer.id, answer.text) for answer in answers)
+        print(choices_q)
         # if answers.filter(is_right=True).count() == 1:
         choices_field = forms.ChoiceField(label=q.text, choices=choices_q,
                                           widget=forms.RadioSelect())
@@ -167,20 +179,40 @@ class MyQuestionInfoView(PermTestStudent, DetailView):
         #     choices_field = forms.MultipleChoiceField(label=q.text, choices=choices_q,
         # widget=forms.CheckboxSelectMultiple())
         form.fields["student_answer"] = choices_field
-        kwargs.update({"form": form, 'question': q})
-        return render(request, self.template_name, kwargs)
+        ctx = self.get_context_data()
+        ctx.update({"form": form, 'question': q})
+        return render(request, self.template_name, ctx)
 
     def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        ctx = self.get_context_data()
         if request.method == "POST":
             form = StudentAnswerForm(request.POST)
             if form.is_valid():
-                s_a = StudentAnswer.objects.create(student=request.user,
+                s_a = StudentAnswer.objects.get_or_create(student=request.user,
                                                    answer_id=form.cleaned_data.get("student_answer"))
-                qs = list(Question.objects.filter(test=s_a.answer.question.test))
+                questions = list(Question.objects.filter(test=s_a.answer.question.test))
                 sas = list(StudentAnswer.objects.filter(student=request.user,
                                                         answer__question__test=s_a.answer.question.test))
-                [qs.remove(sa.answer.question) for sa in sas]
-                if qs.__len__() > 0:
+                sas = [sa.answer.question for sa in sas]
+                qs = [question for question in questions if question not in sas ]
+                if qs.__len__() > 1:
+                    return redirect(reverse('question',
+                                            args=(self.get_object().test.lesson.module.course.id,
+                                                  self.get_object().test.lesson.module.id,
+                                                  self.get_object().test.lesson.id,
+                                                  self.get_object().test.id,
+                                                  qs[0].id,
+                                                  )))
+                elif qs.__len__() == 0:
+                    StudentTest.objects.get(test=self.get_object().test,student=request.user).is_test_right()
+                    return redirect(reverse('lesson_info',
+                                            args=(self.get_object().test.lesson.module.course.id,
+                                                  self.get_object().test.lesson.module.id,
+                                                  self.get_object().test.lesson.id,
+                                                  )))
+                else:
+                    ctx.update({"last": True})
                     return redirect(reverse('question',
                                             args=(self.get_object().test.lesson.module.course.id,
                                                   self.get_object().test.lesson.module.id,
@@ -189,8 +221,8 @@ class MyQuestionInfoView(PermTestStudent, DetailView):
                                                   qs[0].id,
                                                   )))
             else:
-                kwargs.update({"form": form, "test": self.get_object().test})
-        return render(request, self.template_name, kwargs)
+                ctx.update({"form": form, "test": self.get_object().test})
+        return render(request, self.template_name, ctx)
 
 
 class LessonInfoViewWithCreate(PermCourseTeacher, DetailView):

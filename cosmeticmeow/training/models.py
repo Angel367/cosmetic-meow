@@ -1,3 +1,5 @@
+import threading
+
 from PIL import Image, ImageDraw, ImageFont
 from django.db import models
 
@@ -97,12 +99,12 @@ class StudentModule(models.Model):
     is_finished = models.BooleanField(blank=True, default=False)
 
     def get_first_not_finished(self):
-        module = StudentModule.objects.filter(student=self.student, module__id_in_course=1)
-        while module.first().is_finished():
-            module = StudentModule.objects.filter(student=self.student, module=module.get_next_module())
-            if not module.first():
+        module = StudentModule.objects.filter(student=self.student, module__course=self.module.course,module__id_in_course=1).first()
+        while module.is_finished:
+            module = StudentModule.objects.filter(student=self.student, module=module.get_next_module()).first()
+            if not module:
                 return None
-        return module.first().module
+        return module.module
 
     def set_finished(self):
         if (StudentLesson.objects.filter(lesson__module=self.module, is_finished=True).count() ==
@@ -113,7 +115,7 @@ class StudentModule(models.Model):
 
     def get_next_module(self):
         if self.module.id_in_course >= Module.objects.filter(course=self.module.course).count():
-            CourseStudent.objects.filter(course=self.module.course, student=self.student).first().set_finished()
+            # CourseStudent.objects.filter(course=self.module.course, student=self.student).first().set_finished()
             return None
         else:
             return Module.objects.get(course=self.module.course,
@@ -137,32 +139,31 @@ class StudentLesson(models.Model):
     is_finished = models.BooleanField(blank=True, default=False)
 
     def get_first_not_finished(self):
-         lesson = StudentLesson.objects.filter(student=self.student, lesson__id_in_module=1)
-         while lesson.first().is_finished():
-            lesson = StudentLesson.objects.filter(student=self.student, lesson=lesson.get_next_lesson())
-            if not lesson.first():
+        lesson = StudentLesson.objects.filter(student=self.student, lesson__module=self.lesson.module,lesson__id_in_module=1).first()
+        while lesson.is_finished:
+            # print("\n\n", lesson.id, "\n\n")
+            lesson = StudentLesson.objects.filter(student=self.student, lesson=lesson.get_next_lesson()).first()
+            if not lesson:
                 return None
-         return lesson.first().lesson
+        return lesson.lesson
 
     def set_finished(self):
         test = Test.objects.filter(lesson=self.lesson).first()
-        if not StudentTest.objects.get(student=self.student, test=test) \
-                or StudentTest.objects.get(student=self.student, test=test).is_test_right():
+        student_test = StudentTest.objects.filter(student=self.student, test=test).first()
+        if not test or student_test and student_test.is_finished:
             self.is_finished = True
             self.save()
         return self.is_finished
 
     def get_next_lesson(self):
         if self.lesson.id_in_module >= Lesson.objects.filter(module=self.lesson.module).count():
-            StudentModule.objects.get(module=self.lesson.module, student=self.student).set_finished()
+            # StudentModule.objects.get(module=self.lesson.module, student=self.student).set_finished()
             return None
         else:
             return Lesson.objects.get(module=self.lesson.module,
                                       id_in_module=self.lesson.id_in_module + 1)
 
     def save(self, *args, **kwargs):
-        test = Test.objects.get(lesson=self.lesson)
-        StudentTest.objects.get_or_create(student=self.student, test=test)
         super(StudentLesson, self).save(*args, **kwargs)
 
     class Meta:
@@ -180,7 +181,7 @@ class ContentFile(models.Model):
         super(self, ContentFile).save(*args, **kwargs)
 
     def name(self):
-        return (self.lesson.id.__str__()+ "_" +
+        return (self.lesson.id.__str__() + "_" +
                 self.id.__str__() + "_" +
                 self.file.name.__str__())
 
@@ -211,11 +212,23 @@ class Test(models.Model):
 class StudentTest(models.Model):
     student = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     test = models.ForeignKey(Test, on_delete=models.CASCADE)
+    is_finished = models.BooleanField(default=False)
+    time_start = models.DateTimeField(auto_now_add=True)
+
+
+    def test_time_start(self):
+        if not self.is_finished:
+            timer = threading.Timer(self.test.duration, self.is_test_right)
 
     def is_test_right(self):
-        return StudentAnswer.objects.filter(student=self.student, answer__question__test=self.test,
-                answer__is_right=True).exists() and self.test.quantityOfRightForFinish <= StudentAnswer.objects.filter(student=self.student,
-                answer__question__test=self.test,  answer__is_right=True).count()
+        is_right = (StudentAnswer.objects.filter(student=self.student, answer__question__test=self.test, answer__is_right=True).exists()
+                    and self.test.quantityOfRightForFinish <= StudentAnswer.objects.filter(student=self.student,
+                    answer__question__test=self.test, answer__is_right=True).count())
+        if not is_right:
+            self.delete()
+        self.is_finished = True
+        self.save()
+        StudentAnswer.objects.filter(student=self.student, answer__question__test=self.test).delete()
 
     class Meta:
         verbose_name = "тест студента"
@@ -286,7 +299,7 @@ class Certificate(models.Model):
             encoding='UTF-8',
         )
         draw_text = ImageDraw.Draw(im)
-        draw_text.multiline_text(xy=(100,400), text=u'%s' % txt, font=font, fill="black")
+        draw_text.multiline_text(xy=(100, 400), text=u'%s' % txt, font=font, fill="black")
         self.file.name = self.name()
         im.save('media/' + self.path() + self.name())
         super(Certificate, self).save(*args, **kwargs)
@@ -297,6 +310,6 @@ class Certificate(models.Model):
         ordering = ["id"]
 
 # TODO access to only first not finished lesson and all finished - testing
-#  TODO testing test_view + add timer
+#  TODO testing test_view + add timer + course.status
 # TODO crud-action for teacher + add img into course
 # TODO adding into basket -- egor

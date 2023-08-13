@@ -7,7 +7,7 @@
 <body>
 <form action="{% url 'question' question_id=question.id test_id=question.test.id lesson_id=question.test.lesson.id module_id=question.test.lesson.module.id course_id=question.test.lesson.module.course.id %}" method="post">
     {% csrf_token %}
-    {{ form.as_table }}
+    {{ form }}
     <button type="submit" name="save">Ответить</button>
 </form>
 </body>
