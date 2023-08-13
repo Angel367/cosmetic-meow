@@ -4,16 +4,17 @@
 {% block main %}
         {{ lesson.name }}
     {{ lesson.description }}
-
-{#        {% include 'test.html' with test=test %}#}
-{{ test.id }}
-{{ test.duration }}
-
     {% for file in files %}
         <a href="{{ file }}" download >Скачать</a>
     {% endfor %}
     <form method="post" action="{% url 'lesson_info' lesson_id=lesson.id module_id=lesson.module.id course_id=lesson.module.course.id %}">
 {% csrf_token %}
+        {% if  student_test.is_test_right  %}
     <button name="is_finished">Далее</button>
+    {% else %}
+    {{ test.id }}
+    {{ test.duration }}
+    <button name="start_test">Начать тест</button>
+    {% endif %}
     </form>
 {% endblock main %}

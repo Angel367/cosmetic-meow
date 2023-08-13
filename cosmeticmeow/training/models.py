@@ -213,9 +213,9 @@ class StudentTest(models.Model):
     test = models.ForeignKey(Test, on_delete=models.CASCADE)
 
     def is_test_right(self):
-        return self.test.quantityOfRightForFinish <= StudentAnswer.objects.filter(student=self.student,
-                                                                                  answer__question__test=self.test,
-                                                                        answer__is_right=True).count()
+        return StudentAnswer.objects.filter(student=self.student, answer__question__test=self.test,
+                answer__is_right=True).exists() and self.test.quantityOfRightForFinish <= StudentAnswer.objects.filter(student=self.student,
+                answer__question__test=self.test,  answer__is_right=True).count()
 
     class Meta:
         verbose_name = "тест студента"

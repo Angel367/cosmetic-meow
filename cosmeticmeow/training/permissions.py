@@ -3,8 +3,8 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect, get_object_or_404
 from django.views import View
 
-from .models import CourseStudent, StudentModule, StudentLesson, StudentTest, Course, Module, Test, Question
-
+from .models import CourseStudent, StudentModule, StudentLesson, Lesson, Course, Module, Test, Question
+# TODO нет доступа к тесту если он уже пройден
 
 def has_course_access_teacher(user, course):
     return course.teacher == user or user.isMethodist   # не проверял
