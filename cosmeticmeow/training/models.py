@@ -1,5 +1,8 @@
+from PIL import Image, ImageDraw, ImageFont
 from django.db import models
-from shop.models import Product, CustomUser
+
+from foundation.models import CustomUser
+from shop.models import Product
 
 
 class Course(Product):  # онлайн вебинары, запись или текстовые файлы и текст
@@ -12,7 +15,7 @@ class Course(Product):  # онлайн вебинары, запись или т�
     class Meta:
         verbose_name = "курс"
         verbose_name_plural = "курсы"
-        ordering = ["-id"]
+        ordering = ["id"]
 
 
 class CourseStudent(models.Model):
@@ -31,6 +34,7 @@ class CourseStudent(models.Model):
         if (StudentModule.objects.filter(module__course=self.course, is_finished=True).count() ==
                 Module.objects.filter(course=self.course).count()):
             self.is_finished = True
+            Certificate.objects.get_or_create(course_student=self)
             self.save()
         return self.is_finished
 
@@ -41,7 +45,7 @@ class CourseStudent(models.Model):
     class Meta:
         verbose_name = "курс для пользователя"
         verbose_name_plural = "курсы для пользователей"
-        ordering = ["-purchase_date"]
+        ordering = ["purchase_date"]
         unique_together = ('course', 'student')
 
 
@@ -92,22 +96,28 @@ class StudentModule(models.Model):
     module = models.ForeignKey(Module, on_delete=models.CASCADE)
     is_finished = models.BooleanField(blank=True, default=False)
 
+    def get_first_not_finished(self):
+        module = StudentModule.objects.filter(student=self.student, module__id_in_course=1)
+        while module.first().is_finished():
+            module = StudentModule.objects.filter(student=self.student, module=module.get_next_module())
+            if not module.first():
+                return None
+        return module.first().module
+
     def set_finished(self):
-        lesson_last = Lesson.objects.get(module=self.module,
-                                            id_in_module=Lesson.objects
-                                            .filter(module=self.module).count())
-        if StudentLesson.objects.get(student=self.student, lesson=lesson_last).is_finished:
+        if (StudentLesson.objects.filter(lesson__module=self.module, is_finished=True).count() ==
+                Lesson.objects.filter(module=self.module).count()):
             self.is_finished = True
             self.save()
         return self.is_finished
 
-    def get_next_module_id(self):
+    def get_next_module(self):
         if self.module.id_in_course >= Module.objects.filter(course=self.module.course).count():
             CourseStudent.objects.filter(course=self.module.course, student=self.student).first().set_finished()
             return None
         else:
             return Module.objects.get(course=self.module.course,
-                                      id_in_course=self.module.id_in_course + 1).id
+                                      id_in_course=self.module.id_in_course + 1)
 
     def save(self, *args, **kwargs):
         lessons = Lesson.objects.filter(module=self.module)
@@ -126,6 +136,14 @@ class StudentLesson(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     is_finished = models.BooleanField(blank=True, default=False)
 
+    def get_first_not_finished(self):
+         lesson = StudentLesson.objects.filter(student=self.student, lesson__id_in_module=1)
+         while lesson.first().is_finished():
+            lesson = StudentLesson.objects.filter(student=self.student, lesson=lesson.get_next_lesson())
+            if not lesson.first():
+                return None
+         return lesson.first().lesson
+
     def set_finished(self):
         test = Test.objects.filter(lesson=self.lesson).first()
         if not StudentTest.objects.get(student=self.student, test=test) \
@@ -134,13 +152,13 @@ class StudentLesson(models.Model):
             self.save()
         return self.is_finished
 
-    def get_next_lesson_id(self):
+    def get_next_lesson(self):
         if self.lesson.id_in_module >= Lesson.objects.filter(module=self.lesson.module).count():
             StudentModule.objects.get(module=self.lesson.module, student=self.student).set_finished()
             return None
         else:
             return Lesson.objects.get(module=self.lesson.module,
-                                      id_in_module=self.lesson.id_in_module + 1).id
+                                      id_in_module=self.lesson.id_in_module + 1)
 
     def save(self, *args, **kwargs):
         test = Test.objects.get(lesson=self.lesson)
@@ -157,10 +175,25 @@ class ContentFile(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     file = models.FileField(upload_to='training/content_files')
 
+    def save(self, *args, **kwargs):
+        self.file.name = self.name()
+        super(self, ContentFile).save(*args, **kwargs)
+
+    def name(self):
+        return (self.lesson.id.__str__()+ "_" +
+                self.id.__str__() + "_" +
+                self.file.name.__str__())
+
+    def path(self):
+        return 'training/content_files/'
+
+    def get_absolute_file_upload_url(self):
+        return '/media/' + self.path() + self.name()
+
     class Meta:
         verbose_name = "файл контента"
         verbose_name_plural = "файлы контента"
-        ordering = ["-id"]
+        ordering = ["id"]
 
 
 # кол-во тестов в курсе? 1, 0 или больше
@@ -172,7 +205,7 @@ class Test(models.Model):
     class Meta:
         verbose_name = "тест"
         verbose_name_plural = "тесты"
-        ordering = ["-id"]
+        ordering = ["id"]
 
 
 class StudentTest(models.Model):
@@ -181,8 +214,8 @@ class StudentTest(models.Model):
 
     def is_test_right(self):
         return self.test.quantityOfRightForFinish <= StudentAnswer.objects.filter(student=self.student,
-                                                                                 answer__question__test=self.test,
-                                                                                 answer__is_right=True).count()
+                                                                                  answer__question__test=self.test,
+                                                                        answer__is_right=True).count()
 
     class Meta:
         verbose_name = "тест студента"
@@ -197,7 +230,7 @@ class Question(models.Model):
     class Meta:
         verbose_name = "вопрос"
         verbose_name_plural = "вопросы"
-        ordering = ["-id"]
+        ordering = ["id"]
 
 
 # типы вопросов? radio, ответы задаются преподом
@@ -226,10 +259,44 @@ class StudentAnswer(models.Model):
         verbose_name = "ответ студента"
         verbose_name_plural = "ответы студентов"
         ordering = ["-id"]
-# TODO certificate class (form certificate by templatetext, templateimg, db user_data
-# TODO course is_bought in all courses
-# TODO access to only first not finished lesson and all finished
-# TODO file and test view
-# TODO adding into basket
-# TODO crud-action for teacher
 
+
+class Certificate(models.Model):
+    course_student = models.ForeignKey(CourseStudent, on_delete=models.PROTECT)
+    file = models.FileField(null=True, blank=True, upload_to="training/certificates/")
+
+    def name(self):
+        return self.course_student.id.__str__() + '.png'
+
+    def path(self):
+        return 'training/certificates/'
+
+    def get_absolute_file_upload_url(self):
+        return '/media/' + self.path() + self.name()
+
+    def save(self, *args, **kwargs):
+        txt = open('media/' + self.path() + 'template/text.txt', "r", encoding="utf8").read()
+
+        im = Image.open('media/' + self.path() + 'template/img.png')
+        txt = txt.replace("ИМЯ_ФАМИЛИЯ_ОТЧЕСТВО", self.course_student.student.full_name)
+        txt = txt.replace("НАЗВАНИЕ_КУРС", self.course_student.course.name)
+        font = ImageFont.truetype(
+            "media/training/dejavu-fonts-ttf-2.37/ttf/DejaVuSans.ttf",
+            size=25,
+            encoding='UTF-8',
+        )
+        draw_text = ImageDraw.Draw(im)
+        draw_text.multiline_text(xy=(100,400), text=u'%s' % txt, font=font, fill="black")
+        self.file.name = self.name()
+        im.save('media/' + self.path() + self.name())
+        super(Certificate, self).save(*args, **kwargs)
+
+    class Meta:
+        verbose_name = "сертификат"
+        verbose_name_plural = "сертификаты"
+        ordering = ["id"]
+
+# TODO access to only first not finished lesson and all finished - testing
+#  TODO testing test_view + add timer
+# TODO crud-action for teacher + add img into course
+# TODO adding into basket -- egor

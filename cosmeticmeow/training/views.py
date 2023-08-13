@@ -1,32 +1,12 @@
-from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.views import View
 from django.views.generic import DetailView, ListView, CreateView, UpdateView
-
 from .forms import *
 from .models import *
 from .permissions import *
 
 
-class PermCourseTeacher(LoginRequiredMixin, UserPassesTestMixin, View):
-    def test_func(self):
-        return has_course_access_teacher(self.request.user, get_object_or_404(Course, id=self.kwargs['course_id']))
-
-
-class PermCourseStudent(LoginRequiredMixin, UserPassesTestMixin, View):
-    def test_func(self):
-        return has_course_access_student(self.request.user, get_object_or_404(Course, id=self.kwargs['course_id']))
-
-    def handle_no_permission(self):
-        if self.raise_exception:
-            raise PermissionDenied(self.get_permission_denied_message())
-        return redirect('/courses/' + str(self.kwargs['course_id']) + '/')
-
-
-#
 
 # https://docs.djangoproject.com/en/4.2/topics/auth/default/ про mixin
 # https://docs.djangoproject.com/en/4.2/topics/class-based-views/   # про этот ваш классы а не функции
@@ -36,6 +16,15 @@ class CourseListView(ListView):
     model = Course
     paginate_by = 9
     template_name = 'courses.html'
+
+    def get_context_data(self, **kwargs):
+        cntxt = super().get_context_data()
+        if self.request.user.is_authenticated:
+            is_bought = {}
+            for course in list(self.get_queryset()):
+                is_bought[course.id] = CourseStudent.objects.filter(course=course, student=self.request.user).exists()
+            cntxt['is_bought'] = is_bought
+        return cntxt
 
 
 class ModuleListView(PermCourseStudent, ListView):
@@ -49,10 +38,14 @@ class ModuleListView(PermCourseStudent, ListView):
     def get_context_data(self, **kwargs):
         cntxt = super().get_context_data()
         cntxt['course'] = Course.objects.get(id=self.kwargs['course_id'])
+        course_student = CourseStudent.objects.get(student=self.request.user, course=self.kwargs['course_id'])
+        # print(course_student.is_finished and Certificate.objects.filter(course_student=course_student).exists())
+        if course_student.is_finished and Certificate.objects.filter(course_student=course_student).exists():
+            cntxt['certificate'] = Certificate.objects.get(course_student=course_student).get_absolute_file_upload_url()
         return cntxt
 
 
-class LessonListView(ListView, PermCourseStudent):
+class LessonListView(ListView, PermModuleStudent):
     model = Lesson
     paginate_by = 9
     template_name = 'module_info.html'
@@ -63,7 +56,7 @@ class LessonListView(ListView, PermCourseStudent):
         return cntxt
 
     def get_queryset(self):
-        print(Lesson.objects.filter(module=self.kwargs['module_id']))
+        # print(Lesson.objects.filter(module=self.kwargs['module_id']))
         return Lesson.objects.filter(module=self.kwargs['module_id'])
 
 
@@ -71,6 +64,16 @@ class MyCourseListView(LoginRequiredMixin, ListView):
     model = CourseStudent
     paginate_by = 9
     template_name = 'courses.html'
+
+    def get_context_data(self, **kwargs):
+        cntxt = super().get_context_data()
+        if self.request.user.is_authenticated:
+            is_bought_id = {}
+            for course in list(self.get_queryset()):
+                is_bought_id[course.course.id] = CourseStudent.objects.filter(course=course.course.id, student=self.request.user).exists()
+            cntxt['is_bought'] = is_bought_id
+            cntxt['are_bought'] = True
+        return cntxt
 
     def get_queryset(self):
         courses = CourseStudent.objects.filter(student=self.request.user)
@@ -85,44 +88,40 @@ class CourseInfoView(DetailView):
     def get_context_data(self, **kwargs):
         cntxt = super().get_context_data()
         if self.request.user.is_authenticated and has_course_access_student(self.request.user, self.get_object()):
-                cntxt['is_bought'] = True
+            cntxt['is_bought'] = True
         return cntxt
 
 
-# class MyCourseInfoView(PermCourseStudent, DetailView):
-#     model = Course
-#     template_name = 'course_product.html'
-#     pk_url_kwarg = 'course_id'
-
-
-#
-#
-# class MyModuleInfoView(DetailView, PermCourseStudent):
-#     model = Module
-#     template_name = 'course_info.html'
-#     pk_url_kwarg = 'module_id'
-
-
-class MyLessonInfoView(PermCourseStudent, DetailView):
+class MyLessonInfoView(PermLessonStudent, DetailView):
     model = Lesson
     template_name = 'lesson_info.html'
     pk_url_kwarg = 'lesson_id'
+
+    def get_context_data(self, **kwargs):
+        k=super().get_context_data()
+        if Test.objects.filter(lesson=self.get_object()).exists():
+            k['test'] = Test.objects.get(lesson=self.get_object())
+        if ContentFile.objects.filter(lesson=self.get_object()).count() > 0:
+            files = list(ContentFile.objects.filter(lesson=self.get_object()))
+            for file in files:
+                file = file.get_absolute_file_upload_url()
+            k['files'] = files
+        return k
 
     def post(self, request, *args, **kwargs):
         if 'is_finished' in request.POST:
             s_l_mark = StudentLesson.objects.get(lesson=self.get_object(), student=request.user)
             s_m_mark = StudentModule.objects.get(module=self.get_object().module, student=request.user)
             s_c_mark = CourseStudent.objects.get(course=self.get_object().module.course, student=request.user)
-
             if s_l_mark.set_finished():
-                id = s_l_mark.get_next_lesson_id()
+                id = s_l_mark.get_next_lesson().id
                 if id:
                     return redirect(reverse('lesson_info',
                                             args=(self.get_object().module.course.id,
                                                   self.get_object().module.id,
                                                   id)))
                 elif s_m_mark.set_finished():
-                    id = s_m_mark.get_next_module_id()
+                    id = s_m_mark.get_next_module().id
                     if id:
                         return redirect(reverse('lessons_all',
                                                 args=(self.get_object().module.course.id,
@@ -133,6 +132,53 @@ class MyLessonInfoView(PermCourseStudent, DetailView):
                                                     args=(self.get_object().module.course.id,
                                                           )))
         return render(request, self.template_name, self.get_context_data())
+
+
+class MyQuestionInfoView(PermLessonStudent, DetailView):
+    model = Question
+    template_name = 'question.html'
+    pk_url_kwarg = 'question_id'
+    # TODO timer
+    # cxt: test, count_q, count_s_a
+    def get(self, request, *args, **kwargs):
+        q = get_object_or_404(Question, id=kwargs['question_id'])
+        form = StudentAnswerForm(intinal={})
+        answers = Answer.objects.filter(question=q)
+        choices_q = tuple((answer.id, answer.text) for answer in answers)
+        # if answers.filter(is_right=True).count() == 1:
+        choices_field = forms.ChoiceField(label=q.text, choices=choices_q,
+                                              widget=forms.RadioSelect())
+        # else:
+        #     choices_field = forms.MultipleChoiceField(label=q.text, choices=choices_q,
+                                              # widget=forms.CheckboxSelectMultiple())
+        form.fields["student_answer"] = choices_field
+        ctx = self.get_context_data()
+        ctx.update({"form": form, 'test':q.test})
+        return render(request, self.template_name, ctx)
+
+    def post(self, request, *args, **kwargs):
+        if request.method == "POST":
+            form = StudentAnswerForm(request.POST)
+            if form.is_valid():
+                s_a = StudentAnswer.objects.create(student=request.user,
+                                        answer_id=form.cleaned_data.get("student_answer"))
+                qs = list(Question.objects.filter(test=s_a.answer.question.test))
+                sas = list(StudentAnswer.objects.filter(student=request.user,
+                                                         answer__question__test=s_a.answer.question.test))
+                final = [ qs.remove(sa.answer.question) for sa in sas]
+                if qs.__len__() > 0:
+                    return redirect(reverse('question',
+                                        args=(self.get_object().test.lesson.module.course.id,
+                                              self.get_object().test.lesson.module.id,
+                                              self.get_object().test.lesson.id,
+                                              self.get_object().test.id,
+                                              qs[0].id,
+                                             )))
+            else:
+                ctx = self.get_context_data()
+                ctx.update({"form":form})
+        return render(request, self.template_name,ctx)
+
 
 
 class LessonInfoViewWithCreate(PermCourseTeacher, DetailView):

@@ -8,6 +8,7 @@ from django.utils.functional import lazy
 from foundation.managers import CustomUserManager
 
 
+
 # Create your models here.
 
 

@@ -1,4 +1,4 @@
-{% if not course.student %}
+{% if not is_bought_id %}
 <a href="{% url 'course_info' course_id=course.id %}">
     {% else %}
 <a href="{% url 'course_info' course_id=course.course.id %}">
@@ -7,12 +7,9 @@
     {{ course.name }}
     {{ course.short_description }}
 
-{{ course.course.name }}
-    {{ course.course.short_description }}
-
     <form method="post" action="">
     {% csrf_token %}
-    {% if course.student %}
+    {% if is_bought_id%}
         <a href="{% url 'course_info' course_id=course.course.id %}">Приступить к изучению</a>
     {% else %}
         <input hidden name="course_id" value="{{ course.id }}">
