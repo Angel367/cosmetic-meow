@@ -1,5 +1,5 @@
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render
+from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, CreateView
@@ -31,6 +31,12 @@ class CustomRegistrationView(CreateView):
     success_url = reverse_lazy('foundation:login')
 
     def form_valid(self, form):
-        # Автоматически выполняем вход пользователя после успешной регистрации
         user = form.save()
+        #activate_email(self.request, self.request.user, form.fi)
+        print(form.fields.email)
         return super().form_valid(form)
+
+
+def activate_email(request, user, to_email):
+    messages.success(request, f'Dear <b>{user}</b>, please go to you email <b>{to_email}</b> inbox and click on \
+        received activation link to confirm and complete the registration. <b>Note:</b> Check your spam folder.')
