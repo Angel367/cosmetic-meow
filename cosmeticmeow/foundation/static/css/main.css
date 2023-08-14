@@ -74,7 +74,7 @@ main .left > div{
 }
 
 .left  section{
-    width: 60%;
+    width: 45%;
 }
 main .rating{
     background: #FFFFFF80;
@@ -94,13 +94,13 @@ main .rating > div > div:first-child{
 }
 
 main #main_art1{
-    padding: 4rem 6rem;
+    padding: 6.5rem 6rem 4rem;
     z-index: -1;
     height: max-content;
-    background-image: url("../img/main/main_article_old.png");
+    background-image: url("../img/main/main_article.png");
     background-repeat: no-repeat;
     background-size: cover;
-    /*background-position: top left;*/
+    background-position: right 40%;
     /*background-position: top center;*/
 
 }

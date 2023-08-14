@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from django.views.generic import CreateView
 from .forms import CustomUserCreateForm
@@ -16,6 +16,7 @@ class IndexView(CreateView):
     template_name = "main.html"
     model = Subscriber
     fields = ['email']
+    success_url = '/'
 
     def get_form(self, form_class=None):
         if form_class is None:
@@ -26,6 +27,7 @@ class IndexView(CreateView):
             attrs={'placeholder': 'Enter your email Address'}
         )
         return form
+
 
 
 class CustomLoginView(LoginView):
