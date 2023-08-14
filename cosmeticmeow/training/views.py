@@ -121,8 +121,8 @@ class MyLessonInfoView(PermLessonStudent, DetailView):
             test = Test.objects.get(lesson=self.get_object())
             t = StudentTest.objects.get_or_create(student=self.request.user, test=test)
             print(t)
-            if t[1]:
-                return render(request, self.template_name, self.get_context_data())
+            # if t[1]:
+            #     return render(request, self.template_name, self.get_context_data())
             t[0].test_time_start()
             qs = Question.objects.filter(test=Test.objects.filter(lesson=self.get_object()).first()).first()
             return redirect(reverse('question',

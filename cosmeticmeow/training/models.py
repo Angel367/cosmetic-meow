@@ -230,11 +230,17 @@ class StudentTest(models.Model):
                     and self.test.quantityOfRightForFinish <= StudentAnswer.objects.filter(student=self.student,
                                                                                            answer__question__test=self.test,
                                                                                            answer__is_right=True).count())
+        print(self.test.quantityOfRightForFinish, StudentAnswer.objects.filter(student=self.student,
+                                                                               answer__question__test=self.test,
+                                                                               answer__is_right=True).count())
+        StudentAnswer.objects.filter(student=self.student, answer__question__test=self.test).delete()
         if not is_right:
             self.delete()
+            return
         self.is_finished = True
         self.save()
-        StudentAnswer.objects.filter(student=self.student, answer__question__test=self.test).delete()
+
+
 
     class Meta:
         verbose_name = "тест студента"
