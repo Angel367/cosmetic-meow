@@ -6,50 +6,59 @@ from django.views import View
 from .models import CourseStudent, StudentModule, StudentLesson, Lesson, Course, Module, Test, Question, StudentTest
 
 
+def has_access_methodist(user):
+    return user.isMethodist
+
 
 def has_course_access_teacher(user, course):
-    return course.teacher == user or user.isMethodist   # не проверял
+    return course.teacher == user or has_access_methodist(user)  # не проверял
 
 
-def has_course_access_student(user, course):    # не проверял
-    return CourseStudent.objects.filter(student=user, course=course).first() is not None or has_course_access_teacher(user, course)
+def has_course_access_student(user, course):  # не проверял
+    return CourseStudent.objects.filter(student=user, course=course).first() is not None or has_course_access_teacher(
+        user, course)
 
 
 def has_module_access_student(user, module):
-    if module.id_in_course > 1: # если модуль по счету не первый,
+    if module.id_in_course > 1:  # если модуль по счету не первый,
         # проверяем закончен ли прошлый модуль
         is_access = StudentModule.objects.filter(student=user,
                                                  module__course=module.course,
                                                  module__id_in_course=module.id_in_course - 1).first().is_finished
-    else: # иначе студент зашел на 1 модуль
+    else:  # иначе студент зашел на 1 модуль
         is_access = True
     return has_course_access_student(user, module.course) and is_access
 
 
 def has_lesson_access_student(user, lesson):
-    if lesson.id_in_module > 1: # если модуль по счету не первый,
+    if lesson.id_in_module > 1:  # если модуль по счету не первый,
         # проверяем закончен ли прошлый модуль
         is_access = StudentLesson.objects.filter(student=user,
                                                  lesson__module=lesson.module,
                                                  lesson__id_in_module=lesson.id_in_module - 1).first().is_finished
-    else: # иначе студент зашел на 1 модуль
+    else:  # иначе студент зашел на 1 модуль
         is_access = True
 
     return has_module_access_student(user, lesson.module) and is_access
 
 
 def has_test_access_student(user, test, question):
-    student_test = get_object_or_404(StudentTest,student=user, test=test)
+    student_test = get_object_or_404(StudentTest, student=user, test=test)
     #  нет доступа к тесту если он уже пройден или не начат
 
     is_access = not student_test.is_finished
     return has_lesson_access_student(user, test.lesson) and is_access \
-        and get_object_or_404(Question ,id=question.id) and test.id == question.test_id
+        and get_object_or_404(Question, id=question.id) and test.id == question.test_id
 
 
 class PermCourseTeacher(LoginRequiredMixin, UserPassesTestMixin, View):
     def test_func(self):
         return has_course_access_teacher(self.request.user, get_object_or_404(Course, id=self.kwargs['course_id']))
+
+
+class PermMethodist(LoginRequiredMixin, UserPassesTestMixin, View):
+    def test_func(self):
+        return has_access_methodist(self.request.user)
 
 
 class PermCourseStudent(LoginRequiredMixin, UserPassesTestMixin, View):
@@ -67,7 +76,8 @@ class PermModuleStudent(LoginRequiredMixin, UserPassesTestMixin, View):
         return has_module_access_student(self.request.user, get_object_or_404(Module, id=self.kwargs['module_id']))
 
     def handle_no_permission(self):
-        module = StudentModule.objects.get(student=self.request.user ,module_id=self.kwargs['module_id']).get_first_not_finished()
+        module = StudentModule.objects.get(student=self.request.user,
+                                           module_id=self.kwargs['module_id']).get_first_not_finished()
         print(str(module.course.id), str(self.kwargs['course_id']))
         if self.raise_exception:
             raise PermissionDenied(self.get_permission_denied_message())
@@ -82,13 +92,17 @@ class PermLessonStudent(LoginRequiredMixin, UserPassesTestMixin, View):
         return has_lesson_access_student(self.request.user, get_object_or_404(Lesson, id=self.kwargs['lesson_id']))
 
     def handle_no_permission(self):
-        lesson = StudentLesson.objects.get(student=self.request.user, lesson_id=self.kwargs['lesson_id']).get_first_not_finished()
+        lesson = StudentLesson.objects.get(student=self.request.user,
+                                           lesson_id=self.kwargs['lesson_id']).get_first_not_finished()
         if self.raise_exception:
             raise PermissionDenied(self.get_permission_denied_message())
         if str(lesson.module.course.id) == str(self.kwargs['course_id']):
-            return redirect('/courses/' + str(self.kwargs['course_id']) + '/modules/' + str(lesson.module.id) + '/lessons/' + str(lesson.id))
+            return redirect(
+                '/courses/' + str(self.kwargs['course_id']) + '/modules/' + str(lesson.module.id) + '/lessons/' + str(
+                    lesson.id))
         else:
-            return redirect('/courses/' + str(self.kwargs['course_id']) + '/modules/' + str(lesson.module.id) + '/lessons/')
+            return redirect(
+                '/courses/' + str(self.kwargs['course_id']) + '/modules/' + str(lesson.module.id) + '/lessons/')
 
 
 class PermTestStudent(LoginRequiredMixin, UserPassesTestMixin, View):
@@ -104,6 +118,6 @@ class PermTestStudent(LoginRequiredMixin, UserPassesTestMixin, View):
             raise PermissionDenied(self.get_permission_denied_message())
         if str(q.test.lesson.module.course.id) == str(self.kwargs['course_id']):
             return redirect('/courses/' + str(self.kwargs['course_id']) + '/modules/' + \
-                             str(q.test.lesson.module.id) + '/lessons/' + str(q.test.lesson.id))
+                            str(q.test.lesson.module.id) + '/lessons/' + str(q.test.lesson.id))
         else:
             return redirect('/courses/' + str(self.kwargs['course_id']))

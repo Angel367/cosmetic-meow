@@ -1,0 +1,42 @@
+{% extends 'base_elements/base.html' %}
+{% block title %}Все модули курса {{ course.name }}{% endblock title %}
+
+{% block main %}
+    <form method="post" action="{% url 'teacher_course_info' course_id=course.id %}">
+    {% csrf_token %}
+    {{ course.name }}
+    {{ course.long_description }}
+{#    TODO formset for photo#}
+    <input hidden name="course_id" value="{{ course.id }}">
+    <button name="archive">
+        {% if course.is_active %}
+            Архивировать
+        {% else %}
+            Вернуть из архива
+        {% endif %}
+    </button>
+            <a href="{% url 'teacher_course_edit' course_id=course.id %}">Изменить курс</a>
+            <a href="{% url 'teacher_module_add' course_id=course.id %}">Добавить модуль</a>
+    {% for module in page_obj %}
+    {% include 'teacher/module_teacher.html' with module=module %}
+{% endfor %}
+
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+    </form>
+{% endblock main %}

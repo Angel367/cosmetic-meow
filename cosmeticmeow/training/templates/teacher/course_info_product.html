@@ -1,0 +1,25 @@
+{% extends 'base_elements/base.html' %}
+{% block title %}Курс {{ course.name }}{% endblock title %}
+
+{% block main %}
+    <form method="post" action="{% url 'teacher_modules_all' course_id=course.id%}">
+    {{ course.name }}
+    {{ course.short_description }}
+    {{ course.long_description }}
+    {{ course.price }}
+    {{ course.discountPrice }}
+    {{ course.categories }}
+{#    TODO formset for photo#}
+    <input hidden name="course_id" value="{{ course.id }}">
+    <button name="archive">
+        {% if course.is_active %}
+            Архивировать
+        {% else %}
+            Вернуть из архива
+        {% endif %}
+    </button>
+            <a href="{% url 'teacher_course_edit' course_id=course.id %}">Изменить курс</a>
+        <a href="{% url 'teacher_modules_all' course_id=course.id %}">Настроить контент</a>
+
+    </form>
+{% endblock main %}

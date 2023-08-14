@@ -240,8 +240,6 @@ class StudentTest(models.Model):
         self.is_finished = True
         self.save()
 
-
-
     class Meta:
         verbose_name = "тест студента"
         verbose_name_plural = "тесты студентов"
@@ -321,7 +319,6 @@ class Certificate(models.Model):
         verbose_name_plural = "сертификаты"
         ordering = ["id"]
 
-# TODO testing add timer with redirect, test with  quantity of right
-# TODO add img into course
-# TODO crud-action for teacher
+# TODO crud-action for teacher, add img into course
 # TODO adding into basket -- egor
+# TODO testing add timer with redirect

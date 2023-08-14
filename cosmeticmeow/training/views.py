@@ -1,16 +1,12 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
-from django.views.generic import DetailView, ListView, CreateView, UpdateView
+from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from .forms import *
 from .models import *
 from .permissions import *
 
 
-# https://docs.djangoproject.com/en/4.2/topics/auth/default/ про mixin
-# https://docs.djangoproject.com/en/4.2/topics/class-based-views/   # про этот ваш классы а не функции
-# https://docs.djangoproject.com/en/4.2/ref/class-based-views/generic-display/  # тоже
-# https://docs.djangoproject.com/en/4.2/ref/class-based-views/generic-editing/  # тоже
 class CourseListView(ListView):
     model = Course
     paginate_by = 9
@@ -233,7 +229,7 @@ class MyQuestionInfoView(PermTestStudent, DetailView):
 
 class LessonInfoViewWithCreate(PermCourseTeacher, DetailView):
     model = Lesson
-    template_name = 'form.html'
+    template_name = 'teacher/lesson_info_teacher.html'
     pk_url_kwarg = 'lesson_id'
 
     # def get(self, request, *args, **kwargs):
@@ -279,7 +275,7 @@ class LessonInfoViewWithCreate(PermCourseTeacher, DetailView):
 
 
 class UpdateCourse(UpdateView, PermCourseTeacher):
-    template_name = 'form.html'
+    template_name = 'teacher/form.html'
     model = Course
     fields = [
         'name',
@@ -288,16 +284,18 @@ class UpdateCourse(UpdateView, PermCourseTeacher):
         'price',
         'discountPrice',
         'categories',
-        'amount'
+        # 'amount'
     ]
+    pk_url_kwarg = 'course_id'
 
     def get_success_url(self):
-        return reverse('course_info', args=self.object.id)
+        return reverse('teacher_course_info', args=(self.object.id, ))
 
 
-class CreateCourse(CreateView, PermCourseTeacher):
-    template_name = 'form.html'
+class CreateCourse(PermMethodist, CreateView):
+    template_name = 'teacher/form.html'
     model = Course
+    pk_url_kwarg = 'course_id'
     fields = [
         'name',
         'short_description',
@@ -305,7 +303,7 @@ class CreateCourse(CreateView, PermCourseTeacher):
         'price',
         'discountPrice',
         'categories',
-        'amount'
+        # 'amount'
     ]
 
     def form_valid(self, form):
@@ -316,33 +314,40 @@ class CreateCourse(CreateView, PermCourseTeacher):
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse('course_info', args=(self.object.id,))
+        return reverse('teacher_course_info', args=(self.object.id,))
 
 
 class UpdateModule(UpdateView, PermCourseTeacher):
-    template_name = 'form.html'
+    template_name = 'teacher/form.html'
     model = Module
     fields = ['name', 'description']
+    pk_url_kwarg = 'module_id'
 
     def get_object(self, queryset=None):
         return get_object_or_404(Module,
                                  id=self.kwargs.get('module_id'))
 
-    def form_valid(self, form):
-        self.object.name = form.cleaned_data['name']
-        self.object.description = form.cleaned_data['description']
-        self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
-
     def get_success_url(self):
-        return reverse('module_info',
+        return reverse('teacher_lessons_all',
                        args=(self.object.course.id, self.object.id,))
 
 
-class CreateModule(CreateView, PermCourseTeacher):
-    template_name = 'form.html'
+class DeleteModule(PermCourseTeacher, DeleteView):
+    # template_name = 'teacher/form.html'
     model = Module
     fields = ['name', 'description']
+    pk_url_kwarg = 'module_id'
+
+    def get_success_url(self):
+        return reverse('teacher_modules_all',
+                       args=(self.object.course.id, ))
+
+
+class CreateModule(PermCourseTeacher, CreateView):
+    template_name = 'teacher/form.html'
+    model = Module
+    fields = ['name', 'description']
+    pk_url_kwarg = 'module_id'
 
     def form_valid(self, form):
         self.object = Module(course=get_object_or_404(Course,
@@ -353,36 +358,43 @@ class CreateModule(CreateView, PermCourseTeacher):
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse('module_info',
+        return reverse('teacher_lessons_all',
                        args=(self.object.course.id, self.object.id,))
 
 
-class UpdateLesson(UpdateView, PermCourseTeacher):
-    template_name = 'form.html'
+class UpdateLesson(PermCourseTeacher, UpdateView):
+    template_name = 'teacher/form.html'
     model = Lesson
     fields = ['name', 'description']
+    pk_url_kwarg = 'lesson_id'
 
     def get_object(self, queryset=None):
-        return get_object_or_404(Lesson,
-                                 id=self.kwargs.get('lesson_id'))
-
-    def form_valid(self, form):
-        self.object.name = form.cleaned_data['name']
-        self.object.description = form.cleaned_data['description']
-        self.object.save()
-        return HttpResponseRedirect(self.get_success_url())
+        return get_object_or_404(Lesson, id=self.kwargs.get('lesson_id'))
 
     def get_success_url(self):
-        return reverse('lesson_info',
+        return reverse('teacher_lesson_info',
                        args=(self.object.module.course.id,
                              self.object.module.id,
                              self.object.id))
 
 
-class CreateLesson(CreateView, PermCourseTeacher):
-    template_name = 'form.html'
+class DeleteLesson(PermCourseTeacher, DeleteView):
     model = Lesson
     fields = ['name', 'description']
+    pk_url_kwarg = 'lesson_id'
+
+    def get_success_url(self):
+        return reverse('teacher_lessons_all',
+                       args=(self.object.module.course.id,
+                             self.object.module.id,
+                             ))
+
+
+class CreateLesson(PermCourseTeacher, CreateView):
+    template_name = 'teacher/form.html'
+    model = Lesson
+    fields = ['name', 'description']
+    pk_url_kwarg = 'lesson_id'
 
     def form_valid(self, form):
         self.object = Lesson(module=get_object_or_404(Module,
@@ -393,7 +405,7 @@ class CreateLesson(CreateView, PermCourseTeacher):
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse('lesson_info',
+        return reverse('teacher_lesson_info',
                        args=(self.object.module.course.id,
                              self.object.module.id,
                              self.object.id))
@@ -461,3 +473,59 @@ class CreateLesson(CreateView, PermCourseTeacher):
 #
 #     def get_success_url(self):
 #         return reverse('lesson_info', args=self.object.lesson.id)
+
+
+class TeacherCourseInfoView(PermCourseTeacher, DetailView):
+    model = Course
+    paginate_by = 9
+    template_name = 'teacher/course_info_product.html'
+    pk_url_kwarg = 'course_id'
+
+
+class TeacherCourseListView(PermMethodist, ListView):
+    model = Course
+    paginate_by = 9
+    template_name = 'teacher/courses_teacher.html'
+    # TODO archive course
+
+    def get_context_data(self, **kwargs):
+        cntxt = super().get_context_data()
+
+        return cntxt
+
+    def get_queryset(self):
+        return Course.objects.filter(teacher=self.request.user)
+
+
+class TeacherModuleListView(PermCourseTeacher, ListView):
+    model = Module
+    paginate_by = 9
+    template_name = 'teacher/course_info_teacher.html'
+    # TODO delete module
+    # TODO course archive
+
+    def get_context_data(self, **kwargs):
+        cntxt = super().get_context_data()
+        print(self.kwargs['course_id'])
+        cntxt['course'] = Course.objects.get(id=self.kwargs['course_id'])
+        return cntxt
+
+    def get_queryset(self):
+        return Module.objects.filter(course_id=self.kwargs['course_id'],
+                                     course__teacher=self.request.user)
+
+
+class TeacherLessonListView(PermCourseTeacher, ListView):
+    model = Lesson
+    paginate_by = 9
+    template_name = 'teacher/module_info_teacher.html'
+
+    def get_context_data(self, **kwargs):
+        cntxt = super().get_context_data()
+        cntxt['module'] = Module.objects.get(id=self.kwargs['module_id'])
+        return cntxt
+
+    def get_queryset(self):
+        return Lesson.objects.filter(module__course_id=self.kwargs['course_id'],
+                                     module_id=self.kwargs['module_id'],
+                                     module__course__teacher=self.request.user,)

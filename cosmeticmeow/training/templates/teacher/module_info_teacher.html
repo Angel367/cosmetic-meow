@@ -1,12 +1,14 @@
 {% extends 'base_elements/base.html' %}
-{% block title %}Все уроки модуля {{ module.name }}{% endblock title %}
-
+{% block title %}Все уроки модуля "{{ module.name }}"{% endblock title %}
 {% block main %}
-        {{ module.name }}
+    {{ module.name }}
     {{ module.description }}
+    <a href="{% url 'teacher_lesson_delete' module.id %}">Удалить модуль</a>
+    <a href="{% url 'teacher_module_edit' course_id=module.course.id module_id=module.id%}">Изменить модуль</a>
+    <a href="{% url 'teacher_lesson_add' course_id=module.course.id module_id=module.id%}">Добавить урок</a>
     {% for lesson in page_obj %}
-    {% include 'lesson.html' with lesson=lesson %}
-{% endfor %}
+        {% include 'teacher/lesson_teacher.html' with lesson=lesson %}
+    {% endfor %}
 
 <div class="pagination">
     <span class="step-links">
@@ -25,6 +27,6 @@
         {% endif %}
     </span>
 </div>
-   <a href="{% url 'modules_all' course_id=module.course.id  %}">Назад</a>
+    <a href="{% url 'teacher_modules_all' course_id=module.course.id %}">Назад</a>
 
 {% endblock main %}

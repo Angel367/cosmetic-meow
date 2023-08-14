@@ -6,9 +6,7 @@
 
 {% block main %}
 {% for course in page_obj %}
-
    {% for key, val in is_bought.items %}
-
        {% if key == course.course.id %} *****************************<br>{{ key }}<br>
     {% include 'course_small_product.html' with course=course.course is_bought_id=val %}
            *****************************<br><br>
@@ -16,6 +14,7 @@
     {% include 'course_small_product.html' with course=course is_bought_id=val %}
            *****************************<br><br>
        {% endif %}
+
    {% endfor %}
 {% endfor %}
 

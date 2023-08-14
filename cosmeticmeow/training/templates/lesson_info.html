@@ -18,4 +18,6 @@
     <button name="start_test">Начать тест</button>
     {% endif %}
     </form>
+   <a href="{% url 'lessons_all' course_id=lesson.module.course.id module_id=lesson.module.id %}">Назад</a>
+
 {% endblock main %}

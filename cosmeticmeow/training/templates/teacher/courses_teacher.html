@@ -1,12 +1,12 @@
 {% extends 'base_elements/base.html' %}
-{% block title %}Все уроки модуля {{ module.name }}{% endblock title %}
-
+{% block title %}Все курсы {% endblock title %}
 {% block main %}
-        {{ module.name }}
-    {{ module.description }}
-    {% for lesson in page_obj %}
-    {% include 'lesson.html' with lesson=lesson %}
-{% endfor %}
+    <a href="{% url 'teacher_course_add' %}">Добавить курс</a>
+    {% for course in page_obj %}
+        {% if teacher %}
+            {% include 'teacher/course_small_product_teacher.html' with course=course %}
+        {% endif %}
+    {% endfor %}
 
 <div class="pagination">
     <span class="step-links">
@@ -25,6 +25,4 @@
         {% endif %}
     </span>
 </div>
-   <a href="{% url 'modules_all' course_id=module.course.id  %}">Назад</a>
-
 {% endblock main %}
