@@ -11,10 +11,13 @@ header{
 }
 header .logo{
     /*background: darkblue;*/
-    width: 3rem;
-    height: 3rem;
-    padding: 1rem 3.5rem;
+    /*width: 3rem;*/
+    height: 4rem;
+    padding: 1.5rem 3.5rem 1rem
 
+}
+header .logo img{
+    height: 100%;
 }
 header nav{
     padding: 1rem 3.5rem;

@@ -1,12 +1,5 @@
-from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm, PasswordChangeForm
-from .models import Subscriber, CustomUser
-
-
-class SubscriberForm(ModelForm):
-    class Meta:
-        model = Subscriber
-        fields = ['email']
+from .models import CustomUser
 
 
 class CustomUserCreateForm(UserCreationForm):

@@ -1,17 +1,31 @@
+from django import forms
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import CreateView
 from .forms import CustomUserCreateForm
 from .decorators import user_not_authenticated
+from .models import Subscriber
 
 
 # Create your views here.
 
 
-class IndexView(TemplateView):
+class IndexView(CreateView):
     template_name = "main.html"
+    model = Subscriber
+    fields = ['email']
+
+    def get_form(self, form_class=None):
+        if form_class is None:
+            form_class = self.get_form_class()
+
+        form = super(IndexView, self).get_form(form_class)
+        form.fields['email'].widget = forms.TextInput(
+            attrs={'placeholder': 'Enter your email Address'}
+        )
+        return form
 
 
 class CustomLoginView(LoginView):

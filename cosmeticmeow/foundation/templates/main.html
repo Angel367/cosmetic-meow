@@ -12,7 +12,7 @@
         <section class="column ">
 
             <h1>
-                <span>Beauty Bazaar:</span>
+                <span>SIDERIS:</span>
                 <span>Your Online Glam Guide</span>
             </h1>
             <div>
@@ -121,8 +121,16 @@
     </article>
     <article id="course" class="relative column" >
 {#   Курсы     #}
+        <div class="row">
+            <div class="colomn fix1">
+                <img id="course_img" alt="" src="{% static 'img/main/course.png' %}">
 
-        <div class="column fix ">
+                <img id="tube1" alt="" src="{% static 'img/main/tube1.png' %}">
+            <img id="tube2" alt="" src="{% static 'img/main/tube2.png' %}">
+            </div>
+
+        <div class="column  fix2">
+
             <div>
             <h2>Наши курсы и тренинги</h2>
             <div>
@@ -149,6 +157,7 @@
             </div>
 </div>
         </div>
+            </div>
         <a href="#"><span>Записаться на курсы</span>
             <img alt="" src="{% static 'img/main/icon_course.png' %}">
         </a>
@@ -164,7 +173,8 @@
             </div>
             <form action="" method="post" class="column">
                 {% csrf_token %}
-                <input type="email" placeholder="Enter your email Address" maxlength="40">
+{#                <input type="email" placeholder="Enter your email Address" maxlength="40">#}
+                {{ form.as_p }}
                 <button type="submit" name="subscribe">Подписаться</button>
             </form>
         </div>

@@ -41,9 +41,11 @@ class CourseStudent(models.Model):
         return self.is_finished
 
     def status(self):
-
-        return int(100 * StudentModule.objects.filter(student=self.student, module__course=self.course, is_finished=True).count() \
-            / StudentModule.objects.filter(student=self.student,module__course=self.course).count())
+        return int(100 * StudentLesson.objects.filter(student=self.student,
+                                                      lesson__module__course=self.course,
+                                                      is_finished=True).count() \
+                   / StudentLesson.objects.filter(student=self.student,
+                                                  lesson__module__course=self.course).count())
 
     class Meta:
         verbose_name = "курс для пользователя"
@@ -100,7 +102,8 @@ class StudentModule(models.Model):
     is_finished = models.BooleanField(blank=True, default=False)
 
     def get_first_not_finished(self):
-        module = StudentModule.objects.filter(student=self.student, module__course=self.module.course,module__id_in_course=1).first()
+        module = StudentModule.objects.filter(student=self.student, module__course=self.module.course,
+                                              module__id_in_course=1).first()
         while module.is_finished:
             module = StudentModule.objects.filter(student=self.student, module=module.get_next_module()).first()
             if not module:
@@ -140,7 +143,8 @@ class StudentLesson(models.Model):
     is_finished = models.BooleanField(blank=True, default=False)
 
     def get_first_not_finished(self):
-        lesson = StudentLesson.objects.filter(student=self.student, lesson__module=self.lesson.module,lesson__id_in_module=1).first()
+        lesson = StudentLesson.objects.filter(student=self.student, lesson__module=self.lesson.module,
+                                              lesson__id_in_module=1).first()
         while lesson.is_finished:
             # print("\n\n", lesson.id, "\n\n")
             lesson = StudentLesson.objects.filter(student=self.student, lesson=lesson.get_next_lesson()).first()
@@ -216,15 +220,16 @@ class StudentTest(models.Model):
     is_finished = models.BooleanField(default=False)
     time_start = models.DateTimeField(auto_now_add=True)
 
-
     def test_time_start(self):
         if not self.is_finished:
             timer = threading.Timer(self.test.duration, self.is_test_right)
 
     def is_test_right(self):
-        is_right = (StudentAnswer.objects.filter(student=self.student, answer__question__test=self.test, answer__is_right=True).exists()
+        is_right = (StudentAnswer.objects.filter(student=self.student, answer__question__test=self.test,
+                                                 answer__is_right=True).exists()
                     and self.test.quantityOfRightForFinish <= StudentAnswer.objects.filter(student=self.student,
-                    answer__question__test=self.test, answer__is_right=True).count())
+                                                                                           answer__question__test=self.test,
+                                                                                           answer__is_right=True).count())
         if not is_right:
             self.delete()
         self.is_finished = True
@@ -310,7 +315,7 @@ class Certificate(models.Model):
         verbose_name_plural = "сертификаты"
         ordering = ["id"]
 
-# TODO testing add timer with redirect
+# TODO testing add timer with redirect, test with  quantity of right
 # TODO add img into course
 # TODO crud-action for teacher
 # TODO adding into basket -- egor

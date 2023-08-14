@@ -49,7 +49,7 @@ class CustomUser(AbstractUser):
 
 
 class Subscriber(models.Model):
-    email = models.EmailField(blank=False, null=False, unique=True)
+    email = models.EmailField(blank=False, null=False, unique=True, max_length=40, verbose_name='')
     is_active = models.BooleanField(blank=False, null=False, default=True)
 
     class Meta:
