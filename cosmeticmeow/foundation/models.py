@@ -39,7 +39,10 @@ class CustomUser(AbstractUser):
 
     @property
     def full_name(self):
-        return '%s %s %s' % (self.last_name, self.middle_name, self.first_name)
+        return '%s %s %s' % (self.last_name, self.first_name, self.middle_name)
+
+    def __str__(self):
+        return self.full_name
 
     class Meta:
         verbose_name = "пользователь"

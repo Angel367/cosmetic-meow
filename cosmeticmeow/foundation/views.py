@@ -32,8 +32,7 @@ class CustomRegistrationView(CreateView):
 
     def form_valid(self, form):
         user = form.save()
-        #activate_email(self.request, self.request.user, form.fi)
-        print(form.fields.email)
+        activate_email(self.request, user, form.instance.email)
         return super().form_valid(form)
 
 
