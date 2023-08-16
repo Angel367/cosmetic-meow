@@ -3,9 +3,23 @@
 {% block main %}
     {{ module.name }}
     {{ module.description }}
-    <a href="{% url 'teacher_lesson_delete' module.id %}">Удалить модуль</a>
+    <a href="{% url 'teacher_module_delete' course_id=module.course.id module_id=module.id %}">Удалить модуль</a>
     <a href="{% url 'teacher_module_edit' course_id=module.course.id module_id=module.id%}">Изменить модуль</a>
     <a href="{% url 'teacher_lesson_add' course_id=module.course.id module_id=module.id%}">Добавить урок</a>
+    {% if create_form or update_form %}
+        <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button name="save">Сохранить</button>
+        </form>
+    {% endif %}
+    {% if delete_form %}
+        <form action="" method="post">
+        {% csrf_token %}
+        {{  form.as_p }}
+        <button name="save">Подтвердить удаление</button>
+        </form>
+    {% endif %}
     {% for lesson in page_obj %}
         {% include 'teacher/lesson_teacher.html' with lesson=lesson %}
     {% endfor %}

@@ -104,7 +104,7 @@ class Product(models.Model):
     )
     views_amount = models.IntegerField(default=0, blank=False)
     creation_date = models.DateField(auto_now_add=True)
-
+    # TODO func to calculate percents of discount
     def get_price_with_tax(self):
         return float(self.price) + float(self.price) * self.tax_rate
 

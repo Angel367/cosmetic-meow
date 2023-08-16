@@ -18,8 +18,8 @@ url_test_student = [
 url_content_teacher = [
     path('file/<int:lesson_id>/delete/', UpdateLesson.as_view(), name='teacher_file_edit'),
     path('file/add/', CreateLesson.as_view(), name='teacher_file_add'),
-    path('tests/<int:test_id>/edit/', LessonInfoViewWithCreate.as_view(), name='teacher_test_edit'),
-    path('tests/add/', LessonInfoViewWithCreate.as_view(), name='teacher_test_add'),
+    # path('tests/<int:test_id>/edit/', LessonInfoViewWithCreate.as_view(), name='teacher_test_edit'),
+    # path('tests/add/', LessonInfoViewWithCreate.as_view(), name='teacher_test_add'),
     # path('tests/<int:test_id>/', include(url_test_teacher)),
 ]
 url_lessons_student = [
@@ -29,7 +29,7 @@ url_lessons_student = [
 ]
 url_lessons_teacher = [
     path('lessons/<int:lesson_id>/', include(url_content_teacher)),
-    path('lessons/<int:lesson_id>/', LessonInfoViewWithCreate.as_view(), name='teacher_lesson_info'),
+    path('lessons/<int:lesson_id>/', TeacherLessonInfoView.as_view(), name='teacher_lesson_info'),
     path('lessons/<int:lesson_id>/edit/',  UpdateLesson.as_view(), name='teacher_lesson_edit'),
     path('lessons/<int:lesson_id>/delete/', DeleteLesson.as_view(), name='teacher_lesson_delete'),
     path('lessons/', TeacherLessonListView.as_view(), name='teacher_lessons_all'),
@@ -53,10 +53,11 @@ url_courses_student = [ # работает
     path('courses/<int:course_id>/', include(url_module_student)),
 ]
 url_courses_teacher = [ # ждет тестирования
+    path('courses/<int:course_id>/archive/', ArchiveCourse.as_view(), name='teacher_course_archive'),
     path('courses/<int:course_id>/edit/', UpdateCourse.as_view(), name='teacher_course_edit'),
     path('courses/', TeacherCourseListView.as_view(), name='teacher_courses_all'),
     path('courses/add/', CreateCourse.as_view(), name='teacher_course_add'),
-    path('courses/<int:course_id>/', TeacherCourseInfoView.as_view(), name="teacher_course_info"),
+    # path('courses/<int:course_id>/', TeacherCourseInfoView.as_view(), name="teacher_course_info"),
     path('courses/<int:course_id>/', include(url_module_teacher)),
 ]
 urlpatterns = [

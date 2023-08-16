@@ -3,9 +3,10 @@
 {% block main %}
     <a href="{% url 'teacher_course_add' %}">Добавить курс</a>
     {% for course in page_obj %}
-        {% if teacher %}
+
             {% include 'teacher/course_small_product_teacher.html' with course=course %}
-        {% endif %}
+
+
     {% endfor %}
 
 <div class="pagination">

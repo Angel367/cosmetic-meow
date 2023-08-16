@@ -23,6 +23,9 @@ class CourseListView(ListView):
         cntxt['is_bought'] = is_bought
         return cntxt
 
+    def get_queryset(self):
+        return Course.objects.filter(is_active=True)
+
 
 class ModuleListView(PermCourseStudent, ListView):
     model = Module
@@ -227,7 +230,7 @@ class MyQuestionInfoView(PermTestStudent, DetailView):
         return render(request, self.template_name, ctx)
 
 
-class LessonInfoViewWithCreate(PermCourseTeacher, DetailView):
+class TeacherLessonInfoView(PermCourseTeacher, DetailView):
     model = Lesson
     template_name = 'teacher/lesson_info_teacher.html'
     pk_url_kwarg = 'lesson_id'
@@ -275,7 +278,7 @@ class LessonInfoViewWithCreate(PermCourseTeacher, DetailView):
 
 
 class UpdateCourse(UpdateView, PermCourseTeacher):
-    template_name = 'teacher/form.html'
+    template_name = 'teacher/course_info_teacher.html'
     model = Course
     fields = [
         'name',
@@ -288,8 +291,42 @@ class UpdateCourse(UpdateView, PermCourseTeacher):
     ]
     pk_url_kwarg = 'course_id'
 
+    def get_context_data(self, **kwargs):
+        cxnt = super().get_context_data()
+        cxnt['page_obj'] = Module.objects.filter(course_id=self.kwargs['course_id'])
+        cxnt['update_form'] = True
+        cxnt['course'] = get_object_or_404(Course, id=self.kwargs.get('course_id'))
+        return cxnt
+
     def get_success_url(self):
-        return reverse('teacher_course_info', args=(self.object.id, ))
+        return reverse('teacher_modules_all', args=(self.object.id, ))
+
+
+class ArchiveCourse(PermMethodist, DeleteView):
+    template_name = 'teacher/course_info_teacher.html'
+    model = Course
+    pk_url_kwarg = 'course_id'
+    # fields = [
+    #     'is_active',
+    # ]
+
+    def get_context_data(self, **kwargs):
+        cxnt = super().get_context_data()
+        cxnt['page_obj'] = Module.objects.filter(course_id=self.kwargs['course_id'])
+        cxnt['archive_form'] = True
+        cxnt['course'] = get_object_or_404(Course, id=self.kwargs.get('course_id'))
+        return cxnt
+
+    def form_valid(self, form):
+        # super().form_valid(form)
+        get_object_or_404(Course,id=self.kwargs.get('course_id'))
+        course = Course.objects.get( id=self.kwargs.get('course_id'))
+        course.is_active = not course.is_active
+        course.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('teacher_modules_all', args=(self.object.id,))
 
 
 class CreateCourse(PermMethodist, CreateView):
@@ -314,14 +351,23 @@ class CreateCourse(PermMethodist, CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse('teacher_course_info', args=(self.object.id,))
+        return reverse('teacher_modules_all', args=(self.object.id,))
 
 
 class UpdateModule(UpdateView, PermCourseTeacher):
-    template_name = 'teacher/form.html'
+    template_name = "teacher/module_info_teacher.html"
     model = Module
     fields = ['name', 'description']
     pk_url_kwarg = 'module_id'
+    context_object_name = "update_form"
+
+    def get_context_data(self, **kwargs):
+        cxnt = super().get_context_data()
+        cxnt['page_obj'] = Lesson.objects.filter(module__course_id=self.kwargs['course_id'],
+                                                 module_id=self.kwargs['module_id'],
+                                                 module__course__teacher=self.request.user, )
+        cxnt['module'] = get_object_or_404(Module, id=self.kwargs.get('module_id'))
+        return cxnt
 
     def get_object(self, queryset=None):
         return get_object_or_404(Module,
@@ -333,10 +379,19 @@ class UpdateModule(UpdateView, PermCourseTeacher):
 
 
 class DeleteModule(PermCourseTeacher, DeleteView):
-    # template_name = 'teacher/form.html'
+    template_name = 'teacher/module_info_teacher.html'
     model = Module
     fields = ['name', 'description']
     pk_url_kwarg = 'module_id'
+    context_object_name = "delete_form"
+
+    def get_context_data(self, **kwargs):
+        cxnt = super().get_context_data()
+        cxnt['page_obj'] = Lesson.objects.filter(module__course_id=self.kwargs['course_id'],
+                                                 module_id=self.kwargs['module_id'],
+                                                 module__course__teacher=self.request.user, )
+        cxnt['module'] = get_object_or_404(Module, id=self.kwargs.get('module_id'))
+        return cxnt
 
     def get_success_url(self):
         return reverse('teacher_modules_all',
@@ -344,10 +399,17 @@ class DeleteModule(PermCourseTeacher, DeleteView):
 
 
 class CreateModule(PermCourseTeacher, CreateView):
-    template_name = 'teacher/form.html'
+    template_name = 'teacher/course_info_teacher.html'
     model = Module
     fields = ['name', 'description']
     pk_url_kwarg = 'module_id'
+
+    def get_context_data(self, **kwargs):
+        cxnt = super().get_context_data()
+        cxnt['page_obj'] = Module.objects.filter(course_id=self.kwargs['course_id'])
+        cxnt['create_form'] = True
+        cxnt['course'] = get_object_or_404(Course, id=self.kwargs.get('course_id'))
+        return cxnt
 
     def form_valid(self, form):
         self.object = Module(course=get_object_or_404(Course,
@@ -363,10 +425,16 @@ class CreateModule(PermCourseTeacher, CreateView):
 
 
 class UpdateLesson(PermCourseTeacher, UpdateView):
-    template_name = 'teacher/form.html'
+    template_name = 'teacher/lesson_info_teacher.html'
     model = Lesson
     fields = ['name', 'description']
     pk_url_kwarg = 'lesson_id'
+    context_object_name = 'update_form'
+
+    def get_context_data(self, **kwargs):
+        cxnt = super().get_context_data()
+        cxnt['lesson'] = self.get_object()
+        return cxnt
 
     def get_object(self, queryset=None):
         return get_object_or_404(Lesson, id=self.kwargs.get('lesson_id'))
@@ -379,9 +447,16 @@ class UpdateLesson(PermCourseTeacher, UpdateView):
 
 
 class DeleteLesson(PermCourseTeacher, DeleteView):
+    template_name = 'teacher/lesson_info_teacher.html'
     model = Lesson
     fields = ['name', 'description']
     pk_url_kwarg = 'lesson_id'
+    context_object_name = 'delete_form'
+
+    def get_context_data(self, **kwargs):
+        cxnt = super().get_context_data()
+        cxnt['lesson'] = self.get_object()
+        return cxnt
 
     def get_success_url(self):
         return reverse('teacher_lessons_all',
@@ -391,10 +466,19 @@ class DeleteLesson(PermCourseTeacher, DeleteView):
 
 
 class CreateLesson(PermCourseTeacher, CreateView):
-    template_name = 'teacher/form.html'
+    template_name = 'teacher/module_info_teacher.html'
     model = Lesson
     fields = ['name', 'description']
     pk_url_kwarg = 'lesson_id'
+
+    def get_context_data(self, **kwargs):
+        cxnt = super().get_context_data()
+        cxnt['page_obj'] = Lesson.objects.filter(module__course_id=self.kwargs['course_id'],
+                                     module_id=self.kwargs['module_id'],
+                                     module__course__teacher=self.request.user,)
+        cxnt['create_form'] = True
+        cxnt['module'] = get_object_or_404(Module, id=self.kwargs.get('module_id'))
+        return cxnt
 
     def form_valid(self, form):
         self.object = Lesson(module=get_object_or_404(Module,
@@ -474,12 +558,6 @@ class CreateLesson(PermCourseTeacher, CreateView):
 #     def get_success_url(self):
 #         return reverse('lesson_info', args=self.object.lesson.id)
 
-
-class TeacherCourseInfoView(PermCourseTeacher, DetailView):
-    model = Course
-    paginate_by = 9
-    template_name = 'teacher/course_info_product.html'
-    pk_url_kwarg = 'course_id'
 
 
 class TeacherCourseListView(PermMethodist, ListView):
