@@ -20,10 +20,15 @@ class GenderChoices(models.TextChoices):
 
 class CustomUser(AbstractUser):
     username = None
-    gender = models.CharField(choices=GenderChoices.choices, max_length=1, default=GenderChoices.NOT_SPECIFIED)
+    gender = models.CharField(choices=GenderChoices.choices,
+                              max_length=1,
+                              default=GenderChoices.NOT_SPECIFIED,
+                              verbose_name="Пол")
     # first name    имя
     # last name     фамилия
-    middle_name = models.CharField(max_length=150, blank=True)  # Аналогично first/last name, отчество
+    middle_name = models.CharField(max_length=150,
+                                   blank=True,
+                                   verbose_name="Отчество")  # Аналогично first/last name, отчество
     email = models.EmailField('Почта', unique=True, blank=False)
     is_email_verified = models.BooleanField(blank=False, default=False)
     REQUIRED_FIELDS = []
@@ -31,7 +36,8 @@ class CustomUser(AbstractUser):
         max_length=12,
         validators=[RegexValidator(regex=r'^\+7\d{10}$')],
         blank=True,
-        null=True)
+        null=True,
+        verbose_name="Номер телефона")
     USERNAME_FIELD = "email"
     objects = CustomUserManager()
     isMethodist = models.BooleanField(blank=False, default=False)
