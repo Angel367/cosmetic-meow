@@ -1,5 +1,14 @@
+from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm, PasswordChangeForm
-from .models import CustomUser
+from .models import Subscriber, CustomUser
+from captcha.fields import ReCaptchaField
+from captcha.widgets import ReCaptchaV2Checkbox
+
+
+class SubscriberForm(ModelForm):
+    class Meta:
+        model = Subscriber
+        fields = ['email']
 
 
 class CustomUserCreateForm(UserCreationForm):
@@ -14,6 +23,8 @@ class CustomUserCreateForm(UserCreationForm):
                   'password1',
                   'password2'
                   ]
+
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
 
 
 class CustomUserUpdateForm(UserChangeForm):
@@ -33,6 +44,7 @@ class CustomUserAuth(AuthenticationForm):
             'email',
             'password',
         ]
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())
 
 
 class CustomUserChangePassword(PasswordChangeForm):
@@ -41,3 +53,4 @@ class CustomUserChangePassword(PasswordChangeForm):
                   'password1',
                   'password2',
                   ]
+    captcha = ReCaptchaField(widget=ReCaptchaV2Checkbox())

@@ -1,8 +1,12 @@
 from django import forms
 from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib import messages
+from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
+from django.views.generic import TemplateView, CreateView
+from .forms import CustomUserCreateForm, CustomUserAuth
 from django.views.generic import CreateView
 from .forms import CustomUserCreateForm
 from .decorators import user_not_authenticated
@@ -31,6 +35,7 @@ class IndexView(CreateView):
 
 
 class CustomLoginView(LoginView):
+    form_class = CustomUserAuth
     template_name = 'authentication/login.html'
     redirect_authenticated_user = True
     success_url = reverse_lazy('/')
@@ -47,6 +52,11 @@ class CustomRegistrationView(CreateView):
     success_url = reverse_lazy('foundation:login')
 
     def form_valid(self, form):
-        # Автоматически выполняем вход пользователя после успешной регистрации
         user = form.save()
+        activate_email(self.request, user, form.instance.email)
         return super().form_valid(form)
+
+
+def activate_email(request, user, to_email):
+    messages.success(request, f'Dear <b>{user}</b>, please go to you email <b>{to_email}</b> inbox and click on \
+        received activation link to confirm and complete the registration. <b>Note:</b> Check your spam folder.')
