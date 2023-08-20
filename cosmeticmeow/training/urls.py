@@ -46,18 +46,17 @@ url_module_teacher = [
     path('modules/', TeacherModuleListView.as_view(), name='teacher_modules_all'),
     path('modules/add/', CreateModule.as_view(), name='teacher_module_add'),
 ]
-url_courses_student = [ # работает
+url_courses_student = [
     path('courses/my/', MyCourseListView.as_view(), name='course_my'),
     path('courses/<int:course_id>/', CourseInfoView.as_view(), name='course_info'),
     path('courses/', CourseListView.as_view(), name='courses_all'),
     path('courses/<int:course_id>/', include(url_module_student)),
 ]
-url_courses_teacher = [ # ждет тестирования
+url_courses_teacher = [
     path('courses/<int:course_id>/archive/', ArchiveCourse.as_view(), name='teacher_course_archive'),
     path('courses/<int:course_id>/edit/', UpdateCourse.as_view(), name='teacher_course_edit'),
     path('courses/', TeacherCourseListView.as_view(), name='teacher_courses_all'),
     path('courses/add/', CreateCourse.as_view(), name='teacher_course_add'),
-    # path('courses/<int:course_id>/', TeacherCourseInfoView.as_view(), name="teacher_course_info"),
     path('courses/<int:course_id>/', include(url_module_teacher)),
 ]
 urlpatterns = [

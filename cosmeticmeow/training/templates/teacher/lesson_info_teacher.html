@@ -10,7 +10,7 @@
     {% if update_form %}
         <form action="" method="post">
         {% csrf_token %}
-    {#        TODO formset for q and a#}
+
         {{ form.as_p }}
         <button name="save">Сохранить</button>
         </form>
@@ -19,16 +19,18 @@
     {% if delete_form %}
         <form action="" method="post">
         {% csrf_token %}
-    {#        TODO formset for q and a#}
+
         {{  form.as_p }}
         <button name="save">Подтвердить удаление</button>
         </form>
     {% endif %}
+    {#    TODO formset file #}
+    {#    TODO formset for q and a #}
 {#    {% if not test %}#}
 {#            <a href="{% url 'teacher_test_add' course_id=lesson.module.course.id module_id=lesson.module.id lesson_id=lesson.id %}">Добавить тест</a>#}
 {#    {% else %}#}
 {#            <a href="{% url 'teacher_test_add' course_id=lesson.module.course.id module_id=lesson.module.id lesson_id=lesson.id %}">Изменить тест</a>#}
 {#    {% endif %}#}
     <a href="{% url 'teacher_lessons_all' course_id=lesson.module.course.id module_id=lesson.module.id %}">Назад</a>
-    {#    TODO formset file #}
+
 {% endblock main %}

@@ -319,6 +319,6 @@ class Certificate(models.Model):
         verbose_name_plural = "сертификаты"
         ordering = ["id"]
 
-# TODO crud-action for teacher, add img into course
+# TODO crud-action for teacher: img, files, tests
 # TODO adding into basket -- egor
-# TODO testing add timer with redirect
+

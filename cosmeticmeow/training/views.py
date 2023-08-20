@@ -564,7 +564,7 @@ class TeacherCourseListView(PermMethodist, ListView):
     model = Course
     paginate_by = 9
     template_name = 'teacher/courses_teacher.html'
-    # TODO archive course
+
 
     def get_context_data(self, **kwargs):
         cntxt = super().get_context_data()
@@ -579,8 +579,6 @@ class TeacherModuleListView(PermCourseTeacher, ListView):
     model = Module
     paginate_by = 9
     template_name = 'teacher/course_info_teacher.html'
-    # TODO delete module
-    # TODO course archive
 
     def get_context_data(self, **kwargs):
         cntxt = super().get_context_data()
