@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, CreateView
-from .forms import CustomUserCreateForm
+from .forms import CustomUserCreateForm, CustomUserAuth
 from .decorators import user_not_authenticated
 
 
@@ -15,6 +15,7 @@ class IndexView(TemplateView):
 
 
 class CustomLoginView(LoginView):
+    form_class = CustomUserAuth
     template_name = 'authentication/login.html'
     redirect_authenticated_user = True
     success_url = reverse_lazy('/')
