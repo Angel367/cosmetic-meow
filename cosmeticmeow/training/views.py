@@ -102,28 +102,28 @@ class MyLessonInfoView(PermLessonStudent, DetailView):
 
     def get_context_data(self, **kwargs):
         k = super().get_context_data()
-        if Test.objects.filter(lesson=self.get_object()).exists():
-            k['test'] = Test.objects.get(lesson=self.get_object())
+        if Test.objects.filter(lesson=self.get_object(), is_active=True).exists():
+            k['test'] = Test.objects.get(lesson=self.get_object(), is_active=True)
         if ContentFile.objects.filter(lesson=self.get_object()).count() > 0:
             files = list(ContentFile.objects.filter(lesson=self.get_object()))
             for file in files:
                 file = file.get_absolute_file_upload_url()
             k['files'] = files
         k['student_test'] = StudentTest.objects.filter(student=self.request.user,
-                                                           test=Test.objects.filter(lesson=self.get_object()).first()).first()
+                                                           test=Test.objects.filter(lesson=self.get_object(), is_active=True).first()).first()
         # print(k['student_test'] )
         return k
 
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         if 'start_test' in request.POST:
-            test = Test.objects.get(lesson=self.get_object())
+            test = Test.objects.get(lesson=self.get_object(), is_active=True)
             t = StudentTest.objects.get_or_create(student=self.request.user, test=test)
             print(t)
             # if t[1]:
             #     return render(request, self.template_name, self.get_context_data())
             t[0].test_time_start()
-            qs = Question.objects.filter(test=Test.objects.filter(lesson=self.get_object()).first()).first()
+            qs = Question.objects.filter(test=test)
             return redirect(reverse('question',
                                     args=(self.get_object().module.course.id,
                                           self.get_object().module.id,
@@ -277,7 +277,7 @@ class TeacherLessonInfoView(PermCourseTeacher, DetailView):
     # return render(request, self.template_name, self.get_context_data(**ctxt))
 
 
-class UpdateCourse(UpdateView, PermCourseTeacher):
+class UpdateCourse(PermCourseTeacher, UpdateView):
     template_name = 'teacher/course_info_teacher.html'
     model = Course
     fields = [
@@ -385,6 +385,13 @@ class DeleteModule(PermCourseTeacher, DeleteView):
     pk_url_kwarg = 'module_id'
     context_object_name = "delete_form"
 
+    def form_valid(self, form):
+        # super().form_valid(form)
+        module = get_object_or_404(Module, id=self.kwargs.get('module_id'))
+        module.is_active = False
+        module.save()
+        return HttpResponseRedirect(self.get_success_url())
+
     def get_context_data(self, **kwargs):
         cxnt = super().get_context_data()
         cxnt['page_obj'] = Lesson.objects.filter(module__course_id=self.kwargs['course_id'],
@@ -452,6 +459,13 @@ class DeleteLesson(PermCourseTeacher, DeleteView):
     fields = ['name', 'description']
     pk_url_kwarg = 'lesson_id'
     context_object_name = 'delete_form'
+
+    def form_valid(self, form):
+        # super().form_valid(form)
+        module = get_object_or_404(Lesson, id=self.kwargs.get('lesson_id'))
+        module.is_active = False
+        module.save()
+        return HttpResponseRedirect(self.get_success_url())
 
     def get_context_data(self, **kwargs):
         cxnt = super().get_context_data()
@@ -559,20 +573,19 @@ class CreateLesson(PermCourseTeacher, CreateView):
 #         return reverse('lesson_info', args=self.object.lesson.id)
 
 
-
 class TeacherCourseListView(PermMethodist, ListView):
     model = Course
     paginate_by = 9
     template_name = 'teacher/courses_teacher.html'
 
-
     def get_context_data(self, **kwargs):
         cntxt = super().get_context_data()
-
         return cntxt
 
     def get_queryset(self):
-        return Course.objects.filter(teacher=self.request.user)
+        if not self.request.user.isMethodist:
+            return Course.objects.filter(teacher=self.request.user)
+        return Course.objects.all()
 
 
 class TeacherModuleListView(PermCourseTeacher, ListView):

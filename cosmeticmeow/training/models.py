@@ -67,6 +67,7 @@ class Module(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     id_in_course = models.IntegerField(blank=True)
+    is_active = models.BooleanField(blank=True, default=True)
 
     def save(self, *args, **kwargs):
         _id = Module.objects.filter(course=self.course).__len__()
@@ -83,6 +84,7 @@ class Lesson(models.Model):
     module = models.ForeignKey(Module, on_delete=models.CASCADE, blank=True)
     name = models.CharField(max_length=100)
     description = models.TextField()
+    is_active = models.BooleanField(blank=True, default=True)
     id_in_module = models.IntegerField(blank=True)
 
     def save(self, *args, **kwargs):
@@ -202,11 +204,12 @@ class ContentFile(models.Model):
         ordering = ["id"]
 
 
-# кол-во тестов в курсе? 1, 0 или больше
+# кол-во тестов в курсе: 1 активный на 1 урок
 class Test(models.Model):
     lesson = models.OneToOneField(Lesson, on_delete=models.CASCADE)
     duration = models.DurationField()
     quantityOfRightForFinish = models.IntegerField(default=0)
+    is_active = models.BooleanField(blank=True, default=True)
 
     class Meta:
         verbose_name = "тест"
@@ -249,6 +252,7 @@ class StudentTest(models.Model):
 class Question(models.Model):
     text = models.TextField()
     test = models.ForeignKey(Test, on_delete=models.CASCADE)
+    is_active = models.BooleanField(blank=True, default=True)
 
     class Meta:
         verbose_name = "вопрос"
@@ -263,6 +267,7 @@ class Answer(models.Model):
     text = models.TextField()
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     is_right = models.BooleanField(default=False)
+    is_active = models.BooleanField(blank=True, default=True)
 
     class Meta:
         verbose_name = "ответ"
@@ -321,4 +326,3 @@ class Certificate(models.Model):
 
 # TODO crud-action for teacher: img, files, tests
 # TODO adding into basket -- egor
-

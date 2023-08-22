@@ -10,6 +10,11 @@ def has_access_methodist(user):
     return user.isMethodist
 
 
+def has_all_courses_access_teacher(user):
+    # print(Course.objects.filter(teacher=user), user.id)
+    return Course.objects.filter(teacher=user).exists()
+
+
 def has_course_access_teacher(user, course):
     return course.teacher == user or has_access_methodist(user)  # не проверял
 
@@ -58,7 +63,7 @@ class PermCourseTeacher(LoginRequiredMixin, UserPassesTestMixin, View):
 
 class PermMethodist(LoginRequiredMixin, UserPassesTestMixin, View):
     def test_func(self):
-        return has_access_methodist(self.request.user)
+        return has_access_methodist(self.request.user) or has_all_courses_access_teacher(self.request.user)
 
 
 class PermCourseStudent(LoginRequiredMixin, UserPassesTestMixin, View):
