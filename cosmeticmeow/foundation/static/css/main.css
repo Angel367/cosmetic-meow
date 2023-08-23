@@ -126,6 +126,7 @@ main #main_art1{
 }
 main #course .row{
     height: 100%;
+
 }
 
 main #course .fix1 {
@@ -148,6 +149,11 @@ main #course  {
     padding-left: 0;
     padding-right: 0;
     height: max-content;
+}
+main #course .fix2 .row{
+    display: grid;
+    grid-template-columns: 20% 80%;
+  grid-template-rows: 50% 50%;
 }
 main #course .fix2 > div{
         width: 90%;
