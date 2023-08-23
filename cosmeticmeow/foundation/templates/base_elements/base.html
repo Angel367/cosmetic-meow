@@ -3,6 +3,13 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width; initial-scale=1.0">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<!--[if lte IE 9]>
+<script src="{% static 'js/modernizr-custom.js' %}"></script>
+<script src="https://gist.github.com/githabweb/e0f81e082d4fe46636c822dbe75e7f4f.js"></script>
+<![endif]-->
+
     <title>{% block title %}{% endblock title %}</title>
 {% block head_header_footer %} {% endblock head_header_footer %}
     {% block head %}{% endblock head %}
