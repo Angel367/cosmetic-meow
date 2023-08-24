@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }}</title>
+</head>
+<body>
+    <h1>{{ product.name }}</h1>
+
+    <!-- Отображение изображений продукта -->
+    <div class="product-images">
+        {% for image in product.get_images %}
+            <img src="{{ image.image.url }}" alt="{{ product.name }} Image">
+        {% endfor %}
+    </div>
+
+    <!-- Остальные поля продукта -->
+    <!-- {{ product.name }} -->
+
+
+</body>
+</html>
