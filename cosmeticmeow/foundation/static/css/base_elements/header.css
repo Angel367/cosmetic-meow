@@ -183,7 +183,7 @@ header .nav_box .basket {
         gap: 1rem;
     }
     header .nav_box {
-        padding: 1rem 0;
+        padding: .1rem .1rem;
         gap: 2rem;
     }
     header nav {
