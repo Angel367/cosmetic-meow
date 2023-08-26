@@ -29,7 +29,7 @@ footer .footer > div, footer .footer div address, footer .follow-us{
     padding: 1rem 0;
     font-family: inherit;
 }
-footer .footer > div h2, footer .footer > div a, footer .links a, footer .footer div address > div > div{
+footer .footer > div h2, footer .footer > div a, footer .links a, footer .footer div address > div > div > a{
     font-family: 'Roboto', sans-serif;
     text-decoration: none;
     color: white;

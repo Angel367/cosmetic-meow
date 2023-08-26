@@ -7,10 +7,7 @@
 {% block main %}
 <main>
     <article class="column relative left" id="main_art1">
-
-{#        главная секция: фото, инфа, отзыв#}
         <section class="column ">
-
             <h1>
                 <span>SIDERIS:</span>
                 <span>Your Online Glam Guide</span>
@@ -27,7 +24,7 @@
         <section class="column">
             <a href="#">Посмотреть продукцию</a>
             <div class="row rating">
-{#                Cards of review#}
+
                 <div class="column">
                     <div>4.8</div>
                     <div>★★★★★</div>
@@ -47,7 +44,7 @@
                 Trusted by numerous
                 Beauty enthusiasts
             </h2>
-            <div>
+            <div class="hidden">
                 <span>
                     Jessica</span> <span>Simon
                 </span>
@@ -62,123 +59,123 @@
             </div>
         </section>
     </article>
-{#    <article class="column relative" id="main_art2">#}
-{#        <div class="row">#}
-{#        <h2>Наши преимущества</h2>#}
-{#        <a href="#">Узнать о компании</a>#}
+    <article class="column relative " id="main_art2">
+{#        <div class="row slider-block">#}
+        <h2>Наши преимущества</h2>
+        <a href="#">Узнать о компании</a>
 {#        </div>#}
-{#        <div class="row">#}
-{#            <div class="column">#}
-{#                <div>#}
-{#                    <img src="{% static 'img/main/ben1.png' %}" alt="">#}
-{#                </div>#}
-{#                <div>#}
-{#                    Convenient and easy online#}
-{#                    shopping experience for all#}
-{#                    beauty enthusiasts.#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="column">#}
-{#                <div>#}
-{#                    <img src="{% static 'img/main/ben2.png' %}" alt="">#}
-{#                </div>#}
-{#                <div>#}
-{#                    Access to a wide variety of#}
-{#                    beauty products from various#}
-{#                    companies, all in one place.#}
-{#                </div>#}
-{#            </div>#}
-{#            <div class="column">#}
-{#                <div>#}
-{#                    <img src="{% static 'img/main/ben3.png' %}" alt="">#}
-{#                </div>#}
-{#                <div>#}
-{#                    Ability to compare prices#}
-{#                    and read reviews from other#}
-{#                    customers before making a purchase.#}
-{#                </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    </article>#}
-{#    <article class="fix left relative row">#}
-{#        характеристика и фото #}
-{#        <div class="left column">#}
-{#            <h2>Топ компания на планете</h2>#}
-{#            <p>Лучшая продукция</p>#}
-{#        </div>#}
-{##}
-{#    </article>#}
-{#    <article class="row partner">#}
-{#        <h2>Партнеры</h2>#}
-{#        <a href="#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>#}
-{#        <a href="#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>#}
-{#        <a href="#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>#}
-{#        <a href="#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>#}
-{#        <a href="#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>#}
-{##}
-{##}
-{#        партнеры и тд #}
-{#    </article>#}
-{#    <article id="course" class="relative column" >#}
-{#   Курсы     #}
-{#        <div class="row">#}
-{#            <div class="colomn fix1">#}
-{#                <img id="course_img" alt="" src="{% static 'img/main/course.png' %}">#}
-{##}
-{#                <img id="tube1" alt="" src="{% static 'img/main/tube1.png' %}">#}
-{#            <img id="tube2" alt="" src="{% static 'img/main/tube2.png' %}">#}
-{#            </div>#}
-{##}
-{#        <div class="column  fix2">#}
-{##}
-{#            <div>#}
-{#            <h2>Наши курсы и тренинги</h2>#}
-{#            <div>#}
-{#                <div class="row">#}
-{#                <div class="with-img">#}
-{#                    <img alt="" src="{% static 'img/main/icon_course1.png' %}">#}
-{#                </div>#}
-{##}
-{#                <div>Opportunity to discover#}
-{#                    new and unique beauty brands#}
-{#                    that may not be readily#}
-{#                    available in local stores.#}
-{#                </div>#}
-{#                     <div class="with-img">#}
-{#<img alt="" src="{% static 'img/main/icon_course2.png' %}">#}
-{#                </div>#}
-{#                    <div>Option to place orders for#}
-{#                    desired products and have#}
-{#                    them delivered right to your#}
-{#                    doorstep.#}
-{#                </div>#}
-{#                </div>#}
-{#            </div>#}
-{#</div>#}
-{#        </div>#}
-{#            </div>#}
-{#        <a href="#"><span>Записаться на курсы</span>#}
-{#            <img alt="" src="{% static 'img/main/icon_course.png' %}">#}
-{#        </a>#}
-{#    </article >#}
-{#    <article class="relative column fix left">#}
-{##}
-{#        <div class=" column">#}
-{#            <h2>Нужно больше информации?</h2>#}
-{#            <div>#}
-{#                Подпишитесь и узнавайте о#}
-{#                новинках, акциях и скидках#}
-{#                первыми!#}
-{#            </div>#}
-{#            <form action="" method="post" class="column">#}
-{#                {% csrf_token %}#}
-{#                <input type="email" placeholder="Enter your email Address" maxlength="40">#}
-{#                {{ form.as_p }}#}
-{#                <button type="submit" name="subscribe">Подписаться</button>#}
-{#            </form>#}
-{#        </div>#}
-{#        Подписаться #}
-{#    </article>#}
+        <div class="row">
+            <div class="column">
+                <div>
+                    <img src="{% static 'img/main/ben1.png' %}" alt="">
+                </div>
+                <div>
+                    Convenient and easy online
+                    shopping experience for all
+                    beauty enthusiasts.
+                </div>
+            </div>
+            <div class="column slider" >
+                <div>
+                    <img src="{% static 'img/main/ben2.png' %}" alt="">
+                </div>
+                <div>
+                    Access to a wide variety of
+                    beauty products from various
+                    companies, all in one place.
+                </div>
+            </div>
+            <div class="column slider">
+                <div>
+                    <img src="{% static 'img/main/ben3.png' %}" alt="">
+                </div>
+                <div>
+                    Ability to compare prices
+                    and read reviews from other
+                    customers before making a purchase.
+                </div>
+            </div>
+        </div>
+    </article>
+    <article class="fix left relative row hidden">
+
+        <div class="left column">
+            <h2>Топ компания на планете</h2>
+            <p>Лучшая продукция</p>
+        </div>
+
+    </article>
+    <article class="row partner">
+        <h2>Партнеры</h2>
+        <a href="#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>
+        <a href="#" class="running-line"><img src="{% static 'img/main/partner.png' %}" alt=""></a>
+        <a href="#" class="running-line"><img src="{% static 'img/main/partner.png' %}" alt=""></a>
+        <a href="#" class="running-line"><img src="{% static 'img/main/partner.png' %}" alt=""></a>
+        <a href="#" class="running-line"><img src="{% static 'img/main/partner.png' %}" alt=""></a>
+
+
+
+    </article>
+    <article id="course" class="relative column" >
+
+        <div class="row">
+            <div class="colomn fix1">
+                <img id="course_img" alt="" src="{% static 'img/main/course.png' %}">
+
+                <img id="tube1" alt="" src="{% static 'img/main/tube1.png' %}">
+            <img id="tube2" alt="" src="{% static 'img/main/tube2.png' %}">
+            </div>
+
+        <div class="column  fix2">
+
+            <div>
+            <h2>Наши курсы и тренинги</h2>
+            <div>
+                <div class="row">
+                <div class="with-img">
+                    <img alt="" src="{% static 'img/main/icon_course1.png' %}">
+                </div>
+
+                <div>Opportunity to discover
+                    new and unique beauty brands
+                    that may not be readily
+                    available in local stores.
+                </div>
+                     <div class="with-img">
+<img alt="" src="{% static 'img/main/icon_course2.png' %}">
+                </div>
+                    <div>Option to place orders for
+                    desired products and have
+                    them delivered right to your
+                    doorstep.
+                </div>
+                </div>
+            </div>
+</div>
+        </div>
+            </div>
+        <a href="#"><span>Записаться на курсы</span>
+            <img alt="" src="{% static 'img/main/icon_course.png' %}">
+        </a>
+    </article >
+    <article class="relative column fix left">
+
+        <div class=" column">
+            <h2>Нужно больше информации?</h2>
+            <div>
+                Подпишитесь и узнавайте о
+                новинках, акциях и скидках
+                первыми!
+            </div>
+            <form action="" method="post" class="column">
+                {% csrf_token %}
+
+                {{ form.as_p }}
+                <button type="submit" name="subscribe">Подписаться</button>
+            </form>
+        </div>
+
+    </article>
 
 </main>
 {% endblock main %}

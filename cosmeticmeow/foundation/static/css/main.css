@@ -95,7 +95,7 @@ main .rating > div > div:first-child{
 
 main #main_art1{
     padding: 6.5rem 6rem 4rem;
-    z-index: -1;
+    /*z-index: -1;*/
     height: max-content;
     background-image: url("../img/main/main_article.png");
     background-repeat: no-repeat;
@@ -193,8 +193,7 @@ main .fix.row.relative.left {
     background-repeat: no-repeat;
     background-size: contain;
     background-position: right;
-    /*width: 70%;*/
-    padding: 9rem 3rem;
+    padding: 5rem 3rem;
 
 }
 main .fix.row.relative.left h2{
@@ -258,6 +257,9 @@ main .fix.column button{
 }
 #main_art2 a{
     font-size: 1.4rem;
+    position: absolute;
+    top: 2rem;
+    right: 6rem;
 }
 
 #main_art2 .column{
@@ -275,5 +277,82 @@ main .fix.column button{
 }
 #main_art2 .column div img{
     width: 12vw;
+}
+@media screen and (min-width: 1820px) {
+    .left section{
+        width: 35%;
+    }
+    main .rating{
+        width: 45%;
+    }
+    main #main_art1{
+        padding: 4.5rem 3.5rem 3rem;
+        background-image: url("../img/main/main_article_big.png");
+        background-position: left 40%;
+        background-size: cover;
+    }
+    .fix.left.relative.row.hidden .left.column{
+        padding: 10rem 6rem;
+    }
+}
+@media screen and (max-width: 1024px) {
+    .left section{
+        width: 55%;
+    }
+    main .rating{
+        width: 45%;
+    }
+    .hidden{
+        visibility: hidden;
+        position: absolute;
+    }
+    main #main_art1 {
+        padding: 6.5rem 4.5rem 4rem;
+        background-image: url("../img/main/main_article.png");
+    }
+}
+@media screen and (max-width: 890px) {
+    .left section{
+        width: 70%;
+    }
+    main .rating{
+        width: 60%;
+    }
+    .hidden, .slider, .running-line{
+        visibility: hidden;
+        position: absolute;
+    }
+    main #main_art1 {
+        padding: 6.5rem 3rem 4rem;
+        background-image: url("../img/main/main_article_tablet.png");
+    }
+}
+@media screen and (max-width: 700px) {
+    .left section{
+        width: 70%;
+    }
+    main .rating{
+        width: 60%;
+    }
+    main #main_art1 {
+        padding: 6.5rem 2rem 4rem;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .left section{
+        width: 90%;
+    }
+    main .rating{
+        width: 70%;
+    }
+    .hidden,.slider, .running-line{
+        visibility: hidden;
+        position: absolute;
+    }
+    main #main_art1 {
+        padding: 6.5rem 2rem 4rem;
+        background-image: url("../img/main/main_article_mobile.png");
+    }
 }
 
