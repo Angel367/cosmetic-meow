@@ -2,25 +2,28 @@ header{
     position: absolute;
     top: 0;
     width: 100%;
-    /*background: blue;*/
     color:#4D4D4D;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
     align-items: center;
 }
-header .logo{
-    /*background: darkblue;*/
-    /*width: 3rem;*/
-    height: 4rem;
-    padding: 1.5rem 3.5rem 1rem
 
+header input[type=checkbox]{
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
 }
 header .logo img{
     height: 100%;
 }
+header .nav_box{
+    color: inherit;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
 header nav{
-    padding: 1rem 3.5rem;
     color: inherit;
     display: flex;
     flex-direction: row;
@@ -28,25 +31,199 @@ header nav{
     gap: 2rem;
 
 }
-header nav a{
+header .nav_box a{
     font-size: 1.1rem;
     color: inherit;
     text-decoration: none;
 }
-header nav .basket img{
-    width: 1.1rem;
-    /*height: 1.1rem;*/
+header .nav_box a:hover{
+    color: black;
 }
-header nav .basket{
+
+header .nav_box .basket{
     padding: .5rem;
     color: white;
     font-size: 1.1rem;
-    border-radius: .5rem;
     background: #673657;
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: .5rem;
+
 }
 
+@media screen and (max-width: 998px ) {
+    header nav{
+        /*opacity: 0;*/
+        position: absolute;
+        top:100%;
+        left: 0;
+        right: 0;
+        visibility: hidden;
+        flex-direction: column;
+        background: rgb(244 209 230);
+        align-items: center;
+        justify-content: center;
+        /*gap: 2rem;*/
+    }
+    header .nav_box{
+        flex-direction: row-reverse;
+    }
 
+    header {
+        background: rgba(255, 255, 255, 0.5);
+        /*position: fixed;*/
+    }
+    header label span{
+        display: block;
+        height: 3px;
+        width: 2rem;
+        position: relative;
+    }
+    header label span,
+    header label span::before,
+    header label span::after {
+        background:#673657;
+
+    }
+    header label span::before,
+    header label span::after{
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+    header label span::before{
+        top: -200%;
+    }
+    header label span::after{
+        top: 200% ;
+    }
+    header input[type=checkbox]:checked ~ .nav_box label span{
+        transform: rotate(45deg);
+    }
+    header input[type=checkbox]:checked ~ .nav_box label span::after{
+        transform: rotate(90deg);
+        top: 0;
+    }
+    header input[type=checkbox]:checked ~ .nav_box label span::before{
+        top:0;
+        transform: rotate(0);
+    }
+    header input[type=checkbox]:checked ~ .nav_box nav{
+        visibility: visible;
+
+    }
+}
+
+@media screen and (max-width: 425px ) {
+    /*    header{*/
+    /*    padding: 1.5rem 1rem;*/
+    /*}*/
+    /*header .logo{*/
+    /*    height: 4rem;*/
+    /*    padding: 1.5rem 3.5rem 1rem*/
+    /*}*/
+    /*header .nav_box {*/
+    /*    padding: 1rem 3.5rem;*/
+    /*    gap: 2rem;*/
+    /*}*/
+    /*header nav {*/
+    /*    padding: 1rem 3.5rem;*/
+    /*    gap: 2rem;*/
+    /*}*/
+    /*header .nav_box a {*/
+    /*    font-size: 1.1rem;*/
+    /*}*/
+    /*header .nav_box .basket {*/
+    /*    padding: .5rem;*/
+    /*    font-size: 1.1rem;*/
+    /*    gap: .5rem;*/
+    /*}*/
+    /*header .nav_box .basket img{*/
+    /*    width: 1.1rem;*/
+    /*}*/
+}
+@media screen and (max-width: 768px ) {
+    /*header{*/
+    /*    padding: .5rem 1rem;*/
+    /*}*/
+    /*header .logo{*/
+    /*    height: 4rem;*/
+    /*    padding: 1.5rem 3.5rem 1rem*/
+    /*}*/
+    /*header .nav_box {*/
+    /*    padding: 1rem 3.5rem;*/
+    /*    gap: 2rem;*/
+    /*}*/
+    /*header nav {*/
+    /*    padding: 1rem 3.5rem;*/
+    /*    gap: 2rem;*/
+    /*}*/
+    /*header .nav_box a {*/
+    /*    font-size: 1.1rem;*/
+    /*}*/
+    /*header .nav_box .basket {*/
+    /*    padding: .5rem;*/
+    /*    font-size: 1.1rem;*/
+    /*    gap: .5rem;*/
+    /*}*/
+    /*header .nav_box .basket img{*/
+    /*    width: 1.1rem;*/
+    /*}*/
+}
+@media screen and (max-width: 1024px ) {
+    /*    header{*/
+    /*    padding: 1.5rem 1rem;*/
+    /*}*/
+    /*header .logo{*/
+    /*    height: 4rem;*/
+    /*    padding: 1.5rem 3.5rem 1rem*/
+    /*}*/
+    /*header .nav_box {*/
+    /*    padding: 1rem 3.5rem;*/
+    /*    gap: 2rem;*/
+    /*}*/
+    /*header nav {*/
+    /*    padding: 1rem 3.5rem;*/
+    /*    gap: 2rem;*/
+    /*}*/
+    /*header .nav_box a {*/
+    /*    font-size: 1.1rem;*/
+    /*}*/
+    /*header .nav_box .basket {*/
+    /*    padding: .5rem;*/
+    /*    font-size: 1.1rem;*/
+    /*    gap: .5rem;*/
+    /*}*/
+    /*header .nav_box .basket img{*/
+    /*    width: 1.1rem;*/
+    /*}*/
+}
+@media screen and (min-width: 1025px ) {
+    /*header{*/
+    /*    padding: 1.5rem 1rem;*/
+    /*}*/
+    /*header .logo{*/
+    /*    height: 4rem;*/
+    /*    padding: 1.5rem 3.5rem 1rem*/
+    /*}*/
+    /*header .nav_box {*/
+    /*    padding: 1rem 3.5rem;*/
+    /*    gap: 2rem;*/
+    /*}*/
+    /*header nav {*/
+    /*    padding: 1rem 3.5rem;*/
+    /*    gap: 2rem;*/
+    /*}*/
+    /*header .nav_box a {*/
+    /*    font-size: 1.1rem;*/
+    /*}*/
+    /*header .nav_box .basket {*/
+    /*    padding: .5rem;*/
+    /*    font-size: 1.1rem;*/
+    /*    gap: .5rem;*/
+    /*}*/
+    /*header .nav_box .basket img{*/
+    /*    width: 1.1rem;*/
+    /*}*/
+}

@@ -3,17 +3,22 @@
     <div class="logo">
         <img alt="[logo]" src="{% static 'img/base_elements/logo.png'%}">
     </div>
+    <input type="checkbox" id="menu_toggle">
+
+    <div class="nav_box">
+    <label for="menu_toggle">
+        <span></span>
+    </label>
     <nav>
         <a href="#">Продукция</a>
         <a href="{% url 'courses_all' %}">Обучение</a>
         <a href="#">Разработка</a>
         <a href="#">О нас</a>
         <a href="#">Личный кабинет</a>
-        <a href="#" class="basket">
+    </nav>
+    <a href="#" class="basket">
             <img src="{% static 'img/base_elements/basket.png'%}" alt="">
             <span>({{ basket_count }}0)</span>
-        </a>
-
-{#            <a href="#" class="basket"><i class="fa fa-shopping-basket" aria-hidden="true"></i> ({{ basket_count }}0)</a>#}
-    </nav>
+    </a>
+        </div>
 </header>
