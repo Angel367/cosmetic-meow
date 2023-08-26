@@ -75,9 +75,9 @@ header .nav_box .basket{
         background: rgba(255, 255, 255, 0.5);
         /*position: fixed;*/
     }
-    /*header label {*/
-    /*    cursor: pointer;*/
-    /*}*/
+    header label {
+        cursor: pointer;
+    }
     header label span{
         display: block;
         height: 3px;
@@ -180,13 +180,14 @@ header .nav_box .basket {
 @media screen and (max-width: 425px ) {
     header{
         padding: .3rem;
+        gap: 1rem;
     }
     header .nav_box {
-        padding: 1rem 1.3rem;
+        padding: 1rem 0;
         gap: 2rem;
     }
     header nav {
-        padding: 2rem;
+        padding: 0;
         gap: 3rem;
     }
     header .nav_box a {
@@ -194,9 +195,9 @@ header .nav_box .basket {
         font-weight: 600;
     }
     header .nav_box .basket {
-        padding: .3rem 1rem;
+        padding: .3rem .7rem;
         font-size: 1.3rem;
-        gap: 0.9rem;
+        gap: 0.7rem;
     }
     header .nav_box .basket img{
         width: 1.3rem;

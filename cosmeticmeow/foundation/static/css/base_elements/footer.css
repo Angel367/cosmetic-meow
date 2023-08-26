@@ -1,45 +1,30 @@
+footer a:hover{
+    color: rgb(253, 180, 180);
+    /*transition-duration: .5s;*/
+}
 footer{
     font-family: 'Roboto', sans-serif;
     position: relative;
     display: flex;
     flex-direction: column;
-    /*gap: 4rem;*/
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url("../../img/base_elements/footer.png");
     justify-content: space-around;
-    background-position: center;
+    background-position: 30% 20%;
 
 }
-/*footer .img{*/
-/*    z-index: -1;*/
-/*    position: absolute;*/
-/*    top: 0;*/
-/*    left: 0;*/
-/*    overflow: hidden;*/
-/*    width: 100%;*/
-/*    height: 100%;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: flex-start;*/
-
-/*}*/
-/*footer .img img{*/
-/*    height: 100%;*/
-/*    object-fit: cover;*/
-/*}*/
 footer .footer{
     padding: 6rem 1.5rem 2rem;
     display: flex;
     flex-direction: row;
-    /*align-items: center;*/
     justify-content: center;
     gap:3.5rem;
 }
 footer .footer > div, footer .footer div address, footer .follow-us{
     display: flex;
     flex-direction: column;
-    color: white;
+    color: rgba(255, 255, 255, 0.1);
     gap: 1rem;
     padding: 1rem 0;
     font-family: inherit;
@@ -73,6 +58,9 @@ footer .follow-us div{
     justify-content: center;
     gap: 2rem
 }
+footer .footer h2 a{
+        font-weight: 600;
+}
 footer .follow-us h2{
     margin: 0;
     padding: 0;
@@ -84,4 +72,25 @@ footer .links{
     padding: 2rem 4rem 1em;
     justify-content: flex-end;
     align-items:flex-end;
+}
+@media screen and (max-width: 1024px ){
+    footer .footer{
+        padding: 4rem 4rem 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap:.1rem;
+
+    }
+    footer .footer h2 a{
+        font-weight: 600;
+    }
+    footer .footer div > a, footer .footer address, footer .vis{
+        visibility: hidden;
+        position: absolute;
+    }
+    footer .links{
+        justify-content: center;
+        padding: 2rem 1rem 1em;
+    }
 }
