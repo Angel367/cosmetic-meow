@@ -215,17 +215,17 @@ main .fix.row.relative.left p{
 }
 
 main #img_women {
-    background-image: url("../img/main/subscribe.png");
-    background-repeat: no-repeat;
-    background-size: contain;
+    /*background-image: url("../img/main/subscribe.png");*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: contain;*/
     position: absolute;
     right: 0;
     top: 0;
     z-index: -1;
-    width: 60%;
-    height: 100%;
 
-    background-position: right;
+    /*height: 100%;*/
+
+    /*background-position: right;*/
 
 }
 main .fix.column h2{
@@ -299,8 +299,11 @@ main .left .more_inf{
     padding-left: 2rem;
 }
 .fix.more_inf img{
-    visibility: hidden;
+    object-fit: contain;
+    height: 100%;
     position: absolute;
+    top:0;
+    right: 0;
 }
 @media screen and (min-width: 1820px) {
 
@@ -331,13 +334,30 @@ main .left .more_inf{
 
 
 }
+main #img_women {
+        width: 60%;
+        height: 100%;
+    }
 @media screen and (max-width: 1800px){
     .fix.left.relative.row.hidden .left.column{
         padding: 7rem 4rem;
     }
+    main #img_women {
+        width: 60%;
+        height: 100%;
+    }
+}
+@media screen and (max-width: 1440px){
+ .fix.left.relative.row.hidden .left.column{
+        padding: 0rem 4rem;
+    }
+    main .left .more_inf {
+        width: 45%;
+        margin: 0;
+}
 }
 @media screen and (max-width: 1024px) {
-    main #img_women{
+main #img_women{
         position: relative;
         width: 100%;
         order: 0;
@@ -350,8 +370,7 @@ main .left .more_inf{
         visibility: visible;
         width: 100%;
     }
-
-    main .more_inf.column.text{
+     main .more_inf.column.text{
         order: 1;
         width: auto;
         padding: 0 5rem;
@@ -363,6 +382,8 @@ main .left .more_inf{
         padding-left: 0;
         padding-right: 0;
     }
+
+
     main .left > div{
         width: 35%;
         margin: 2rem 0;
@@ -445,7 +466,7 @@ main .left .more_inf{
     }
 
     main #main_art1 {
-        padding: 6.5rem 2rem 4rem;
+        padding: 6.5rem 7rem 2rem 4rem;
         background-image: url("../img/main/main_article_mobile.png");
     }
     main .more_inf.column.text{
