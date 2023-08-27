@@ -59,10 +59,10 @@
             </div>
         </section>
     </article>
-    <article class="column relative " id="main_art2">
+    <article class="column relative slider" id="main_art2">
 {#        <div class="row slider-block">#}
         <h2>Наши преимущества</h2>
-        <a href="#">Узнать о компании</a>
+
 {#        </div>#}
         <div class="row">
             <div class="column">
@@ -95,17 +95,21 @@
                     customers before making a purchase.
                 </div>
             </div>
+            <a href="#">Узнать о компании</a>
         </div>
     </article>
-    <article class="fix left relative row hidden">
+    <article class="fix left relative row hidden more_inf">
 
-        <div class="left column">
+        <div class="left column more_inf">
             <h2>Топ компания на планете</h2>
             <p>Лучшая продукция</p>
         </div>
+        <div id="img_women1">
+
+        </div>
 
     </article>
-    <article class="row partner">
+    <article class="row partner running-line">
         <h2>Партнеры</h2>
         <a href="#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>
         <a href="#" class="running-line"><img src="{% static 'img/main/partner.png' %}" alt=""></a>
@@ -116,7 +120,7 @@
 
 
     </article>
-    <article id="course" class="relative column" >
+    <article id="course" class="relative column slider" >
 
         <div class="row">
             <div class="colomn fix1">
@@ -158,9 +162,9 @@
             <img alt="" src="{% static 'img/main/icon_course.png' %}">
         </a>
     </article >
-    <article class="relative column fix left">
+    <article class="relative column fix left more_inf">
 
-        <div class=" column">
+        <div class=" column more_inf text">
             <h2>Нужно больше информации?</h2>
             <div>
                 Подпишитесь и узнавайте о
@@ -173,6 +177,9 @@
                 {{ form.as_p }}
                 <button type="submit" name="subscribe">Подписаться</button>
             </form>
+        </div>
+        <div id="img_women">
+<img src="{% static 'img/main/subscribe.png' %}">
         </div>
 
     </article>

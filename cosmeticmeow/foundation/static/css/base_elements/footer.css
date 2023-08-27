@@ -1,6 +1,9 @@
-footer a:hover{
-    color: rgb(253, 180, 180);
+footer .footer a:hover, footer a:hover div, footer .links a:hover{
+    color: rgb(231, 49, 82);
     /*transition-duration: .5s;*/
+}
+footer .follow-us a:hover{
+    color: rgb(95, 159, 241);
 }
 footer{
     font-family: 'Roboto', sans-serif;

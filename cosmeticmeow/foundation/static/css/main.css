@@ -1,6 +1,10 @@
 h2{
     margin: 0;
 }
+article a:hover, form button:hover{
+    cursor: pointer;
+    color: #673657;
+}
 main .column {
     display: flex;
     flex-direction: column;
@@ -22,7 +26,7 @@ main .row{
 
 }
 main article{
-    max-width: 100%;
+    /*max-width: 100%;*/
     padding: 2rem 6rem
 }
 
@@ -70,7 +74,7 @@ main article section{
     margin: 0;
 }
 main .left > div{
-    width: 50%;
+    width: 35%;
 }
 
 .left  section{
@@ -134,12 +138,7 @@ main #course .fix1 {
 
     position: relative;
     min-height: inherit;
-    /*!*width: 100%;*!*/
-    /*background-image: url("../img/main/course.png");*/
-    /*background-repeat: no-repeat;*/
-    /*background-size: contain;*/
-    /*background-position: left;*/
-    /*align-items: flex-end;*/
+
     padding-right: 1rem;
     margin-top:5rem;
     margin-bottom:5rem;
@@ -150,6 +149,9 @@ main #course  {
     padding-right: 0;
     height: max-content;
 }
+/*main #course{*/
+/*    position: absolute;*/
+/*}*/
 main #course .fix2 .row{
     display: grid;
     grid-template-columns: 20% 80%;
@@ -188,12 +190,18 @@ main #course .fix2 > div > div > .row{
 }
 
 
-main .fix.row.relative.left {
+main #img_women1{
     background-image: url("../img/main/top_company.png");
     background-repeat: no-repeat;
     background-size: contain;
     background-position: right;
-    padding: 5rem 3rem;
+    position: absolute;
+    top:0;
+    right: 0;
+    z-index: -1;
+    width: 60%;
+    height: 100%;
+    /*padding: 5rem 3rem;*/
 
 }
 main .fix.row.relative.left h2{
@@ -206,13 +214,17 @@ main .fix.row.relative.left p{
     font-size: 2.5rem;
 }
 
-main .fix.column {
+main #img_women {
     background-image: url("../img/main/subscribe.png");
     background-repeat: no-repeat;
     background-size: contain;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+    width: 60%;
+    height: 100%;
 
-    /*width: 70%;*/
-    padding: 3rem 6rem;
     background-position: right;
 
 }
@@ -278,7 +290,28 @@ main .fix.column button{
 #main_art2 .column div img{
     width: 12vw;
 }
+main .left .more_inf{
+    width: 55%;
+    margin: 4rem 0;
+
+}
+.relative.more_inf{
+    padding-left: 2rem;
+}
+.fix.more_inf img{
+    visibility: hidden;
+    position: absolute;
+}
 @media screen and (min-width: 1820px) {
+
+main .left .more_inf{
+    width: 45%;
+    margin: 6rem 0;
+
+}
+.relative.more_inf{
+    padding-left: 4rem;
+}
     .left section{
         width: 35%;
     }
@@ -292,10 +325,48 @@ main .fix.column button{
         background-size: cover;
     }
     .fix.left.relative.row.hidden .left.column{
-        padding: 10rem 6rem;
+        padding: 12rem 6rem;
+    }
+
+
+
+}
+@media screen and (max-width: 1800px){
+    .fix.left.relative.row.hidden .left.column{
+        padding: 7rem 4rem;
     }
 }
 @media screen and (max-width: 1024px) {
+    main #img_women{
+        position: relative;
+        width: 100%;
+        order: 0;
+        margin: 0;
+        padding: 0;
+
+    }
+    main #img_women img{
+        position: relative;
+        visibility: visible;
+        width: 100%;
+    }
+
+    main .more_inf.column.text{
+        order: 1;
+        width: auto;
+        padding: 0 5rem;
+    }
+     .fix.more_inf{
+        padding: 0;
+    }
+    .hidden.more_inf{
+        padding-left: 0;
+        padding-right: 0;
+    }
+    main .left > div{
+        width: 35%;
+        margin: 2rem 0;
+    }
     .left section{
         width: 55%;
     }
@@ -305,6 +376,7 @@ main .fix.column button{
     .hidden{
         visibility: hidden;
         position: absolute;
+        /*box-sizing: border-box;*/
     }
     main #main_art1 {
         padding: 6.5rem 4.5rem 4rem;
@@ -312,6 +384,10 @@ main .fix.column button{
     }
 }
 @media screen and (max-width: 890px) {
+    /*main #img_women{*/
+    /*    position: relative;*/
+    /*    width: 100%;*/
+    /*}*/
     .left section{
         width: 70%;
     }
@@ -326,8 +402,25 @@ main .fix.column button{
         padding: 6.5rem 3rem 4rem;
         background-image: url("../img/main/main_article_tablet.png");
     }
+    main .more_inf.column.text h2{
+        font-size: 1.6rem;
+    }
+    main .more_inf.column.text div,
+    main .more_inf.column.text button,
+    main .more_inf.column.text input::placeholder,
+    main .more_inf.column.text input{
+        font-size: 1.2rem;
+    }
+    main .fix.column form, main .left .more_inf {
+     margin: 0;
+}
+
 }
 @media screen and (max-width: 700px) {
+    /*main #img_women{*/
+    /*    position: relative;*/
+    /*    width: 100%;*/
+    /*}*/
     .left section{
         width: 70%;
     }
@@ -340,19 +433,46 @@ main .fix.column button{
 }
 
 @media screen and (max-width: 600px) {
+    /*main #img_women{*/
+    /*    position: relative;*/
+    /*    width: 100%;*/
+    /*}*/
     .left section{
         width: 90%;
     }
     main .rating{
         width: 70%;
     }
-    .hidden,.slider, .running-line{
-        visibility: hidden;
-        position: absolute;
-    }
+
     main #main_art1 {
         padding: 6.5rem 2rem 4rem;
         background-image: url("../img/main/main_article_mobile.png");
     }
+    main .more_inf.column.text{
+        order: 1;
+        width: auto;
+        padding: 0 2.5rem;
+    }
+    main .more_inf.column.text h2{
+        font-size: 1.4rem;
+    }
+    main .more_inf.column.text div,
+    main .more_inf.column.text button,
+    main .more_inf.column.text input::placeholder,
+    main .more_inf.column.text input{
+        font-size: 1.1rem;
+    }
+    main .fix.column form, main .left .more_inf {
+     margin: 0;
+}
+    main .column.more_inf{
+        gap: 1rem;
+    }
+.hidden, .slider, .running-line{
+        visibility: hidden;
+        position: absolute;
+        /*box-sizing: border-box;*/
+    }
+
 }
 
