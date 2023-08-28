@@ -357,6 +357,52 @@ main #img_women {
 }
 }
 @media screen and (max-width: 1024px) {
+    .partner{
+        margin-left: 5rem;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+     #running-line{
+
+        width: calc(100% + 5rem);
+        animation: scroll 10s infinite linear;
+        /*padding-left: ;*/
+        display: block;
+        white-space: nowrap;
+
+    }
+    @keyframes scroll{
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(-100%);
+  }
+  50.0001% {
+    transform: translateX(100%);
+  }
+  /*50% {*/
+  /*  transform: translateX(100%);*/
+  /*}*/
+  /*75% {*/
+  /*  !*transform: translateX(0%);*!*/
+  /*}*/
+  100% {
+    transform: translateX(0%);
+  }
+  /*      100% {*/
+  /*  transform: translate(100%, 0);*/
+  /*}*/
+}
+    #running-line a{
+        margin-right: 5rem;
+        max-width: 10rem;
+        display: inline-block;
+    }
+
 main #img_women{
         position: relative;
         width: 100%;
@@ -403,22 +449,29 @@ main #img_women{
         padding: 6.5rem 4.5rem 4rem;
         background-image: url("../img/main/main_article.png");
     }
+
 }
 @media screen and (max-width: 890px) {
     /*main #img_women{*/
     /*    position: relative;*/
     /*    width: 100%;*/
     /*}*/
+    #running-line a{
+        margin-right: 4rem;
+        max-width: 8rem;
+
+    }
     .left section{
         width: 70%;
     }
     main .rating{
         width: 60%;
     }
-    .hidden, .slider, .running-line{
+    .hidden, .slider{
         visibility: hidden;
         position: absolute;
     }
+
     main #main_art1 {
         padding: 6.5rem 3rem 4rem;
         background-image: url("../img/main/main_article_tablet.png");
@@ -442,6 +495,11 @@ main #img_women{
     /*    position: relative;*/
     /*    width: 100%;*/
     /*}*/
+    #running-line{
+        margin-left: 4rem;
+        padding-left: 0;
+    }
+
     .left section{
         width: 70%;
     }
@@ -450,6 +508,11 @@ main #img_women{
     }
     main #main_art1 {
         padding: 6.5rem 2rem 4rem;
+    }
+    #running-line a{
+        margin-right: 3rem;
+        max-width: 8rem;
+
     }
 }
 
@@ -464,7 +527,15 @@ main #img_women{
     main .rating{
         width: 70%;
     }
+#running-line{
+        margin-left: 2rem;
+        padding-left: 0;
+    }
+#running-line a{
+        margin-right: 2rem;
+        max-width: 8rem;
 
+    }
     main #main_art1 {
         padding: 6.5rem 7rem 2rem 4rem;
         background-image: url("../img/main/main_article_mobile.png");
@@ -489,7 +560,7 @@ main #img_women{
     main .column.more_inf{
         gap: 1rem;
     }
-.hidden, .slider, .running-line{
+.hidden, .slider{
         visibility: hidden;
         position: absolute;
         /*box-sizing: border-box;*/

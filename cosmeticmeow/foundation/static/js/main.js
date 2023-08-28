@@ -14,3 +14,4 @@ document.getElementById('main_art1')
     .getElementById('main_header')
     .offsetHeight) + 'px'
 }
+
