@@ -459,13 +459,12 @@ main #img_women{
         padding: 6.5rem 4.5rem 4rem;
         background-image: url("../img/main/main_article.png");
     }
-
+.running-line a{
+        width:8rem;
+    }
 }
 
-
-
-@media screen and (max-width: 890px) {
-    @keyframes scroll890px {
+ @keyframes scroll890px {
      0% {
          transform: translateX(0);
      }
@@ -474,11 +473,17 @@ main #img_women{
      }
 
  }
+
+@media screen and (max-width: 890px) {
+
     .hidden.more_inf.row, .slider{
     display: none;
 }
     .running-line{
         animation: scroll890px 15s infinite linear;
+    }
+    .running-line a{
+        width:8rem;
     }
     .partner.row, .running-line{
         /*margin-left: 5rem;*/
