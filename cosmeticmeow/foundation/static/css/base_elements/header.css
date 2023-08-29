@@ -54,7 +54,7 @@ header .nav_box .basket{
 
 }
 
-@media screen and (max-width: 1024px ) {
+@media screen and (max-width: 1070px ) {
     header nav{
         /*opacity: 0;*/
         position: absolute;
