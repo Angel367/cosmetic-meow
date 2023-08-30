@@ -608,6 +608,12 @@ main #img_women{
 .running-line a{
         width:8rem;
     }
+    #main_art2.slider .column div img{
+    width: 100%;
+}
+    #main_art2.slider .column div{
+    width: 45vw;
+}
 }
 
  @keyframes scroll890px {
@@ -622,7 +628,7 @@ main #img_women{
 
 @media screen and (max-width: 890px) {
 
-    .hidden.more_inf.row, {
+    .hidden.more_inf.row {
     display: none;
 }
     .running-line{
@@ -664,6 +670,12 @@ main #img_women{
     main .fix.column form, main .left .more_inf {
      margin: 0;
 }
+    #main_art2.slider .column div img{
+    width: 100%;
+}
+    #main_art2.slider .column div{
+    width: 55vw;
+}
 
 }
 
@@ -678,12 +690,25 @@ main #img_women{
     .hidden.more_inf.row{
     display: none;
 }
+    #main_art2.slider .column div img{
+    width: 100%;
+}
+    #main_art2.slider .column div{
+    width: 65vw;
+}
 }
 @media screen and (max-width: 600px) {
     /*main #img_women{*/
     /*    position: relative;*/
     /*    width: 100%;*/
     /*}*/
+
+    #main_art2.slider .column div img{
+    width: 100%;
+}
+    #main_art2.slider .column div{
+    width: 70vw;
+}
     main #main_art2{
         padding: 2rem 3rem;
     }
@@ -723,6 +748,7 @@ main #img_women{
     main #main_art2 a{
         font-size: 1.2rem;
     }
+
     main #main_art2 h2{
         font-size: 1.6rem;
     }
@@ -771,4 +797,10 @@ main #img_women{
 main #main_art2{
         padding: 2rem 2rem;
     }
+    #main_art2.slider .column div img{
+    width: 100%;
+}
+    #main_art2.slider .column div{
+    width: 75vw;
+}
 }
