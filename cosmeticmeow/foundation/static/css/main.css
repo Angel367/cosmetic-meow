@@ -1,7 +1,7 @@
 h2{
     margin: 0;
 }
-.hidden.more_inf, .slider{
+.hidden.more_inf, .slider.column, .slider.column.relative input{
     display: none;
 }
 article a:hover, form button:hover{
@@ -286,6 +286,7 @@ main .fix.column button{
 #main_art2 .column{
     justify-content: center;
     gap: 1rem;
+    height: max-content;
 
 }
 #main_art2 .column div{
@@ -294,7 +295,7 @@ main .fix.column button{
 }
 #main_art2 .column div {
     max-width: 20vw;
-    height: auto;
+    height: max-content;
 }
 #main_art2 .column div img{
     width: 12vw;
@@ -339,8 +340,12 @@ main .left .more_inf{
     .fix.left.relative.row.hidden .left.column{
         padding: 12rem 6rem;
     }
-.hidden.more_inf.row, .slider{
+.hidden.more_inf.row, .slider.column.relative{
     display: block;
+}
+.slider.column.relative .controls, .slider.column.relative input{
+    visibility: hidden;
+    position: absolute;
 }
 
 
@@ -357,8 +362,12 @@ main #img_women {
         width: 60%;
         height: 100%;
     }
-   .hidden.more_inf.row, .slider{
+ .hidden.more_inf.row, .slider.column.relative{
     display: block;
+}
+.slider.column.relative .controls, .slider.column.relative input{
+    visibility: hidden;
+    position: absolute;
 }
 }
 @media screen and (max-width: 1440px){
@@ -369,11 +378,16 @@ main #img_women {
         width: 45%;
         margin: 0;
 }
-.hidden.more_inf.row, .slider{
+.hidden.more_inf.row, .slider.column.relative{
     display: block;
+}
+.slider.column.relative .controls{
+    visibility: hidden;
+    position: absolute;
 }
 }
 @media screen and (max-width: 1024px) {
+
     .partner.row{
         /*margin-left: 5rem;*/
         overflow: hidden;
@@ -433,9 +447,144 @@ main #img_women{
         padding-left: 0;
         padding-right: 0;
     }
-    .hidden.more_inf.row, .slider{
+    .hidden.more_inf.row, .slider.column.relative{
     display: block;
 }
+    .slider.column.relative  .controls{
+        position: relative;
+        visibility: visible;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+    .slider.column.relative .controls label{
+        cursor: pointer;
+        transition: background .5s linear;
+        background: darkgray;
+        width: 1rem;
+        height: 1rem;
+        border-radius: .5rem;
+    }
+
+    #main_art2 .slider-block{
+        /*width: 100vw;*/
+        /*padding-left: 30%;*/
+display: inline-flex;
+         transition: all 1s linear;
+    }
+
+    #main_art2 .slider-holder {
+        width: 50%;
+
+        white-space: nowrap;
+            position: relative;
+    overflow: hidden;
+
+    }
+     #main_art2 .slider-block .slides div:nth-of-type(2){
+         display: flex;
+         justify-content: center;
+         height: 6rem;
+         max-width: 20rem;
+         white-space: normal;
+    }
+
+     #main_art2 .slider-block .slides div:nth-of-type(1){
+         /*flex-grow: 2;*/
+     }
+     .slider-block .slides.column{
+         /*opacity: 0;*/
+         /*visibility: hidden;*/
+         /*position: absolute;*/
+         /*left:0;*/
+         z-index: 0;
+         flex-grow: 2;
+        align-items: center;
+         transition: all 1s linear;
+    }
+     .slider-block.row{
+         justify-content: center;
+         align-items: center;
+         position: relative;
+     }
+     @keyframes slider {
+         0% {
+             transform: translateX(0);
+             animation-delay: 3s;
+         }
+         33% {
+             transform: translateX(-28%);
+             animation-delay: 3s;
+         }
+         66% {
+             transform: translateX(calc(-60%));
+             animation-delay: 3s;
+         }
+         100% {
+             transform: translateX(0);
+             animation-delay: 3s;
+         }
+     }
+
+
+.slider.column.relative:hover .slider-block {
+
+}
+     .slider.column.relative input:nth-of-type(1):checked ~ .slider-holder .slider-block .slides:nth-of-type(1),
+    .slider.column.relative input:nth-of-type(2):checked ~ .slider-holder .slider-block .slides:nth-of-type(2),
+    .slider.column.relative input:nth-of-type(3):checked ~ .slider-holder .slider-block .slides:nth-of-type(3){
+        /*visibility: visible;*/
+        justify-self: center;
+         align-items: center;
+        /*position: relative;*/
+         z-index: 1;
+        /*opacity: 1;*/
+        animation-delay: 1s;
+    }
+     .slider.column.relative .slider-block {
+            animation: slider 10s linear infinite;
+     }
+    .slider.column.relative input:nth-of-type(1):checked ~ .slider-holder:nth-of-type(1) .slider-block {
+        transform: translateX(0%);
+
+    }
+    .slider.column.relative input:nth-of-type(2):checked ~ .slider-holder:nth-of-type(1) .slider-block {
+        transform: translateX(-28%);
+    }
+    .slider.column.relative input:nth-of-type(3):checked ~ .slider-holder:nth-of-type(1) .slider-block {
+        transform: translateX(-56%);
+    }
+    .slider.column.relative input:nth-of-type(1):checked ~ .controls label:nth-of-type(1),
+    .slider.column.relative input:nth-of-type(2):checked ~ .controls label:nth-of-type(2),
+    .slider.column.relative input:nth-of-type(3):checked ~ .controls label:nth-of-type(3){
+        border: darkgray solid .4rem;
+        background: gray;
+        width: .4rem;
+        height: .4rem;
+        border-radius: 1rem;
+    }
+    .slider.column.relative > div{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .slider.column.relative:hover{
+        animation-play-state: paused;
+    }
+    .slider.column.relative#main_art2 > div a{
+        position: relative;
+        align-self: center;
+        top:0;
+        right: 0;
+    }
+    .slider.column.relative#main_art2 > div  .slider-holder{
+        overflow: hidden;
+
+
+        align-items: center;
+    }
 
 
     main .left > div{
@@ -476,7 +625,7 @@ main #img_women{
 
 @media screen and (max-width: 890px) {
 
-    .hidden.more_inf.row, .slider{
+    .hidden.more_inf.row, .slider.column.relative{
     display: none;
 }
     .running-line{
@@ -526,7 +675,7 @@ main #img_women{
     main #main_art1 {
         padding: 6.5rem 2rem 4rem;
     }
-    .hidden.more_inf.row, .slider{
+    .hidden.more_inf.row, .slider.column.relative{
     display: none;
 }
 }
@@ -535,7 +684,7 @@ main #img_women{
     /*    position: relative;*/
     /*    width: 100%;*/
     /*}*/
-    .hidden.more_inf.row, .slider{
+    .hidden.more_inf.row, .slider.column.relative{
     display: none;
 }
     .left section{
@@ -607,7 +756,7 @@ main #img_women{
     main #main_art1{
         padding-left: 1.5rem ;
     }
-    .hidden.more_inf.row, .slider{
+    .hidden.more_inf.row, .slider.column.relative{
     display: none;
 }
     /*.hidden, .slider{*/

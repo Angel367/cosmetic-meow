@@ -59,13 +59,49 @@
             </div>
         </section>
     </article>
-{#    <article class="column relative slider" id="main_art2">#}
-{#        <div class="row slider-block">#}
-{#        <h2>Наши преимущества</h2>#}
-{##}
-{#        </div>#}
-{#        <div class="row">#}
-{#            <div class="column">#}
+    <article class="column relative slider" id="main_art2">
+        <div>
+        <h2>Наши преимущества</h2>
+
+     <input type="radio" name="point" id="slide1" checked>
+	<input type="radio" name="point" id="slide2">
+	<input type="radio" name="point" id="slide3">
+        <div class="slider-holder">
+                    <div class=" row slider-block ">
+            <div class="  slides column">
+                <div>
+                    <img src="{% static 'img/main/ben1.png' %}" alt="">
+                </div>
+                <div>
+                    Convenient and easy online
+                    shopping experience for all
+                    beauty enthusiasts.
+                </div>
+            </div>
+            <div class="column slides" >
+                <div>
+                    <img src="{% static 'img/main/ben2.png' %}" alt="">
+                </div>
+                <div>
+                    Access to a wide variety of
+                    beauty products from various
+                    companies, all in one place.
+                </div>
+            </div>
+            <div class="column slides">
+                <div>
+                    <img src="{% static 'img/main/ben3.png' %}" alt="">
+                </div>
+                <div>
+                    Ability to compare prices
+                    and read reviews from other
+                    customers before making a purchase.
+                </div>
+            </div>
+        </div>
+
+{#        <div class=" row slider-block" aria-hidden="true">#}
+{#            <div class="  slides column">#}
 {#                <div>#}
 {#                    <img src="{% static 'img/main/ben1.png' %}" alt="">#}
 {#                </div>#}
@@ -75,7 +111,7 @@
 {#                    beauty enthusiasts.#}
 {#                </div>#}
 {#            </div>#}
-{#            <div class="column slider" >#}
+{#            <div class="column slides" >#}
 {#                <div>#}
 {#                    <img src="{% static 'img/main/ben2.png' %}" alt="">#}
 {#                </div>#}
@@ -85,7 +121,7 @@
 {#                    companies, all in one place.#}
 {#                </div>#}
 {#            </div>#}
-{#            <div class="column slider">#}
+{#            <div class="column slides">#}
 {#                <div>#}
 {#                    <img src="{% static 'img/main/ben3.png' %}" alt="">#}
 {#                </div>#}
@@ -95,9 +131,17 @@
 {#                    customers before making a purchase.#}
 {#                </div>#}
 {#            </div>#}
-{#            <a href="#">Узнать о компании</a>#}
 {#        </div>#}
-{#    </article>#}
+</div>
+            <div class="controls">
+		<label for="slide1"></label>
+		<label for="slide2"></label>
+		<label for="slide3"></label>
+	        </div>
+
+            <a href="#">Узнать о компании</a>
+            </div>
+    </article>
     <article  class="fix left relative row hidden more_inf">
 
         <div class="left column more_inf">
