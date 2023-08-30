@@ -238,4 +238,16 @@
 {% block js%}
 <script type="application/javascript" src="{% static 'js/main.js' %}"  >
 </script>
+    <script>
+    function switchSlide() {
+        const slides = document.querySelectorAll('.slider input[type="radio"]');
+        const activeSlide = document.querySelector('.slider input[type="radio"]:checked');
+        const activeIndex = Array.from(slides).indexOf(activeSlide);
+        const nextIndex = (activeIndex + 1) % slides.length;
+
+        slides[nextIndex].checked = true;
+    }
+
+    setInterval(switchSlide, 4000); // Переключение каждые 4 секунд
+</script>
 {% endblock js %}
