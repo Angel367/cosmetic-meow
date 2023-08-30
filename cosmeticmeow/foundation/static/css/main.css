@@ -4,6 +4,9 @@ h2{
 .hidden.more_inf, .slider.column, .slider.column.relative input{
     display: none;
 }
+.with-img img{
+    width: 100%;
+}
 article a:hover, form button:hover{
     cursor: pointer;
     color: #673657;
@@ -48,7 +51,7 @@ section h1{
     margin:2rem 0 0;
 }
 
-section > div{
+section > div, main #course .fix2 > div > div > .row div{
     font-size: 1.2rem;
 }
 section h2{
@@ -89,6 +92,13 @@ main .rating{
     padding: 1rem 2rem;
     justify-content: space-evenly;
     width: 60%;
+}
+.partner .running-line:nth-child(1){
+    visibility: hidden;
+    position: absolute;
+}
+.partner .running-line:nth-child(2){
+    flex-grow: 1;
 }
 main .rating > div > div{
     font-size: 1rem;
@@ -135,15 +145,9 @@ main #course .row{
     height: 100%;
 
 }
-.partner .running-line:nth-child(1){
-    visibility: hidden;
-    position: absolute;
-}
-.partner .running-line:nth-child(2){
-    flex-grow: 1;
-}
+
 main #course .fix1 {
-    flex-grow: 2;
+    /*flex-grow: 2;*/
 
     position: relative;
     min-height: inherit;
@@ -170,7 +174,7 @@ main #course .fix2 > div{
         width: 90%;
         /*padding: 0 2rem;*/
 }
-main #course .fix2 > div h2{
+main #course .fix2 > div h2, #course .fix1 h2{
     font-size: 4rem;
     font-weight: 700;
 }
@@ -191,7 +195,7 @@ main #course .fix2 > div > div{
     justify-content: center;
     gap:1rem;
 }
- .with-img{
+.with-img{
     flex-shrink: 3;
 }
 main #course .fix2 > div > div > .row{
@@ -317,6 +321,11 @@ main .left .more_inf{
 }
 @media screen and (min-width: 1801px) {
 
+    main #course .fix2 .row {
+
+        grid-template-columns: 10% 90%;
+
+    }
 main .left .more_inf{
     width: 45%;
     margin: 6rem 0;
@@ -358,6 +367,7 @@ main #img_women {
     .fix.left.relative.row.hidden .left.column{
         padding: 7rem 4rem;
     }
+
     main #img_women {
         width: 60%;
         height: 100%;
@@ -371,6 +381,7 @@ main #img_women {
 }
 }
 @media screen and (max-width: 1440px){
+
  .fix.left.relative.row.hidden .left.column{
         padding: 0rem 4rem;
     }
@@ -386,8 +397,55 @@ main #img_women {
     position: absolute;
 }
 }
+#course .fix1 h2{
+    visibility: hidden;
+    position: absolute;
+}
 @media screen and (max-width: 1024px) {
+    #tube2{
+    height: 160%;
+    left: 77%;
+        top: -6rem;
+    bottom: unset;
 
+}
+
+#tube1{
+    top: unset;
+    bottom: -5rem;
+    height: 155%;
+    left:67%;
+}
+main #course .fix2 > div h2{
+    visibility: hidden;
+    position: absolute;
+}
+main #course .fix2{
+    padding-left: 4rem;
+    padding-right: 1rem;
+    padding-bottom: 2rem;
+}
+main #course .fix1{
+    margin-top: 4rem;
+    margin-bottom: 3rem;
+    /*padding: 4rem 0 3rem;*/
+}
+main #course .fix1 h2{
+    visibility: visible;
+    text-align: center;
+    width: 60%;
+    font-size: 3rem;
+    padding: 2rem;
+    z-index: 1;
+}
+    main #course.column .row{
+     flex-direction: column;
+    }
+    main #course .fix1 {
+        padding: 0;
+        width: 100%;
+        height: 12rem;
+    }
     .partner.row{
         /*margin-left: 5rem;*/
         overflow: hidden;
@@ -415,9 +473,7 @@ main #img_women {
 
          animation: scroll890px 15s linear infinite;
     }
-     .partner:hover .running-line{
-         animation-play-state: paused;
-     }
+
 
 
 
@@ -578,8 +634,6 @@ main #img_women{
     }
     .slider.column.relative#main_art2 > div  .slider-holder{
         overflow: hidden;
-
-
         align-items: center;
     }
 
@@ -594,13 +648,7 @@ main #img_women{
     main .rating{
         width: 45%;
     }
-    /*.hidden{*/
-    /*    !*display: none;*!*/
-    /*    visibility: hidden;*/
-    /*    position: absolute;*/
-    /*    width: 0;*/
-    /*    !*box-sizing: border-box;*!*/
-    /*}*/
+
     main #main_art1 {
         padding: 6.5rem 4.5rem 4rem;
         background-image: url("../img/main/main_article.png");
@@ -612,8 +660,8 @@ main #img_women{
     width: 100%;
 }
     #main_art2.slider .column div{
-    width: 45vw;
-}
+        width: 45vw;
+    }
 }
 
  @keyframes scroll890px {
@@ -628,6 +676,19 @@ main #img_women{
 
 @media screen and (max-width: 890px) {
 
+/*        #tube2{*/
+/*    height: 160%;*/
+/*    left: 77%;*/
+/*        top: -6rem;*/
+/*    bottom: unset;*/
+
+/*}*/
+/*#tube1{*/
+/*    top: unset;*/
+/*    bottom: -5rem;*/
+/*    height: 155%;*/
+/*    left:67%;*/
+/*}*/
     .hidden.more_inf.row {
     display: none;
 }
@@ -681,6 +742,20 @@ main #img_women{
 
 
 @media screen and (max-width: 700px) {
+
+/*        #tube2{*/
+/*    height: 160%;*/
+/*    left: 77%;*/
+/*        top: -6rem;*/
+/*    bottom: unset;*/
+
+/*}*/
+/*#tube1{*/
+/*    top: unset;*/
+/*    bottom: -5rem;*/
+/*    height: 155%;*/
+/*    left:67%;*/
+/*}*/
     main #main_art1 {
         padding: 6.5rem 2rem 4rem;
     }
@@ -698,10 +773,32 @@ main #img_women{
 }
 }
 @media screen and (max-width: 600px) {
-    /*main #img_women{*/
-    /*    position: relative;*/
-    /*    width: 100%;*/
-    /*}*/
+    main #course.relative a span{
+        font-size: 1.7rem;
+    }
+    main #course a img{
+        width: 1.7rem;
+        height: 1.7rem;
+    }
+        #tube2{
+
+    left: 78%;
+
+    top:-5rem;
+    height: 125%;
+
+}
+#tube1{
+    bottom: -4rem;
+    left:67%;
+    height: 125%;
+}
+
+/*TODO runline test*/
+main #course .fix1 h2{
+    font-size: 2rem;
+}
+
 
     #main_art2.slider .column div img{
     width: 100%;
@@ -785,6 +882,34 @@ main #img_women{
 
 }
 @media screen and (max-width: 425px){
+    main #course.relative a span {
+    font-size: 1.2rem;
+}
+    main #course .fix2 div, #course .fix1 h2 {
+        font-size: 1rem;
+    }
+    main #course{
+
+}
+        #tube2{
+             bottom: -1rem;
+    height: 100%;
+left:70%;
+
+}
+       main #course .fix1 h2{
+            padding: 1rem;
+            font-size: 1.4rem;
+           width: 40%;
+        }
+#tube1{
+ top: 1rem;
+    height: 100%;
+    left:55%;
+}
+main #course .fix2 {
+    padding-left: 2rem;
+}
     main .rating{
         width: 95%;
     }
