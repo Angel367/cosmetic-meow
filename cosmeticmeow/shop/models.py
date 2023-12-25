@@ -111,6 +111,9 @@ class Product(models.Model):
     def get_images(self):
         return ProductImage.objects.filter(product=self)
 
+    def get_count_in_cart(self, customer):
+        return OrderedProduct.objects.filter(product=self, order__customer=customer)
+
     # def save(self, *args, **kwargs):
     #     if self.pk and self.price != Product.objects.get(pk=self.pk).price:
     #         PriceChange.objects.create(
@@ -167,7 +170,7 @@ class OrderedProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
     price = models.DecimalField(max_digits=10, decimal_places=2)
-
+    # todo func count in order
     def save(self, *args, **kwargs):
         if not self.price:
             self.price = self.product.discountPrice

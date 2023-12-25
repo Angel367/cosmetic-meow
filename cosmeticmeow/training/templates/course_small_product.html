@@ -1,19 +1,55 @@
-{% if not is_bought_id %}
-<a href="{% url 'course_info' course_id=course.id %}">
-    {% else %}
-<a href="{% url 'course_info' course_id=course.course.id %}">
-{% endif %}
-    <div>
-    {{ course.name }}
-    {{ course.short_description }}
+{#{% if not is_bought_id %}#}
+{#<a href="{% url 'course_info' course_id=course.id %}">#}
+{#    {% else %}#}
+{#<a href="{% url 'course_info' course_id=course.course.id %}">#}
+{#{% endif %}#}
+{#    <div>#}
+{#    {{ course.name }}#}
+{#    {{ course.short_description }}#}
+{##}
+{#    <form method="post" action="">#}
+{#    {% csrf_token %}#}
+{#    {% if is_bought_id%}#}
+{#        <a href="{% url 'course_info' course_id=course.course.id %}">Приступить к изучению</a>#}
+{#    {% else %}#}
+{#        <input hidden name="course_id" value="{{ course.id }}">#}
+{#        <input hidden name="course_id" value="{{ course.id }}">#}
+{#        <button name="bye">Купить</button>#}
+{#    {% endif %}#}
+{#    </form>#}
+{#</div></a>#}
 
-    <form method="post" action="">
-    {% csrf_token %}
-    {% if is_bought_id%}
-        <a href="{% url 'course_info' course_id=course.course.id %}">Приступить к изучению</a>
-    {% else %}
-        <input hidden name="course_id" value="{{ course.id }}">
-        <button name="bye">Купить</button>
-    {% endif %}
-    </form>
-</div></a>
+<div class="course_small">
+    <a class="course_link_block" href="">
+        <div class="course_main photo_holder">
+            <img src="" alt="Фотография курса">
+        </div>
+        <div class="course_main text_holder">
+            <h3>{{ course.course.name }}</h3>
+            <p>{{ course.course.short_description }}</p>
+        </div>
+    </a>
+    <div>
+        <span class="course_price">
+            {{ course.course.price }}
+        </span>
+        <span class="course_basket">
+            {% if is_bought_id%}
+                <a href="{% url 'course_info' course_id=course.course.id %}">Приступить к изучению</a>
+            {% elif is_in_order %}
+                <a href="{% url 'product_info_incr' product_id=course.product.id %}">
+                +
+                </a>
+                <span>COUNT</span>
+                <a href="{% url 'product_info_decr' product_id=product.id %}">
+                -
+                </a>
+            {% else %}
+                <a>Ст.ц.</a>
+                <a href="#">
+                +
+                </a>
+            {% endif %}
+        </span>
+    </div>
+</div>

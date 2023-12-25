@@ -4,13 +4,17 @@ from django.urls import path, include
 from cosmeticmeow import settings
 from .views import *
 
+
+app_name = 'shop'
+
 url_product_manager = [
-    path('product/add/', CreateProduct.as_view(), name='product_manager_add'),
+    path('products/add/', CreateProduct.as_view(), name='product_manager_add'),
 ]
 
 urlpatterns = [
     path('product_manager/', include(url_product_manager)),
-    path('product/<int:product_id>', ProductInfoView.as_view(), name='product_info_view')
+    path('products', ProductListView.as_view(), name='products'),
+    path('products/<int:product_id>', ProductInfoView.as_view(), name='product_info_view')
 ]
 
 if settings.DEBUG:

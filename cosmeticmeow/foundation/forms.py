@@ -1,14 +1,18 @@
+from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, AuthenticationForm, PasswordChangeForm
 from .models import Subscriber, CustomUser
-from captcha.fields import ReCaptchaField
-from captcha.widgets import ReCaptchaV2Checkbox
+from django_recaptcha.fields import ReCaptchaField
+from django_recaptcha.widgets import ReCaptchaV2Checkbox
 
 
 class SubscriberForm(ModelForm):
     class Meta:
         model = Subscriber
         fields = ['email']
+        widgets = {
+            'email': forms.TextInput(attrs={'placeholder': 'Ваш email...'})
+        }
 
 
 class CustomUserCreateForm(UserCreationForm):

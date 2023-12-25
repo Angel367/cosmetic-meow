@@ -5,12 +5,11 @@ from django.urls import reverse_lazy
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView, CreateView
-from .forms import CustomUserCreateForm, CustomUserAuth
-from django.views.generic import CreateView
+from .forms import CustomUserAuth
+from django.views.generic import CreateView, DetailView
 from .forms import CustomUserCreateForm
 from .decorators import user_not_authenticated
-from .models import Subscriber
+from .models import Subscriber, CustomUser
 
 
 # Create your views here.
@@ -25,13 +24,36 @@ class IndexView(CreateView):
     def get_form(self, form_class=None):
         if form_class is None:
             form_class = self.get_form_class()
-
         form = super(IndexView, self).get_form(form_class)
         form.fields['email'].widget = forms.TextInput(
-            attrs={'placeholder': 'Enter your email Address'}
+            attrs={'placeholder': 'Ваш email...'}
         )
         return form
 
+
+class DevelopmentView(CreateView):
+    template_name = "main.html"
+    model = Subscriber
+    fields = ['email']
+    success_url = '/'
+
+
+# class IndexEnView(IndexView):
+#     template_name = "main_en.html"
+#     success_url = '/en'
+#     def get_form(self, form_class=None):
+#         if form_class is None:
+#             form_class = self.get_form_class()
+#         form = super(IndexView, self).get_form(form_class)
+#         form.fields['email'].widget = forms.TextInput(
+#             attrs={'placeholder': 'Your email...'}
+#         )
+#         return form
+
+
+class CustomUserDetailsView(DetailView):
+    model = CustomUser
+    template_name = 'user_details.html'
 
 
 class CustomLoginView(LoginView):

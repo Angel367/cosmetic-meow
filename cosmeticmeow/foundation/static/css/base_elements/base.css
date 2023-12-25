@@ -1,10 +1,29 @@
-body{
+@font-face {
+    font-family: 'CygreBold';
+    src: url('../../font/Cygre-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'CygreExtraBold';
+    src: url('../../font/Cygre-ExtraBold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Cygre';
+    src: url('../../font/Cygre-Regular.ttf') format('truetype');
+}
+
+*{
+    font-family: Cygre, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0;
+}
+a {
+  text-decoration: none;
+}
+body {
     padding: 0;
     margin: 0;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
-*{
-    font-weight: 400;
-    font-family: 'Montserrat',sans-serif;
-    letter-spacing: 0;
-}
+

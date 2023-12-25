@@ -6,10 +6,16 @@ from django.db import models
 from foundation.models import CustomUser
 from shop.models import Product
 
+#     status прохождения:
+#     is not started 0 уроков закончено
+#     finished for x% ??? n finished_lesson / n all
+#     finished successful n finished_lesson = n all
+#     # время доступа :
+#       forever! or date_of_end_subscr(на будущ)
 
 class Course(Product):  # онлайн вебинары, запись или текстовые файлы и текст
     teacher = models.ForeignKey(CustomUser, on_delete=models.PROTECT, null=True)
-
+    duration = models.DurationField(null=True)
     def save(self, *args, **kwargs):
         self.is_course = True
         super(Course, self).save(*args, **kwargs)
@@ -52,14 +58,6 @@ class CourseStudent(models.Model):
         verbose_name_plural = "курсы для пользователей"
         ordering = ["purchase_date"]
         unique_together = ('course', 'student')
-
-
-#     status прохождения:
-#     is not started 0 уроков закончено
-#     finished for x% ??? n finished_lesson / n all
-#     finished successful n finished_lesson = n all
-#     # время доступа :
-#       forever! or date_of_end_subscr(на будущ)
 
 
 class Module(models.Model):

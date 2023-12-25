@@ -3,10 +3,10 @@ from django.urls import path, include
 
 from cosmeticmeow import settings
 from .views import *
-
+app_name = 'training'
 
 url_test_student = [
-    path('questions/<int:question_id>/', MyQuestionInfoView.as_view(), name='question')
+    path('tests/<int:test_id>/questions/<int:question_id>', MyQuestionInfoView.as_view(), name='question')
 ]
 # url_test_teacher=[
 #     path('questions/<int:question_id>/', MyQuestionInfoView.as_view(), name='teacher_question'),
@@ -43,14 +43,14 @@ url_module_teacher = [
     path('modules/<int:module_id>/', include(url_lessons_teacher)),
     path('modules/<int:module_id>/delete/', DeleteModule.as_view(), name='teacher_module_delete'),
     path('modules/<int:module_id>/edit/', UpdateModule.as_view(), name='teacher_module_edit'),
-    path('modules/', TeacherModuleListView.as_view(), name='teacher_modules_all'),
-    path('modules/add/', CreateModule.as_view(), name='teacher_module_add'),
+    path('modules', TeacherModuleListView.as_view(), name='teacher_modules_all'),
+    path('modules/add', CreateModule.as_view(), name='teacher_module_add'),
 ]
 url_courses_student = [
     path('courses/my/', MyCourseListView.as_view(), name='course_my'),
     path('courses/<int:course_id>/', CourseInfoView.as_view(), name='course_info'),
-    path('courses/', CourseListView.as_view(), name='courses_all'),
-    path('courses/<int:course_id>/', include(url_module_student)),
+    path('courses', CourseListView.as_view(), name='courses'),
+    path('courses/<int:course_id>', include(url_module_student)),
 ]
 url_courses_teacher = [
     path('courses/<int:course_id>/archive/', ArchiveCourse.as_view(), name='teacher_course_archive'),

@@ -1,24 +1,39 @@
+    
 {% load static %}
 <header id="main_header">
-    <div class="logo">
-        <img alt="[logo]" src="{% static 'img/base_elements/logo.png'%}">
-    </div>
-    <input type="checkbox" id="menu_toggle">
-
-    <div class="nav_box">
+    <a href="{% url 'foundation:index' %}" class="logo">
+        <img alt="[logo]" src="{% static 'img/header/logo.png'%}">
+    </a>
+ <div class="nav_box">
+     <input type="checkbox" id="menu_toggle">
+    
     <label for="menu_toggle">
         <span></span>
     </label>
     <nav>
-        <a href="#">Продукция</a>
-        <a href="{% url 'courses_all' %}">Обучение</a>
-        <a href="#">Разработка</a>
-        <a href="#">О нас</a>
-        <a href="#">Личный кабинет</a>
-    </nav>
-    <a href="#" class="basket">
-            <img src="{% static 'img/base_elements/basket.png'%}" alt="">
-            <span>({{ basket_count }}0)</span>
-    </a>
-        </div>
-</header>
+           <a href="{% url 'shop:products' %}">
+           Продукция
+       </a>
+        <a href="{% url 'training:courses' %}">
+            Обучение
+        </a>
+        <a href="{% url 'foundation:development' %}">
+            Разработка
+        </a>
+       
+    </nav></div>
+{#    <div class="search-bar">#}
+{#        <form>#}
+{#        <input type="search" placeholder="Search...">#}
+{#        #}
+{#        </form>#}
+{#    </div>#}
+    <div class="button_holder">
+        <a href="#" class="basket">
+            <img alt="[cart]" src="{% static 'img/header/fi-rr-shopping-cart.svg'%}">
+        </a>
+        <a href="#" class="ik">
+            <img alt="[ik]" src="{% static 'img/header/fi-rr-user.svg'%}">
+        </a>
+    </div>
+    </header>

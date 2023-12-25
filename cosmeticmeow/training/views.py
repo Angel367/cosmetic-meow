@@ -20,6 +20,11 @@ class CourseListView(ListView):
                 is_bought[course.id] = False
             else:
                 is_bought[course.id] = CourseStudent.objects.filter(course=course, student=self.request.user).exists()
+        for course in list(self.get_queryset()):
+            if not self.request.user.is_authenticated:
+                is_bought[course.id] = False
+            else:
+                is_bought[course.id] = CourseStudent.objects.filter(course=course, student=self.request.user).exists()
         cntxt['is_bought'] = is_bought
         return cntxt
 
@@ -123,13 +128,13 @@ class MyLessonInfoView(PermLessonStudent, DetailView):
             # if t[1]:
             #     return render(request, self.template_name, self.get_context_data())
             t[0].test_time_start()
-            qs = Question.objects.filter(test=test)
+            qs = Question.objects.filter(test=test).first()
             return redirect(reverse('question',
                                     args=(self.get_object().module.course.id,
                                           self.get_object().module.id,
                                           self.get_object().id,
                                           qs.test.id,
-                                          qs.id,
+                                          qs.id
                                           )))
         if 'is_finished' in request.POST:
             s_l_mark = StudentLesson.objects.get(lesson=self.get_object(), student=request.user)

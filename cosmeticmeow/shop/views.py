@@ -3,7 +3,7 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.views import View
-from django.views.generic import CreateView, FormView, DetailView
+from django.views.generic import CreateView, FormView, DetailView, ListView
 
 from .permissions import has_product_access_manager
 from .models import *
@@ -20,6 +20,11 @@ class PermProductManager(LoginRequiredMixin, UserPassesTestMixin, View):
         if self.raise_exception:
             raise PermissionDenied(self.get_permission_denied_message())
         return redirect('/')
+
+
+class ProductListView(ListView):
+    model = Product
+    template_name = 'products.html'
 
 
 class ProductInfoView(DetailView):

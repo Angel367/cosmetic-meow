@@ -2,6 +2,8 @@
 {% load static %}
 <html lang="ru">
 <head>
+    
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width; initial-scale=1.0">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
@@ -12,16 +14,14 @@
     <title>{% block title %}{% endblock title %}</title>
     {% block head_header_footer %}{% endblock head_header_footer %}
     {% block head %}{% endblock head %}
+{#    <link rel="stylesheet" href="{% static 'css/base_elements/header.css' %}">#}
+    <link rel="stylesheet" href="{% static 'css/base_elements/footer.css' %}">
     <link rel="stylesheet" href="{% static 'css/base_elements/base.css' %}">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/98db032af2.js" crossorigin="anonymous"></script>
+     <link rel="shortcut icon" type="image/png" href="{% static 'img/header/favicon.png' %}"/>
 </head>
 <body>
-    {% block header %}{% endblock header %}
-    {% block main %}{% endblock main %}
+{#    {% block header %}{% endblock header %}#}
+{#    {% block main %}{% endblock main %}#}
     {% block footer %}{% endblock footer %}
     {% block js %}{% endblock js %}
 </body>
