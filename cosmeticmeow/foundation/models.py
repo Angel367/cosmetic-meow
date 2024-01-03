@@ -1,9 +1,6 @@
-from django.conf import settings
-from django.contrib.auth.base_user import BaseUserManager
+from django.contrib.auth.models import AbstractUser
 from django.core.validators import RegexValidator
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-from django.utils.functional import lazy
 
 from foundation.managers import CustomUserManager
 
@@ -72,21 +69,23 @@ class Subscriber(models.Model):
         ordering = ["-id"]
 
 
-class Callback(models.Model):
-    email = models.EmailField(blank=False, null=False, unique=True, max_length=40, verbose_name='')
+class Feedback(models.Model):
+    email = models.EmailField(blank=False, null=False, unique=False, max_length=40, verbose_name='')
     is_active = models.BooleanField(blank=False, null=False, default=True)
-    name = models.CharField(max_length=150,
-                            blank=True,
-                            verbose_name="Имя")
-    message = models.CharField(max_length=150,
-                               blank=True,
-                               verbose_name="Сообщение")
-    type = models.CharField(choices=CallbackChoices.choices,
-                            max_length=1,
-                            default=CallbackChoices.OTHER,
-                            verbose_name="Тип обратной связи")
+    name = models.CharField(
+        max_length=150,
+        blank=True,
+        verbose_name="Имя")
+    message = models.TextField(
+        blank=True,
+        verbose_name="Сообщение")
+    type = models.CharField(
+        choices=CallbackChoices.choices,
+        max_length=1,
+        default=CallbackChoices.OTHER,
+        verbose_name="Тип обратной связи")
 
     class Meta:
         verbose_name = "Обратная связь"
-        verbose_name_plural = "Обратная связь"
+        verbose_name_plural = "Обратные связи"
         ordering = ["-id"]

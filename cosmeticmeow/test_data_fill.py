@@ -142,13 +142,13 @@ def generate_ordered_products(num_ordered_products, orders, products):
         )
 
 
-def generate_feedbacks(num_feedbacks):
-    for _ in range(num_feedbacks):
+def generate_reviews(num_reviews):
+    for _ in range(num_reviews):
         text = fake.paragraph()
         sender = fake.email()
         is_active = fake.boolean()
 
-        Feedback.objects.create(
+        Review.objects.create(
             text=text,
             sender=sender,
             is_active=is_active,

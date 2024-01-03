@@ -1,27 +1,27 @@
 from django.test import TestCase
-from shop.models import Feedback
+from shop.models import Review
 
 
-class FeedbackTestCase(TestCase):
-    def test_feedback_creation(self):
-        feedback = Feedback.objects.create(text="Test feedback", sender="test@example.com", is_active=True)
-        self.assertEqual(feedback.text, "Test feedback")
-        self.assertEqual(feedback.sender, "test@example.com")
-        self.assertTrue(feedback.is_active)
+class ReviewTestCase(TestCase):
+    def test_review_creation(self):
+        review = Review.objects.create(text="Test review", sender="test@example.com", is_active=True)
+        self.assertEqual(review.text, "Test review")
+        self.assertEqual(review.sender, "test@example.com")
+        self.assertTrue(review.is_active)
 
     def test_verbose_names(self):
-        self.assertEqual(Feedback._meta.verbose_name, "отзыв")
-        self.assertEqual(Feedback._meta.verbose_name_plural, "отзывы")
+        self.assertEqual(Review._meta.verbose_name, "отзыв")
+        self.assertEqual(Review._meta.verbose_name_plural, "отзывы")
 
     def test_ordering(self):
-        feedback1 = Feedback.objects.create(text="Feedback 1", sender="sender1@example.com", is_active=True)
-        feedback2 = Feedback.objects.create(text="Feedback 2", sender="sender2@example.com", is_active=True)
-        self.assertGreater(feedback2.pk, feedback1.pk)  # feedback2 should be created after feedback1
+        review1 = Review.objects.create(text="Review 1", sender="sender1@example.com", is_active=True)
+        review2 = Review.objects.create(text="Review 2", sender="sender2@example.com", is_active=True)
+        self.assertGreater(review2.pk, review1.pk)  # review2 should be created after review1
 
-    def test_inactive_feedback_not_in_queryset(self):
-        feedback_active = Feedback.objects.create(text="Active feedback", sender="active@example.com", is_active=True)
-        feedback_inactive = Feedback.objects.create(text="Inactive feedback", sender="inactive@example.com",
-                                                    is_active=False)
-        queryset = Feedback.objects.filter(is_active=True)
-        self.assertIn(feedback_active, queryset)
-        self.assertNotIn(feedback_inactive, queryset)
+    def test_inactive_review_not_in_queryset(self):
+        review_active = Review.objects.create(text="Active review", sender="active@example.com", is_active=True)
+        review_inactive = Review.objects.create(text="Inactive review", sender="inactive@example.com",
+                                                  is_active=False)
+        queryset = Review.objects.filter(is_active=True)
+        self.assertIn(review_active, queryset)
+        self.assertNotIn(review_inactive, queryset)

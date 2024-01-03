@@ -2,9 +2,9 @@ from django import forms
 from .models import *
 
 
-class FeedbackForm(forms.ModelForm):
+class ReviewForm(forms.ModelForm):
     class Meta:
-        model = Feedback
+        model = Review
         fields = [
             "text", 'sender'
         ]

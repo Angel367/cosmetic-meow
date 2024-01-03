@@ -42,7 +42,6 @@ MESSAGE_TAGS = {
 
 MY_APPS = [
     'foundation',
-    'personal_account',
     'shop',
     'training'
 ]

@@ -182,7 +182,7 @@ class OrderedProduct(models.Model):
         ordering = ["order"]
 
 
-class Feedback(models.Model):
+class Review(models.Model):
     text = models.TextField()
     sender = models.EmailField()
     is_active = models.BooleanField(default=False)
