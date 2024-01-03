@@ -44,13 +44,12 @@ class Order(models.Model):
                 orderedProduct.price = orderedProduct.product.price
                 # TODO Написать нормально
 
-    def add_product(self, product):    # TODO: Проверить что происходит если это первое добавление в заказ (новый заказ)
+    def add_product(self, product):  # TODO: Проверить что происходит если это первое добавление в заказ (новый заказ)
         new_ordered_product = OrderedProduct(
             order=self,
             product=product
         )
         new_ordered_product.save()
-
 
     class Meta:
         verbose_name = "заказ"
@@ -104,6 +103,7 @@ class Product(models.Model):
     )
     views_amount = models.IntegerField(default=0, blank=False)
     creation_date = models.DateField(auto_now_add=True)
+
     # TODO func to calculate percents of discount
     def get_price_with_tax(self):
         return float(self.price) + float(self.price) * self.tax_rate
@@ -170,6 +170,7 @@ class OrderedProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+
     # todo func count in order
     def save(self, *args, **kwargs):
         if not self.price:
