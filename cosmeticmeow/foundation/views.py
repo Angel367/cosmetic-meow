@@ -38,7 +38,7 @@ class IndexView(CreateView):
 
 
 class DevelopmentView(CreateView):
-    template_name = "main.html"
+    template_name = "dev.html"
     model = Subscriber
     fields = ['email']
     success_url = '/'

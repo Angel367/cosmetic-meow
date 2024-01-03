@@ -1,4 +1,4 @@
-Django==4.1.10
+Django==4.1.13
 pillow
 Faker~=19.3.0
 django-recaptcha
