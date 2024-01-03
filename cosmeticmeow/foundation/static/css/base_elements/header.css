@@ -37,11 +37,11 @@ header input[type=checkbox]{
     visibility: hidden;
     position: absolute;
 }
-header .logo img, header .button-holder a img{
+.logo img, header .button-holder a img{
     height: 100%;
 }
 .logo{
-    height: 150px;
+    height: 80px;
 }
 header nav{
     color: inherit;
@@ -61,24 +61,24 @@ header .button_holder {
 a{
     text-decoration: none;
 }
-header a{
+header a, header a img svg path{
     color: #5F6886;
     font-family: CygreBold, sans-serif;
-    font-size: 2rem;
+    font-size: 1rem;
     font-weight: 700;
     /*line-height: 20px;*/
-
+    fill: #1A2751;
     letter-spacing: 0;
     text-align: left;
 }
-header .button-holder a img{
-    height: 10rem;
-    width: 2rem;
-}
-header nav a:hover{
+/*header .button-holder a {*/
+/*    height: 10rem;*/
+/*    width: 2rem;*/
+/*}*/
+header a:hover, header a:hover img svg path{
     color: #1A2751;
     font-family: CygreExtraBold, sans-serif;
-    font-size: 2rem;
+    fill: #1A2751;
     font-weight: 800;
     /*line-height: 28px;*/
     letter-spacing: 0;

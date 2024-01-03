@@ -8,8 +8,13 @@ from django.utils.functional import lazy
 from foundation.managers import CustomUserManager
 
 
-
 # Create your models here.
+
+class CallbackChoices(models.TextChoices):
+    TRAINING = 'T', "Обучение"
+    SHOP = 'S', "Магазин"
+    OTHER = 'O', "Другое"
+    DEVELOPMENT = 'D', "Контрактное производство"
 
 
 class GenderChoices(models.TextChoices):
@@ -64,4 +69,24 @@ class Subscriber(models.Model):
     class Meta:
         verbose_name = "подписчик"
         verbose_name_plural = "подписчики"
+        ordering = ["-id"]
+
+
+class Callback(models.Model):
+    email = models.EmailField(blank=False, null=False, unique=True, max_length=40, verbose_name='')
+    is_active = models.BooleanField(blank=False, null=False, default=True)
+    name = models.CharField(max_length=150,
+                            blank=True,
+                            verbose_name="Имя")
+    message = models.CharField(max_length=150,
+                               blank=True,
+                               verbose_name="Сообщение")
+    type = models.CharField(choices=CallbackChoices.choices,
+                            max_length=1,
+                            default=CallbackChoices.OTHER,
+                            verbose_name="Тип обратной связи")
+
+    class Meta:
+        verbose_name = "Обратная связь"
+        verbose_name_plural = "Обратная связь"
         ordering = ["-id"]

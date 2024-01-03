@@ -2,14 +2,14 @@ from django import forms
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib import messages
 from django.urls import reverse_lazy
-from django.shortcuts import render
-from django.urls import reverse_lazy, reverse
 from django.utils.decorators import method_decorator
 from .forms import CustomUserAuth
 from django.views.generic import CreateView, DetailView
 from .forms import CustomUserCreateForm
 from .decorators import user_not_authenticated
 from .models import Subscriber, CustomUser
+from training.models import Course
+from shop.models import Product
 
 
 # Create your views here.
@@ -20,6 +20,12 @@ class IndexView(CreateView):
     model = Subscriber
     fields = ['email']
     success_url = '/'
+
+    def get_context_data(self, **kwargs):
+        cntxt = super().get_context_data()
+        cntxt['courses'] = Course.objects.filter(is_active=True)[:6]
+        cntxt['products'] = Product.objects.filter(is_active=True)[:6]
+        return cntxt
 
     def get_form(self, form_class=None):
         if form_class is None:

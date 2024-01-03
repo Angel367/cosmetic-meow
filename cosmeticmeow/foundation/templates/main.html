@@ -5,7 +5,6 @@
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/base_elements/blue_button.css' %}">
     <link rel="stylesheet" href="{% static 'css/base_elements/small_product.css' %}">
-    
 {% endblock head %}
 
 {% block header %} 
@@ -59,7 +58,7 @@
                     <div class=" row slider-block ">
             <div class="  slides column">
                 <div>
-                    <img src="{% static 'img/main/ben1.png' %}" alt="">
+                    <img src="{% static 'img/main/fi-rr-magic-wand.svg' %}" alt="">
                 </div>
                 <h4>Легкость</h4>
                 <div>
@@ -69,7 +68,7 @@
             </div>
             <div class="column slides" >
                 <div>
-                    <img src="{% static 'img/main/ben2.png' %}" alt="">
+                    <img src="{% static 'img/main/fi-rr-confetti.svg' %}" alt="">
                 </div>
                 <h4>Разнообразие</h4>
                 <div>
@@ -79,7 +78,7 @@
             </div>
             <div class="column slides">
                 <div>
-                    <img src="{% static 'img/main/ben3.png' %}" alt="">
+                    <img src="{% static 'img/main/fi-rr-following.svg' %}" alt="">
                 </div>
                 <h4>Удобство</h4>
                 <div>
@@ -91,38 +90,38 @@
 </div>
 
 
-            <a href="#">Узнать о больше компании</a>
+            <a href="{% url 'foundation:development' %}">Узнать о больше компании</a>
             </div>
     </article>
    <article class="column ">
             <h2>
-                Trusted by numerous
-                Beauty enthusiasts
+                Нам доверяют множество Экспертов Красоты
             </h2>
-            <div class="hidden">
-                <span>
-                    Jessica</span> <span>Simon
-                </span>
+            
+                
                 <div>
-                    This website offers a wide
-                    variety of beauty products
-                    from various companies, making
-                    it convenient and enjoyable for
-                    customers to explore and purchase
-                    their favorite items.
+                    “ На этом веб-сайте представлен широкий выбор косметических товаров от различных компаний, что делает его удобным и приятным для клиентов, изучающих и покупающих свои любимые товары ”
                 </div>
-            </div>
-        </article>
+                <span>
+                   Джессика</span> <span>Саймон
+                </span>
+           
+   </article>
     
     <article class="row partner relative" >
+        <h3>Нам доверяют множество Бьюти-компаний</h3>
        <div class="row running-line">
-           <a> <h2>Партнеры</h2></a>
-        <a href="#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>
-        <a href="#" ><img src="{% static 'img/main/partner.png' %}" alt=""></a>
-        <a href="#" ><img src="{% static 'img/main/partner.png' %}" alt=""></a>
-        <a href="#" ><img src="{% static 'img/main/partner.png' %}" alt=""></a>
-        <a href="#" ><img src="{% static 'img/main/partner.png' %}" alt=""></a>
+           
+        <a href="{% url 'foundation:development' %}#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>
+        <a href="{% url 'foundation:development' %}#" ><img src="{% static 'img/main/partner.png' %}" alt=""></a>
+        <a href="{% url 'foundation:development' %}#" ><img src="{% static 'img/main/partner.png' %}" alt=""></a>
+        <a href="{% url 'foundation:development' %}#" ><img src="{% static 'img/main/partner.png' %}" alt=""></a>
+        <a href="{% url 'foundation:development' %}#" ><img src="{% static 'img/main/partner.png' %}" alt=""></a>
        </div>
+        <a href="{% url 'foundation:development' %}">Станьте нашим партнером
+        <img alt="Перейти" src="{% static 'img/main/fi-rr-arrow-small-right.svg'%}">
+        </a>
+
     </article>
     
     <article>
@@ -132,10 +131,10 @@
 </div></div>
     <div>
         {% for product in products %}
-            {% include 'product_small.html' with product=product %}
+            {% include 'base_elements/product_small.html' with product=product %}
         {% endfor %}
     </div>
-    <a href="#">Перейти в каталог</a>
+    <a href="{% url 'shop:products' %}">Перейти в каталог</a>
     </article>
     <article>
         <div>
@@ -145,7 +144,7 @@
     <div>
         {% if courses %}
         {% for course in courses %}
-            {% include 'product_small.html' with product=product %}
+            {% include 'base_elements/course_small.html' with course=course %}
         {% endfor %}
     {% else %}
     <div>
@@ -153,7 +152,7 @@
     </div>
     {% endif %}
     </div>
-    <a href="#">Записаться на курсы</a>
+    <a href="{% url 'training:courses'%}">Записаться на курсы</a>
     </article>
     
     <article class="relative column fix left more_inf">
@@ -168,7 +167,7 @@
                 {{ form.as_p }}
                 <button type="submit" name="subscribe">Подписаться</button>
             </form>
-            <a>Станьте нашим партнером</a>
+            <a href="{% url 'foundation:development' %}#">Станьте нашим партнером</a>
         </div>
         
 

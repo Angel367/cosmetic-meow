@@ -1,73 +1,62 @@
   .small-product-box {
-    border-radius: 15px;
     background-color:#fff;
     display: flex;
-    max-width: 373px;
+    border-radius: 15px;
+    max-width: 300px;
     flex-direction: column;
     padding: 30px;
+    align-items: flex-start;
+    gap: 1rem;
   }
-  .small-product-box :hover{
+  .small-product-box:hover {
     filter: drop-shadow(10px 10px 40px rgba(26, 39, 81, 0.30)) drop-shadow(-5px -5px 20px rgba(255, 255, 255, 0.70));
-  }
-  img {
-    aspect-ratio: 0.87;
-    object-fit: contain;
-    object-position: center;
-    width: 100%;
-    overflow: hidden;
   }
   .small-product-name {
     color: #1a2751;
-    text-align: center;
-    margin-top: 20px;
-    white-space: nowrap;
-    font: 700 18px Cygre, sans-serif;
+    font: 700 1.125rem Cygre, sans-serif;
   }
   .small-product-description {
     color: #5f6886;
-    text-align: center;
-    font: 400 14px Cygre, sans-serif;
+    font: 400 0.875rem Cygre, sans-serif;
   }
+.small-product-img-box{
+    flex-shrink: 0;
+    border-radius: 0.625rem;
+    background: #DAD6E4;
+    overflow: hidden;
+}
+.small-product-img-box img{
+    object-fit: cover;
+    max-width: 100%;
+    max-height: 100%;
+}
   .small-product-main-box {
     justify-content: space-between;
+      align-items: center;
     display: flex;
-    margin-top: 10px;
-    gap: 20px;
+      width: 100%;
   }
-  .small-product-price {
+  .small-product-price, .small-product-progress {
     color: #e47a7c;
-    text-align: center;
     font: 700 24px Cygre, sans-serif;
   }
   .small-product-time{
     color: #dad6e4;
-    text-align: center;
-    align-self: start;
-    margin-top: 10px;
     font: 700 18px Cygre, sans-serif;
   }
-  .small-product-link a, .small-product-link  span{
+  .small-product-link a, .small-product-link span{
     color: #5F6886;
     font-family: CygreBold, sans-serif;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
-    /*line-height: 20px;*/
 
-    letter-spacing: 0;
-    text-align: left;
   }
-
-  .small-product-link a img{
-    height: 10rem;
-    width: 2rem;
+  .small-product-link img
+{
+    height: 2.25rem;
+      width: 2.25rem;
 }
-  /*.img-2 {*/
-  /*  aspect-ratio: 1;*/
-  /*  object-fit: contain;*/
-  /*  object-position: center;*/
-  /*  width: 36px;*/
-  /*  overflow: hidden;*/
-  /*  align-self: start;*/
-  /*  margin-top: 5px;*/
-  /*  max-width: 100%;*/
-  /*}*/
+
+
+
+

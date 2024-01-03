@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import *
+from .views import IndexView, DevelopmentView, CustomLogoutView, CustomLoginView, CustomUserDetailsView, CustomRegistrationView
 
 app_name = 'foundation'
 

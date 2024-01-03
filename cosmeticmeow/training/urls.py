@@ -2,7 +2,11 @@ from django.conf.urls.static import static
 from django.urls import path, include
 
 from cosmeticmeow import settings
-from .views import *
+from .views import UpdateLesson, CreateLesson, LessonListView, MyLessonInfoView, TeacherLessonInfoView, DeleteLesson, \
+    TeacherLessonListView, ModuleListView, MyQuestionInfoView, CreateCourse, DeleteModule, UpdateModule, \
+    TeacherModuleListView, CreateModule, MyCourseListView, CourseInfoView, CourseListView, ArchiveCourse, UpdateCourse, \
+    TeacherCourseListView
+
 app_name = 'training'
 
 url_test_student = [

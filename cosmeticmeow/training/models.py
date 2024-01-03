@@ -1,4 +1,5 @@
 import threading
+from datetime import timedelta
 
 from PIL import Image, ImageDraw, ImageFont
 from django.db import models
@@ -15,7 +16,7 @@ from shop.models import Product
 
 class Course(Product):  # онлайн вебинары, запись или текстовые файлы и текст
     teacher = models.ForeignKey(CustomUser, on_delete=models.PROTECT, null=True)
-    duration = models.DurationField(null=True)
+    duration = models.DurationField(default=timedelta(minutes=20))
     def save(self, *args, **kwargs):
         self.is_course = True
         super(Course, self).save(*args, **kwargs)

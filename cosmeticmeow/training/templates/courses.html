@@ -5,7 +5,7 @@
     курсы {% endblock title %}
 {% block head %}
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/small_course.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base_elements/small_product.css' %}">
 
 
 {% endblock head %}
@@ -20,10 +20,10 @@
 {% for course in page_obj %}
    {% for key, val in is_bought.items %}
        {% if key == course.course.id %}
-    {% include 'course_small_product.html' with course=course.course is_bought_id=val %}
+    {% include 'base_elements/course_small.html' with course=course.course is_bought_id=val %}
 
        {% elif key == course.id %}
-    {% include 'course_small_product.html' with course=course is_bought_id=val %}
+    {% include 'base_elements/course_small.html' with course=course is_bought_id=val %}
 
        {% endif %}
 
