@@ -10,6 +10,22 @@
     font-family: 'Cygre';
     src: url('../../font/Cygre-Regular.ttf') format('truetype');
 }
+.full_type input ,  .full_type textarea{
+    padding: 1rem 1.5rem;
+    border-radius: .935rem;
+    border: 1px solid #DAD6E4;
+    background:  #FFF;
+    color:  #DAD6E4;
+    /*text-align: center;*/
+    font-family: 'Cygre', sans-serif;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.125rem; /* 100% */
+}
+
+
+
 .button{
     text-decoration: none;
     /*width: 100%;*/
@@ -20,7 +36,7 @@
     letter-spacing: 0;
     text-align: center;
     border-radius: 15px;
-    padding: 1.5rem 1.5rem;
+    padding: 1.1rem 2rem 1.4rem;
     position: relative;
     box-shadow: -5px -5px 20px 0 rgba(255, 255, 255, 0.7);
 }
@@ -54,12 +70,12 @@ button.blue.subscribe{
     border-top-left-radius: 0;
     border-bottom-right-radius: 0;
 }
-input[type=text]{
-    color: rgba(95, 104, 134, 1);
-    box-shadow: -5px -5px 20px 0 rgba(255, 255, 255, 0.8);
-    border-top-right-radius: 0;
-    border-bottom-left-radius: 0;
-}
+/*input[type=text]{*/
+/*    color: rgba(95, 104, 134, 1);*/
+/*    box-shadow: -5px -5px 20px 0 rgba(255, 255, 255, 0.8);*/
+/*    border-top-right-radius: 0;*/
+/*    border-bottom-left-radius: 0;*/
+/*}*/
 @media screen and (max-width: 768px ) {
     .button{
         padding: 1rem 1rem;

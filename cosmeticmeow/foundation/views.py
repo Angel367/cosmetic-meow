@@ -7,7 +7,7 @@ from .forms import CustomUserAuth
 from django.views.generic import CreateView, DetailView
 from .forms import CustomUserCreateForm
 from .decorators import user_not_authenticated
-from .models import Subscriber, CustomUser
+from .models import Subscriber, CustomUser, Feedback
 from training.models import Course
 from shop.models import Product
 
@@ -39,9 +39,26 @@ class IndexView(CreateView):
 
 class DevelopmentView(CreateView):
     template_name = "dev.html"
-    model = Subscriber
-    fields = ['email']
+    model = Feedback
+    fields = ['email', 'message', 'name', 'is_agreement_signed']
     success_url = '/'
+
+    def get_form(self, form_class=None):
+        if form_class is None:
+            form_class = self.get_form_class()
+        form = super(DevelopmentView, self).get_form(form_class)
+        form.fields['is_agreement_signed'].required = True
+        # form.fields['message'].widget = forms.Textarea
+        # form.fields['is_agreement_signed'].widget = forms.CheckboxInput()
+        form.fields['is_agreement_signed'].label = 'Я согласен с условиями обработки персональных данных'
+        return form
+
+    def form_valid(self, form):
+        form.type = 'Development'
+        form.save()
+        return super().form_valid(form)
+
+
 
 
 # class IndexEnView(IndexView):

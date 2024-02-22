@@ -1,63 +1,77 @@
 {% load static %}
 <footer>
-  <address class="info">
-    <a href="" class="logo">
-        <img alt="[logo]" src="{% static 'img/header/logo.png'%}" />
-    </a>
-    <div class="social">
-        <img alt="[logo]" src="{% static 'img/footer/Facebook.svg'%}" />
-        <img alt="[logo]" src="{% static 'img/footer/Instagram.svg'%}" />
-        <img alt="[logo]" src="{% static 'img/footer/Telegram.svg'%}" />
-        <img alt="[logo]" src="{% static 'img/footer/Twitter.svg'%}" />
-    </div>
-    <div class="email">
-              <img alt="[logo]" src="{% static 'img/footer/Message.svg'%}" />
-      <div class="div-6">support@figma.com</div>
-    </div>
-    <div class="address">
-        <img alt="[logo]" src="{% static 'img/footer/Location.svg'%}" />
-      <div class="div-8">
-        Wisconsin Ave, Suite 700 Chevy Chase, Maryland 20815
+    <div class="link-with-addr">
+    <address class="contacts">
+        <a href="" class="logo">
+            <img alt="[logo]" src="{% static 'img/header/logo.png'%}" />
+        </a>
+        <div class="social">
+            <a href="">
+                <img alt="[logo]" src="{% static 'img/footer/Facebook.svg'%}" />
+            </a>
+            <a href="">
+                <img alt="[logo]" src="{% static 'img/footer/Instagram.svg'%}" />
+            </a>
+            <a href="">
+                <img alt="[logo]" src="{% static 'img/footer/Telegram.svg'%}" />
+            </a>
+            
+            <a href="">
+                <img alt="[logo]" src="{% static 'img/footer/Twitter.svg'%}" />
+            </a>
+        </div>
+        <div class="email">
+                  <img alt="[logo]" src="{% static 'img/footer/Message.svg'%}" />
+          <div class="div-6">support@figma.com</div>
+        </div>
+        <div class="address">
+            <img alt="[logo]" src="{% static 'img/footer/Location.svg'%}" />
+          <div class="div-8">
+            Wisconsin Ave, Suite 700 Chevy Chase, Maryland 20815
+          </div>
+        </div>
+        </address>
+ 
+      
+    
+      <div class="shopping">
+        <a class="main-link" href="{% url 'shop:products' %}#">Products</a>
+        <a href="{% url 'shop:products' %}#">Landing Page</a>
+        <a href="{% url 'shop:products' %}#">Popup Builder</a>
+        <a href="{% url 'shop:products' %}#">Web-design</a>
+        <a href="{% url 'shop:products' %}#">Content</a>
+        <a href="{% url 'shop:products' %}#">Integrations</a>
+      </div>
+      <div class="developing">
+        <a class="main-link" href="{% url 'foundation:development' %}">Developing</a>
+        <a href="{% url 'foundation:development' %}">Web-designers</a>
+        <a href="{% url 'foundation:development' %}">Marketers</a>
+        <a href="{% url 'foundation:development' %}">Small Business</a>
+        <a href="{% url 'foundation:development' %}">Website Builder</a>
+      </div>
+        <div class="about">
+        <a class="main-link" href="{% url 'foundation:development' %}">About</a>
+        <a href="{% url 'foundation:development' %}">Careers</a>
+        <a href="{% url 'foundation:development' %}">FAQs</a>
+        <a href="{% url 'foundation:development' %}">Teams</a>
+      </div>
+      <div class="training">
+        <a class="main-link" href="{% url 'training:courses'%}#">Education</a>
+        <a href="{% url 'training:courses'%}#">Academy</a>
+        <a href="{% url 'training:courses'%}#">Blog</a>
+        <a href="{% url 'training:courses'%}#">Themes</a>
+        <a href="{% url 'training:courses'%}#">Hosting</a>
+        <a href="{% url 'training:courses'%}#">Support</a>
+      </div>
+      
+      <div class="users">
+        <a class="main-link" href="{% url 'foundation:development' %}">For users</a>
+        <a href="{% url 'foundation:development' %}">Privacy policy</a>
+        <a href="{% url 'foundation:development' %}">Terms of use</a>
+        <a href="{% url 'foundation:development' %}">Sales and Refunds</a>
+        <a href="{% url 'foundation:development' %}">Legal</a>
+        <a href="{% url 'foundation:development' %}">Site Map</a>
       </div>
     </div>
-    </address>
-
-  <div class="shopping">
-    <a href="{% url 'shop:products' %}#" class="div-10">Products</a>
-    <a href="{% url 'shop:products' %}#" class="div-11">Landing Page</a>
-    <a href="{% url 'shop:products' %}#" class="div-12">Popup Builder</a>
-    <a href="{% url 'shop:products' %}#" class="div-13">Web-design</a>
-    <a href="{% url 'shop:products' %}#" class="div-14">Content</a>
-    <a href="{% url 'shop:products' %}#" class="div-15">Integrations</a>
-  </div>
-  <div class="developing">
-    <a href="{% url 'foundation:development' %}" class="div-17">Developing</a>
-    <a href="{% url 'foundation:development' %}" class="div-18">Web-designers</a>
-    <a href="{% url 'foundation:development' %}" class="div-19">Marketers</a>
-    <a href="{% url 'foundation:development' %}" class="div-20">Small Business</a>
-    <a href="{% url 'foundation:development' %}" class="div-21">Website Builder</a>
-  </div>
-  <div class="training">
-    <a href="{% url 'training:courses'%}#" class="div-23">Education</a>
-    <a href="{% url 'training:courses'%}#" class="div-24">Academy</a>
-    <a href="{% url 'training:courses'%}#" class="div-25">Blog</a>
-    <a href="{% url 'training:courses'%}#" class="div-26">Themes</a>
-    <a href="{% url 'training:courses'%}#" class="div-27">Hosting</a>
-    <a href="{% url 'training:courses'%}#" class="div-28">Support</a>
-  </div>
-  <div class="about">
-    <a href="{% url 'foundation:development' %}" class="div-30">About</a>
-    <a href="{% url 'foundation:development' %}" class="div-31">Careers</a>
-    <a href="{% url 'foundation:development' %}" class="div-32">FAQs</a>
-    <a href="{% url 'foundation:development' %}" class="div-33">Teams</a>
-  </div>
-  <div class="users">
-    <a href="{% url 'foundation:development' %}" class="div-35">For users</a>
-    <a href="{% url 'foundation:development' %}" class="div-36">Privacy policy</a>
-    <a href="{% url 'foundation:development' %}" class="div-37">Terms of use</a>
-    <a href="{% url 'foundation:development' %}" class="div-38">Sales and Refunds</a>
-    <a href="{% url 'foundation:development' %}" class="div-39">Legal</a>
-    <a href="{% url 'foundation:development' %}" class="div-40">Site Map</a>
-  </div>
     <div class="copy">&copy; 2023 All rights reserved</div>
 </footer>

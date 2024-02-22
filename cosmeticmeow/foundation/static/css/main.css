@@ -14,10 +14,18 @@
     font-family: 'Bergamasco';
     src: url('../font/Bergamasco Regular.ttf') format('truetype');
 }
+header{
+    background: rgba(218, 214, 228, 1);
+}
+
+
+
+
+
 
 .button-holder.main {
     display: flex;
-    gap: 4rem;
+    gap: 2rem;
 }
 
 #main_art1 {
@@ -34,15 +42,25 @@
     flex-direction: column;
     margin: 0;
     padding-left: 5rem;
+    align-items: flex-start;
+    gap: 3.125rem;
 }
-
-#main_art1 div.img {
-    width: 500px;
-    height: auto;
-    display: block;
-    background: url("../img/main/main_article_mobile.png") no-repeat left;
-    background-size: cover; /* Move background-size after background */
+#main_art1 .art div.welcome{
+    color:  #5F6886;
+    width: 30.25rem;
+    /*font-family: Cygre;*/
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.5rem; /* 150% */
 }
+/*#main_art1 div.img {*/
+/*    width: 500px;*/
+/*    height: auto;*/
+/*    display: block;*/
+/*    background: url("../img/main/main_article.png") no-repeat left;*/
+/*    background-size: cover; !* Move background-size after background *!*/
+/*}*/
 
 main {
     display: flex;
@@ -65,6 +83,40 @@ main {
     display: flex;
     flex-direction: column;
 }
+#main_art2 .slider-holder{
+    display: flex;
+    /*flex-direction: column;*/
+    align-items: center;
+    gap: 2rem;
+    /*margin-top: 4rem;*/
+}
+#main_art2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    /*margin-top: 4rem;*/
+}
+#main_art2 h3{
+    margin: 0;
+    color:  #1A2751;
+text-align: center;
+font-family: 'CygreBold', sans-serif;
+font-size: 2.75rem;
+font-style: normal;
+font-weight: 700;
+line-height: 2.75rem;
+}
+#main_art2 h2{
+    margin: 0;
+color: #E47A7C;
+text-align: center;
+font-family: 'Cygre', sans-serif;
+font-size: 1rem;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+}
 
 #main_art1 .art h1 span:last-child {
     font-family: 'Bergamasco', serif;
@@ -80,6 +132,11 @@ main {
     #main_art1 .art {
         padding-left: 1.5rem;
     }
+    #main_art1 div.img {
+        visibility: hidden;
+        opacity: 0;
+        overflow: hidden;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -88,7 +145,7 @@ main {
     }
 
     #main_art1 div.img {
-        display: block;
+        /*display: block;*/
         background: url("../img/main/main_article_mobile.png") no-repeat left;
         background-size: cover;
     }

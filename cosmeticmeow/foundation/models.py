@@ -70,18 +70,24 @@ class Subscriber(models.Model):
 
 
 class Feedback(models.Model):
-    email = models.EmailField(blank=False, null=False, unique=False, max_length=40, verbose_name='')
+    email = models.EmailField(blank=False,
+                              null=False,
+                              unique=False,
+                              max_length=40,
+                              verbose_name='Почта')
     is_active = models.BooleanField(blank=False, null=False, default=True)
+    is_agreement_signed = models.BooleanField(blank=False, null=False, default=False,
+                                              verbose_name="Согласие на обработку персональных данных")
+
     name = models.CharField(
         max_length=150,
-        blank=True,
         verbose_name="Имя")
     message = models.TextField(
-        blank=True,
         verbose_name="Сообщение")
     type = models.CharField(
         choices=CallbackChoices.choices,
         max_length=1,
+        blank=True,
         default=CallbackChoices.OTHER,
         verbose_name="Тип обратной связи")
 
