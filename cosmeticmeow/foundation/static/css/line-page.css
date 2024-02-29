@@ -1,0 +1,260 @@
+header{
+    background: rgba(255, 255, 255, 1);
+}
+h1, h3, h2, p{
+    margin: 0;
+    padding: 0;
+
+}
+h2{
+    font-size: 24px;
+    font-weight: 700;
+}
+main{
+    display: flex;
+    flex-direction: column;
+    gap: 6rem;
+}
+
+.description h3{
+    color:  #E47A7C;
+    /* Regular 14px 14LH */
+    font-family: 'Cygre', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+}
+.advantages-holder h3{
+    color: #1A2751;
+    font-family: 'CygreBold', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+.description h1{
+    color: #1A2751;
+    font-family: 'CygreBold', sans-serif;
+    font-size: 2.75rem;
+    font-weight: 700;
+}
+section:nth-child(2), section:nth-child(3), section:nth-child(4), section:nth-child(5){
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+ h2{
+    color: #1A2751;
+    font-family: 'CygreBold', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+
+}
+.description p, section p{
+    color:  #5F6886;
+    font-family: 'Cygre', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+}
+.description a{
+    text-decoration: none;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    /*justify-content: center;*/
+}
+.description a span{
+    color: #1A2751;
+    font-family: 'Cygre', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.description .text {
+    display: flex;
+    flex-direction: column;
+    width: 55%;
+    gap: 1rem;
+}
+
+.description {
+    display: flex;
+    justify-content: space-between;
+    /*align-items: center;*/
+    gap: 1.5rem;
+}
+
+main {
+    padding: 2rem 5rem 10rem;
+    /*gap: 4rem;*/
+}
+
+.img-holder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 2;
+    overflow: hidden;
+    border-radius: 20px;
+
+}
+
+.img-holder img{
+    width: 100%;
+    height: auto;
+}
+.link-holder{
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.production-holder, .similar-holder{
+    margin-top: 2rem;
+    display: grid;
+    grid: repeat(2, 1fr) / repeat(2, 1fr);
+    /*display: flex;*/
+    gap: 3rem;
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    /*flex-wrap: wrap;*/
+}
+.advantages-holder{
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+}
+.advantages-holder .advantage{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+}
+.application-holder{
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-direction: column;
+}
+.application-holder .application{
+    display: flex;
+
+    align-items: center;
+    /*justify-content: center;*/
+    /*text-align: center;*/
+    gap: 2rem;
+}
+.application-holder{
+    counter-reset: list-counter;
+
+}
+.application-holder .application::before{
+    background-color: rgba(218, 214, 228, 1);
+    color: rgba(255, 255, 255, 1);
+    padding: 1.2rem 1.5rem;
+    border-radius: 1.7rem;
+    counter-increment: list-counter;
+    content: counter(list-counter);
+    font: 700 1.5rem 'CygreBold', sans-serif;
+}
+
+
+
+@media (max-width:992px ) {
+    main{
+        padding: 2rem 3rem;
+    }
+}
+@media (max-width: 768px) {
+
+    .production-holder .small-product-box, .similar-holder .small-product-box,
+    .advantages-holder .advantage:nth-child(4){
+        visibility: hidden;
+        opacity: 0;
+        position: absolute;
+    }
+    .production-holder .small-product-box:nth-child(1), .similar-holder .small-product-box:nth-child(1){
+        visibility: visible;
+        opacity: 1;
+        position: relative;
+    }
+
+    .link-holder{
+        flex-direction: column;
+        gap: 1rem;
+    }
+    .description h1{
+        font-size: 30px;
+    }
+    .description h3{
+        font-size: 14px;
+    }
+    section h2{
+        text-align: center;
+        font-size: 20px;
+        font-weight: 700;
+    }
+    main{
+        padding: 2rem 1rem;
+        gap:2rem;
+    }
+    .description .text{
+        width: 100%;
+    }
+    .img-holder{
+        border-radius: 20px;
+    }
+    .production-holder, .similar-holder{
+        grid-template-columns: 1fr;
+    }
+
+    .production-holder, .similar-holder{
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .application-holder .application::before{
+        padding: 1rem 1.5rem;
+        border-radius: 1.7rem;
+        font: 700 1.2rem 'CygreBold', sans-serif;
+    }
+    .advantages-holder{
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+section:nth-child(2), section:nth-child(3),
+section:nth-child(4), section:nth-child(5){
+        padding: 0 1rem;
+        /*align-items: center;*/
+    }
+    section:nth-child(2) > p, section:nth-child(3) > p,
+    section:nth-child(4) > p, section:nth-child(5) > p{
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+    }
+    main{
+        padding: 0 0 5rem;
+    }
+    .description{
+        flex-direction: column-reverse;
+        gap: 2rem;
+    }
+    .description .text{
+        width: unset;
+        padding: 0 1rem;
+    }
+
+    .img-holder{
+        width: 100%;
+        border-radius: 0;
+    }
+
+
+
+}

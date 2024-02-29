@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from .forms import CustomUserAuth
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, ListView, TemplateView
 from .forms import CustomUserCreateForm
 from .decorators import user_not_authenticated
 from .models import Subscriber, CustomUser, Feedback
@@ -66,20 +66,6 @@ class DevelopmentView(CreateView):
 
 
 
-
-# class IndexEnView(IndexView):
-#     template_name = "main_en.html"
-#     success_url = '/en'
-#     def get_form(self, form_class=None):
-#         if form_class is None:
-#             form_class = self.get_form_class()
-#         form = super(IndexView, self).get_form(form_class)
-#         form.fields['email'].widget = forms.TextInput(
-#             attrs={'placeholder': 'Your email...'}
-#         )
-#         return form
-
-
 class CustomUserDetailsView(DetailView):
     model = CustomUser
     template_name = 'user_details.html'
@@ -90,6 +76,16 @@ class CustomLoginView(LoginView):
     template_name = 'authentication/login.html'
     redirect_authenticated_user = True
     success_url = reverse_lazy('/')
+
+
+class LinePageView(TemplateView):
+    template_name = 'line-page.html'
+
+    def get_context_data(self, **kwargs):
+        cntxt = super().get_context_data()
+        cntxt['similar'] = Product.objects.filter(is_active=True).order_by("creation_date")[:4]
+        cntxt['products'] = Product.objects.filter(is_active=True).order_by("name")[:4]
+        return cntxt
 
 
 class CustomLogoutView(LogoutView):

@@ -169,6 +169,7 @@ form button.blue.button{
     }
 }
 @media (max-width: 768px) {
+
     .contact-us{
         visibility: hidden;
         opacity: 0;
