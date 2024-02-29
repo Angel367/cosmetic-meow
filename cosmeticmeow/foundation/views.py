@@ -49,8 +49,12 @@ class DevelopmentView(CreateView):
         form = super(DevelopmentView, self).get_form(form_class)
         form.label_suffix = ''
         form.fields['is_agreement_signed'].required = True
-        form.fields['message'].widget.attrs['rows'] = 6
+        form.fields['message'].widget.attrs['rows'] = 7
 
+        form.fields['message'].widget.attrs['cols'] = 3
+        form.fields['name'].widget.attrs['placeholder'] = 'Ваше имя...'
+        form.fields['email'].widget.attrs['placeholder'] = 'Ваш email...'
+        form.fields['message'].widget.attrs['placeholder'] = 'Ваше сообщение...'
         # form.fields['is_agreement_signed'].widget = forms.CheckboxInput()
         form.fields['is_agreement_signed'].label = 'Я согласен с условиями обработки персональных данных'
         return form
