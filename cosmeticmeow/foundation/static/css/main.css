@@ -17,6 +17,9 @@
 header{
     background: rgba(218, 214, 228, 1);
 }
+main{
+    margin-top: calc(4rem + 24px);
+}
 
 
 

@@ -13,169 +13,169 @@
 
 {% block main %}
 <main>
-    <article id="main_art1">
-        <div class="art">
-            <h1>
-                <span>SIDERIS</span>
-                <span>Ваш бьюти-ассистент</span>
-            </h1>
-            <div class="welcome">
-                Добро пожаловать в Cosmetic Products,
-                место, где можно найти все необходимое для
-                красоты, где вы можете легко просмотреть и
-                приобрести широкий ассортимент косметических
-                товаров от различных брендов.
-            </div>
-            <div class="button-holder main">
-                <a class="button blue" href="{% url 'shop:products' %}">Купить продукцию</a>
-                <a class="button white" href="{% url 'training:courses'%}">Записаться на курсы</a>
-            </div>
-
-            <div class="row rating">
-
-                <div class="column">
-                    <div>4.8</div>
-                    <div>Google Reviews</div>
-                </div>
-                <div class="column">
-                    <div>A+</div>
-                    <div>BBB Rating</div>
-                </div>
-            </div>
-        </div>
-        <div class="img">
-
-        </div>
-            
-        
-    </article>
-    <article class="column relative slider" id="main_art2">
-        <div>
-        <h2>Преимущества</h2>
-       <h3>Почему нас выбирают</h3>
-        </div>
-        
-   
-        <div class="slider-holder">
-                   
-            <div class="  slides column">
-                <div>
-                    <img src="{% static 'img/main/fi-rr-magic-wand.svg' %}" alt="">
-                </div>
-                <h4>Легкость</h4>
-                <div>
-                    Удобный и простой онлайн-шоппинг 
-                    для всех любителей красоты
-                </div>
-            </div>
-            <div class="column slides" >
-                <div>
-                    <img src="{% static 'img/main/fi-rr-confetti.svg' %}" alt="">
-                </div>
-                <h4>Разнообразие</h4>
-                <div>
-                    Доступ к широкому выбору косметических
-                    товаров от разных компаний в одном месте
-                </div>
-            </div>
-            <div class="column slides">
-                <div>
-                    <img src="{% static 'img/main/fi-rr-following.svg' %}" alt="">
-                </div>
-                <h4>Удобство</h4>
-                <div>
-                    Возможность сравнивать цены и читать 
-                    отзывы других покупателей перед совершением покупки
-                </div>
-            </div>
-        
-        </div>
-
-
-            <a href="{% url 'foundation:development' %}">Узнать о больше компании</a>
-        
-    </article>
-   <article class="column ">
-            <h2>
-                Нам доверяют множество <span>Экспертов Красоты</span>
-            </h2>
-            
-                
-                <div>
-                    “ На этом веб-сайте представлен широкий выбор косметических товаров от различных компаний, что делает его удобным и приятным для клиентов, изучающих и покупающих свои любимые товары ”
-                </div>
-       <div>
-                <span>
-                   Джессика</span> <span>Саймон
-                </span>
-           </div>
-           
-   </article>
-    
-    <article class="row partner relative" >
-        <h3>Нам доверяют множество Бьюти-компаний</h3>
-       <div class="row running-line">
-           
-        <a href="{% url 'foundation:development' %}#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>
-        <a href="{% url 'foundation:development' %}#" ><img src="{% static 'img/main/partner.png' %}" alt=""></a>
-        <a href="{% url 'foundation:development' %}#" ><img src="{% static 'img/main/partner.png' %}" alt=""></a>
-        <a href="{% url 'foundation:development' %}#" ><img src="{% static 'img/main/partner.png' %}" alt=""></a>
-        <a href="{% url 'foundation:development' %}#" ><img src="{% static 'img/main/partner.png' %}" alt=""></a>
-       </div>
-        <a href="{% url 'foundation:development' %}">Станьте нашим партнером
-        <img alt="Перейти" src="{% static 'img/main/fi-rr-arrow-small-right.svg'%}">
-        </a>
-
-    </article>
-    
-    <article>
-        <div><h3>Бестселлеры</h3>
-<h2> Наша продукция</h2>
-<div>Мы — ведущая косметическая компания, которая предлагает вам лучшие продукты по уходу за кожей
-</div></div>
-    <div>
-        {% for product in products %}
-            {% include 'base_elements/product_small.html' with product=product %}
-        {% endfor %}
-    </div>
-    <a href="{% url 'shop:products' %}">Перейти в каталог</a>
-    </article>
-    <article>
-        <div>
-<h2>Обучение</h2><h3>Наши курсы</h3>
-<div>Мы предоставляем вам возможность открыть для себя новые и уникальные косметические бренды
-</div></div>
-    <div>
-        {% if courses %}
-        {% for course in courses %}
-            {% include 'base_elements/course_small.html' with course=course %}
-        {% endfor %}
-    {% else %}
-    <div>
-        Этот модуль совсем скоро будет доступен
-    </div>
-    {% endif %}
-    </div>
-    <a href="{% url 'training:courses'%}">Записаться на курсы</a>
-    </article>
-    
-    <article class="relative column fix left more_inf">
-
-        <div class=" column more_inf text">
-            <h2>Подпишись на Email-рассылку</h2>
-            <div>
-                Подпишитесь и узнавайте о новинках, акциях и скидках первыми! 
-            </div>
-            <form action="" method="post" class="column">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit" name="subscribe">Подписаться</button>
-            </form>
-            <a href="{% url 'foundation:development' %}#">Станьте нашим партнером</a>
-        </div>
-        
-
-    </article>
+{#    <article id="main_art1">#}
+{#        <div class="art">#}
+{#            <h1>#}
+{#                <span>SIDERIS</span>#}
+{#                <span>Ваш бьюти-ассистент</span>#}
+{#            </h1>#}
+{#            <div class="welcome">#}
+{#                Добро пожаловать в Cosmetic Products,#}
+{#                место, где можно найти все необходимое для#}
+{#                красоты, где вы можете легко просмотреть и#}
+{#                приобрести широкий ассортимент косметических#}
+{#                товаров от различных брендов.#}
+{#            </div>#}
+{#            <div class="button-holder main">#}
+{#                <a class="button blue" href="{% url 'shop:products' %}">Купить продукцию</a>#}
+{#                <a class="button white" href="{% url 'training:courses'%}">Записаться на курсы</a>#}
+{#            </div>#}
+{##}
+{#            <div class="row rating">#}
+{##}
+{#                <div class="column">#}
+{#                    <div>4.8</div>#}
+{#                    <div>Google Reviews</div>#}
+{#                </div>#}
+{#                <div class="column">#}
+{#                    <div>A+</div>#}
+{#                    <div>BBB Rating</div>#}
+{#                </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class="img">#}
+{##}
+{#        </div>#}
+{#            #}
+{#        #}
+{#    </article>#}
+{#    <article class="column relative slider" id="main_art2">#}
+{#        <div>#}
+{#        <h2>Преимущества</h2>#}
+{#       <h3>Почему нас выбирают</h3>#}
+{#        </div>#}
+{#        #}
+{#   #}
+{#        <div class="slider-holder">#}
+{#                   #}
+{#            <div class="  slides column">#}
+{#                <div>#}
+{#                    <img src="{% static 'img/main/fi-rr-magic-wand.svg' %}" alt="">#}
+{#                </div>#}
+{#                <h4>Легкость</h4>#}
+{#                <div>#}
+{#                    Удобный и простой онлайн-шоппинг #}
+{#                    для всех любителей красоты#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="column slides" >#}
+{#                <div>#}
+{#                    <img src="{% static 'img/main/fi-rr-confetti.svg' %}" alt="">#}
+{#                </div>#}
+{#                <h4>Разнообразие</h4>#}
+{#                <div>#}
+{#                    Доступ к широкому выбору косметических#}
+{#                    товаров от разных компаний в одном месте#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="column slides">#}
+{#                <div>#}
+{#                    <img src="{% static 'img/main/fi-rr-following.svg' %}" alt="">#}
+{#                </div>#}
+{#                <h4>Удобство</h4>#}
+{#                <div>#}
+{#                    Возможность сравнивать цены и читать #}
+{#                    отзывы других покупателей перед совершением покупки#}
+{#                </div>#}
+{#            </div>#}
+{#        #}
+{#        </div>#}
+{##}
+{##}
+{#            <a href="{% url 'foundation:development' %}">Узнать о больше компании</a>#}
+{#        #}
+{#    </article>#}
+{#   <article class="column ">#}
+{#            <h2>#}
+{#                Нам доверяют множество <span>Экспертов Красоты</span>#}
+{#            </h2>#}
+{#            #}
+{#                #}
+{#                <div>#}
+{#                    “ На этом веб-сайте представлен широкий выбор косметических товаров от различных компаний, что делает его удобным и приятным для клиентов, изучающих и покупающих свои любимые товары ”#}
+{#                </div>#}
+{#       <div>#}
+{#                <span>#}
+{#                   Джессика</span> <span>Саймон#}
+{#                </span>#}
+{#           </div>#}
+{#           #}
+{#   </article>#}
+{#    #}
+{#    <article class="row partner relative" >#}
+{#        <h3>Нам доверяют множество Бьюти-компаний</h3>#}
+{#       <div class="row running-line">#}
+{#           #}
+{#        <a href="{% url 'foundation:development' %}#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>#}
+{#        <a href="{% url 'foundation:development' %}#" ><img src="{% static 'img/main/partner.png' %}" alt=""></a>#}
+{#        <a href="{% url 'foundation:development' %}#" ><img src="{% static 'img/main/partner.png' %}" alt=""></a>#}
+{#        <a href="{% url 'foundation:development' %}#" ><img src="{% static 'img/main/partner.png' %}" alt=""></a>#}
+{#        <a href="{% url 'foundation:development' %}#" ><img src="{% static 'img/main/partner.png' %}" alt=""></a>#}
+{#       </div>#}
+{#        <a href="{% url 'foundation:development' %}">Станьте нашим партнером#}
+{#        <img alt="Перейти" src="{% static 'img/main/fi-rr-arrow-small-right.svg'%}">#}
+{#        </a>#}
+{##}
+{#    </article>#}
+{#    #}
+{#    <article>#}
+{#        <div><h3>Бестселлеры</h3>#}
+{#<h2> Наша продукция</h2>#}
+{#<div>Мы — ведущая косметическая компания, которая предлагает вам лучшие продукты по уходу за кожей#}
+{#</div></div>#}
+{#    <div>#}
+{#        {% for product in products %}#}
+{#            {% include 'base_elements/product_small.html' with product=product %}#}
+{#        {% endfor %}#}
+{#    </div>#}
+{#    <a href="{% url 'shop:products' %}">Перейти в каталог</a>#}
+{#    </article>#}
+{#    <article>#}
+{#        <div>#}
+{#<h2>Обучение</h2><h3>Наши курсы</h3>#}
+{#<div>Мы предоставляем вам возможность открыть для себя новые и уникальные косметические бренды#}
+{#</div></div>#}
+{#    <div>#}
+{#        {% if courses %}#}
+{#        {% for course in courses %}#}
+{#            {% include 'base_elements/course_small.html' with course=course %}#}
+{#        {% endfor %}#}
+{#    {% else %}#}
+{#    <div>#}
+{#        Этот модуль совсем скоро будет доступен#}
+{#    </div>#}
+{#    {% endif %}#}
+{#    </div>#}
+{#    <a href="{% url 'training:courses'%}">Записаться на курсы</a>#}
+{#    </article>#}
+{#    #}
+{#    <article class="relative column fix left more_inf">#}
+{##}
+{#        <div class=" column more_inf text">#}
+{#            <h2>Подпишись на Email-рассылку</h2>#}
+{#            <div>#}
+{#                Подпишитесь и узнавайте о новинках, акциях и скидках первыми! #}
+{#            </div>#}
+{#            <form action="" method="post" class="column">#}
+{#                {% csrf_token %}#}
+{#                {{ form.as_p }}#}
+{#                <button type="submit" name="subscribe">Подписаться</button>#}
+{#            </form>#}
+{#            <a href="{% url 'foundation:development' %}#">Станьте нашим партнером</a>#}
+{#        </div>#}
+{#        #}
+{##}
+{#    </article>#}
 
 </main>
     

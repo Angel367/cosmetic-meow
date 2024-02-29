@@ -100,9 +100,9 @@ header .link-index, header nav .logo{
         visibility: hidden;
         opacity: 0;
         left: 0;
-        top: 100%;
+        top: 99%;
         right: 0;
-        height: calc(100vh - 4rem - 24px);
+        height: calc(100vh - 4rem - 22px);
     }
 
     header .nav_box{
@@ -163,6 +163,7 @@ header .link-index, header nav .logo{
     header input[type=checkbox]:checked ~ nav{
         visibility: visible;
         opacity: 1;
+        animation: fadeIn 1s ease-in-out;
 
     }
 
@@ -173,7 +174,7 @@ header .link-index, header nav .logo{
         opacity: 1;
     }
 header input[type=checkbox]:checked ~ nav a{
-        animation: fadeIn 0.5s ease-in-out;
+        animation: fadeIn 1s ease-in-out;
     }
 
     @keyframes fadeIn {
@@ -187,7 +188,8 @@ header input[type=checkbox]:checked ~ nav a{
         }
     }
    header nav > .logo{
-       margin-bottom: 2rem;
+       margin-bottom: 1rem;
+       margin-left: -2.5rem;
    }
 
 
