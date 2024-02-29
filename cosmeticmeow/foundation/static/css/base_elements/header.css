@@ -13,239 +13,191 @@
 header{
     position: relative;
     z-index: 1;
-    /*top: 0;*/
-    /*right: 0;*/
-    /*left: 0;*/
-    padding: 1rem 2rem;
+    padding: 2rem 3rem;
     display: flex;
     justify-content: space-between;
-    flex-direction: row;
     align-items: center;
-    gap: 5rem;
+    gap: 1rem;
+
+
+
+}
+header .logo{
+    height: 60px;
+}
+header .logo img{
+    height: 100%;
+}
+header .button-holder{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+}
+
+header .nav_box{
+    background: inherit;
+    display: flex;
+    align-items: center;
+    flex-grow: 3;
+    justify-content: center;
+}
+
+header input[type=checkbox]{
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+}
+header nav a{
+    text-decoration: none;
+    white-space: nowrap;
+    color: #5F6886;
+    font-family: CygreBold, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+}
+header nav a:hover{
+    color: #1A2751;
+    font-family: CygreExtraBold, sans-serif;
+    font-weight: 700;
+}
+
+header nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 2rem;
+    flex-grow: 3;
+    background: inherit;
+}
+header .link-index, header nav .logo{
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+}
+@media (max-width:992px ) {
+    header{
+        padding: 2rem 1.5rem;
+        gap: 3rem;
+    }
+}
+@media (max-width:768px ) {
+    header label span{
+        position: absolute;
+        display: block;
+        height: 2.5px;
+        width: 24px;
+        top: 11px;
+    }
+    header label {
+        cursor: pointer;
+        position: relative;
+        height: 24px;
+        width: 24px;
+   }
+    header > .logo, header nav{
+        position: absolute;
+        visibility: hidden;
+        opacity: 0;
+        left: 0;
+        top: 100%;
+        right: 0;
+        height: calc(100vh - 4rem - 24px);
+    }
+
+    header .nav_box{
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+
+    header nav{
+        flex-direction: column;
+        align-items: center;
+        justify-content: start;
+        gap: 2rem;
+    }
+    header{
+        flex-direction: row-reverse;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+    }
+    header nav a{
+        font-size: 17px;
+    }
+    header label span,
+    header label span::before,
+    header label span::after {
+        background: #1A2751;
+        z-index: 3;
+        transition: 0.5s;
+    }
+    header label span::before,
+    header label span::after{
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+    }
+    header label span::before{
+        top: 8px;
+    }
+    header label span::after{
+        bottom: 8px;
+    }
+    header input[type=checkbox]:checked ~  label span{
+        transform: rotate(45deg);
+        height: 2px;
+    }
+    header input[type=checkbox]:checked ~ label span::after{
+        transform: rotate(90deg);
+        height: 2px;
+        top: 0;
+    }
+    header input[type=checkbox]:checked ~ label span::before{
+        top:0;
+        height: 2px;
+        transform: rotate(0);
+    }
+    header input[type=checkbox]:checked ~ nav{
+        visibility: visible;
+        opacity: 1;
+
+    }
+
+    header input[type=checkbox]:checked ~ nav .link-index,
+    header input[type=checkbox]:checked ~ nav .logo{
+        position: relative;
+        visibility: visible;
+        opacity: 1;
+    }
+header input[type=checkbox]:checked ~ nav a{
+        animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from{
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+        to{
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+   header nav > .logo{
+       margin-bottom: 2rem;
+   }
+
+
+
+}
+@media (max-width: 576px) {
+    header nav a{
+        font-size: 18px;
+    }
+
 }
 
 
-
-
-/*header{*/
-/*    position: relative;*/
-/*    z-index: 2;*/
-/*    top: 0;*/
-/*    right: 0;*/
-/*    left: 0;*/
-/*    padding: 1rem 2rem;*/
-/*    !*background: rgba(218, 214, 228, 1);*!*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    flex-direction: row;*/
-/*    align-items: center;*/
-/*    gap: 5rem;*/
-/*}*/
-/*header .button-holder{*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    flex-direction: row;*/
-/*    align-items: center;*/
-/*    gap: 3rem;*/
-/*}*/
-
-/*header input[type=checkbox]{*/
-/*    opacity: 0;*/
-/*    visibility: hidden;*/
-/*    position: absolute;*/
-/*}*/
-/*.logo img, header .button-holder a img{*/
-/*    height: 100%;*/
-/*}*/
-/*.logo{*/
-/*    height: 80px;*/
-/*}*/
-/*header nav{*/
-/*    color: inherit;*/
-/*    display: flex;*/
-/*    flex-direction: row;*/
-/*    align-items: center;*/
-/*    justify-content: space-between;*/
-/*    !*flex-grow: 2;*!*/
-/*    gap: 10rem;*/
-/*}*/
-/*header .button_holder {*/
-/*    display: flex;*/
-/*    justify-content: space-between;*/
-/*    align-items: center;*/
-/*    gap: 2rem;*/
-/*}*/
-/*a{*/
-/*    text-decoration: none;*/
-/*}*/
-/*header a, header a img svg path{*/
-/*    color: #5F6886;*/
-/*    font-family: CygreBold, sans-serif;*/
-/*    font-size: 1rem;*/
-/*    font-weight: 700;*/
-/*    !*line-height: 20px;*!*/
-/*    fill: #1A2751;*/
-/*    letter-spacing: 0;*/
-/*    text-align: left;*/
-/*}*/
-/*!*header .button-holder a {*!*/
-/*!*    height: 10rem;*!*/
-/*!*    width: 2rem;*!*/
-/*!*}*!*/
-/*header a:hover, header a:hover img svg path{*/
-/*    color: #1A2751;*/
-/*    font-family: CygreExtraBold, sans-serif;*/
-/*    fill: #1A2751;*/
-/*    font-weight: 800;*/
-/*    !*line-height: 28px;*!*/
-/*    letter-spacing: 0;*/
-/*    text-align: left;*/
-/*}*/
-
-
-/*.search-bar {*/
-/*    position: relative;*/
-/*}*/
-
-/*.search-bar input {*/
-/*    border: none;*/
-/*    outline: none;*/
-/*    padding: 0.5em;*/
-/*    width: 200px;*/
-/*    background-color: rgba(26, 39, 81, 0.1); !* Transparent white background *!*/
-/*    backdrop-filter: blur(10px); !* Apply background blur *!*/
-/*    border-radius: 20px;*/
-/*}*/
-
-/*.search-bar input::after {*/
-/*    content: url('../../img/header/fi-rr-search.svg');*/
-/*    position: absolute;*/
-/*    top: 50%;*/
-/*    right: 10px;*/
-/*    transform: translateY(-50%);*/
-/*}*/
-
-/*@media screen and (max-width: 1024px ) {*/
-/*    header{*/
-/*        justify-content: space-between;*/
-/*        padding: 2rem 1.5rem;*/
-/*        gap: 3rem;*/
-/*    }*/
-/*    header .logo{*/
-/*        height: 55px;*/
-/*    }*/
-/*    header nav {*/
-
-/*        gap: 2rem;*/
-/*    }*/
-
-/*    header a {*/
-/*        font-size: 14px;*/
-/*        line-height: 18px;*/
-/*    }*/
-
-/*    header nav a:hover {*/
-/*        font-size: 14px;*/
-/*        line-height: 24px;*/
-/*    }*/
-/*}*/
-
-/*@media screen and (max-width: 768px ) {*/
-
-/*    header{*/
-/*        flex-direction: row-reverse;*/
-/*    }*/
-/*    header nav{*/
-/*        !*opacity: 0;*!*/
-/*        position: absolute;*/
-/*        top:100%;*/
-/*        left: 0;*/
-/*        right: 0;*/
-/*        visibility: hidden;*/
-/*        flex-direction: column;*/
-/*        !*background: rgb(244 209 230);*!*/
-/*        align-items: center;*/
-/*        justify-content: center;*/
-/*        !*gap: 2rem;*!*/
-/*    }*/
-/*    header .nav_box{*/
-/*        flex-direction: row-reverse;*/
-/*    }*/
-
-/*    header label {*/
-/*        cursor: pointer;*/
-/*        position: relative;*/
-/*    }*/
-/*    header label span{*/
-/*        display: block;*/
-/*        height: 2px;*/
-/*        width: 24px;*/
-
-
-/*    }*/
-/*    header label span,*/
-/*    header label span::before,*/
-/*    header label span::after {*/
-/*        background: #1A2751;*/
-/*    }*/
-/*    header label span::before,*/
-/*    header label span::after{*/
-/*        content: '';*/
-/*        position: absolute;*/
-/*        width: 100%;*/
-/*        height: 100%;*/
-/*    }*/
-/*    header label span::before{*/
-/*        top: -300%;*/
-/*    }*/
-/*    header label span::after{*/
-/*        top: 300%;*/
-/*    }*/
-/*    header input[type=checkbox]:checked ~  label span{*/
-/*        transform: rotate(45deg);*/
-/*        height: 5px;*/
-/*    }*/
-/*    header input[type=checkbox]:checked ~ label span::after{*/
-/*        transform: rotate(90deg);*/
-/*        top: 0;*/
-
-/*    }*/
-/*    header input[type=checkbox]:checked ~ label span::before{*/
-/*        top:0;*/
-/*        transform: rotate(0);*/
-/*    }*/
-/*    header input[type=checkbox]:checked ~ nav{*/
-/*        visibility: visible;*/
-/*    }*/
-/*    .logo{*/
-/*        opacity: 0;*/
-/*        visibility: hidden;*/
-/*        position: absolute;*/
-/*        width: 0;*/
-/*        height: 0;*/
-/*    }*/
-/*    .button-holder{*/
-/*        justify-content: space-between;*/
-/*    }*/
-/*    header a {*/
-/*        font-size: 14px;*/
-/*        line-height: 18px;*/
-/*    }*/
-
-/*    header nav a:hover {*/
-/*        font-size: 14px;*/
-/*        line-height: 24px;*/
-/*    }*/
-/*}*/
-
-/*@media screen and (max-width: 425px) {*/
-/*    header a {*/
-/*        font-size: 12px;*/
-/*        line-height: 16px;*/
-/*    }*/
-
-/*    header nav a:hover {*/
-/*        font-size: 12px;*/
-/*        line-height: 20px;*/
-/*    }*/
-/*}*/

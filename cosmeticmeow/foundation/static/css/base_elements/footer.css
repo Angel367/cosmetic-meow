@@ -29,11 +29,12 @@ footer .link-with-addr{
     justify-content: space-between;
 }
 
-
+footer .link-with-addr > div  a:hover{
+    color: rgba(255, 255, 255, 1);
+}
 footer .link-with-addr a, footer address div{
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
-
 }
 footer .copy{
     color:  rgba(95, 104, 134, 1);
@@ -61,11 +62,12 @@ footer .link-with-addr > div .main-link{
     font-size: 18px;
     font-weight: 700;
 }
-.logo{
-    max-height: 65px;
+footer .logo{
+    position: relative;
+    width: 100%;
 }
-.logo img{
-    height: 100%;
+footer .logo img{
+    width: 100%;
 }
 footer{
     padding: 2rem 4rem;
@@ -91,8 +93,8 @@ footer .link-with-addr{
 }
 @media (max-width:768px ) {
     footer{
-    padding: 1rem 3rem;
-    gap: 4rem;
+        padding: 1rem 3rem;
+        gap: 4rem;
     }
     footer .link-with-addr{
         flex-wrap: wrap;
@@ -106,6 +108,10 @@ footer .link-with-addr{
     footer .link-with-addr .training{
         order: 3;
     }
+    footer .link-with-addr .users{
+        order: 4;
+    }
+
     footer .link-with-addr > div a, footer .link-with-addr > address{
         font-size: 13px;
     }
@@ -120,12 +126,12 @@ footer .link-with-addr{
     padding: 1rem 2rem;
 
     }
-footer .link-with-addr > div a, footer .link-with-addr > address{
-    font-size: 12px;
+    footer .link-with-addr > div a, footer .link-with-addr > address{
+        font-size: 12px;
 
-}
-footer .link-with-addr > div .main-link{
-    font-size: 16px;
+    }
+    footer .link-with-addr > div .main-link{
+        font-size: 16px;
 
-}
+    }
 }
