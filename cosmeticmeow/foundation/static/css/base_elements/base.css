@@ -23,7 +23,14 @@ body {
     display: flex;
     flex-direction: column;
 }
-main{
-    margin-top: calc(4rem + 26px);
+main {
+        /*padding-top: calc(4rem + 26px);*/
+        margin-top: 0;
+}
+@media (max-width:768px ) {
+    main {
+        margin-top: calc(4rem + 26px);
+        /*padding-top: 0;*/
+    }
 }
 

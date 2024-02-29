@@ -76,6 +76,7 @@ button.blue.subscribe{
 /*    border-top-right-radius: 0;*/
 /*    border-bottom-left-radius: 0;*/
 /*}*/
+
 @media screen and (max-width: 768px ) {
     .button{
         padding: 1rem 1rem;

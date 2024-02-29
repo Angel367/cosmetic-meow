@@ -83,7 +83,7 @@ class Feedback(models.Model):
         max_length=150,
         verbose_name="Имя")
     message = models.TextField(
-        verbose_name="Сообщение")
+        verbose_name="Сообщение", max_length=100)
     type = models.CharField(
         choices=CallbackChoices.choices,
         max_length=1,

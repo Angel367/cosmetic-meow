@@ -40,15 +40,17 @@ class IndexView(CreateView):
 class DevelopmentView(CreateView):
     template_name = "dev.html"
     model = Feedback
-    fields = ['email', 'message', 'name', 'is_agreement_signed']
+    fields = ['name', 'email', 'message',  'is_agreement_signed']
     success_url = '/'
 
     def get_form(self, form_class=None):
         if form_class is None:
             form_class = self.get_form_class()
         form = super(DevelopmentView, self).get_form(form_class)
+        form.label_suffix = ''
         form.fields['is_agreement_signed'].required = True
-        # form.fields['message'].widget = forms.Textarea
+        form.fields['message'].widget.attrs['rows'] = 6
+
         # form.fields['is_agreement_signed'].widget = forms.CheckboxInput()
         form.fields['is_agreement_signed'].label = 'Я согласен с условиями обработки персональных данных'
         return form

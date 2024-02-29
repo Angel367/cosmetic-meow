@@ -1,60 +1,159 @@
 header{
     background: rgba(255, 255, 255, 1);
 }
+h1, h3, h2, p{
+    margin: 0;
+    padding: 0;
 
-
-
-
-.description h3{
-    color:  #E47A7C;
-
-/* Regular 14px 14LH */
-font-family: 'Cygre', sans-serif;
-font-size: 0.875rem;
-font-style: normal;
-font-weight: 400;
-line-height: 0.875rem; /* 100% */
-}
-.description h1{
-    color: #1A2751;
-
-/* Bold 44px */
-font-family: 'CygreBold', sans-serif;
-font-size: 2.75rem;
-font-style: normal;
-font-weight: 700;
-line-height: 2.75rem; /* 100% */
-}
-.description p{
-    color:  #5F6886;
-
-/* Regular 16px */
-font-family: 'Cygre', sans-serif;
-font-size: 1rem;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-}
-.description a{
-    color: #1A2751;
-
-/* Bold 16px 18LH */
-font-family: 'Cygre', sans-serif;
-font-size: 1rem;
-font-style: normal;
-font-weight: 700;
-line-height: 1.125rem; /* 112.5% */
-}
-
-.description .text {
-    display: flex;
-    flex-direction: column;
 }
 main{
     display: flex;
     flex-direction: column;
 }
-.description {
+
+.description h3{
+    color:  #E47A7C;
+    /* Regular 14px 14LH */
+    font-family: 'Cygre', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 400;
+}
+.description h1{
+    color: #1A2751;
+    font-family: 'CygreBold', sans-serif;
+    font-size: 2.75rem;
+    font-weight: 700;
+}
+.description p{
+    color:  #5F6886;
+    font-family: 'Cygre', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+}
+.description a{
+    text-decoration: none;
     display: flex;
+    gap: 1rem;
+    align-items: center;
+    /*justify-content: center;*/
+}
+.description a span{
+    color: #1A2751;
+    font-family: 'Cygre', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+
 }
 
+.description .text {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 1rem;
+}
+
+.description {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+main {
+    padding: 2rem 5rem 10rem;
+    gap: 4rem;
+}
+
+.img-holder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 2;
+    overflow: hidden;
+    border-radius: 20px;
+
+}
+
+.img-holder img{
+    width: 100%;
+    height: auto;
+}
+
+.form-section{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+}
+.social_dev{
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+form p {
+    display: flex;
+    flex-direction: column;
+
+}
+form{
+    display: grid;
+    gap: 1rem;
+    grid-template-areas:
+    "name_ message_"
+    "email_ message_"
+    "checkbox_ checkbox_"
+    "button_ none_";
+}
+
+
+form:nth-child(2){
+    grid-area: name_;
+    background: #5F6886;
+}
+form p:nth-child(3){
+    grid-area: email_;
+}
+form p:nth-child(4){
+    grid-area: message_;
+    /*height: 100%;*/
+}
+form p:nth-child(5){
+    grid-area: checkbox_;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+
+/*.full_type  p:nth-child(5) label{*/
+/*    position: relative;*/
+/*    display: inline-flex;*/
+/*}*/
+/*.full_type input[type="checkbox"]{*/
+/*    position: absolute;*/
+/*    opacity: 0;*/
+/*    z-index: -1;*/
+/*}*/
+/*.full_type  p:nth-child(5) label::before{*/
+/*    content: '';*/
+/*    background-color: rgba(229, 232, 242, 1);*/
+/*    border: 1px solid rgba(229, 232, 242, 1);*/
+/*    border-radius: 0;*/
+/*    width: 1em;*/
+/*    height: 1em;*/
+/*    position: relative;*/
+/*}*/
+
+form p:nth-child(6){
+    grid-area: button_;
+}
+form button.blue.button{
+    max-width: 50%;
+    margin-top: 2rem;
+}
+
+
+@media (max-width:992px ) {
+    main{
+        padding: 2rem 3rem;
+    }
+}
