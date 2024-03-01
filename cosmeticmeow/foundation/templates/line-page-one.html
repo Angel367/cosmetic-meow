@@ -1,0 +1,136 @@
+{% extends 'base_elements/base.html' %}
+{% load static %}
+{% block title %}Линейка{% endblock title %}
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/line-page.css' %}">
+{#    <link rel="stylesheet" href="{% static 'css/base_elements/blue_button.css' %}">#}
+    <link rel="stylesheet" href="{% static 'css/base_elements/small_product.css' %}">
+{% endblock head %}
+
+{% block header %} 
+    {% include 'base_elements/header.html' %}
+{% endblock header %}
+
+{% block main %}
+<main>
+<span class="close"></span>
+<section class="description">
+    <div class="text">
+    <h3>Продукция</h3>
+    <h1>Название продукта</h1>
+    <p>Lorem ipsum dolor sit amet consectetur. Leo nulla imperdiet quam
+        tellus fringilla viverra eleifend tempor quis. Nec dolor risus 
+        fermentum nec vulputate proin nulla nulla consequat. Vitae 
+        velit mi velit tortor euismod. Commodo velit eu amet ac.
+        Lorem ipsum dolor sit amet consectetur. Leo nulla imperdiet 
+        quam tellus fringilla viverra eleifend tempor quis. Nec dolor
+        risus fermentum nec vulputate proin nulla nulla consequat. 
+        Vitae velit mi velit tortor euismod. Commodo velit eu amet ac. 
+    </p>
+
+        
+    </div>
+    
+    <div class="img-holder">
+{#        {% for image in product.get_images %}#}
+{#            <img src="{{ image.image.url }}" alt="{{ product.name }} Image">#}
+{#        {% endfor %}#}
+        <input type="checkbox" id="page1" class="img-control">
+        <label for="page1" class="img-label">
+            <img src="{% static 'img/main/product.png'%}" alt="product">
+        </label>
+        <input type="checkbox" id="page2" class="img-control">
+        <label for="page2" class="img-label">
+            <img src="{% static 'img/main/product.png'%}" alt="product">
+        </label>
+        <input type="checkbox" id="page3" class="img-control">
+        <label for="page3" class="img-label">
+            <img src="{% static 'img/main/product.png'%}" alt="product">
+        </label>
+        <input type="checkbox" id="page4" class="img-control">
+        <label for="page4" class="img-label">
+            <img src="{% static 'img/main/product.png'%}" alt="product">
+        </label>
+        <input type="checkbox" id="page5" class="img-control">
+        <label for="page5" class="img-label">
+            <img src="{% static 'img/main/product.png'%}" alt="product">
+        </label>
+        
+        </div>
+</section>
+    <section>
+        <div class="main-info"> 
+            <p class="small-product-name">{{ product.name }}</p>
+            <p class="small-product-description">{{ product.short_description }}</p>
+            <p class="small-product-price">{{ product.price }} руб.</p>
+            <a href="" class="blue-button">Добавить в корзину</a>
+            <p>Shop product on other marketplaces</p>
+            <div class="link-holder">
+                <a href="" ><span>Ozon</span><span>
+                <img alt="" src="{% static 'img/line-page/pink.svg'%}">
+        </span></a>
+            
+            <a href="" ><span>Ozon</span><span>
+                <img alt="" src="{% static 'img/line-page/pink.svg'%}">
+        </span></a>
+                <a href="" ><span>Ozon</span><span>
+                <img alt="" src="{% static 'img/line-page/pink.svg'%}">
+        </span></a>
+                
+            
+        </div>
+            <div class="info">
+                <div class="controls-text"> 
+                <input type="checkbox" id="description" class="info-checkbox">
+                <label for="description" class="info-label">Описание</label>
+                <input type="checkbox" id="usage" class="info-checkbox">
+                <label for="usage" class="info-label">Использование</label>
+                <input type="checkbox" id="composition" class="info-checkbox">
+                <label for="composition" class="info-label">Состав</label>
+                </div>
+                <div>
+                    <p class="info-text">1Lorem ipsum dolor sit amet consectetur. Leo nulla imperdiet quam
+                        tellus fringilla viverra eleifend tempor quis. Nec dolor risus 
+                        fermentum nec vulputate proin nulla nulla consequat. Vitae 
+                        velit mi velit tortor euismod. Commodo velit eu amet ac.
+                        Lorem ipsum dolor sit amet consectetur. Leo nulla imperdiet 
+                        quam tellus fringilla viverra eleifend tempor quis. Nec dolor
+                        risus fermentum nec vulputate proin nulla nulla consequat. 
+                        Vitae velit mi velit tortor euismod. Commodo velit eu amet ac. 
+                    </p>
+                    <p>
+                        2Lorem ipsum dolor sit amet consectetur. Leo nulla imperdiet quam
+                        tellus fringilla viverra eleifend tempor quis. Nec dolor risus 
+                        fermentum nec vulputate proin nulla nulla consequat. Vitae 
+                        velit mi velit tortor euismod. Commodo velit eu amet ac.
+                        Lorem ipsum dolor sit amet consectetur. Leo nulla imperdiet 
+                        quam tellus fringilla viverra eleifend tempor quis. Nec dolor
+                        risus fermentum nec vulputate proin nulla nulla consequat. 
+                        Vitae velit mi velit tortor euismod. Commodo velit eu amet ac.
+                    </p>
+                    <p>
+                        3Lorem ipsum dolor sit amet consectetur. Leo nulla imperdiet quam
+                        tellus fringilla viverra eleifend tempor quis. Nec dolor risus 
+                        fermentum nec vulputate proin nulla nulla consequat. Vitae 
+                        velit mi velit tortor euismod. Commodo velit eu amet ac.
+                        Lorem ipsum dolor sit amet consectetur. Leo nulla imperdiet 
+                        quam tellus fringilla viverra eleifend tempor quis. Nec dolor
+                        risus fermentum nec vulputate proin nulla nulla consequat. 
+                        Vitae velit mi velit tortor euismod. Commodo velit eu amet ac.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<a href="" class="back">К линейке продуктов</a>
+
+</main>
+    
+{% endblock main %}
+{% block footer %} 
+    {% include 'base_elements/footer.html'  %}
+{% endblock footer %}
+{% block js%}
+
+{% endblock js %}
