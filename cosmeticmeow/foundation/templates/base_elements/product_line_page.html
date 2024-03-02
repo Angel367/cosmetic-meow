@@ -1,6 +1,6 @@
 {% load static %}
 
-<div class="small-product-box line-page">
+<a class="small-product-box line-page" href="{% url 'foundation:line_page_details' product.id %}">
     <div class="small-product-img-box">
     {% if product.get_images.count > 0 %}
         {% for image in product.get_images %}
@@ -18,5 +18,5 @@
         <div class="small-product-description">{{ product.long_description }}</div>
     </div>
     
-</div>
+</a>
 

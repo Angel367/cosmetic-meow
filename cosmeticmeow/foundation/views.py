@@ -65,10 +65,14 @@ class DevelopmentView(CreateView):
         return super().form_valid(form)
 
 
-
 class CustomUserDetailsView(DetailView):
     model = CustomUser
     template_name = 'user_details.html'
+
+
+class LinePageDetailsView(DetailView):
+    model = Product
+    template_name = 'line-page-one.html'
 
 
 class CustomLoginView(LoginView):

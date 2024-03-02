@@ -14,6 +14,7 @@
     drop-shadow(-5px -5px 20px rgba(255, 255, 255, 0.70));
   }
   .small-product-box.line-page{
+      text-decoration: none;
       display: grid;
         grid-template-columns: 1fr 2fr;
       max-width: unset;
