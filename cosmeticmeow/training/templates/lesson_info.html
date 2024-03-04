@@ -7,7 +7,7 @@
     {% for file in files %}
         <a href="{{ file }}" download >Скачать</a>
     {% endfor %}
-    <form method="post" action="{% url 'lesson_info' lesson_id=lesson.id module_id=lesson.module.id course_id=lesson.module.course.id %}">
+    <form method="post" action="{% url 'training:lesson_info' lesson_id=lesson.id module_id=lesson.module.id course_id=lesson.module.course.id %}">
 {% csrf_token %}
         {% if  student_test.is_finished or not test %}
             {% if test %} Тест завершен{% endif %}
@@ -18,6 +18,6 @@
     <button name="start_test">Начать тест</button>
     {% endif %}
     </form>
-   <a href="{% url 'lessons_all' course_id=lesson.module.course.id module_id=lesson.module.id %}">Назад</a>
+   <a href="{% url 'training:lessons_all' course_id=lesson.module.course.id module_id=lesson.module.id %}">Назад</a>
 
 {% endblock main %}

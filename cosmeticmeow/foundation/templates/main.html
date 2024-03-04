@@ -49,73 +49,66 @@
 {##}
 {#    </article>#}
     
-    <article class="column relative slider" id="main_art2">
-        <div>
-        <h2>Преимущества</h2>
-       <h3>Почему нас выбирают</h3>
-        </div>
+    <article id="advantages">
+        <h3>Преимущества</h3>
+       <h2>Почему нас выбирают</h2>
+        <div class="slide-holder">
 
-
-        <div class="slider-holder">
-
-            <div class="  slides column">
+            <div class="slide">
                 <div>
                     <img src="{% static 'img/main/fi-rr-magic-wand.svg' %}" alt="">
                 </div>
                 <h4>Легкость</h4>
-                <div>
+                <p>
                     Удобный и простой онлайн-шоппинг 
                     для всех любителей красоты
-                </div>
+                </p>
             </div>
-            <div class="column slides" >
+            <div class="slide" >
                 <div>
                     <img src="{% static 'img/main/fi-rr-confetti.svg' %}" alt="">
                 </div>
                 <h4>Разнообразие</h4>
-                <div>
+                <p>
                     Доступ к широкому выбору косметических
                     товаров от разных компаний в одном месте
-                </div>
+                </p>
             </div>
-            <div class="column slides">
+            <div class="slide">
                 <div>
                     <img src="{% static 'img/main/fi-rr-following.svg' %}" alt="">
                 </div>
                 <h4>Удобство</h4>
-                <div>
+                <p>
                     Возможность сравнивать цены и читать 
                     отзывы других покупателей перед совершением покупки
-                </div>
+                </p>
             </div>
 
         </div>
-
-
-            <a href="{% url 'foundation:development' %}">Узнать о больше компании</a>
-
+        <a href="{% url 'foundation:development' %}"
+           class="back">Узнать о больше компании
+<img src="{% static 'img/line-page/black-arrow.svg'%}" alt="arrow">
+</a>
     </article>
-{#   <article class="column ">#}
-{#            <h2>#}
-{#                Нам доверяют множество <span>Экспертов Красоты</span>#}
-{#            </h2>#}
-{#            #}
-{#                #}
-{#                <div>#}
-{#                    “ На этом веб-сайте представлен широкий выбор косметических товаров от различных компаний, что делает его удобным и приятным для клиентов, изучающих и покупающих свои любимые товары ”#}
-{#                </div>#}
-{#       <div>#}
-{#                <span>#}
-{#                   Джессика</span> <span>Саймон#}
-{#                </span>#}
-{#           </div>#}
-{#           #}
-{#   </article>#}
-{#    #}
+   <article id="review">
+       <div class="header-review">
+           <span class="font-review">Нам доверяют множество</span>
+           <span class="font-review">Экспертов Красоты</span>
+       </div>
+       <p class="review-body">
+           “На этом веб-сайте представлен широкий 
+           выбор косметических товаров от 
+           различных компаний, что делает его 
+           удобным и приятным для клиентов, 
+           изучающих и покупающих свои любимые товары”
+       </p>
+       <p class="author font-review">Джессика Саймон</p>
+   </article>
 {#    <article class="row partner relative" >#}
 {#        <h3>Нам доверяют множество Бьюти-компаний</h3>#}
 {#       <div class="row running-line">#}
-{#           #}
+{##}
 {#        <a href="{% url 'foundation:development' %}#"><img src="{% static 'img/main/partner.png' %}" alt=""></a>#}
 {#        <a href="{% url 'foundation:development' %}#" ><img src="{% static 'img/main/partner.png' %}" alt=""></a>#}
 {#        <a href="{% url 'foundation:development' %}#" ><img src="{% static 'img/main/partner.png' %}" alt=""></a>#}
@@ -176,7 +169,6 @@
 {#        #}
 {##}
 {#    </article>#}
-
 </main>
     
 {% endblock main %}

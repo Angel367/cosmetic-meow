@@ -8,7 +8,7 @@
     <form method="post" action="">
     {% csrf_token %}
     {% if is_bought %}
-        <a href="{% url 'modules_all' course_id=course.id %}">Приступить к изучению</a>
+        <a href="{% url 'training:modules_all' course_id=course.id %}">Приступить к изучению</a>
     {% else %}
         <input name="course_id" value="{{ course.id }}">
         <button name="bye">Купить</button>

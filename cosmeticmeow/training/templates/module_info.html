@@ -25,6 +25,6 @@
         {% endif %}
     </span>
 </div>
-   <a href="{% url 'modules_all' course_id=module.course.id  %}">Назад</a>
+   <a href="{% url 'training:modules_all' course_id=module.course.id  %}">Назад</a>
 
 {% endblock main %}

@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import render
 from django.urls import reverse
 from django.views.generic import DetailView, ListView, CreateView, UpdateView, DeleteView
 from .forms import *
@@ -129,7 +129,7 @@ class MyLessonInfoView(PermLessonStudent, DetailView):
             #     return render(request, self.template_name, self.get_context_data())
             t[0].test_time_start()
             qs = Question.objects.filter(test=test).first()
-            return redirect(reverse('question',
+            return redirect(reverse('training:question',
                                     args=(self.get_object().module.course.id,
                                           self.get_object().module.id,
                                           self.get_object().id,
@@ -144,7 +144,7 @@ class MyLessonInfoView(PermLessonStudent, DetailView):
                 id = s_l_mark.get_next_lesson()
                 if id:
                     id = id.id
-                    return redirect(reverse('lesson_info',
+                    return redirect(reverse('training:lesson_info',
                                             args=(self.get_object().module.course.id,
                                                   self.get_object().module.id,
                                                   id)))
@@ -152,12 +152,12 @@ class MyLessonInfoView(PermLessonStudent, DetailView):
                     id = s_m_mark.get_next_module()
                     if id:
                         id = id.id
-                        return redirect(reverse('lessons_all',
+                        return redirect(reverse('training:lessons_all',
                                                 args=(self.get_object().module.course.id,
                                                       id)))
                     else:
                         if s_c_mark.set_finished():
-                            return redirect(reverse('modules_all',
+                            return redirect(reverse('training:modules_all',
                                                     args=(self.get_object().module.course.id,
                                                           )))
         return render(request, self.template_name, self.get_context_data())
@@ -207,7 +207,7 @@ class MyQuestionInfoView(PermTestStudent, DetailView):
                 sas = [sa.answer.question for sa in sas]
                 qs = [question for question in questions if question not in sas ]
                 if qs.__len__() > 1:
-                    return redirect(reverse('question',
+                    return redirect(reverse('training:question',
                                             args=(self.get_object().test.lesson.module.course.id,
                                                   self.get_object().test.lesson.module.id,
                                                   self.get_object().test.lesson.id,
@@ -216,14 +216,14 @@ class MyQuestionInfoView(PermTestStudent, DetailView):
                                                   )))
                 elif qs.__len__() == 0:
                     StudentTest.objects.get(test=self.get_object().test,student=request.user).is_test_right()
-                    return redirect(reverse('lesson_info',
+                    return redirect(reverse('training:lesson_info',
                                             args=(self.get_object().test.lesson.module.course.id,
                                                   self.get_object().test.lesson.module.id,
                                                   self.get_object().test.lesson.id,
                                                   )))
                 else:
                     ctx.update({"last": True})
-                    return redirect(reverse('question',
+                    return redirect(reverse('training:question',
                                             args=(self.get_object().test.lesson.module.course.id,
                                                   self.get_object().test.lesson.module.id,
                                                   self.get_object().test.lesson.id,
@@ -304,7 +304,7 @@ class UpdateCourse(PermCourseTeacher, UpdateView):
         return cxnt
 
     def get_success_url(self):
-        return reverse('teacher_modules_all', args=(self.object.id, ))
+        return reverse('training:teacher_modules_all', args=(self.object.id, ))
 
 
 class ArchiveCourse(PermMethodist, DeleteView):
@@ -331,7 +331,7 @@ class ArchiveCourse(PermMethodist, DeleteView):
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse('teacher_modules_all', args=(self.object.id,))
+        return reverse('training:teacher_modules_all', args=(self.object.id,))
 
 
 class CreateCourse(PermMethodist, CreateView):
@@ -356,7 +356,7 @@ class CreateCourse(PermMethodist, CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse('teacher_modules_all', args=(self.object.id,))
+        return reverse('training:teacher_modules_all', args=(self.object.id,))
 
 
 class UpdateModule(UpdateView, PermCourseTeacher):
@@ -379,7 +379,7 @@ class UpdateModule(UpdateView, PermCourseTeacher):
                                  id=self.kwargs.get('module_id'))
 
     def get_success_url(self):
-        return reverse('teacher_lessons_all',
+        return reverse('training:teacher_lessons_all',
                        args=(self.object.course.id, self.object.id,))
 
 
@@ -406,7 +406,7 @@ class DeleteModule(PermCourseTeacher, DeleteView):
         return cxnt
 
     def get_success_url(self):
-        return reverse('teacher_modules_all',
+        return reverse('training:teacher_modules_all',
                        args=(self.object.course.id, ))
 
 
@@ -432,7 +432,7 @@ class CreateModule(PermCourseTeacher, CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse('teacher_lessons_all',
+        return reverse('training:teacher_lessons_all',
                        args=(self.object.course.id, self.object.id,))
 
 
@@ -452,7 +452,7 @@ class UpdateLesson(PermCourseTeacher, UpdateView):
         return get_object_or_404(Lesson, id=self.kwargs.get('lesson_id'))
 
     def get_success_url(self):
-        return reverse('teacher_lesson_info',
+        return reverse('training:teacher_lesson_info',
                        args=(self.object.module.course.id,
                              self.object.module.id,
                              self.object.id))
@@ -478,7 +478,7 @@ class DeleteLesson(PermCourseTeacher, DeleteView):
         return cxnt
 
     def get_success_url(self):
-        return reverse('teacher_lessons_all',
+        return reverse('training:teacher_lessons_all',
                        args=(self.object.module.course.id,
                              self.object.module.id,
                              ))
@@ -508,7 +508,7 @@ class CreateLesson(PermCourseTeacher, CreateView):
         return HttpResponseRedirect(self.get_success_url())
 
     def get_success_url(self):
-        return reverse('teacher_lesson_info',
+        return reverse('training:teacher_lesson_info',
                        args=(self.object.module.course.id,
                              self.object.module.id,
                              self.object.id))

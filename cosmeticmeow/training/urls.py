@@ -54,7 +54,7 @@ url_courses_student = [
     path('courses/my/', MyCourseListView.as_view(), name='course_my'),
     path('courses/<int:course_id>/', CourseInfoView.as_view(), name='course_info'),
     path('courses', CourseListView.as_view(), name='courses'),
-    path('courses/<int:course_id>', include(url_module_student)),
+    path('courses/<int:course_id>/', include(url_module_student)),
 ]
 url_courses_teacher = [
     path('courses/<int:course_id>/archive/', ArchiveCourse.as_view(), name='teacher_course_archive'),
