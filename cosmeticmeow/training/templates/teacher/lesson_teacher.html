@@ -1,5 +1,0 @@
-<div>
-    <a href="{% url 'teacher_lesson_info' course_id=lesson.module.course.id module_id=lesson.module.id lesson_id=lesson.id %}">{{ lesson.name }}</a>
-    <a href="{% url 'teacher_lesson_edit' course_id=lesson.module.course.id module_id=lesson.module.id lesson_id=lesson.id %}">Изменить</a>
-    <a href="{% url 'teacher_lesson_delete' course_id=lesson.module.course.id module_id=lesson.module.id lesson_id=lesson.id %}">Удалить</a>
-</div>
