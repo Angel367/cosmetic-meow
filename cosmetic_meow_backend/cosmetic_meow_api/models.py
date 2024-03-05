@@ -50,10 +50,30 @@ class Product(models.Model):
         blank=False,
         verbose_name='Название'
     )
+    short_description = models.TextField(
+        null=False,
+        blank=False,
+        verbose_name='Краткое описание'
+    )
     description = models.TextField(
         null=False,
         blank=False,
         verbose_name='Описание'
+    )
+    description_composition = models.TextField(
+        null=False,
+        blank=False,
+        verbose_name='Состав'
+    )
+    purpose = models.TextField(
+        null=False,
+        blank=False,
+        verbose_name='Назначение'
+    )
+    application_method = models.TextField(
+        null=False,
+        blank=False,
+        verbose_name='Способ применения'
     )
     price = models.ForeignKey(
         to=BasePrice,
@@ -101,6 +121,20 @@ class ProductClinicalTestingResultImage(models.Model):
         blank=True,
         verbose_name='Изображение'
     )
+    description = models.TextField(
+        null=False,
+        blank=False,
+        verbose_name='Описание'
+    )
+    name = models.CharField(
+        max_length=100,
+        null=False,
+        blank=False,
+        verbose_name='Название'
+    )
+    #todo Егор это нифига не будет удобно но как есть
+    #     надо предложить просто давать ссылку на исследование
+    #     а не хранить картинку
     product_clinical_testing_result = models.ForeignKey(
         to=ProductClinicalTestingResult,
         on_delete=models.CASCADE,
