@@ -1,6 +1,6 @@
-import Header from "./components/baseComponents/Header";
-import LineProduct from "./components/lineProductPage/LineProduct";
-import Footer from "./components/baseComponents/Footer";
+import Header from "../components/baseComponents/Header";
+import LineProduct from "../components/lineProductPage/LineProduct";
+import Footer from "../components/baseComponents/Footer";
 import React from 'react';
 import {useParams} from "react-router-dom";
 

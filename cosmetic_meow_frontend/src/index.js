@@ -8,11 +8,11 @@ import {
 } from "react-router-dom";
 
 import reportWebVitals from './reportWebVitals';
-import MainPage from "./MainPage";
-import ErrorPage from "./ErrorPage";
-import DevelopmentPage from "./DevelopmentPage";
-import LineProductPage from "./LineProductPage";
-import LinePage from "./LinePage";
+import MainPage from "./page/MainPage";
+import ErrorPage from "./page/ErrorPage";
+import DevelopmentPage from "./page/DevelopmentPage";
+import LineProductPage from "./page/LineProductPage";
+import LinePage from "./page/LinePage";
 
 
 

@@ -1,15 +1,25 @@
-import React from 'react';
-import {Link} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {Link, useParams} from "react-router-dom";
+import {render} from "react-dom";
+import axios from "axios";
 const down = process.env.PUBLIC_URL + '/img/dev/down.svg';
 const img = process.env.PUBLIC_URL + '/img/line-page/img.png';
- class LineDescription extends React.Component {
-    render() {
+ // todo get from db
+ function LineDescription() {
+     let {lineDescription} = useParams();
+    if (!lineDescription)
+        lineDescription = {
+            name: 'lineDescription.name',
+           description: 'lineDescription.description'
+        };
+
         return (
             <section className="description">
                 <div className="text">
                     <h3>Продукция</h3>
-                    <h1>Название продукта</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur. Leo nulla imperdiet quam
+                    <h1>{lineDescription.name}</h1>
+                    <p>{lineDescription.description}
+                        Lorem ipsum dolor sit amet consectetur. Leo nulla imperdiet quam
                         tellus fringilla viverra eleifend tempor quis. Nec dolor risus
                         fermentum nec vulputate proin nulla nulla consequat. Vitae
                         velit mi velit tortor euismod. Commodo velit eu amet ac.
@@ -31,7 +41,7 @@ const img = process.env.PUBLIC_URL + '/img/line-page/img.png';
             <img alt="" src={down}/>
                         </span></Link>
 
-                        <Link to={'/line'}><span>Применение</span><span>
+                        <Link to={'/line#usage'}><span>Применение</span><span>
             <img alt="" src={down}/>
                         </span></Link>
                     </div>
@@ -41,7 +51,7 @@ const img = process.env.PUBLIC_URL + '/img/line-page/img.png';
                 </div>
             </section>
         );
-    }
+
 }
 export default LineDescription;
 

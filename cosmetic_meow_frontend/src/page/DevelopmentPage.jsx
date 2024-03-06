@@ -1,6 +1,6 @@
-import Header from "./components/baseComponents/Header";
-import Footer from "./components/baseComponents/Footer";
-import Dev from "./components/developmentPage/Dev";
+import Header from "../components/baseComponents/Header";
+import Footer from "../components/baseComponents/Footer";
+import Dev from "../components/developmentPage/Dev";
 
 function DevelopmentPage() {
     return (

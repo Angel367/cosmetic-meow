@@ -1,17 +1,43 @@
 import React from "react";
 import {useParams} from "react-router-dom";
 
+
 const arrow = process.env.PUBLIC_URL + '/img/line-page/pink-arrow.svg';
 function LineProductDescription() {
-    const {product} = useParams();
-    console.log(product + 'product from LineProductDescription')
+    let {product} = useParams();
     if (!product)
-        return (
-            <div>
-                <p>Product is loading</p>
-            </div>
-        )
-        else
+        product = {
+        name: 'product.name',
+        product_line: {
+            name: 'product.product_line.name',
+            img: 'product.product_line.img'
+        },
+        price: 'product.price',
+        description: 'product.description',
+        short_description: 'product.short_description',
+        purpose: 'product.purpose',
+        application_method: 'product.application_method',
+        composition: 'product.composition',
+        active_substances: [
+            {
+                name: 'substance.name',
+                description: 'substance.description'
+            }
+        ],
+        advantages: [ {
+            name: 'advantage.name',
+            description: 'advantages.description'
+        }
+
+        ],
+        clinical_testing_result :
+            {
+                description:
+                    'product.clinical_testing_result'
+
+            }
+    };
+
      return (
     <section>
         <div className="main-info">
@@ -71,16 +97,15 @@ function LineProductDescription() {
 
                         <p className="info-text" id="usage-text">
                             {product.purpose || 'product.purpose' +
-                            + ' 2.product.purpose' +
-                            + ' 2.product.purpose' +
-                            + ' 2.product.purpose' +
+
                             + ' 2.product.purpose'  }
 
                             { ' ' + product.application_method || 'product.application_method' +
-                            + ' 2.product.application_method' +
-                            + ' 2.product.application_method' +
-                            + ' 2.product.application_method' +
+
                             + ' 2.product.application_method'  }
+
+                            { ' ' + product.clinical_testing_result.description || 'product.clinical_testing_result' +
+                            + ' 2.product.clinical_testing_result' }
 
                         </p>
 

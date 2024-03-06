@@ -1,6 +1,6 @@
-import Header from "./components/baseComponents/Header";
-import Main from "./components/mainPage/Main";
-import Footer from "./components/baseComponents/Footer";
+import Header from "../components/baseComponents/Header";
+import Main from "../components/mainPage/Main";
+import Footer from "../components/baseComponents/Footer";
 import React from 'react';
 
 

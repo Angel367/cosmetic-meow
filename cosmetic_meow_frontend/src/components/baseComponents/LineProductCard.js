@@ -1,14 +1,16 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 const product_image = process.env.PUBLIC_URL + '/img/main/product.png';
 
-class  LineProductCard extends React.Component {
-    render() {
-        const product = {
+function LineProductCard() {
+    let {product} =useParams();
+    if (!product)
+        product = {
             id: 1,
             name_: "Product",
             short_description_: "Short description"
         }
+
         return (
             <Link className="small-product-box line-page"
                     to={`/product/${product.id}`}>
@@ -25,12 +27,12 @@ class  LineProductCard extends React.Component {
                 </div>
 
                 <div className="small-product-info-box">
-                    <div className="small-product-name">{product.name_}</div>
-                    <div className="small-product-description">{product.short_description_}</div>
+                    <div className="small-product-name">{product.name}</div>
+                    <div className="small-product-description">{product.short_description}</div>
                 </div>
 
             </Link>
         );
     }
-}
+
 export default LineProductCard;
