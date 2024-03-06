@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-h9_l87idc)#7rqylycp21vlx)u_%2d8xoq9p=-r_6#&me=^wlb
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*'] #added for CORS знаю что это не то просто на всякий случай
 
 # Application definition
 
@@ -40,7 +40,7 @@ INSTALLED_APPS = [
                      'django.contrib.staticfiles',
                      'rest_framework',
                      'rest_framework_simplejwt',
-                     'corsheaders'
+                     'corsheaders' #added for CORS
 
                  ] + MY_APPS
 
@@ -100,15 +100,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',  #added for CORS
 
 ]
-CORS_ALLOWED_ORIGIN_REGEXES = [
-    'http://localhost:3000',
-]
-CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_ORIGIN = ['http://localhost:3000']
+
+CORS_ALLOWED_ORIGIN = ['http://localhost:3000'] #added for CORS
+
+
 ROOT_URLCONF = 'cosmetic_meow_backend.urls'
 
 TEMPLATES = [

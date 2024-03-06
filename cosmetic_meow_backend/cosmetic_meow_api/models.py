@@ -107,6 +107,7 @@ class Product(models.Model):
     )
 
 
+
 class ProductClinicalTestingResult(models.Model):
     description = models.TextField(
         null=False,
