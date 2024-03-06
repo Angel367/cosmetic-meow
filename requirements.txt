@@ -12,3 +12,4 @@ sqlparse==0.4.4
 typing_extensions==4.10.0
 tzdata==2024.1
 django-recaptcha
+django-cors-headers

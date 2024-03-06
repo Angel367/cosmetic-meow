@@ -49,7 +49,12 @@ def generate_clinical_testing_result_images(num_images=10):
     for _ in range(num_images):
         image = 'path/to/image.jpg'  # You can generate or use existing image paths
         result = ProductClinicalTestingResult.objects.order_by('?').first()
-        ProductClinicalTestingResultImage.objects.create(image=image, product_clinical_testing_result=result)
+        name = fake.word()
+        description = fake.text()
+        ProductClinicalTestingResultImage.objects.create(image=image,
+                                                         name=name,
+                                                         description=description,
+                                                         product_clinical_testing_result=result)
 
 
 # Function to generate fake data for BasePriceHistory model
@@ -106,6 +111,10 @@ def generate_products(num_products=10):
         advantages = ProductAdvantage.objects.order_by('?').all()[:random.randint(1, 3)]
         clinical_testing_result = ProductClinicalTestingResult.objects.order_by('?').first()
         product_line = ProductLine.objects.order_by('?').first()
+        short_description = fake.text()
+        description_composition = fake.text()
+        purpose = fake.text()
+        application_method = fake.text()
 
         product = Product.objects.create(
             name=name,
@@ -113,7 +122,11 @@ def generate_products(num_products=10):
             price=price,
             discount_price=discount_price,
             clinical_testing_result=clinical_testing_result,
-            product_line=product_line
+            product_line=product_line,
+            short_description=short_description,
+            description_composition=description_composition,
+            purpose=purpose,
+            application_method=application_method
         )
         product.active_substances.set(active_substances)
         product.advantages.set(advantages)
