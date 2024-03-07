@@ -6,10 +6,11 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView
 )
 
-from .views import ProductViewSet
+from .views import ProductViewSet, FullProductLineViewSet
 
 router = DefaultRouter()
-router.register(r'products', ProductViewSet, basename='products')
+router.register(r'product', ProductViewSet, basename='products')
+router.register(r'product_line', FullProductLineViewSet, basename='product_lines')
 
 urlpatterns = [
     path('auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

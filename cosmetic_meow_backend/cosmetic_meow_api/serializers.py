@@ -33,7 +33,7 @@ class ProductActiveSubstanceSerializer(serializers.ModelSerializer):
         fields = ['name', 'description']
 
 
-class ProductLineSerializer(serializers.ModelSerializer):
+class BaseProductLineSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductLine
         fields = ['name', 'description']
@@ -45,7 +45,7 @@ class ProductSerializer(serializers.ModelSerializer):
     clinical_testing_result = ProductClinicalTestingResultSerializer()
     advantages = ProductAdvantageSerializer(many=True)
     active_substances = ProductActiveSubstanceSerializer(many=True)
-    product_line = ProductLineSerializer()
+    product_line = BaseProductLineSerializer()
 
     class Meta:
         model = Product
