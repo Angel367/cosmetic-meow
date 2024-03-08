@@ -1,14 +1,21 @@
-from django.shortcuts import render
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions
 from rest_framework.response import Response
-
+from .filters import ProductFilter
 from .serializers import *
-from .models import Product, ProductActiveSubstance
 
 
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+    permission_classes = [permissions.AllowAny]
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = ProductFilter
+
+
+class ProductTagViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = ProductTag.objects.all()
+    serializer_class = ProductTagSerializer
     permission_classes = [permissions.AllowAny]
 
 

@@ -43,6 +43,20 @@ class DiscountPrice(BasePrice):
     )
 
 
+class ProductTag(models.Model):
+    name = models.CharField(
+        max_length=100,
+        null=False,
+        blank=False,
+        verbose_name='Название'
+    )
+    description = models.TextField(
+        null=False,
+        blank=False,
+        verbose_name='Описание'
+    )
+
+
 class Product(models.Model):
     name = models.CharField(
         max_length=100,
@@ -84,6 +98,10 @@ class Product(models.Model):
         to='ProductLine',
         on_delete=models.CASCADE,
         verbose_name='Линия продукта'
+    )
+    product_tags = models.ManyToManyField(
+        to=ProductTag,
+        verbose_name='Теги',
     )
 
 
@@ -182,4 +200,3 @@ class ProductLine(models.Model):
         blank=False,
         verbose_name='Описание'
     )
-
