@@ -56,6 +56,9 @@ class ProductTag(models.Model):
         verbose_name='Описание'
     )
 
+    def __str__(self):
+        return self.name
+
 
 class Product(models.Model):
     name = models.CharField(
