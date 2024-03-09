@@ -39,6 +39,12 @@ class BaseProductLineSerializer(serializers.ModelSerializer):
         fields = ['name', 'description']
 
 
+class ProductTagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductTag
+        fields = ['name', 'description']
+
+
 class ProductSerializer(serializers.ModelSerializer):
     price = BasePriceSerializer()
     discount_price = DiscountPriceSerializer()
@@ -46,6 +52,7 @@ class ProductSerializer(serializers.ModelSerializer):
     advantages = ProductAdvantageSerializer(many=True)
     active_substances = ProductActiveSubstanceSerializer(many=True)
     product_line = BaseProductLineSerializer()
+    product_tags = ProductTagSerializer(many=True)
 
     class Meta:
         model = Product

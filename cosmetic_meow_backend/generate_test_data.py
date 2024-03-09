@@ -14,11 +14,11 @@ fake = Faker()
 
 # Function to generate fake data for CustomUser model
 def generate_custom_users(num_users=10):
-    User = get_user_model()
+    user = get_user_model()
     for _ in range(num_users):
         phone_number = fake.phone_number()
         middle_name = fake.first_name()
-        User.objects.create(phone_number=phone_number, middle_name=middle_name)
+        user.objects.create(phone_number=phone_number, middle_name=middle_name)
 
 
 # Function to generate fake data for BasePrice model
@@ -74,7 +74,6 @@ def generate_product_advantages(num_advantages=10):
     for _ in range(num_advantages):
         name = fake.word()
         description = fake.text()
-        # You need to fill in other fields and create related instances here
         ProductAdvantage.objects.create(name=name, description=description)
 
 
@@ -95,6 +94,13 @@ def generate_product_lines(num_lines=10):
         ProductLine.objects.create(name=name, description=description)
 
 
+def generate_product_tags(num_tags=10):
+    for _ in range(num_tags):
+        name = fake.word()
+        description = fake.text()
+        ProductTag.objects.create(name=name, description=description)
+
+
 # Function to generate fake data for Product model
 def generate_products(num_products=10):
     for _ in range(num_products):
@@ -106,6 +112,7 @@ def generate_products(num_products=10):
         advantages = ProductAdvantage.objects.order_by('?').all()[:random.randint(1, 3)]
         clinical_testing_result = ProductClinicalTestingResult.objects.order_by('?').first()
         product_line = ProductLine.objects.order_by('?').first()
+        product_tags = ProductTag.objects.order_by('?').all()[:random.randint(1, 3)]
 
         product = Product.objects.create(
             name=name,
@@ -117,6 +124,7 @@ def generate_products(num_products=10):
         )
         product.active_substances.set(active_substances)
         product.advantages.set(advantages)
+        product.product_tags.set(product_tags)
 
 
 # Call the functions to generate fake data
@@ -130,4 +138,5 @@ generate_product_partners()
 generate_product_advantages()
 generate_product_active_substances()
 generate_product_lines()
+generate_product_tags()
 generate_products()
