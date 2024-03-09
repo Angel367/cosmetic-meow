@@ -3,12 +3,9 @@ import {Link, useParams} from "react-router-dom";
 
 const active_substance_image = process.env.PUBLIC_URL + '/img/main/product.png';
 
-function LineActiveSubstanceCard(){
-     let active_substance =( useParams()||{
-            id: 1,
-            name: "active_substance",
-            description: "Short description"
-        })
+function LineActiveSubstanceCard({active_substance}){
+     if (!active_substance)
+         return <div>Загрузка...</div>
         return (
             <div className="small-product-box line-page">
                 <div className="small-product-img-box">

@@ -1,8 +1,8 @@
 import React from "react";
 import {useParams} from "react-router-dom";
 import LineActiveSubstanceCard from "../baseComponents/LineActiveSubstanceCard";
-function LineComposition() {
-    let {active_substances} = useParams();
+function LineComposition({active_substances}) {
+
     if (!active_substances || active_substances.length === 0) {
         active_substances = [
             {
