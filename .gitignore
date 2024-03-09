@@ -3,6 +3,26 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+cosmetic_meow_frontend/node_modules
+cosmetic_meow_frontend/.pnp
+cosmetic_meow_frontend/.pnp.js
+
+# testing
+cosmetic_meow_frontend/coverage
+
+# production
+cosmetic_meow_frontend/build
+
+# misc
+cosmetic_meow_frontend/.DS_Store
+cosmetic_meow_frontend/.env.local
+cosmetic_meow_frontend/.env.development.local
+cosmetic_meow_frontend/.env.test.local
+cosmetic_meow_frontend/.env.production.local
+cosmetic_meow_frontend/npm-debug.log*
+cosmetic_meow_frontend/yarn-debug.log*
+cosmetic_meow_frontend/yarn-error.log*
+
 # C extensions
 *.so
 
