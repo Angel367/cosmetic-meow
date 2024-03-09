@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import DevForm from "./DevForm";
 const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
 const page = process.env.PUBLIC_URL + '/img/main/course.png';
 const icon = process.env.PUBLIC_URL + '/img/dev/social/Icon.svg';
@@ -45,10 +46,8 @@ function Dev() {
                     </div>
                     <form method="POST" className="full_type">
                         {/*TODO add form*/}
-                        {/*{{form.as_p}}*/}
-                        <p>
-                            <button className="button blue">Отправить</button>
-                        </p>
+                        <DevForm/>
+
 
                     </form>
                 </section>
