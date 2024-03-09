@@ -1,5 +1,5 @@
 import {Link, useParams} from "react-router-dom";
-import '../../styles/LineProductStyles.css';
+// import '../../styles/LineProductStyles.css';
 import LineProductImgHolder from "./LineProductImgHolder";
 import LineProductDescription from "./LineProductDescription";
 import fetchData from "../fetchData";
@@ -11,7 +11,7 @@ function LineProduct(props) {
     const {id} = useParams()
     const product = fetchData('http://localhost:3000/products/' + id);
         return (
-            <main>
+            <main className="main-line-product">
                 <Link to={"/line"}
                       className="close"/>
                 {/* todo fix cursor*/}

@@ -16,9 +16,9 @@ const Footer = () => {
             <div className="link-with-addr">
                 <address className="contacts">
                     {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a href="" className="logo">
+                    <Link to={'/'} className="logo">
                         <img alt="[logo]" src={logo}/>
-                    </a>
+                    </Link>
                     <div className="social">
                         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                         <a href="">

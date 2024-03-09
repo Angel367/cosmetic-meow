@@ -1,4 +1,4 @@
-import '../../styles/BaseStyles/SmallProductStyles.css'
+
 import React from "react";
 import LineAssortment from "./LineAssortment";
 import LineDescription from "./LineDescription";
@@ -25,7 +25,7 @@ function Line() {
         console.log(applications)
 
         return (
-            <main>
+            <main className='main-line'>
                 <LineDescription lineDescription={lineDescription}/>
                 <LineAssortment products={products}/>
                 <LineAdvantages advantages={advantages}/>

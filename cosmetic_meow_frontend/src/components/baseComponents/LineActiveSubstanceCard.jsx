@@ -1,5 +1,6 @@
 import React from "react";
 import {Link, useParams} from "react-router-dom";
+
 const active_substance_image = process.env.PUBLIC_URL + '/img/main/product.png';
 
 function LineActiveSubstanceCard(){

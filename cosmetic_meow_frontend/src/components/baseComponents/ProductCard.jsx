@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+
 // const product_image = process.env.PUBLIC_URL + '/img/main/product.png';
 
 class  ProductCard extends React.Component {

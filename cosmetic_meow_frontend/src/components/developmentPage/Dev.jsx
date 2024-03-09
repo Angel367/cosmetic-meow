@@ -1,5 +1,4 @@
 import React from 'react';
-import '../../styles/DevelopmentStyles.css';
 import {Link} from "react-router-dom";
 const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
 const page = process.env.PUBLIC_URL + '/img/main/course.png';
@@ -8,8 +7,7 @@ const icon1 = process.env.PUBLIC_URL + '/img/dev/social/Icon-1.svg';
 const icon2 = process.env.PUBLIC_URL + '/img/dev/social/Icon-2.svg';
 const icon3 = process.env.PUBLIC_URL + '/img/dev/social/Icon-3.svg';
 
-class Dev extends React.Component {
-    render() {
+function Dev() {
         return (
             <main>
                 <section className="description">
@@ -56,6 +54,5 @@ class Dev extends React.Component {
                 </section>
             </main>
         );
-    }
 }
 export default Dev;

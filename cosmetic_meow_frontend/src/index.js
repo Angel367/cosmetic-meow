@@ -18,7 +18,7 @@ import LinePage from "./page/LinePage";
 
 const router = createBrowserRouter([
     {
-        path: "/",
+        index: true,
         element: <MainPage/>,
         errorElement: <ErrorPage/>,
     },

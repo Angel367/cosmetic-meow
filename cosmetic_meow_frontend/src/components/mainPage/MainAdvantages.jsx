@@ -3,14 +3,14 @@ import {Link, useParams} from "react-router-dom";
 const magicWand = process.env.PUBLIC_URL + '/img/main/fi-rr-magic-wand.svg';
 const confetti = process.env.PUBLIC_URL + '/img/main/fi-rr-confetti.svg';
 const following = process.env.PUBLIC_URL + '/img/main/fi-rr-following.svg';
+const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
 function MainAdvantages() {
-    const {arrow} = useParams();
+
     return (
         <article id="advantages">
             <h3>Преимущества</h3>
             <h2>Почему нас выбирают</h2>
             <div className="slide-holder">
-
                 <div className="slide">
                     <div>
                         <img src={magicWand} alt=""/>
@@ -41,7 +41,6 @@ function MainAdvantages() {
                         отзывы других покупателей перед совершением покупки
                     </p>
                 </div>
-
             </div>
             <Link to={"/development"}
                   className="back">Узнать о больше компании

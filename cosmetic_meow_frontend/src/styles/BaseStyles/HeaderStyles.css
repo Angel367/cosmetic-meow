@@ -2,14 +2,14 @@
 header{
     position: relative;
     z-index: 2;
-    padding: 2rem 5rem;
+    padding: 0 5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
 }
 header .logo{
-    /*width: 100%;*/max-width: 15rem;
+    /*width: 100%;*/max-width: 17rem;
 }
 header .logo img{
     width: 100%;
@@ -63,7 +63,7 @@ header .link-index, header nav .logo{
 }
 @media (max-width:992px ) {
     header{
-        padding: 2rem 3rem;
+        padding: 0 3rem;
         gap: 3rem;
     }
 }
@@ -80,6 +80,9 @@ header .link-index, header nav .logo{
         position: relative;
         height: 24px;
         width: 24px;
+    }
+    header{
+        padding: 2rem 3rem;
     }
     header > .logo, header nav{
         position: absolute;
@@ -105,6 +108,7 @@ header .link-index, header nav .logo{
     header{
         flex-direction: row-reverse;
         position: fixed;
+        gap:2rem;
         top: 0;
         left: 0;
         right: 0;
