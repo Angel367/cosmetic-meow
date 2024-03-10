@@ -114,22 +114,22 @@
     "name_ message_"
     "email_ message_"
     "checkbox_ checkbox_"
-    "button_ none_";
+    "button_ button_";
 }
 
 
-.DevApp form:nth-child(2){
+.DevApp form p:nth-child(1){
     grid-area: name_;
-    background: #5F6886;
+    /*background: #5F6886;*/
 }
-.DevApp form p:nth-child(3){
+.DevApp form p:nth-child(2){
     grid-area: email_;
 }
-.DevApp form p:nth-child(4){
+.DevApp form p:nth-child(3){
     grid-area: message_;
     /*height: 100%;*/
 }
-.DevApp form p:nth-child(5){
+.DevApp form p:nth-child(4){
     grid-area: checkbox_;
     flex-direction: row-reverse;
     justify-content: flex-end;
@@ -145,7 +145,7 @@
 /*    opacity: 0;*/
 /*    z-index: -1;*/
 /*}*/
-/*.full_type  p:nth-child(5) label::before{*/
+/*.full_type  p:nth-child(4) label::before{*/
 /*    content: '';*/
 /*    background-color: rgba(229, 232, 242, 1);*/
 /*    border: 1px solid rgba(229, 232, 242, 1);*/
@@ -155,7 +155,7 @@
 /*    position: relative;*/
 /*}*/
 
-.DevApp form p:nth-child(6){
+.DevApp form p:nth-child(5){
     grid-area: button_;
 }
 .DevApp form button.blue.button{

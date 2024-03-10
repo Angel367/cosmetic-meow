@@ -16,7 +16,7 @@ function useFetchData(urlPart,  params = null) {
             .catch((error) => {
                 console.log(error);
             });
-    });
+    }, [url, params]);
     console.log(variable);
     return variable;
 }

@@ -41,7 +41,7 @@ h1, h3, h2, p{
 }
 
 
-.main-line-product input[type="radio"], input[type="checkbox"]{
+.main-line-product input[type="radio"], .main-line-product input[type="checkbox"]{
     visibility: hidden;
     opacity: 0;
     position: absolute;

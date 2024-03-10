@@ -3,14 +3,10 @@ import {Link, useParams} from "react-router-dom";
 
 const product_image = process.env.PUBLIC_URL + '/img/main/product.png';
 
-function LineProductCard() {
-    let {product} =useParams();
+function LineProductCard({product}) {
+
     if (!product)
-        product = {
-            id: 1,
-            name_: "Product",
-            short_description_: "Short description"
-        }
+        return <div>Загрузка...</div>;
 
         return (
             <Link className="small-product-box line-page"

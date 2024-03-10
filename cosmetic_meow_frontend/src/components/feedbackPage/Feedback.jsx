@@ -9,13 +9,13 @@ const icon1 = process.env.PUBLIC_URL + '/img/dev/social/Icon-1.svg';
 const icon2 = process.env.PUBLIC_URL + '/img/dev/social/Icon-2.svg';
 const icon3 = process.env.PUBLIC_URL + '/img/dev/social/Icon-3.svg';
 
-function Dev() {
+function Feedback() {
         return (
             <main>
                 <section className="description">
                     <div className="text">
-                        <h3>Разработка</h3>
-                        <h1>Контрактное производство</h1>
+                        <h3>Поддержка</h3>
+                        <h1>Обратная связь</h1>
                         <p>Lorem ipsum dolor sit amet consectetur. Leo nulla imperdiet quam
                             tellus fringilla viverra eleifend tempor quis. Nec dolor risus
                             fermentum nec vulputate proin nulla nulla consequat. Vitae
@@ -45,14 +45,9 @@ function Dev() {
                         <img alt="" src={icon2}/>
                         <img alt="" src={icon3}/>
                     </div>
-
-
-                        <FeedbackForm type={"contract_request"}/>
-
-
-
+                        <FeedbackForm type={"support"}/>
                 </section>
             </main>
         );
 }
-export default Dev;
+export default Feedback;

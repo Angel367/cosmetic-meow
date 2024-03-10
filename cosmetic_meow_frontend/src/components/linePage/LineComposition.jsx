@@ -4,27 +4,7 @@ import LineActiveSubstanceCard from "../baseComponents/LineActiveSubstanceCard";
 function LineComposition({active_substances}) {
 
     if (!active_substances || active_substances.length === 0) {
-        active_substances = [
-            {
-                name: "Active substance 1",
-                description: "Description 1"
-            },
-            {
-                name: "Active substance 2",
-                description: "Description 2"
-
-            },
-            {
-                name: "Active substance 3",
-                description: "Description 3"
-
-            },
-            {
-                name: "Active substance 4",
-                description: "Description 4"
-
-            }];
-
+        return <div>Загрузка...</div>
     }
         return (
             <section className="similar" id="similar">

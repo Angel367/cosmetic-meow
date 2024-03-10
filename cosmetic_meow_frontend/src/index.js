@@ -13,6 +13,8 @@ import ErrorPage from "./page/ErrorPage";
 import DevelopmentPage from "./page/DevelopmentPage";
 import LineProductPage from "./page/LineProductPage";
 import LinePage from "./page/LinePage";
+import Protected from "./components/baseComponents/Protected";
+import FeedbackPage from "./page/FeedbackPage";
 
 
 
@@ -27,17 +29,51 @@ const router = createBrowserRouter([
         element: <DevelopmentPage/>,
         errorElement: <ErrorPage/>,
     },
+     {
+        path: "/feedback",
+        element: <FeedbackPage/>,
+        errorElement: <ErrorPage/>,
+    },
 
     {
-        path: "/line",
+
+        path: "/lines/:id_line",
         element: <LinePage/>,
         errorElement: <ErrorPage/>,
+        children: [
+            {
+            path: "products/:id_product",
+            element: <LineProductPage/>,
+            errorElement: <ErrorPage/>,
+        },
+
+        ],
     },
-    {
-        path: "/line/:id",
-        element: <LineProductPage/>,
-        errorElement: <ErrorPage/>,
-    },
+    // {
+    //     path: "/login",
+    //     element: <LoginPage/>,
+    // },
+    // {
+    //     path: "/register",
+    //     element: <RegisterPage/>,
+    // },
+    // {
+    //     path: "/profile",
+    //     element: <Protected>
+    //         <ProfilePage/>
+    //     </Protected>,
+    // },
+    // {
+    //     path: "/cart",
+    //     element: <Protected><CartPage/></Protected>,
+    // },
+
+    // {
+    //     path: "*",
+    //     element: <ErrorPage/>,
+    // },
+
+
 ]);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

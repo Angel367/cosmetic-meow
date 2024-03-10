@@ -1,17 +1,10 @@
 import React from 'react';
 import {useParams} from "react-router-dom";
 
-function LineApplication(){
-        let {applications} = useParams();
-        if (!applications || applications.length === 0) {
-            applications = [
-                "Aplication 1sit amet consectetur. Leo nulla imperdiet quam tellus fringilla viverra eleifend tempor quis",
-                "Aplication 2sit amet consectetur. Leo nulla imperdiet quam tellus fringilla viverra eleifend tempor quis",
-                "Aplication 3sit amet consectetur. Leo nulla imperdiet quam tellus fringilla viverra eleifend tempor quis",
-                "Aplication 4sit amet consectetur. Leo nulla imperdiet quam tellus fringilla viverra eleifend tempor quis",
-                "Aplication 5sit amet consectetur. Leo nulla imperdiet quam tellus fringilla viverra eleifend tempor quis"
-            ];
-        }
+function LineApplication({applications} ){
+        if (!applications || !applications.length)
+            return <div> Загрузка... </div>;
+
         return (
             <section className="application" id="application">
                 <h2>Назначение</h2>

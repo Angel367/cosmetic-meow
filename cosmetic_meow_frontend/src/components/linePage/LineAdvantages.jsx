@@ -4,28 +4,10 @@ const magicWand = process.env.PUBLIC_URL + '/img/main/fi-rr-magic-wand.svg';
 const confetti = process.env.PUBLIC_URL + '/img/main/fi-rr-confetti.svg';
 const following = process.env.PUBLIC_URL + '/img/main/fi-rr-following.svg';
 
-function LineAdvantages() {
-    let {advantages} = useParams();
-    if (!advantages || advantages.length === 0)
-advantages = [
-            {
-                name: 'advantage1.name',
-                description: 'advantage1.description'
-            },
-            {
-                name: 'advantage2.name',
-                description: 'advantage2.description'
-            },
-            {
-                name: 'advantage3.name',
-                description: 'advantage3.description'
-            },
-            {
-                name: 'advantage4.name',
-                description: 'advantage4.description'
-            }
-        ];
+function LineAdvantages({advantages}) {
 
+    if (!advantages || advantages.length === 0)
+        return <div>Загрузка...</div>
         return (
             <section className="advantages" id="advantages">
                 <h2>Ключевые преимущества</h2>

@@ -14,17 +14,18 @@ function Line() {
         if (!id) {
             id = 2
         }
-        let lineData = fetchData(`product_line/${id}`)
+        // let
+        const lineData = fetchData(`product_line/${id}/`)
         let lineDescription = lineData.product_line
-        let products = lineData.products
+        let products = fetchData(`product/`, {product_line: id})
         let advantages = lineData.advantages
         let active_substances = lineData.active_substances
         let applications = lineData.applications
-        console.log(lineDescription, "lineDescription")
-        console.log(products, "products")
-        console.log(advantages, "advantages")
-        console.log(active_substances, "active_substances")
-        console.log(applications, "applications")
+        // console.log(lineDescription, "lineDescription")
+        // console.log(products, "products")
+        // console.log(advantages, "advantages")
+        // console.log(active_substances, "active_substances")
+        // console.log(applications, "applications")
 
         return (
             <main className='main-line'>
