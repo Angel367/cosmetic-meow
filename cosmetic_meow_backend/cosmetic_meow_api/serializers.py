@@ -60,7 +60,7 @@ class BaseProductLineSerializer(serializers.ModelSerializer):
 class ProductTagSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductTag
-        fields = ['name', 'description']
+        fields = ['id', 'name', 'description']
 
 
 class ProductSerializer(serializers.ModelSerializer):
