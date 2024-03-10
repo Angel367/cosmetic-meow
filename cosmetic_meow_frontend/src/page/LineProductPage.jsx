@@ -7,11 +7,11 @@ import {useParams} from "react-router-dom";
 
 
 function LineProductPage() {
-    const { id_product} = useParams();
+
         return (
             <div className="LineProductApp">
                 <Header/>
-                <LineProduct productId={id_product}/>
+                <LineProduct />
                 <Footer/>
             </div>
         );

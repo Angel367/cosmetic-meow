@@ -20,11 +20,13 @@ import FeedbackPage from "./page/FeedbackPage";
 
 const router = createBrowserRouter([
     {
+
         index: true,
         element: <MainPage/>,
         errorElement: <ErrorPage/>,
     },
     {
+
         path: "/development",
         element: <DevelopmentPage/>,
         errorElement: <ErrorPage/>,

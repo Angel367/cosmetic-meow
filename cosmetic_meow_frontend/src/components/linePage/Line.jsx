@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, {useEffect} from "react";
 import LineAssortment from "./LineAssortment";
 import LineDescription from "./LineDescription";
 import LineAdvantages from "./LineAdvantages";
@@ -16,7 +16,13 @@ function Line() {
         const lineData = fetchData(`product_line/${id_line}/`)
         let lineDescription = lineData.product_line
         let products = fetchData(`product/`, {product_line: id_line})
-
+        useEffect(() => {
+            if (!lineDescription)
+                document.title = "Линейка продуктов";
+            else
+                document.title = lineDescription.name || "Линейка продуктов";
+        window.scrollTo(0, 0);
+    });
         let advantages = lineData.advantages
         let active_substances = lineData.active_substances
         let applications = lineData.applications

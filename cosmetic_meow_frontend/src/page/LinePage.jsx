@@ -7,6 +7,7 @@ import React from 'react';
 
 
 function LinePage() {
+
     return (
         <div className="LinePageApp">
             <Header/>
