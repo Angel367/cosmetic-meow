@@ -2,6 +2,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions, generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
+
 from .filters import ProductFilter, FeedBackFilter
 from .serializers import *
 from .models import *
@@ -17,7 +19,19 @@ class UserCreateAPIView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            refresh = RefreshToken.for_user(serializer.instance)
+            access_token = AccessToken.for_user(serializer.instance)
+            res = {
+                "refresh": str(refresh),
+                "access": str(access_token)
+            }
+            return Response(
+                    {
+                        'user': serializer.data,
+                        'refresh': res['refresh'],
+                        'access': res['access']
+                    }
+                    , status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
