@@ -3,6 +3,7 @@ from rest_framework import viewsets, permissions
 from rest_framework.response import Response
 from .filters import ProductFilter
 from .serializers import *
+from .models import *
 
 
 class ProductViewSet(viewsets.ReadOnlyModelViewSet):
@@ -35,8 +36,15 @@ class FullProductLineViewSet(viewsets.ReadOnlyModelViewSet):
             product__product_line=instance
         ).distinct().values()
 
+        applications_of_products_in_product_line = Product.objects.filter(
+            product_line=instance
+        ).distinct().values('application_method')
+        applications = []
+        for result in applications_of_products_in_product_line:
+            applications.append(result['application_method'])
         return Response({
             'product_line': serializer.data,
             'active_substances': active_substances_of_products_in_product_line,
-            'advantages': advantages_of_products_in_product_line
+            'advantages': advantages_of_products_in_product_line,
+            'applications': applications
         })

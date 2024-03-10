@@ -1,23 +1,165 @@
 from django.contrib.auth.base_user import AbstractBaseUser
+from django.contrib.auth.models import BaseUserManager
 from django.db import models
 
 
+class CustomUserManager(BaseUserManager):
+    def create_user(self, phone_number, password=None):
+        """
+        Creates and saves a User with the given phone_number and password.
+        """
+        if not phone_number:
+            raise ValueError("Users must have an phone number")
+
+        user = self.model(
+            phone_number=phone_number,
+        )
+
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+    def create_superuser(self, phone_number, password=None):
+        """
+        Creates and saves a superuser with the given email, date of
+        birth and password.
+        """
+        user = self.create_user(
+            phone_number,
+            password=password
+        )
+        user.is_admin = True
+        user.save(using=self._db)
+        return user
+
+
 class CustomUser(AbstractBaseUser):
-    phone_number = models.CharField(
-        max_length=12,
+    email = models.EmailField(
+        verbose_name="email address",
+        max_length=255,
         unique=True,
-        null=False,
-        blank=False,
-        verbose_name='Номер телефона'
+        null=True,
+        blank=True
     )
-    middle_name = models.CharField(
-        max_length=50,
+    date_of_birth = models.DateField(
         null=True,
         blank=True,
+        verbose_name='Дата рождения'
+    )
+    phone_number = models.CharField(
+        max_length=20,
+        null=False,
+        blank=False,
+        unique=True,
+        verbose_name='Номер телефона'
+    )
+    is_active = models.BooleanField(
+        default=True
+    )
+    is_admin = models.BooleanField(
+        default=False
+    )
+
+    first_name = models.CharField(
+        max_length=100,
+        null=False,
+        blank=False,
+        verbose_name='Имя'
+    )
+    last_name = models.CharField(
+        max_length=100,
+        null=False,
+        blank=False,
+        verbose_name='Фамилия'
+    )
+    middle_name = models.CharField(
+        max_length=100,
+        null=False,
+        blank=False,
         verbose_name='Отчество'
     )
 
-    USERNAME_FIELD = 'phone_number'
+
+    objects = CustomUserManager()
+
+    USERNAME_FIELD = "phone_number"
+    REQUIRED_FIELDS = []
+
+    def __str__(self):
+        return self.phone_number
+
+    @staticmethod
+    def has_perm(self, perm, obj=None):
+        """Does the user have a specific permission?"""
+        # Simplest possible answer: Yes, always
+        return True
+
+    @staticmethod
+    def has_module_perms(self, app_label):
+        """Does the user have permissions to view the app `app_label`?"""
+        # Simplest possible answer: Yes, always
+        return True
+
+    @property
+    def is_staff(self):
+        """Is the user a member of staff?"""
+        # Simplest possible answer: All admins are staff
+        return self.is_admin
+
+
+# class UserAddress(models.Model):
+#     user = models.ForeignKey(
+#         to=CustomUser,
+#         on_delete=models.CASCADE,
+#         verbose_name='Пользователь'
+#     )
+#     city = models.CharField(
+#         max_length=100,
+#         null=False,
+#         blank=False,
+#         verbose_name='Город'
+#     )
+#     street = models.CharField(
+#         max_length=100,
+#         null=False,
+#         blank=False,
+#         verbose_name='Улица'
+#     )
+#     house = models.CharField(
+#         max_length=100,
+#         null=False,
+#         blank=False,
+#         verbose_name='Дом'
+#     )
+#     apartment = models.CharField(
+#         max_length=100,
+#         null=False,
+#         blank=False,
+#         verbose_name='Квартира'
+#     )
+#     entrance = models.CharField(
+#         max_length=100,
+#         null=False,
+#         blank=False,
+#         verbose_name='Подъезд'
+#     )
+#     floor = models.CharField(
+#         max_length=100,
+#         null=False,
+#         blank=False,
+#         verbose_name='Этаж'
+#     )
+#     intercom_code = models.CharField(
+#         max_length=100,
+#         null=False,
+#         blank=False,
+#         verbose_name='Домофон'
+#     )
+#     comment = models.TextField(
+#         null=False,
+#         blank=False,
+#         verbose_name='Комментарий'
+#     )
 
 
 class BasePrice(models.Model):
@@ -67,10 +209,30 @@ class Product(models.Model):
         blank=False,
         verbose_name='Название'
     )
+    short_description = models.TextField(
+        null=False,
+        blank=False,
+        verbose_name='Краткое описание'
+    )
     description = models.TextField(
         null=False,
         blank=False,
         verbose_name='Описание'
+    )
+    composition = models.TextField(
+        null=False,
+        blank=False,
+        verbose_name='Состав'
+    )
+    purpose = models.TextField(
+        null=False,
+        blank=False,
+        verbose_name='Назначение'
+    )
+    application_method = models.TextField(
+        null=False,
+        blank=False,
+        verbose_name='Способ применения'
     )
     price = models.ForeignKey(
         to=BasePrice,
@@ -121,6 +283,17 @@ class ProductClinicalTestingResultImage(models.Model):
         null=True,
         blank=True,
         verbose_name='Изображение'
+    )
+    description = models.TextField(
+        null=False,
+        blank=False,
+        verbose_name='Описание'
+    )
+    name = models.CharField(
+        max_length=100,
+        null=False,
+        blank=False,
+        verbose_name='Название'
     )
     product_clinical_testing_result = models.ForeignKey(
         to=ProductClinicalTestingResult,

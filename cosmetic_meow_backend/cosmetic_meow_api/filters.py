@@ -25,7 +25,11 @@ class ProductFilter(filters.FilterSet):
         field_name='product_tags',
         conjoined=False
     )
+    product_line = filters.NumberFilter(
+        field_name='product_line__id',  # Assuming product_line is a ForeignKey
+        lookup_expr='exact'
+    )
 
     class Meta:
         model = Product
-        fields = ['min_price', 'max_price', 'name', 'all_tags', 'any_tags']
+        fields = ['min_price', 'max_price', 'name', 'all_tags', 'any_tags', 'product_line']
