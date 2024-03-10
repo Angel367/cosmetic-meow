@@ -1,5 +1,4 @@
 import React from "react";
-import {useParams} from "react-router-dom";
 import LineActiveSubstanceCard from "../baseComponents/LineActiveSubstanceCard";
 function LineComposition({active_substances}) {
 

@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import {Link, useParams} from "react-router-dom";
-import {render} from "react-dom";
-import axios from "axios";
+import React from 'react';
+import {Link} from "react-router-dom";
+
 const down = process.env.PUBLIC_URL + '/img/dev/down.svg';
 const img = process.env.PUBLIC_URL + '/img/line-page/img.png';
  // todo get from db

@@ -49,18 +49,17 @@ const Footer = () => {
                     </div>
                 </address>
                 <div className="shopping">
-                    <Link className="main-link" to={'/line'}>Каталог</Link>
-                    <Link to={'/line'}>Эмолент</Link>
-                    <Link to={'/line'}>Вторая линия</Link>
-                    <Link to={'/line'}>Третья линия</Link>
-                    <Link to={'/line'}>Четвертая линия</Link>
-                    <Link to={'/line'}>Пятая линия</Link>
+                    <Link className="main-link" to={'/lines/3'}>Каталог</Link>
+                    <Link to={'/lines/3/products/1'}>Продукт1</Link>
+                    <Link to={'/lines/3/products/4'}>Продукт2</Link>
+                    <Link to={'/lines/3/products/1'}>Продукт3</Link>
+
                 </div>
                 <div className="developing">
                     <Link className="main-link" to={'/development'}>Сотрудничество</Link>
                     <Link to={'/development'}>Стать партнером</Link>
-                    <Link to={'/development'}>Поддержка</Link>
-                    <Link to={'/development'}>Обратная связь</Link>
+                    <Link to={'/feedback'} >Обратная связь</Link>
+                    <Link to={'/feedback'}>Поддержка</Link>
                 </div>
                 <div className="about">
                     <Link className="main-link" to={'/'}>О нас</Link>

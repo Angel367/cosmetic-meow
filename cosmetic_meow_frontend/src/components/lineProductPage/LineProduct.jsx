@@ -8,12 +8,12 @@ const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
 
 
 function LineProduct(props) {
-    const {id} = useParams();
-    let product = useFetchData('product/' + id);
+    const {id_product, id_line} = useParams();
+    let product = useFetchData('product/' + id_product);
     // console.log(product, "product")
         return (
             <main className="main-line-product">
-                <Link to={"/line"}
+                <Link to={"/lines/" + id_line}
                       className="close"/>
                 {/* todo fix cursor*/}
                 <article>
@@ -22,7 +22,7 @@ function LineProduct(props) {
                     <LineProductDescription product={product}/>
                 </article>
 
-                <Link to={"/line"}
+                <Link to={"/lines/" + id_line}
                       className="back">К линейке продуктов
                     <img src={arrow} alt="arrow"/>
                 </Link>

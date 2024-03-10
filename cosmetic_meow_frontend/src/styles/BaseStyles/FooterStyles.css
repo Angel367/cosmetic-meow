@@ -13,7 +13,7 @@ footer .link-with-addr > div .main-link {
 }
 footer .link-with-addr{
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     justify-content: space-between;
 }
 

@@ -10,14 +10,13 @@ import {useParams} from "react-router-dom";
 
 
 function Line() {
-        let {id} = useParams();
-        if (!id) {
-            id = 2
-        }
+        let {id_line} = useParams();
+
         // let
-        const lineData = fetchData(`product_line/${id}/`)
+        const lineData = fetchData(`product_line/${id_line}/`)
         let lineDescription = lineData.product_line
-        let products = fetchData(`product/`, {product_line: id})
+        let products = fetchData(`product/`, {product_line: id_line})
+
         let advantages = lineData.advantages
         let active_substances = lineData.active_substances
         let applications = lineData.applications

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './styles/BaseStyles/BaseStyles.css';
 import './styles/BaseStyles/BlueButtonStyles.css';
 import {
-    createBrowserRouter,
+    createBrowserRouter, Outlet,
     RouterProvider,
 } from "react-router-dom";
 
@@ -38,10 +38,18 @@ const router = createBrowserRouter([
     {
 
         path: "/lines/:id_line",
-        element: <LinePage/>,
+        element: <Outlet/>,
         errorElement: <ErrorPage/>,
         children: [
             {
+                index: true,
+                element: <LinePage/>,
+                errorElement: <ErrorPage/>,
+
+            },
+
+            {
+
             path: "products/:id_product",
             element: <LineProductPage/>,
             errorElement: <ErrorPage/>,
@@ -78,7 +86,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-      <RouterProvider router={router} />
+      <RouterProvider router={router}>
+
+      </RouterProvider>
   </React.StrictMode>
 );
 

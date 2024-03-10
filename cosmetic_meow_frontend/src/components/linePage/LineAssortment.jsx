@@ -1,10 +1,10 @@
 import React from "react";
 import LineProductCard from "../baseComponents/LineProductCard";
-import {useParams} from "react-router-dom";
+
 
 
 function LineAssortment ({products} )  {
-
+    products = products.results
     if (!products || products.length === 0)
         return <div>Загрузка...</div>;
         return (

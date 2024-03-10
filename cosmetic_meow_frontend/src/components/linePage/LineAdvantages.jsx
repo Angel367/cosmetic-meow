@@ -1,5 +1,5 @@
 import React from "react";
-import {useParams} from "react-router-dom";
+
 const magicWand = process.env.PUBLIC_URL + '/img/main/fi-rr-magic-wand.svg';
 const confetti = process.env.PUBLIC_URL + '/img/main/fi-rr-confetti.svg';
 const following = process.env.PUBLIC_URL + '/img/main/fi-rr-following.svg';

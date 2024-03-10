@@ -1,11 +1,10 @@
 import React from "react";
-import {Link, useParams} from "react-router-dom";
+import {Link} from "react-router-dom";
 const magicWand = process.env.PUBLIC_URL + '/img/main/fi-rr-magic-wand.svg';
 const confetti = process.env.PUBLIC_URL + '/img/main/fi-rr-confetti.svg';
 const following = process.env.PUBLIC_URL + '/img/main/fi-rr-following.svg';
 const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
 function MainAdvantages() {
-
     return (
         <article id="advantages">
             <h3>Преимущества</h3>

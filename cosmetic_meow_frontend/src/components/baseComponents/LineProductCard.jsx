@@ -10,7 +10,7 @@ function LineProductCard({product}) {
 
         return (
             <Link className="small-product-box line-page"
-                    to={`/product/${product.id}`}>
+                    to={`products/${product.id}`}>
                 <div className="small-product-img-box">
                     {/*{% if product.get_images.count > 0 %}*/}
                     {/*{% for image in product.get_images %}*/}

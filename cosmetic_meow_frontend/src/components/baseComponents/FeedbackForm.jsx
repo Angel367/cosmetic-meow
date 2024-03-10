@@ -1,4 +1,10 @@
 import React, {useState} from "react";
+import postData from "../postData";
+import {NotificationManager} from "react-notifications";
+import 'react-notifications/lib/notifications.css';
+
+
+
 
 function FeedbackForm({type="other"}) {
     const [name, setName] = useState("");
@@ -6,22 +12,48 @@ function FeedbackForm({type="other"}) {
     const [message, setMessage] = useState("");
     const [isAgreementSigned, setIsAgreementSigned] = useState(false);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(name, email, message, type);
+        let feedbackData;
+
+        let url = 'feedback/';
+        let data = {
+            name: name,
+            email: email,
+            message: message,
+            type: type
+        }
+        try{
+            feedbackData = await postData(url, data);
+            if (feedbackData.status === 201) {
+                NotificationManager.success("Спасибо за ваше сообщение! Мы обязательно его рассмотрим!", "Сообщение отправлено", 5000);
+            } else {
+                NotificationManager.error("Произошла ошибка при отправке сообщения. Попробуйте позже", "Ошибка отправки сообщения", 5000);
+            }
+        } catch (err) {
+            NotificationManager.error("Произошла ошибка при отправке сообщения. Попробуйте позже", "Ошибка отправки сообщения", 5000);
+
+        }
+
+
     }
     return (
-        <form onSubmit={handleSubmit} method="POST" className="full_type">
+
+    <form onSubmit={handleSubmit} method="POST" className="full_type">
             <p>
             <label htmlFor={"name"}>Имя</label>
             <input id={"name"} type="text"
                      name={"name"}
-                   placeholder="Ваше имя..." value={name} onChange={(e) => setName(e.target.value)}/>
+                   placeholder="Ваше имя..." value={name}
+                   required={true}
+                   onChange={(e) => setName(e.target.value)}/>
             </p>
             <p>
             <label htmlFor={"email"}>Email</label>
             <input id={"email"} type="email" placeholder="Ваш email..." value={email}
                    name={"email"}
+                   required={true}
+
                    onChange={(e) => setEmail(e.target.value)}/>
                 </p>
             <p>
@@ -29,6 +61,7 @@ function FeedbackForm({type="other"}) {
             <textarea id={"message"} placeholder="Ваше сообщение..."
                       value={message} rows={5} cols={3}
                       name={"message"}
+                        required={true}
                       onChange={(e) => setMessage(e.target.value)}/>
             </p>
             <p>

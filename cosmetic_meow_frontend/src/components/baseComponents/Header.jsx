@@ -21,7 +21,8 @@ const Header = () => {
                     </Link>
 
                     <Link to={'/'} className='link-index'>Главная</Link>
-                    <Link to={'/line'}>Каталог</Link>
+                    <Link to={'/lines/3/'}>
+                        Каталог</Link>
                     <Link to={'/development'}>О нас</Link>
                 </nav>
         </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import {useParams} from "react-router-dom";
+
 
 
 const arrow = process.env.PUBLIC_URL + '/img/line-page/pink-arrow.svg';

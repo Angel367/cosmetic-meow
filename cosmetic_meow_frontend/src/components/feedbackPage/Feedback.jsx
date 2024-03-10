@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import FeedbackForm from "../baseComponents/FeedbackForm";
+import NotificationContainer from "react-notifications/lib/NotificationContainer";
 
 const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
 const page = process.env.PUBLIC_URL + '/img/main/course.png';
@@ -12,6 +13,7 @@ const icon3 = process.env.PUBLIC_URL + '/img/dev/social/Icon-3.svg';
 function Feedback() {
         return (
             <main>
+
                 <section className="description">
                     <div className="text">
                         <h3>Поддержка</h3>
@@ -26,7 +28,7 @@ function Feedback() {
                             Vitae velit mi velit tortor euismod. Commodo velit eu amet ac.
                         </p>
 
-                        <Link to={'/development'} className="contact-us" ><span>Связаться</span><span>
+                        <Link to={'/development'} className="contact-us"><span>Связаться</span><span>
             <img alt="" src={arrow}/>
         </span></Link>
                     </div>
@@ -45,9 +47,10 @@ function Feedback() {
                         <img alt="" src={icon2}/>
                         <img alt="" src={icon3}/>
                     </div>
-                        <FeedbackForm type={"support"}/>
+                    <FeedbackForm type={"support"}/>
                 </section>
             </main>
         );
 }
+
 export default Feedback;
