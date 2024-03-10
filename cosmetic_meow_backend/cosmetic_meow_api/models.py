@@ -376,3 +376,46 @@ class ProductLine(models.Model):
         blank=False,
         verbose_name='Описание'
     )
+
+
+class FeedBack(models.Model):
+    TYPE_CHOICES = (
+        ('support', 'Поддержка'),
+        ('contract_request', 'Запрос на контрактное производство'),
+        ('other', 'Другое')
+    )
+
+    name = models.CharField(
+        max_length=100,
+        null=False,
+        blank=False,
+        verbose_name='Имя'
+    )
+    email = models.EmailField(
+        max_length=100,
+        null=False,
+        blank=False,
+        verbose_name='Email'
+    )
+    message = models.TextField(
+        null=False,
+        blank=False,
+        verbose_name='Сообщение'
+    )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        verbose_name='Дата создания'
+    )
+    type = models.CharField(
+        choices=TYPE_CHOICES,
+        max_length=100,
+        null=False,
+        blank=False,
+        verbose_name='Тип'
+    )
+    is_active = models.BooleanField(
+        default=True,
+        null=False,
+        blank=False,
+        verbose_name='Активно'
+    )
