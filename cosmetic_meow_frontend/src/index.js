@@ -17,8 +17,9 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import Registration from "./page/Registration";
 import Login from "./page/Login";
 import Profile from "./page/Profile";
-
-
+import Cart from "./components/Cart";
+import {Provider} from "react-redux";
+import store from "./helpres/store";
 
 const router = createBrowserRouter([
     {
@@ -114,7 +115,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/cart",
-        // element: <Cart/>,
+        element: <Cart/>,
         errorElement: <ErrorPage/>,
     },
     {
@@ -128,9 +129,13 @@ const router = createBrowserRouter([
 
     ]
 );
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <RouterProvider router={router}/>
+    <Provider store={store}>
+            <RouterProvider router={router}/>
+    </Provider>
+
 );
 
 // If you want to start measuring performance in your app, pass a function
