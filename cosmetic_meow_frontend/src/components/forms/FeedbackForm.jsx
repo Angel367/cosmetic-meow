@@ -1,7 +1,8 @@
 import React, {useState} from "react";
-import postData from "../postData";
+
 import {NotificationManager} from "react-notifications";
 import 'react-notifications/lib/notifications.css';
+import postData from "../../helpres/postData";
 
 
 

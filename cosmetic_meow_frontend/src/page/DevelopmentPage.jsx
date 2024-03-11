@@ -9,6 +9,7 @@ import NotificationContainer from "react-notifications/lib/NotificationContainer
 function DevelopmentPage() {
     useEffect(() => {
         document.title = "Контрактное производство"
+        window.scrollTo(0, 0);
     });
     return (
         <div className="DevApp">

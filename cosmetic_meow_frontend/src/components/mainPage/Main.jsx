@@ -4,13 +4,14 @@ import MainAdvantages from "./MainAdvantages";
 import MainProducts from "./MainProducts";
 import MainPartners from "./MainPartners";
 // import MainSubscribe from "./MainSubscribe";
-import fetchData from "../useFetchData";
+
 import MainTitle from "./MainTitle";
+import useFetchData from "../../helpres/useFetchData";
 
 
 function Main  ()  {
 
-    let products = fetchData('http://localhost:3000/products');
+    let products = useFetchData('product', {page_size: 6});
     return (
         <main className='main'>
             <MainTitle/>

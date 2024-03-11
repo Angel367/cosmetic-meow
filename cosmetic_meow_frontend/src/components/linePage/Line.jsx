@@ -5,17 +5,17 @@ import LineDescription from "./LineDescription";
 import LineAdvantages from "./LineAdvantages";
 import LineComposition from "./LineComposition";
 import LineApplication from "./LineApplication";
-import fetchData from "../useFetchData";
 import {useParams} from "react-router-dom";
+import useFetchData from "../../helpres/useFetchData";
 
 
 function Line() {
         let {id_line} = useParams();
 
         // let
-        const lineData = fetchData(`product_line/${id_line}/`)
+        const lineData = useFetchData(`product_line/${id_line}/`)
         let lineDescription = lineData.product_line
-        let products = fetchData(`product/`, {product_line: id_line})
+        let products = useFetchData(`product/`, {product_line: id_line})
         useEffect(() => {
             if (!lineDescription)
                 document.title = "Линейка продуктов";

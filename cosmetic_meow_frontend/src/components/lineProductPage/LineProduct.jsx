@@ -2,8 +2,9 @@ import {Link, useNavigate, useParams} from "react-router-dom";
 
 import LineProductImgHolder from "./LineProductImgHolder";
 import LineProductDescription from "./LineProductDescription";
-import useFetchData from "../useFetchData";
-import React, {useEffect, useState} from 'react';
+
+import React, {useEffect} from 'react';
+import useFetchData from "../../helpres/useFetchData";
 const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
 
 

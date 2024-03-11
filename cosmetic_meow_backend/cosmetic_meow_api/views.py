@@ -2,6 +2,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions, generics, status
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 
 from .filters import ProductFilter, FeedBackFilter
@@ -26,12 +27,12 @@ class UserCreateAPIView(generics.CreateAPIView):
                 "access": str(access_token)
             }
             return Response(
-                    {
-                        'user': serializer.data,
-                        'refresh': res['refresh'],
-                        'access': res['access']
-                    }
-                    , status=status.HTTP_201_CREATED)
+                {
+                    'user': serializer.data,
+                    'refresh': res['refresh'],
+                    'access': res['access']
+                }
+                , status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -92,3 +93,54 @@ class FeedBackViewSet(viewsets.ModelViewSet):
     permission_classes = [AllCreateAdminAllAnother403]
     filter_backends = [DjangoFilterBackend]
     filterset_class = FeedBackFilter
+
+
+class PhoneSendCode(APIView):
+    permission_classes = [permissions.AllowAny]
+    code = '1234'
+
+    def post(self, request):
+        phone = request.data.get('phone_number')
+        if phone:
+            phone = str(phone)
+            if CustomUser.objects.filter(phone_number=phone).exists():
+                return Response(
+                    {'error': 'Пользователь с таким номером телефона уже существует'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            else:
+                print(phone, self.code)
+                return Response(
+                    {'message': 'Код отправлен на номер {}'.format(phone)},
+                    status=status.HTTP_200_OK
+                )
+        else:
+            return Response(
+                {'error': 'Телефон не указан'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+
+class PhoneVerifyCode(APIView):
+    permission_classes = [permissions.AllowAny]
+    code = '1234'
+
+    def post(self, request):
+        phone = request.data.get('phone_number')
+        code = request.data.get('code')
+        if phone and code:
+            if code == self.code:
+                return Response(
+                    {'message': 'Номер телефона подтвержден'},
+                    status=status.HTTP_200_OK
+                )
+            else:
+                return Response(
+                    {'error': 'Неверный код подтверждения'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+        else:
+            return Response(
+                {'error': 'Телефон или код не указаны'},
+                status=status.HTTP_400_BAD_REQUEST
+            )

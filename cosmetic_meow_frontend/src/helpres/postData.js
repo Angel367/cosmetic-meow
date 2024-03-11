@@ -12,6 +12,7 @@ async function postData(urlPart, data) {
             }
         }
     ).then((response) => {
+            console.log(response, "response");
             return response;
         }
     ).catch((err) => {

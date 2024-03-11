@@ -6,13 +6,19 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView
 )
 
-from .views import ProductViewSet, FullProductLineViewSet, UserCreateAPIView, FeedBackViewSet, UserUpdateAPIView
+from .views import (
+    ProductViewSet,
+    FullProductLineViewSet,
+    UserCreateAPIView,
+    FeedBackViewSet,
+    UserUpdateAPIView, PhoneVerifyCode, PhoneSendCode,
+
+)
 
 router = DefaultRouter()
 router.register(r'product', ProductViewSet, basename='products')
 router.register(r'product_line', FullProductLineViewSet, basename='product_lines')
 router.register(r'feedback', FeedBackViewSet, basename='feedback')
-
 
 urlpatterns = [
     path('auth/register/', UserCreateAPIView.as_view(), name='user_register'),
@@ -20,5 +26,7 @@ urlpatterns = [
     path('auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('auth/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('phone/send', PhoneSendCode.as_view(), name='phone'),
+    path('phone/verify', PhoneVerifyCode.as_view(), name='phone'),
     path('', include(router.urls))
 ]

@@ -6,15 +6,16 @@ import {
     createBrowserRouter, Outlet,
     RouterProvider,
 } from "react-router-dom";
-
 import reportWebVitals from './reportWebVitals';
 import MainPage from "./page/MainPage";
 import ErrorPage from "./page/ErrorPage";
 import DevelopmentPage from "./page/DevelopmentPage";
 import LineProductPage from "./page/LineProductPage";
 import LinePage from "./page/LinePage";
-import Protected from "./components/baseComponents/Protected";
 import FeedbackPage from "./page/FeedbackPage";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import Registration from "./page/Registration";
+import Login from "./page/Login";
 
 
 
@@ -59,39 +60,20 @@ const router = createBrowserRouter([
 
         ],
     },
-    // {
-    //     path: "/login",
-    //     element: <LoginPage/>,
-    // },
-    // {
-    //     path: "/register",
-    //     element: <RegisterPage/>,
-    // },
-    // {
-    //     path: "/profile",
-    //     element: <Protected>
-    //         <ProfilePage/>
-    //     </Protected>,
-    // },
-    // {
-    //     path: "/cart",
-    //     element: <Protected><CartPage/></Protected>,
-    // },
+    {
+        path: "/register",
+        element: <Registration/>,
+    },
+    {
+        path: "/login",
+        element: <Login/>,
+    },
 
-    // {
-    //     path: "*",
-    //     element: <ErrorPage/>,
-    // },
-
-
-]);
+    ]
+);
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-      <RouterProvider router={router}>
-
-      </RouterProvider>
-  </React.StrictMode>
+    <RouterProvider router={router}/>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import FeedbackForm from "../baseComponents/FeedbackForm";
+import FeedbackForm from "../forms/FeedbackForm";
 
 const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
 const page = process.env.PUBLIC_URL + '/img/main/course.png';
