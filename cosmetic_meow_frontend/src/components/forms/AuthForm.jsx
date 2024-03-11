@@ -39,11 +39,11 @@ function AuthForm({path="login/", buttonName="Войти"}) {
         const authForm = await postUser(path, data);
         if (authForm.status === 201) {
             NotificationManager.success("Вы успешно зарегистрировались", "Успешная регистрация", 5000);
-            navigate('/');
+            navigate('/profile');
             // todo redirect to cart
         } else if (authForm.status === 200) {
             NotificationManager.success("Вы успешно вошли", "Успешный вход", 5000);
-            navigate('/');
+            navigate('/profile');
         }
         else {
             NotificationManager.error("Произошла ошибка. Попробуйте позже", "Ошибка auth", 5000);
