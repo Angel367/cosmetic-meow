@@ -9,7 +9,13 @@ function AuthForm({path="login/", buttonName="Войти"}) {
      const navigate = useNavigate();
     const [validated, setValidated] = useState(false);
     const [form, setForm] = useState({});
-
+    let component = '';
+    if (buttonName === "Зарегистрироваться") {
+        document.getElementById("submitAuth").disabled = true;
+        component = <VerificationPhone phone_number={form.phone_number} />;
+    } else {
+        document.getElementById("submitAuth").disabled = false;
+    }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -44,9 +50,9 @@ function AuthForm({path="login/", buttonName="Войти"}) {
                 <label htmlFor={"phone_number"}>Телефон</label>
                 <input id={"phone_number"} type="tel" placeholder="Ваш телефон..." required={true}
                        onChange={(e) => setForm({...form, phone_number: e.target.value})}/>
-                <VerificationPhone phone_number={form.phone_number} />
-            </p>
 
+            </p>
+            {component}
             <p>
                 <label htmlFor={"password"}>Пароль</label>
             <input id={"password"} type="password" placeholder="Ваш пароль..." required={true}

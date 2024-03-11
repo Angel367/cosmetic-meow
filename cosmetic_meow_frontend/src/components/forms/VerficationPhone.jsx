@@ -7,11 +7,10 @@ function VerificationPhone({phone_number}) {
     const [isVerified, setVerification] = useState(false);
     const [form, setForm] = useState({});
     const [isSend, setSend] = useState(false);
+    // document.getElementById("submitAuth").disabled = true;
 
     const onClick= async () => {
         if (! isSend) {
-
-             document.getElementById("submitAuth").disabled = true;
             await onClickSend();
         } else if (! isVerified) {
 
@@ -28,6 +27,7 @@ function VerificationPhone({phone_number}) {
         if (sendCode.status === 200) {
             setSend(true);
             document.getElementById("code").hidden = false;
+            document.getElementById("codeLabel").hidden = false;
             NotificationManager.success("Код отправлен", "Успешная отправка", 5000);
 
         } else {
@@ -41,7 +41,10 @@ function VerificationPhone({phone_number}) {
             {phone_number: phone_number, code: code});
         if (verification_res.status === 200) {
             setVerification(true);
+
             document.getElementById("code").hidden = true;
+            document.getElementById("codeLabel").hidden = true;
+
             NotificationManager.success("Телефон подтвержден", "Успешная отправка", 5000);
             document.getElementById("submitAuth").disabled = false;
         } else {
@@ -58,11 +61,13 @@ function VerificationPhone({phone_number}) {
 
 
         return (
-            <div>
+            <p>
+                <label id={"codeLabel"}
+                       htmlFor={"code"} hidden={true} >Код из смс</label>
                 <input id={"code"} type="text" placeholder="Код из смс..." hidden={true}
                        onChange={(e) => setForm({...form, code: e.target.value})}/>
                 <a onClick={onClick}>{textButton}</a>
-            </div>
+            </p>
         );
 
 
