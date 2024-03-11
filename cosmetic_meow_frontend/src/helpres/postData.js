@@ -1,8 +1,7 @@
 import axios, {AxiosError} from "axios";
-
-
+import getBaseUrl from "./baseUrl";
 async function postData(urlPart, data) {
-    let url = 'http://localhost/api/' + urlPart;
+    let url = getBaseUrl() + urlPart;
 
     return await axios.post(url,
         data,

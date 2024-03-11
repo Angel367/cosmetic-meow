@@ -15,7 +15,7 @@ function Registration() {
             </div>
             <main>
                 <RegistrationForm path={'register/'} buttonName={"Зарегистрироваться"}/>
-                <Link to={"/login"}>Уже зарегистрированы? Войти</Link>
+                <Link to={"/login/"}>Уже зарегистрированы? Войти</Link>
             </main>
         </div>
     );

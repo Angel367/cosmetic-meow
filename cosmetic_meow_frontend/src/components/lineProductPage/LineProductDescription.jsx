@@ -68,7 +68,7 @@ function LineProductDescription({product}) {
             </div>
             <div className="info">
                 <div className="controls-text">
-                    {/*todo fix radio*/}
+
                     <input type="radio" id="description-radio" name="info" className="info-radio" defaultChecked/>
                     <label htmlFor="description-radio" className="info-label">Описание</label>
                     <input type="radio" id="usage-radio" name="info" className="info-radio"/>

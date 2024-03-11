@@ -3,7 +3,7 @@ import {Link} from "react-router-dom";
 
 const down = process.env.PUBLIC_URL + '/img/dev/down.svg';
 const img = process.env.PUBLIC_URL + '/img/line-page/img.png';
- // todo get from db
+
  function LineDescription({lineDescription}) {
 
      // let  = useParams();

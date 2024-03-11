@@ -8,7 +8,7 @@ function LineApplication({applications} ){
         return (
             <section className="application" id="application">
                 <h2>Назначение</h2>
-                {/*todo fix*/}
+
                 <div className="application-holder">
                     {applications.map((application, index) => (
                     <p className="application" key={index}>

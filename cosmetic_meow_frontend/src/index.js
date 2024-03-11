@@ -16,12 +16,12 @@ import FeedbackPage from "./page/FeedbackPage";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Registration from "./page/Registration";
 import Login from "./page/Login";
+import Profile from "./page/Profile";
 
 
 
 const router = createBrowserRouter([
     {
-
         index: true,
         element: <MainPage/>,
         errorElement: <ErrorPage/>,
@@ -59,6 +59,63 @@ const router = createBrowserRouter([
         },
 
         ],
+    },
+    {
+        path: "/profile",
+        element: <ProtectedRoute>
+            <Outlet/>
+        </ProtectedRoute>,
+        errorElement: <ErrorPage/>,
+        children: [
+            {
+                index: true,
+                element: <Profile/>,
+                errorElement: <ErrorPage/>,
+
+            },
+            {
+                path: "personal/",
+                element: <Outlet/>,
+                children: [
+                    {
+                        index: true,
+                        // element: <ProfilePersonal/>,
+                        errorElement: <ErrorPage/>,
+                    },
+                    {
+                        path: "edit/",
+                        // element: <ProfilePersonalEdit/>,
+                        errorElement: <ErrorPage/>,
+                    },
+                ],
+                errorElement: <ErrorPage/>,
+            },
+
+            {
+
+                path: "orders/",
+                element: <Outlet/>,
+                children: [
+                {
+                    index: true,
+                    // element: <Orders/>,
+                    errorElement: <ErrorPage/>,
+                },
+                {
+                    path: "order/:id_order",
+                    // element: <Order/>,
+                    errorElement: <ErrorPage/>,
+                },
+               ],
+                errorElement: <ErrorPage/>,
+            },
+
+        ],
+    },
+    {
+        path: "/cart",
+        // element: <Cart/>,
+        errorElement: <ErrorPage/>,
     },
     {
         path: "/register",

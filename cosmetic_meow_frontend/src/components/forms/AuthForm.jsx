@@ -10,12 +10,20 @@ function AuthForm({path="login/", buttonName="Войти"}) {
     const [validated, setValidated] = useState(false);
     const [form, setForm] = useState({});
     let component = '';
-    if (buttonName === "Зарегистрироваться") {
-        document.getElementById("submitAuth").disabled = true;
-        component = <VerificationPhone phone_number={form.phone_number} />;
-    } else {
-        document.getElementById("submitAuth").disabled = false;
-    }
+
+        if (buttonName === "Зарегистрироваться") {
+
+            component = <VerificationPhone phone_number={form.phone_number} />;
+            if (document.getElementById("submitAuth") !== null) {
+                document.getElementById("submitAuth").disabled = true;
+            }
+        } else {
+            if (document.getElementById("submitAuth") !== null) {
+                document.getElementById("submitAuth").disabled = false;
+            }
+            // document.getElementById("submitAuth").disabled = false;
+        }
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -45,7 +53,7 @@ function AuthForm({path="login/", buttonName="Войти"}) {
 
     }
     return (
-        <form className="auth" noValidate validated={validated} onSubmit={handleSubmit} method="POST">
+        <form className="auth" noValidate validated={validated.toString()} onSubmit={handleSubmit} method="POST">
             <p>
                 <label htmlFor={"phone_number"}>Телефон</label>
                 <input id={"phone_number"} type="tel" placeholder="Ваш телефон..." required={true}

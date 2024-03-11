@@ -20,11 +20,11 @@ function LineProduct(props) {
     // console.log(product, "product")
         return (
             <main className="main-line-product">
-                <Link to={`/lines/${id_line}`}>
+                <a href='#'>
                 <div
                     onClick={() => navigate(-1)}
                       className="close"/>
-                </Link>
+                </a>
                 {/* todo fix cursor*/}
                 <article>
                     <LineProductImgHolder/>

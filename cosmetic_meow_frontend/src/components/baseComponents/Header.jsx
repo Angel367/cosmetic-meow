@@ -33,9 +33,9 @@ const Header = () => {
                 <img alt="[cart]" src={cart}/>
             </a>
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a href="#" className="ik">
+            <Link to={'/profile'} className="profile">
                 <img alt="[ik]" src={ik}/>
-            </a>
+            </Link>
         </div>
     </header>
     );

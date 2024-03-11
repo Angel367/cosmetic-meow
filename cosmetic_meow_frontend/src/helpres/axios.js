@@ -1,16 +1,19 @@
 import axios from "axios";
 import createAuthRefreshInterceptor from "axios-auth-refresh";
+import {getAccessToken, getRefreshToken,  useLogout} from "../hooks/user.actions";
+import getBaseUrl from "./baseUrl";
+
 
 
 const axiosService = axios.create({
- baseURL: "http://localhost",
+ baseURL: getBaseUrl()+"auth/token/verify/",
  headers: {
  "Content-Type": "application/json",
  },
 });
 axiosService.interceptors.request.use(async (config) => {
- const { access } = JSON.parse(localStorage.getItem("auth"));
- config.headers.Authorization = `Bearer ${access}`;
+
+ config.headers.Authorization = `Bearer ${getAccessToken()}`;
  return config;
 });
 
@@ -20,9 +23,9 @@ axiosService.interceptors.response.use(
 );
 
 const refreshAuthLogic = async (failedRequest) => {
- const { refresh } = JSON.parse(localStorage.getItem("auth"));
- return axios.post("/refresh/token/", null, {
-  baseURL: "http://localhost",
+ const { refresh } = getRefreshToken();
+ return axios.post("token/refresh/", null, {
+  baseURL: getBaseUrl()+"auth/",
   headers: {
   Authorization: `Bearer ${refresh}`,
  },})
@@ -35,7 +38,10 @@ const refreshAuthLogic = async (failedRequest) => {
     localStorage.removeItem("auth");
  });};
 createAuthRefreshInterceptor(axiosService,  refreshAuthLogic);
-export function fetcher(url) {
- return axiosService.get(url).then((res) => res.data);
+export function fetcherUser(url) {
+ return axiosService.get(getBaseUrl()+ url).then((res) => res.data);
+}
+export async function updateUser(url, data) {
+ return await axiosService.put(getBaseUrl() + url, data).then((res) => res.data);
 }
 export default axiosService;

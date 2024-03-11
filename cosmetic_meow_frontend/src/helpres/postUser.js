@@ -1,8 +1,11 @@
 import axios, {AxiosError} from "axios";
+import { setUserData,} from "../hooks/user.actions";
+import getBaseUrl from "./baseUrl";
 
 
 async function postUser(urlPart, data) {
-    let url = 'http://localhost/api/auth/' + urlPart;
+
+    let url = getBaseUrl() +'auth/' + urlPart;
     return await axios.post(url,
         data,
         {
@@ -11,17 +14,12 @@ async function postUser(urlPart, data) {
             }
         }
     ).then((res) => {
-            localStorage.setItem("auth",
-             JSON.stringify({
-                 access: res.data.access,
-                 refresh: res.data.refresh,
-                 user: res.data.user,
 
-                 }));
-            return {
-                status: res.status
-            }
-        }
+        setUserData(res.data);
+        return {
+            status: res.status,
+
+        };}
     ).catch((err) => {
         if (err instanceof AxiosError) {
                 const errors = err.response.data
@@ -38,7 +36,7 @@ async function postUser(urlPart, data) {
                     data: err.message
                 }
             }
-    })
+    });
 
 }
 export default postUser;
