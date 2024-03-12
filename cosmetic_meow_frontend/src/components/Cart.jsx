@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {addProduct, addQuantity, calculateTotal, removeProduct, subQuantity} from "../helpres/reduserCart";
+import React, {useEffect, useState} from 'react';
+import { useSelector} from 'react-redux';
+
+import ProductCard from "./baseComponents/ProductCard";
+
 
 
 
 function Cart() {
-
     const products = useSelector(state => state.cart.products);
-
-    const total = useSelector(state => state.cart.total);
-    const dispatch = useDispatch();
+    // console.log(products.length, 'products');
+    // console.log(JSON.parse(localStorage.getItem('products')).length, 'localStorage');
+    const [total, setTotal] = useState(0);
+     useEffect(() => {
+            setTotal(products.reduce((total, product) => total
+                + product.price * product.quantity, 0));
+        }, [products]);
     if (!products || products.length === 0) {
         return (
             <div>
@@ -18,31 +23,14 @@ function Cart() {
             </div>
         );
     }
-    localStorage.setItem('products', JSON.stringify(products));
 
-    dispatch(calculateTotal());
-    console.log(localStorage.getItem('products'), "localStorage.getItem('products')");
-    console.log(products, "products");
     return (
         <div>
             <h1>Cart</h1>
             <div>
                 <h2>Products</h2>
                 {products.map((product, index=product.id) => (
-                    <div key={index}>
-                        <h3>{product.name}</h3>
-                        <h4>{product.price}</h4>
-                        <h4>Quantity: {product.quantity}</h4>
-                        <button onClick={() => dispatch(addQuantity(product.id))}>
-                            Add
-                        </button>
-                        <button onClick={() => dispatch(subQuantity(product.id))}>
-                            Subtract
-                        </button>
-                        <button onClick={() => dispatch(removeProduct(product.id))}>
-                            Remove
-                        </button>
-                    </div>
+                   <ProductCard key={index} product={product} />
                 ))}
             </div>
             <div>

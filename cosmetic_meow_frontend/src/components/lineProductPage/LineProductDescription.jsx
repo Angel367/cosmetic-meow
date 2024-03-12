@@ -1,43 +1,43 @@
 import React from "react";
+import {addProduct, addQuantity, removeProduct, subQuantity} from "../../helpres/reduxCart";
+import {useDispatch} from "react-redux";
 
 
 
 const arrow = process.env.PUBLIC_URL + '/img/line-page/pink-arrow.svg';
 function LineProductDescription({product}) {
-    console.log(product, "blyat")
+    const dispatch = useDispatch();
     if (!product || product.length === 0)
         return <div>Загрузка</div>
-        // product = {
-        // name: 'product.name',
-        // product_line: {
-        //     name: 'product.product_line.name',
-        //     img: 'product.product_line.img'
-        // },
-        // price: 'product.price',
-        // description: 'product.description',
-        // short_description: 'product.short_description',
-        // purpose: 'product.purpose',
-        // application_method: 'product.application_method',
-        // composition: 'product.composition',
-        // active_substances: [
-        //     {
-        //         name: 'substance.name',
-        //         description: 'substance.description'
-        //     }
-        // ],
-        // advantages: [ {
-        //     name: 'advantage.name',
-        //     description: 'advantages.description'
-        // }
-        //
-        // ],
-        // clinical_testing_result :
-        //     {
-        //         description:
-        //             'product.clinical_testing_result'
-        //
-        //     }
-    // };
+    let ManagerComponent;
+      if (product.quantity > 0) {
+            ManagerComponent =
+                <div className="card-product-link">
+                <button onClick={() => dispatch(addQuantity(product.id))}>
+                +
+                </button>
+                    <div className="card-product-quantity">
+                        {product.quantity}
+                    </div>
+                <button onClick={() => dispatch(subQuantity(product.id))}>
+                -
+            </button>
+            <button onClick={() => {
+                // todo ask if user sure
+                dispatch(removeProduct(product.id));
+            }
+            }>
+                Remove
+            </button>
+                </div>
+        } else {
+            ManagerComponent =
+                <div className="small-product-link">
+                    <button onClick={() => dispatch(addProduct(product.id))}>
+                        Add to cart
+                    </button>
+                </div>
+        }
      return (
     <section>
         <div className="main-info">
@@ -46,7 +46,7 @@ function LineProductDescription({product}) {
             <p className="product-price">{product.price.price_value || 'product.price'}</p>
 
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a href="" className="blue button">Добавить в корзину</a>
+            {ManagerComponent}
 
             <p>Shop product on other marketplaces</p>
             <div className="link-holder">
@@ -78,20 +78,12 @@ function LineProductDescription({product}) {
                     <div>
                         <p className="info-text" id="description-text">
                             {product.short_description + ' ' || 'product.short_description'}
-                            {product.description || 'product.description' +
-                                ' 1.product.description' +
-                                ' 1.product.description' +
-                                ' 1.product.description' +
-                                ' 1.product.description'}
-                            {' \nAdvantages: ' +
-                            product.advantages.map((advantage) => {
+                            {product.description || 'product.description' }
+
+                            {product.advantages.map((advantage) => {
                                 return ' ' + advantage.name + ' : ' + advantage.description + ' ';
-                            }
-                            ) || 'product.advantages' +
-                            ' 1.product.advantages' +
-                            ' 1.product.advantages' +
-                            ' 1.product.advantages' +
-                            ' 1.product.advantages'}
+                            })}
+
 
                         </p>
 
@@ -111,20 +103,12 @@ function LineProductDescription({product}) {
 
 
                         <p className="info-text" id="composition-text">
-                            {product.composition || 'product.composition' +
-                            + ' 3.product.composition' +
-                            + ' 3.product.composition' +
-                            + ' 3.product.composition' +
-                            + ' 3.product.composition'}
+                            {product.composition || 'product.composition' }
 
                             {product.active_substances.map((substance) => {
                                 return ' ' + substance.name + ' : '  + substance.description + ' ';
                             })
-                             || 'product.active_substances' +
-                            + ' 3.product.active_substances1' +
-                            + ' 3.product.active_substances2' +
-                            + ' 3.product.active_substances3' +
-                            + ' 3.product.active_substances4'}
+                             || 'product.active_substances' }
                         </p>
                     </div>
                 </div>

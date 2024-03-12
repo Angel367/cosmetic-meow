@@ -20,6 +20,7 @@ import Profile from "./page/Profile";
 import Cart from "./components/Cart";
 import {Provider} from "react-redux";
 import store from "./helpres/store";
+import Catalog from "./components/Catalog";
 
 const router = createBrowserRouter([
     {
@@ -59,6 +60,23 @@ const router = createBrowserRouter([
             errorElement: <ErrorPage/>,
         },
 
+        ],
+    },
+    {
+        path: "catalog",
+        element: <Outlet/>,
+        errorElement: <ErrorPage/>,
+        children: [
+            {
+                index: true,
+                element: <Catalog/>,
+                errorElement: <ErrorPage/>,
+            },
+            {
+                path: "product/:id_product",
+                element: <LineProductPage/>,
+                errorElement: <ErrorPage/>,
+            },
         ],
     },
     {

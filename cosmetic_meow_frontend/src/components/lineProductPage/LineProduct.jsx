@@ -8,7 +8,7 @@ import useFetchData from "../../helpres/useFetchData";
 const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
 
 
-function LineProduct(props) {
+function LineProduct() {
 
     const {id_product, id_line} = useParams();
     let navigate = useNavigate();
