@@ -24,13 +24,13 @@ axiosService.interceptors.response.use(
 
 const refreshAuthLogic = async (failedRequest) => {
  const { refresh } = getRefreshToken();
+ const {access} = getAccessToken();
  return axios.post("token/refresh/", null, {
   baseURL: getBaseUrl()+"auth/",
   headers: {
-  Authorization: `Bearer ${refresh}`,
+  Authorization: `Bearer ${access}`,
   },body: {
     refresh: refresh
-
     }
     ,})
  .then((resp) => {
