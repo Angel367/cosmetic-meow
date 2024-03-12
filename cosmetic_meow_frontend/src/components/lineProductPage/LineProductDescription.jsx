@@ -21,7 +21,7 @@ function LineProductDescription({product}) {
             <p className="product-description">{product.product_line.name || 'product.product_line.name'}</p>
             <p className="product-price">{product.price.price_value || 'product.price'}</p>
 
-            <ManageProductInCart    product={product} quantity={quantity} addProduct={addProduct}/>
+            <ManageProductInCart    product={product} quantity={quantity} />
 
             <p>Shop product on other marketplaces</p>
             <div className="link-holder">

@@ -3,12 +3,18 @@ import {addProduct, addQuantity, removeProduct, subQuantity} from "../../helpres
 import {useDispatch, useSelector} from "react-redux";
 
 const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
-function ManageProductInCart({product, quantity, noButton=false}) {
+function ManageProductInCart({product, quantity, noButton=false, isOrder=false}) {
     let dispatch = useDispatch();
     return (
 
         <div className="small-product-link">
-            {noButton ? (<img src={arrow} alt={"Перейти"}/>) :
+            {noButton ? (
+                <>
+                    {isOrder ? (
+                        <div>{quantity}</div>
+                    ) : null}
+                <img src={arrow} alt={"Перейти"}/>
+                </>) :
                 (
                     <>{quantity === 0 ?
                 (<button onClick={() => dispatch(addProduct(product))}>Add to cart</button>) :
