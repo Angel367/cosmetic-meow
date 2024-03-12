@@ -63,7 +63,7 @@ const router = createBrowserRouter([
         ],
     },
     {
-        path: "catalog",
+        path: "/shop",
         element: <Outlet/>,
         errorElement: <ErrorPage/>,
         children: [

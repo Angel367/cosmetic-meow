@@ -19,19 +19,19 @@ const Header = () => {
                     <Link to={'/'} className="logo">
                         <img alt="[logo]" src={logo}/>
                     </Link>
-
                     <Link to={'/'} className='link-index'>Главная</Link>
-                    <Link to={'/lines/3/'}>
-                        Каталог</Link>
-                    <Link to={'/development'}>О нас</Link>
+                    <Link to={'/lines/3/'}>[НАЗВАНИЕ ЛИНИИ]</Link>
+                    <Link to={'/shop'}>Магазин</Link>
+                    <Link to={'/development'}>Разработка</Link>
                 </nav>
         </div>
 
         <div className="button-holder">
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a href="#" className="basket">
+            <Link to={'/cart'} className="basket">
+
                 <img alt="[cart]" src={cart}/>
-            </a>
+            </Link>
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <Link to={'/profile'} className="profile">
                 <img alt="[ik]" src={ik}/>

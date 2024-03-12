@@ -1,43 +1,19 @@
 import React from "react";
-import {addProduct, addQuantity, removeProduct, subQuantity} from "../../helpres/reduxCart";
-import {useDispatch} from "react-redux";
+import {addProduct} from "../../helpres/reduxCart";
+
+import ManageProductInCart from "../baseComponents/ManageProductInCart";
+import {useSelector} from "react-redux";
 
 
 
 const arrow = process.env.PUBLIC_URL + '/img/line-page/pink-arrow.svg';
 function LineProductDescription({product}) {
-    const dispatch = useDispatch();
+    let quantity = useSelector(state => state.cart.products.find(
+        (p) => p.id === product.id)?.quantity || 0
+    )
     if (!product || product.length === 0)
         return <div>Загрузка</div>
-    let ManagerComponent;
-      if (product.quantity > 0) {
-            ManagerComponent =
-                <div className="card-product-link">
-                <button onClick={() => dispatch(addQuantity(product.id))}>
-                +
-                </button>
-                    <div className="card-product-quantity">
-                        {product.quantity}
-                    </div>
-                <button onClick={() => dispatch(subQuantity(product.id))}>
-                -
-            </button>
-            <button onClick={() => {
-                // todo ask if user sure
-                dispatch(removeProduct(product.id));
-            }
-            }>
-                Remove
-            </button>
-                </div>
-        } else {
-            ManagerComponent =
-                <div className="small-product-link">
-                    <button onClick={() => dispatch(addProduct(product.id))}>
-                        Add to cart
-                    </button>
-                </div>
-        }
+
      return (
     <section>
         <div className="main-info">
@@ -45,8 +21,7 @@ function LineProductDescription({product}) {
             <p className="product-description">{product.product_line.name || 'product.product_line.name'}</p>
             <p className="product-price">{product.price.price_value || 'product.price'}</p>
 
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            {ManagerComponent}
+            <ManageProductInCart    product={product} quantity={quantity} addProduct={addProduct}/>
 
             <p>Shop product on other marketplaces</p>
             <div className="link-holder">

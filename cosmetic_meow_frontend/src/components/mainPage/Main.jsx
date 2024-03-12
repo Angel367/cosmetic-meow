@@ -10,8 +10,7 @@ import useFetchData from "../../helpres/useFetchData";
 
 
 function Main  ()  {
-
-    let products = useFetchData('product', {page_size: 6});
+    let products = useFetchData('product', {page_size: 6}).results;
     return (
         <main className='main'>
             <MainTitle/>

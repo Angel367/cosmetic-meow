@@ -2,12 +2,15 @@ import React from "react";
 import {addProduct, addQuantity, removeProduct, subQuantity} from "../../helpres/reduxCart";
 import {useDispatch, useSelector} from "react-redux";
 
-function ManageProductInCart({product, quantity}) {
+const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
+function ManageProductInCart({product, quantity, noButton=false}) {
     let dispatch = useDispatch();
     return (
 
         <div className="small-product-link">
-            {quantity === 0 ?
+            {noButton ? (<img src={arrow} alt={"Перейти"}/>) :
+                (
+                    <>{quantity === 0 ?
                 (<button onClick={() => dispatch(addProduct(product))}>Add to cart</button>) :
                 ( <>
                     <button onClick={() => dispatch(addQuantity(product.id))}>+</button>
@@ -15,6 +18,7 @@ function ManageProductInCart({product, quantity}) {
                 <button onClick={() => dispatch(subQuantity(product.id)) }>-</button>
                 <button onClick={() => dispatch(removeProduct(product.id))}>Remove</button>
                 </>)
+            }</>)
             }
         </div>
     );

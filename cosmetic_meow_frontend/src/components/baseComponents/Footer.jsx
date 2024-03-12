@@ -49,22 +49,22 @@ const Footer = () => {
                     </div>
                 </address>
                 <div className="shopping">
-                    <Link className="main-link" to={'/lines/3'}>Каталог</Link>
-                    <Link to={'/lines/3/products/1'}>Продукт1</Link>
+                    <Link className="main-link" to={'/shop'}>Каталог</Link>
+                    <Link to={'/lines/3'}>НАЗВАНИЕ ЛИНИИ</Link>
                     <Link to={'/lines/3/products/4'}>Продукт2</Link>
                     <Link to={'/lines/3/products/1'}>Продукт3</Link>
 
                 </div>
                 <div className="developing">
-                    <Link className="main-link" to={'/development'}>Сотрудничество</Link>
+                    <Link className="main-link" to={'/development'}>Разработка</Link>
+                    <Link to={'/development'}>О контрактном производстве</Link>
                     <Link to={'/development'}>Стать партнером</Link>
-                    <Link to={'/feedback'} >Обратная связь</Link>
-                    <Link to={'/feedback'}>Поддержка</Link>
+                    <Link to={'/lines/3'}>НАЗВАНИЕ ЛИНИИ</Link>
+
                 </div>
                 <div className="about">
                     <Link className="main-link" to={'/'}>О нас</Link>
-                    <Link to={'/'}>О компании</Link>
-                    <Link to={'/'}>Контакты</Link>
+                    <Link to={'/'}>Компания</Link>
                     <Link to={'/'}>Партнеры</Link>
                 </div>
                 {/*<div className="training">*/}
@@ -78,8 +78,8 @@ const Footer = () => {
 
                 <div className="users">
                     <Link className="main-link" to={'/help'}>Пользователям</Link>
-                    <Link to={'/help'}>Помощь</Link>
-                    <Link to={'/help'}>FAQ</Link>
+                    <Link to={'/feedback'} >Обратная связь</Link>
+                    <Link to={'/feedback'}>Поддержка</Link>
                     <Link to={'/help'}>Правила</Link>
                     <Link to={'/help'}>Безопасность</Link>
                 </div>

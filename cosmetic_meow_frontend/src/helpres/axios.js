@@ -28,7 +28,11 @@ const refreshAuthLogic = async (failedRequest) => {
   baseURL: getBaseUrl()+"auth/",
   headers: {
   Authorization: `Bearer ${refresh}`,
- },})
+  },body: {
+    refresh: refresh
+
+    }
+    ,})
  .then((resp) => {
  const { access, refresh } = resp.data;
  failedRequest.response.config.headers["Authorization"] = "Bearer " + access;
