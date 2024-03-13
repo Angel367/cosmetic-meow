@@ -1,6 +1,6 @@
 import React from "react";
 
-import {fetcherUser, updateUser} from "../../requests/axios";
+import {fetcherUser, updateUser} from "../../requests/axiosService";
 import {getUser} from "../../hooks/user.actions";
 
 function OrderInformation() {

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {fetcherUser} from "../../requests/axios";
+import {fetcherUser} from "../../requests/axiosService";
 import {Link} from "react-router-dom";
 import {logout} from "../../hooks/user.actions";
 

@@ -14,8 +14,8 @@ function getRefreshToken() {
 }
 // Set the access, token and user property
 function setUserData(data) {
- Cookies.set("access", data.access);
- Cookies.set("refresh", data.refresh);
+ Cookies.set("access", data.access, { expires: 1, secure: true });
+ Cookies.set("refresh", data.refresh, { expires: 7, secure: true });
 
 }
  // Logout the user

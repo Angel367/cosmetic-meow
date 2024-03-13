@@ -36,8 +36,8 @@ const refreshAuthLogic = async (failedRequest) => {
  .then((resp) => {
     const { access, refresh } = resp.data;
     failedRequest.response.config.headers["Authorization"] = "Bearer " + access;
-    Cookies.set('access', access);
-    Cookies.set('refresh', refresh);
+    Cookies.set('access', access, { expires: 1, secure: true });
+    Cookies.set('refresh', refresh, { expires: 7, secure: true });
 
  // localStorage.setItem("auth", JSON.stringify({access, refresh }));
  })

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-import {fetcherUser, updateUser} from "../../requests/axios";
+import {fetcherUser, updateUser} from "../../requests/axiosService";
 import {getUser} from "../../hooks/user.actions";
 import OrderInformation from "./OrderInformation";
 

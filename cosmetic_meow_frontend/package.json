@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.7",
     "axios-auth-refresh": "^3.3.6",
+    "cors": "^2.8.5",
     "html-entities": "^2.5.2",
     "js-cookie": "^3.0.5",
     "react": "^18.2.0",

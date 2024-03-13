@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {fetcherUser, updateUser} from "../../requests/axios";
+import {fetcherUser, updateUser} from "../../requests/axiosService";
 
 
 function PersonalEdit() {

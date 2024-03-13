@@ -1,5 +1,5 @@
 import React from "react";
-import {fetcherUser} from "../../requests/axios";
+import {fetcherUser} from "../../requests/axiosService";
 import {logout} from "../../hooks/user.actions";
 import {Link} from "react-router-dom";
 const Message = process.env.PUBLIC_URL + "/img/footer/Message.svg";
