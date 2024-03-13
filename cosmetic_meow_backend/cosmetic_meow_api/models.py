@@ -413,6 +413,7 @@ class Order(models.Model):
     status = models.CharField(max_length=20, choices=ORDER_STATUS_CHOICES, default='cart')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    pick_up_point = models.ForeignKey('PickUpPoint', on_delete=models.CASCADE, null=True, blank=True)
 
     def total_items(self):
         return sum(item.quantity for item in self.order_items.all())
@@ -451,6 +452,22 @@ class Order(models.Model):
 
     def clear_cart(self):
         self.order_items.all().delete()
+
+
+class PickUpPoint(models.Model):
+    name = models.CharField(
+        max_length=100,
+        null=False,
+        blank=False,
+        verbose_name='Название'
+    )
+    address = models.CharField(
+        max_length=150,
+        null=False,
+        blank=False,
+        verbose_name='Адрес'
+    )
+
 
 
 class FeedBack(models.Model):

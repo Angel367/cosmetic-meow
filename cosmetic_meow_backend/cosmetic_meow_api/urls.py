@@ -16,7 +16,8 @@ from .views import (
     OrderViewSet,
     OrderItemViewSet,
     PhoneVerifyCode,
-    PhoneSendCode
+    PhoneSendCode,
+    PickUpPointViewSet
 )
 router = DefaultRouter()
 router.register(r'product', ProductViewSet, basename='products')
@@ -24,6 +25,7 @@ router.register(r'product_line', FullProductLineViewSet, basename='product_lines
 router.register(r'feedback', FeedBackViewSet, basename='feedback')
 router.register(r'order', OrderViewSet, basename='order')
 router.register(r'order_item', OrderItemViewSet, basename='order_item')
+router.register(r'pickup_point', PickUpPointViewSet, basename='pickup_point')
 
 urlpatterns = [
     path('auth/register/', UserCreateAPIView.as_view(), name='user_register'),

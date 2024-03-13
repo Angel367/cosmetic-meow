@@ -108,13 +108,22 @@ class OrderViewSet(viewsets.ModelViewSet):
             else:
                 return Response({'error': 'You do not have permission to access this order'}, status=403)
 
-    def perform_create(self, serializer):
+    def create(self, request, *args, **kwargs):
+        # победили
         if not self.request.session.session_key:
             self.request.session.create()
-        if self.request.user.is_authenticated:
-            serializer.save(user=self.request.user)
+        if Order.objects.filter(session_key=self.request.session.session_key, status='cart').exists():
+            return Response({'error': 'You already have a cart'}, status=400)
+        if self.request.user.is_authenticated and Order.objects.filter(user=self.request.user.id, status='cart').exists():
+            return Response({'error': 'You already have a cart'}, status=400)
+
+        if not self.request.user.is_authenticated:
+            self.request.data['session_key'] = self.request.session.session_key
         else:
-            serializer.save(session_key=self.request.session.session_key)
+            self.request.data['user'] = self.request.user.id
+        return super().create(request, *args, **kwargs)
+
+
 
     def list(self, request, *args, **kwargs):
         if not request.session.session_key:
@@ -188,6 +197,11 @@ class OrderItemViewSet(viewsets.ModelViewSet):
                 return Response({'error': 'You do not have permission to access this order item'}, status=403)
 
 
+class PickUpPointViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = PickUpPoint.objects.all()
+    serializer_class = PickUpPointSerializer
+    permission_classes = [permissions.AllowAny]
+
 
 class FeedBackViewSet(viewsets.ModelViewSet):
     queryset = FeedBack.objects.all()
@@ -246,3 +260,4 @@ class PhoneVerifyCode(APIView):
                 {'error': 'Телефон или код не указаны'},
                 status=status.HTTP_400_BAD_REQUEST
             )
+

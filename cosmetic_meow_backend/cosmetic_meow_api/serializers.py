@@ -121,6 +121,12 @@ class OrderSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class PickUpPointSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = PickUpPoint
+        fields = '__all__'
+
+
 class FeedBackSerializer(serializers.ModelSerializer):
     class Meta:
         model = FeedBack
