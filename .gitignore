@@ -3,6 +3,26 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+cosmetic_meow_frontend/node_modules
+cosmetic_meow_frontend/.pnp
+cosmetic_meow_frontend/.pnp.js
+
+# testing
+cosmetic_meow_frontend/coverage
+
+# production
+cosmetic_meow_frontend/build
+
+# misc
+cosmetic_meow_frontend/.DS_Store
+cosmetic_meow_frontend/.env.local
+cosmetic_meow_frontend/.env.development.local
+cosmetic_meow_frontend/.env.test.local
+cosmetic_meow_frontend/.env.production.local
+cosmetic_meow_frontend/npm-debug.log*
+cosmetic_meow_frontend/yarn-debug.log*
+cosmetic_meow_frontend/yarn-error.log*
+
 # C extensions
 *.so
 
@@ -158,3 +178,4 @@ cython_debug/
 #  and can be added to the global gitignore or merged into this file.  For a more nuclear
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 .idea/
+/cosmetic_meow_backend/cosmetic_meow_api/migrations/*.py

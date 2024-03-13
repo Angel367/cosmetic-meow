@@ -1,0 +1,40 @@
+@font-face {
+    font-family: 'CygreBold';
+    src: url('../../../public/font/Cygre-Bold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'CygreExtraBold';
+    src: url('../../../public/font/Cygre-ExtraBold.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Cygre';
+    src: url('../../../public/font/Cygre-Regular.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'Bergamasco Regular';
+    src: url('../../../public/font/Bergamasco Regular.ttf') format('truetype');
+}
+*{
+    font-family: Cygre, sans-serif;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 24px;
+}
+body {
+    padding: 0;
+    margin: 0;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+main {
+        /*padding-top: calc(4rem + 26px);*/
+        margin-top: 0;
+}
+@media (max-width:768px ) {
+    main {
+        margin-top: calc(4rem + 26px);
+        /*padding-top: 0;*/
+    }
+}
+

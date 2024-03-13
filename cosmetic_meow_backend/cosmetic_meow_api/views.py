@@ -3,6 +3,9 @@ from rest_framework import viewsets, permissions, generics, status
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
+
 from .filters import ProductFilter, FeedBackFilter
 from .serializers import *
 from .models import *
@@ -18,11 +21,23 @@ class UserCreateAPIView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            refresh = RefreshToken.for_user(serializer.instance)
+            access_token = AccessToken.for_user(serializer.instance)
+            res = {
+                "refresh": str(refresh),
+                "access": str(access_token)
+            }
+            return Response(
+                {
+                    'user': serializer.data,
+                    'refresh': res['refresh'],
+                    'access': res['access']
+                }
+                , status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class UserUpdateAPIView(generics.UpdateAPIView):
+class UserUpdateAPIView(generics.RetrieveUpdateAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = UserUpdateSerializer
     permission_classes = [IsAuthenticated]
@@ -180,3 +195,54 @@ class FeedBackViewSet(viewsets.ModelViewSet):
     permission_classes = [AllCreateAdminAllAnother403]
     filter_backends = [DjangoFilterBackend]
     filterset_class = FeedBackFilter
+
+
+class PhoneSendCode(APIView):
+    permission_classes = [permissions.AllowAny]
+    code = '1234'
+
+    def post(self, request):
+        phone = request.data.get('phone_number')
+        if phone:
+            phone = str(phone)
+            if CustomUser.objects.filter(phone_number=phone).exists():
+                return Response(
+                    {'error': 'Пользователь с таким номером телефона уже существует'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            else:
+                print(phone, self.code)
+                return Response(
+                    {'message': 'Код отправлен на номер {}'.format(phone)},
+                    status=status.HTTP_200_OK
+                )
+        else:
+            return Response(
+                {'error': 'Телефон не указан'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+
+class PhoneVerifyCode(APIView):
+    permission_classes = [permissions.AllowAny]
+    code = '1234'
+
+    def post(self, request):
+        phone = request.data.get('phone_number')
+        code = request.data.get('code')
+        if phone and code:
+            if code == self.code:
+                return Response(
+                    {'message': 'Номер телефона подтвержден'},
+                    status=status.HTTP_200_OK
+                )
+            else:
+                return Response(
+                    {'error': 'Неверный код подтверждения'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+        else:
+            return Response(
+                {'error': 'Телефон или код не указаны'},
+                status=status.HTTP_400_BAD_REQUEST
+            )

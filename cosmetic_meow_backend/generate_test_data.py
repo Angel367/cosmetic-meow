@@ -113,14 +113,22 @@ def generate_products(num_products=10):
         clinical_testing_result = ProductClinicalTestingResult.objects.order_by('?').first()
         product_line = ProductLine.objects.order_by('?').first()
         product_tags = ProductTag.objects.order_by('?').all()[:random.randint(1, 3)]
-
+        application_method = fake.text()
+        short_description = fake.text()
+        composition = fake.text()
+        purpose = fake.text()
         product = Product.objects.create(
             name=name,
             description=description,
             price=price,
             discount_price=discount_price,
             clinical_testing_result=clinical_testing_result,
-            product_line=product_line
+            product_line=product_line,
+            application_method=application_method,
+            composition=composition,
+            purpose=purpose,
+            short_description=short_description
+
         )
         product.active_substances.set(active_substances)
         product.advantages.set(advantages)
