@@ -94,8 +94,6 @@ class OrderItemSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        # Получаем заказ для этого элемента
-        cart = None
         request = self.context.get('request')
 
         if request.user.is_authenticated:
@@ -131,5 +129,3 @@ class FeedBackSerializer(serializers.ModelSerializer):
     class Meta:
         model = FeedBack
         fields = ['id', 'name', 'email', 'message', 'type', 'created_at']
-
-

@@ -12,6 +12,17 @@ from .models import *
 from .permissions import AllCreateAdminAllAnother403
 
 
+class SetUserTokenGetView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request):
+        if request.session.session_key is None:
+            request.session.create()
+            return Response(status=status.HTTP_201_CREATED)
+        else:
+            return Response(status=status.HTTP_208_ALREADY_REPORTED)
+
+
 class UserCreateAPIView(generics.CreateAPIView):
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
@@ -31,9 +42,9 @@ class UserCreateAPIView(generics.CreateAPIView):
                 {
                     'user': serializer.data,
                     'refresh': res['refresh'],
-                    'access': res['access']
-                }
-                , status=status.HTTP_201_CREATED)
+                    'access': res['access']},
+                status=status.HTTP_201_CREATED
+            )
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -109,12 +120,12 @@ class OrderViewSet(viewsets.ModelViewSet):
                 return Response({'error': 'You do not have permission to access this order'}, status=403)
 
     def create(self, request, *args, **kwargs):
-        # победили
         if not self.request.session.session_key:
             self.request.session.create()
         if Order.objects.filter(session_key=self.request.session.session_key, status='cart').exists():
             return Response({'error': 'You already have a cart'}, status=400)
-        if self.request.user.is_authenticated and Order.objects.filter(user=self.request.user.id, status='cart').exists():
+        if self.request.user.is_authenticated and \
+                Order.objects.filter(user=self.request.user.id, status='cart').exists():
             return Response({'error': 'You already have a cart'}, status=400)
 
         if not self.request.user.is_authenticated:
@@ -122,8 +133,6 @@ class OrderViewSet(viewsets.ModelViewSet):
         else:
             self.request.data['user'] = self.request.user.id
         return super().create(request, *args, **kwargs)
-
-
 
     def list(self, request, *args, **kwargs):
         if not request.session.session_key:
@@ -141,7 +150,6 @@ class OrderViewSet(viewsets.ModelViewSet):
             queryset = Order.objects.filter(session_key=request.session.session_key, session_key__isnull=False)
             serializer = OrderSerializer(queryset, many=True)
             return Response(serializer.data)
-
 
     @action(detail=True, methods=['post'])
     def clear_cart(self, request, pk=None):
@@ -260,4 +268,3 @@ class PhoneVerifyCode(APIView):
                 {'error': 'Телефон или код не указаны'},
                 status=status.HTTP_400_BAD_REQUEST
             )
-
