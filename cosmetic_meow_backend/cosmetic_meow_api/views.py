@@ -1,5 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions, generics, status
+from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .filters import ProductFilter, FeedBackFilter
@@ -70,6 +71,107 @@ class FullProductLineViewSet(viewsets.ReadOnlyModelViewSet):
             'advantages': advantages_of_products_in_product_line,
             'applications': [result['application_method'] for result in applications_of_products_in_product_line]
         })
+
+
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+
+    def retrieve(self, request, *args, **kwargs):
+        # check does user have access to this order
+        order = self.get_object()
+        if request.user.is_authenticated:
+            if request.user.is_admin or order.user == request.user:
+                serializer = self.get_serializer(order)
+                return Response(serializer.data)
+            else:
+                return Response({'error': 'You do not have permission to access this order'}, status=403)
+        else:
+            if order.session_key == request.session.session_key:
+                serializer = self.get_serializer(order)
+                return Response(serializer.data)
+            else:
+                return Response({'error': 'You do not have permission to access this order'}, status=403)
+
+    def perform_create(self, serializer):
+        if not self.request.session.session_key:
+            self.request.session.create()
+        if self.request.user.is_authenticated:
+            serializer.save(user=self.request.user)
+        else:
+            serializer.save(session_key=self.request.session.session_key)
+
+    def list(self, request, *args, **kwargs):
+        if not request.session.session_key:
+            request.session.create()
+        if request.user.is_authenticated:
+            if request.user.is_admin:
+                queryset = Order.objects.all()
+                serializer = OrderSerializer(queryset, many=True)
+                return Response(serializer.data)
+            else:
+                queryset = Order.objects.filter(user=request.user)
+                serializer = OrderSerializer(queryset, many=True)
+                return Response(serializer.data)
+        else:
+            queryset = Order.objects.filter(session_key=request.session.session_key, session_key__isnull=False)
+            serializer = OrderSerializer(queryset, many=True)
+            return Response(serializer.data)
+
+
+    @action(detail=True, methods=['post'])
+    def clear_cart(self, request, pk=None):
+        order = self.get_object()
+        order.clear_cart()
+        return Response({'message': 'Cart cleared successfully'})
+
+    @action(detail=True, methods=['get'])
+    def total_price(self, request, pk=None):
+        if self.get_object().user != request.user:
+            return Response({'error': 'You do not have permission to access this order'}, status=403)
+        if self.get_object().session_key != request.session.session_key:
+            return Response({'error': 'You do not have permission to access this order'}, status=403)
+
+        order = self.get_object()
+        total_price = order.total_price()
+        return Response({'total_price': total_price})
+
+
+class OrderItemViewSet(viewsets.ModelViewSet):
+    queryset = OrderItem.objects.all()
+    serializer_class = OrderItemSerializer
+
+    def list(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            if request.user.is_admin:
+                queryset = OrderItem.objects.all()
+                serializer = OrderItemSerializer(queryset, many=True)
+                return Response(serializer.data)
+            else:
+                queryset = OrderItem.objects.filter(order__user=request.user)
+                serializer = OrderItemSerializer(queryset, many=True)
+                return Response(serializer.data)
+        else:
+            queryset = OrderItem.objects.filter(order__session_key=request.session.session_key)
+            serializer = OrderItemSerializer(queryset, many=True)
+            return Response(serializer.data)
+
+    def retrieve(self, request, *args, **kwargs):
+        # check does user have access to this order item
+        order_item = self.get_object()
+        if request.user.is_authenticated:
+            if request.user.is_admin or order_item.order.user == request.user:
+                serializer = self.get_serializer(order_item)
+                return Response(serializer.data)
+            else:
+                return Response({'error': 'You do not have permission to access this order item'}, status=403)
+        else:
+            if order_item.order.session_key == request.session.session_key:
+                serializer = self.get_serializer(order_item)
+                return Response(serializer.data)
+            else:
+                return Response({'error': 'You do not have permission to access this order item'}, status=403)
+
 
 
 class FeedBackViewSet(viewsets.ModelViewSet):

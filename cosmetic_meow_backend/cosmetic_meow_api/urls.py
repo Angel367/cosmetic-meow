@@ -6,12 +6,21 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView
 )
 
-from .views import ProductViewSet, FullProductLineViewSet, UserCreateAPIView, FeedBackViewSet, UserUpdateAPIView
-
+from .views import (
+    ProductViewSet,
+    FullProductLineViewSet,
+    UserCreateAPIView,
+    FeedBackViewSet,
+    UserUpdateAPIView,
+    OrderViewSet,
+    OrderItemViewSet
+)
 router = DefaultRouter()
 router.register(r'product', ProductViewSet, basename='products')
 router.register(r'product_line', FullProductLineViewSet, basename='product_lines')
 router.register(r'feedback', FeedBackViewSet, basename='feedback')
+router.register(r'order', OrderViewSet, basename='order')
+router.register(r'order_item', OrderItemViewSet, basename='order_item')
 
 
 urlpatterns = [

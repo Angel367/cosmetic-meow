@@ -239,12 +239,16 @@ class Product(models.Model):
         related_name='price',
         on_delete=models.CASCADE,
         verbose_name='Цена',
+        null=False,
+        blank=False
     )
     discount_price = models.ForeignKey(
         to=DiscountPrice,
         related_name='discount_price',
         on_delete=models.CASCADE,
-        verbose_name='Цена со скидкой'
+        verbose_name='Цена со скидкой',
+        null=True,
+        blank=True
     )
     active_substances = models.ManyToManyField(
         to='ProductActiveSubstance',
@@ -268,6 +272,12 @@ class Product(models.Model):
         to=ProductTag,
         verbose_name='Теги',
     )
+
+    @property
+    def get_price(self):
+        if self.discount_price:
+            return self.discount_price.price_value
+        return self.price.price_value
 
 
 class ProductClinicalTestingResult(models.Model):
@@ -376,6 +386,71 @@ class ProductLine(models.Model):
         blank=False,
         verbose_name='Описание'
     )
+
+
+class OrderItem(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_items')
+    quantity = models.PositiveIntegerField(default=1)
+    order = models.ForeignKey('Order', on_delete=models.CASCADE, related_name='order_items')
+
+    def __str__(self):
+        return f'{self.product.name} - {self.quantity}'
+
+    @property
+    def total_price(self):
+        return self.product.get_price * self.quantity
+
+
+class Order(models.Model):
+    ORDER_STATUS_CHOICES = (
+        ('cart', 'Корзина'),
+        ('in_progress', 'В обработке'),
+        ('done', 'Выполнен'),
+        ('canceled', 'Отменен'),
+    )
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True)
+    session_key = models.CharField(max_length=50, null=True, blank=True)
+    status = models.CharField(max_length=20, choices=ORDER_STATUS_CHOICES, default='cart')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def total_items(self):
+        return sum(item.quantity for item in self.order_items.all())
+
+    def total_price(self):
+        return sum(item.total_price for item in self.order_items.all())
+
+    def mark_as_in_progress(self):
+        self.status = 'in_progress'
+        self.save()
+
+    def mark_as_done(self):
+        self.status = 'done'
+        self.save()
+
+    def cancel_order(self):
+        self.status = 'canceled'
+        self.save()
+
+    def add_item(self, product, quantity=1):
+        existing_item = self.order_items.filter(product=product).first()
+        if existing_item:
+            existing_item.quantity += quantity
+            existing_item.save()
+        else:
+            self.order_items.create(product=product, quantity=quantity)
+
+    def remove_item(self, product, quantity=1):
+        existing_item = self.order_items.filter(product=product).first()
+        if existing_item:
+            if existing_item.quantity <= quantity:
+                existing_item.delete()
+            else:
+                existing_item.quantity -= quantity
+                existing_item.save()
+
+    def clear_cart(self):
+        self.order_items.all().delete()
 
 
 class FeedBack(models.Model):

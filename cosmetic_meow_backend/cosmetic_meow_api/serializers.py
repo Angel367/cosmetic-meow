@@ -77,6 +77,41 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class OrderItemSerializer(serializers.ModelSerializer):
+    order = serializers.PrimaryKeyRelatedField(read_only=True)
+
+    class Meta:
+        model = OrderItem
+        fields = '__all__'
+
+    def create(self, validated_data):
+        # Получаем заказ для этого элемента
+        cart = None
+        request = self.context.get('request')
+
+        if request.user.is_authenticated:
+            cart = Order.objects.get_or_create(user=request.user, status='cart')[0]
+        else:
+            cart = Order.objects.get_or_create(session_key=request.session.session_key, status='cart')[0]
+
+        # Проверка наличия продукта с таким id в корзине
+
+        if OrderItem.objects.filter(product=validated_data['product'], order=cart).exists():
+            raise serializers.ValidationError('Product is already in cart, adelina use PUT')
+
+        # Добавляем связанный заказ к данным перед сохранением
+        validated_data['order'] = cart
+        return super().create(validated_data)
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    order_items = OrderItemSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Order
+        fields = '__all__'
+
+
 class FeedBackSerializer(serializers.ModelSerializer):
     class Meta:
         model = FeedBack

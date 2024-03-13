@@ -4,7 +4,6 @@ from rest_framework import permissions
 class AllCreateAdminAllAnother403(permissions.BasePermission):
     def has_permission(self, request, view):
         if request.method == 'POST':
-            print("da")
             # Разрешаем только создание для всех пользователей
             return True
         elif request.user.is_authenticated:
