@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 
-import {fetcherUser, updateUser} from "../../helpres/axios";
+import {fetcherUser, updateUser} from "../../requests/axios";
 import {getUser} from "../../hooks/user.actions";
 import OrderInformation from "./OrderInformation";
 
 function OrderInformationEdit() {
-    let user = getUser();
+    let user = fetcherUser();
     const [form, setForm] = useState({});
 
     // todo fetch cart by user

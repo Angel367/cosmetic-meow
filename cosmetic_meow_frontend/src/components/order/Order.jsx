@@ -1,5 +1,5 @@
 import React from "react";
-import ProductCard from "../baseComponents/ProductCard";
+import ProductCard from "../product/ProductCard";
 
 const Order = ({ order }) => {
     if (!order) {

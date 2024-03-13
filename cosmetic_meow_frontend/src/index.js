@@ -7,36 +7,44 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
-import MainPage from "./page/MainPage";
-import ErrorPage from "./page/ErrorPage";
-import DevelopmentPage from "./page/DevelopmentPage";
-import LineProductPage from "./page/LineProductPage";
-import LinePage from "./page/LinePage";
-import FeedbackPage from "./page/FeedbackPage";
-import ProtectedRoute from "./routes/ProtectedRoute";
-import Registration from "./page/Registration";
-import Login from "./page/Login";
-import Profile from "./page/Profile";
-import Cart from "./components/Cart";
+import ErrorPage from "./components/error/ErrorPage";
+import Cart from "./components/order/Cart";
 import {Provider} from "react-redux";
-import store from "./helpres/store";
-import Catalog from "./components/Catalog";
+import store from "./redux/store";
+import Shop from "./components/shop/Shop";
+import Main from "./components/main/Main";
+import Line from "./components/line/Line";
+import LineProduct from "./components/product/LineProduct";
+import OnlyForAnonymousRoute from "./routes/OnlyForAnonymousRoute";
+import ProfileLayout from "./components/profile/ProfileLayout";
+import ProfileContent from "./components/profile/ProfileContent";
+import PersonalEdit from "./components/profile/PersonalEdit";
+import Personal from "./components/profile/Personal";
+import Layout from "./components/base/Layout";
+import Dev from "./components/feedback/Dev";
+import Feedback from "./components/feedback/Feedback";
+import OnlyForAuthenticatedRoute from "./routes/OnlyForAuthenticatedRoute";
+import AuthLayout from "./components/auth/AuthLayout";
+import Registration from "./components/auth/Login";
+import Login from "./components/auth/Login";
+import Orders from "./components/order/Orders";
+import Order from "./components/order/Order";
 
 const router = createBrowserRouter([
     {
         index: true,
-        element: <MainPage/>,
+        element: <Layout children={<Main/>} title={"Главная"}/>,
         errorElement: <ErrorPage/>,
     },
     {
 
         path: "/development",
-        element: <DevelopmentPage/>,
+        element: <Layout children={<Dev/> } title={"Разработка"}/>,
         errorElement: <ErrorPage/>,
     },
      {
         path: "/feedback",
-        element: <FeedbackPage/>,
+        element: <Layout children={<Feedback/>} title={"Обратная связь"}/>,
         errorElement: <ErrorPage/>,
     },
 
@@ -48,7 +56,7 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <LinePage/>,
+                element: <Layout children={<Line/>}/>,
                 errorElement: <ErrorPage/>,
 
             },
@@ -56,7 +64,7 @@ const router = createBrowserRouter([
             {
 
             path: "products/:id_product",
-            element: <LineProductPage/>,
+            element: <Layout children={<LineProduct/>}/>,
             errorElement: <ErrorPage/>,
         },
 
@@ -69,26 +77,29 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Catalog/>,
+                element: <Layout children={<Shop/>} title={"Каталог"}/>,
                 errorElement: <ErrorPage/>,
             },
             {
                 path: "product/:id_product",
-                element: <LineProductPage/>,
+                element: <Layout children={<LineProduct/>} title={"Товар"}/>,
                 errorElement: <ErrorPage/>,
             },
         ],
     },
     {
         path: "/profile",
-        element: <ProtectedRoute>
+        element: <OnlyForAuthenticatedRoute>
             <Outlet/>
-        </ProtectedRoute>,
+        </OnlyForAuthenticatedRoute>,
         errorElement: <ErrorPage/>,
         children: [
             {
                 index: true,
-                element: <Profile/>,
+                element: <Layout
+                    children={<ProfileLayout content={<ProfileContent/>}/>}
+                    title={"Профиль"}/>,
+
                 errorElement: <ErrorPage/>,
 
             },
@@ -98,12 +109,21 @@ const router = createBrowserRouter([
                 children: [
                     {
                         index: true,
-                        // element: <ProfilePersonal/>,
+                        element: <Layout children=
+                                             {
+                            <ProfileLayout content={<Personal/>}/>
+                        }
+                                         title={"Личные данные"}/>,
+
                         errorElement: <ErrorPage/>,
                     },
                     {
                         path: "edit/",
-                        // element: <ProfilePersonalEdit/>,
+                        element: <Layout children=
+                                             {
+                            <ProfileLayout content={<PersonalEdit/>}/>
+                        }
+                                         title={"Редактирование"}/>,
                         errorElement: <ErrorPage/>,
                     },
                 ],
@@ -117,12 +137,20 @@ const router = createBrowserRouter([
                 children: [
                 {
                     index: true,
-                    // element: <Orders/>,
+                    element: <Layout children=
+                                         {
+                            <ProfileLayout content={<Orders/>}/>
+                        }
+                                     title={"Заказы"}/>,
                     errorElement: <ErrorPage/>,
                 },
                 {
                     path: "order/:id_order",
-                    // element: <Order/>,
+                    element: <Layout children=
+                                         {
+                            <ProfileLayout content={<Order/>}/>
+                        }
+                                     title={"Заказ"}/>,
                     errorElement: <ErrorPage/>,
                 },
                ],
@@ -133,16 +161,20 @@ const router = createBrowserRouter([
     },
     {
         path: "/cart",
-        element: <Cart/>,
+        element: <Layout children={<Cart/>} title={"Корзина"}/>,
         errorElement: <ErrorPage/>,
     },
     {
         path: "/register",
-        element: <Registration/>,
+        element: <OnlyForAnonymousRoute>
+                    <AuthLayout children={<Registration/>} title={"Регистрация"}/>
+                </OnlyForAnonymousRoute>,
     },
     {
         path: "/login",
-        element: <Login/>,
+        element: <OnlyForAnonymousRoute>
+                    <AuthLayout children={<Login/>} title={"Вход"}/>
+                </OnlyForAnonymousRoute>,
     },
 
     ]

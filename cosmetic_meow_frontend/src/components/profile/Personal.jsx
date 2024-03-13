@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {fetcherUser} from "../../helpres/axios";
+import React from "react";
+import {fetcherUser} from "../../requests/axios";
 import {logout} from "../../hooks/user.actions";
 import {Link} from "react-router-dom";
 const Message = process.env.PUBLIC_URL + "/img/footer/Message.svg";
@@ -11,11 +11,7 @@ function Personal() {
         logout();
         window.location.reload();
     }
-    let [user, setUser] = useState();
-    useEffect(
-        fetcherUser('auth/update', '').then((data) => {
-        setUser(data);
-    }, []));
+    let user = fetcherUser();
 
     if (!user)
         user = {

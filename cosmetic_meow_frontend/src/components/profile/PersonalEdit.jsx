@@ -1,11 +1,9 @@
 import React, {useState} from "react";
-import {fetcherUser, updateUser} from "../../helpres/axios";
-import { logout} from "../../hooks/user.actions";
-import {Link} from "react-router-dom";
+import {fetcherUser, updateUser} from "../../requests/axios";
 
 
 function PersonalEdit() {
-    let user = fetcherUser('update', '')
+    let user = fetcherUser();
     if (!user)
         user = {
         first_name: "Имя",

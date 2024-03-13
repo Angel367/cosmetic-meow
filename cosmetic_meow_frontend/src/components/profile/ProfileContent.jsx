@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {fetcherUser} from "../../helpres/axios";
-
+import {fetcherUser} from "../../requests/axios";
 import {Link} from "react-router-dom";
 import {logout} from "../../hooks/user.actions";
 
@@ -15,7 +14,7 @@ function ProfileContent() {
     }
     const [userData, setUserDate] = useState({});
     useEffect(() => {
-        fetcherUser('auth/update/', '')
+        fetcherUser()
             .then((data) => {
             setUserDate(data);
         })

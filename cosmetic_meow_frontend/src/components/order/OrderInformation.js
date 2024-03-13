@@ -1,10 +1,10 @@
 import React from "react";
 
-import {fetcherUser, updateUser} from "../../helpres/axios";
+import {fetcherUser, updateUser} from "../../requests/axios";
 import {getUser} from "../../hooks/user.actions";
 
 function OrderInformation() {
-    let user = getUser();
+    let user = fetcherUser();
     // todo fetch cart by user
     if (!user)
         user = {

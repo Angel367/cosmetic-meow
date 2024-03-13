@@ -1,39 +1,27 @@
-import {useNavigate} from "react-router-dom";
+import Cookies from "js-cookie";
 
-
-function getUser() {
- const auth =
- JSON.parse(localStorage.getItem("auth"));
- return auth.user;
+function isAuth() {
+ return getAccessToken() !== null;
 }
 
 // Get the access token
 function getAccessToken() {
- const auth =
- JSON.parse(localStorage.getItem("auth"));
- return auth.access;
+ return Cookies.get("access");
 }
 // Get the refresh token
 function getRefreshToken() {
- const auth =
- JSON.parse(localStorage.getItem("auth"));
- return auth.refresh;
+ return Cookies.get("refresh");
 }
 // Set the access, token and user property
 function setUserData(data) {
- localStorage.setItem(
- "auth",
- JSON.stringify({
- access: data.access,
- refresh: data.refresh,
- user: data.user,
- })
- );
+ Cookies.set("access", data.access);
+ Cookies.set("refresh", data.refresh);
+
 }
  // Logout the user
  function logout() {
-     localStorage.removeItem("auth");
+    Cookies.remove("access");
+    Cookies.remove("refresh");
+
  }
-
-
- export { getUser, getAccessToken, getRefreshToken, setUserData, logout};
+ export {isAuth, getAccessToken, getRefreshToken, setUserData, logout};
