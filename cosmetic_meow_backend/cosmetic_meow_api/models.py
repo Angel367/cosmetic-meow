@@ -79,7 +79,6 @@ class CustomUser(AbstractBaseUser):
         verbose_name='Отчество'
     )
 
-
     objects = CustomUserManager()
 
     USERNAME_FIELD = "phone_number"
@@ -408,12 +407,40 @@ class Order(models.Model):
         ('done', 'Выполнен'),
         ('canceled', 'Отменен'),
     )
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True)
-    session_key = models.CharField(max_length=50, null=True, blank=True)
-    status = models.CharField(max_length=20, choices=ORDER_STATUS_CHOICES, default='cart')
+    user = models.ForeignKey(
+        CustomUser,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+    session_key = models.CharField(
+        max_length=50,
+        null=True,
+        blank=True
+    )
+    status = models.CharField(
+        max_length=20,
+        choices=ORDER_STATUS_CHOICES,
+        default='cart'
+    )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    pick_up_point = models.ForeignKey('PickUpPoint', on_delete=models.CASCADE, null=True, blank=True)
+    pick_up_point = models.ForeignKey(
+        to='PickUpPoint',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+    receiver_full_name = models.CharField(
+        max_length=100,
+        null=True,
+        blank=True
+    )
+    receiver_phone_number = models.CharField(
+        max_length=20,
+        null=True,
+        blank=True
+    )
 
     def total_items(self):
         return sum(item.quantity for item in self.order_items.all())
@@ -467,7 +494,6 @@ class PickUpPoint(models.Model):
         blank=False,
         verbose_name='Адрес'
     )
-
 
 
 class FeedBack(models.Model):
