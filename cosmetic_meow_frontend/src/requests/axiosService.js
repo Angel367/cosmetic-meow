@@ -7,8 +7,10 @@ import Cookies from 'js-cookie';
 
 const axiosService = axios.create({
  baseURL: getBaseUrl()+"auth/token/verify/",
+    withCredentials: true,
  headers: {
  "Content-Type": "application/json",
+
  },
 });
 axiosService.interceptors.request.use(async (config) => {
@@ -27,7 +29,9 @@ const refreshAuthLogic = async (failedRequest) => {
  const {access} = getAccessToken();
  return axios.post("token/refresh/", null, {
   baseURL: getBaseUrl()+"auth/",
+     withCredentials: true,
   headers: {
+
   Authorization: `Bearer ${access}`,
   },body: {
     refresh: refresh

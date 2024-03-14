@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import NotificationContainer from "react-notifications/lib/NotificationContainer";
 
 import axios from "axios";
+import createSession from "../../requests/createSession";
 
 function AuthLayout({children, title, scrollX=0, scrollY=0}) {
 
@@ -13,16 +14,7 @@ function AuthLayout({children, title, scrollX=0, scrollY=0}) {
         }
         window.scrollTo(scrollX, scrollY);
     });
-
-    // if (Cookies.getSession() === null) {
-    //         axios.get('http://localhost:8000/session/')
-    //             .then((response) => {
-    //                 return response.status;
-    //             })
-    //             .catch((error) => {
-    //                 console.log(error);
-    //             });
-    // }
+    createSession();
     return (
         <div>
             <div>

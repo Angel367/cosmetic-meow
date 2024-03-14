@@ -57,6 +57,10 @@ function AuthForm({path="login/", buttonName="Войти"}) {
             <p>
                 <label htmlFor={"phone_number"}>Телефон</label>
                 <input id={"phone_number"} type="tel" placeholder="Ваш телефон..." required={true}
+                       autoCorrect={"off"}
+                       autoCapitalize={"off"}
+                       spellCheck={"false"}
+                       autoComplete={"off"}
                        onChange={(e) => setForm({...form, phone_number: e.target.value})}/>
 
             </p>
@@ -65,6 +69,10 @@ function AuthForm({path="login/", buttonName="Войти"}) {
                 <label htmlFor={"password"}>Пароль</label>
             <input id={"password"} type="password" placeholder="Ваш пароль..." required={true}
                    minLength={8}
+                   autoCorrect={"off"}
+                   autoCapitalize={"off"}
+                   spellCheck={"false"}
+                   autoComplete={"off"}
                 onChange={(e) => setForm({...form, password: e.target.value})}/>
             </p>
             <p>

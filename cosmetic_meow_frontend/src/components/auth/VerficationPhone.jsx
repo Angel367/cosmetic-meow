@@ -64,7 +64,11 @@ function VerificationPhone({phone_number}) {
             <p>
                 <label id={"codeLabel"}
                        htmlFor={"code"} hidden={true} >Код из смс</label>
-                <input id={"code"} type="text" placeholder="Код из смс..." hidden={true}
+                <input id={"code"} type="number" placeholder="Код из смс..." hidden={true}
+                       autoCorrect={"off"}
+                       autoCapitalize={"off"}
+                       spellCheck={"false"}
+                       autoComplete={"off"}
                        onChange={(e) => setForm({...form, code: e.target.value})}/>
                 <a onClick={onClick}>{textButton}</a>
             </p>

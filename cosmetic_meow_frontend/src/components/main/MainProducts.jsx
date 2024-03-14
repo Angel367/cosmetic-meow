@@ -1,6 +1,6 @@
 import React from "react";
 import ProductCard from "../product/ProductCard";
-import useFetchData from "../../requests/useFetchData";
+import fetchData from "../../requests/fetchData";
 import {Link} from "react-router-dom";
 
 function MainProducts({products}) {

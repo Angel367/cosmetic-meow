@@ -2,18 +2,17 @@ import axios from "axios";
 import {useEffect, useState} from "react";
 import getBaseUrl from "./baseUrl";
 
-function useFetchData(urlPart,  params = null) {
-    let currentUrl = window.location.href;
+async function fetchData(urlPart, params = null) {
     let url = getBaseUrl() + urlPart;
-    let [variable, setVariable] = useState([]);
-    useEffect(() => {
-    axios.get(url,
+    let variable;
+    await axios.get(url,
             {
                 params: params,
+                withCredentials: true,
             }
             )
             .then((response) => {
-                setVariable(response.data);
+                variable = response.data;
                 console.log(response.status,
                     "response_status",
                     response.data,
@@ -22,8 +21,6 @@ function useFetchData(urlPart,  params = null) {
             .catch((error) => {
                 console.log(error);
             });
-    }, [currentUrl]);
-    console.log(variable, urlPart, params, "variable");
     return variable;
 }
-export default useFetchData;
+export default fetchData;

@@ -6,6 +6,7 @@ async function postData(urlPart, data) {
     return await axios.post(url,
         data,
         {
+            withCredentials: true,
             headers: {
                 'Content-Type': 'application/json',
             }

@@ -1,19 +1,23 @@
 import { createSlice } from '@reduxjs/toolkit'
+import axios, {AxiosError} from "axios";
+import getBaseUrl from "../requests/baseUrl";
+import fetchData from "../requests/fetchData";
 
 export const reduxCart = createSlice({
   name: 'cart',
   initialState: {
     products: []
-  }
-  ,
+  },
+
+
   reducers: {
-    initProducts: (state, action) => {
-        state.products = action.payload;
+    initiateProducts: (state, action) => {
+        state.products = action.payload
     },
     addProduct: (state, action) => {
       let product = {
         id: action.payload.id,
-        quantity: 1,
+        quantity: action.payload.quantity || 1,
         price: action.payload.price.price_value,
         name: action.payload.name,
         short_description: action.payload.short_description
@@ -45,7 +49,7 @@ export const {
     removeProduct,
     addQuantity,
     subQuantity,
-
+    initiateProducts
 } = reduxCart.actions
 
 export default reduxCart.reducer

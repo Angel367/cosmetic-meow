@@ -11,7 +11,7 @@ function LineProductDescription({product}) {
     let quantity = useSelector(state => state.cart.products.find(
         (p) => p.id === product.id)?.quantity || 0
     )
-    if (!product || product.length === 0)
+    if (!product)
         return <div>Загрузка</div>
 
      return (

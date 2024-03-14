@@ -13,7 +13,6 @@ function Layout({children, title, scrollX=0, scrollY=0}) {
         }
         window.scrollTo(scrollX, scrollY);
     });
-
     createSession();
     return (
         <div>

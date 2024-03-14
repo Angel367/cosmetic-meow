@@ -159,7 +159,7 @@ class OrderViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['get'])
     def total_price(self, request, pk=None):
-        if self.get_object().user != request.user:
+        if request.user.is_authenticated and self.get_object().user != request.user:
             return Response({'error': 'You do not have permission to access this order'}, status=403)
         if self.get_object().session_key != request.session.session_key:
             return Response({'error': 'You do not have permission to access this order'}, status=403)
