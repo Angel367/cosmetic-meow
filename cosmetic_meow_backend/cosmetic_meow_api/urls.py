@@ -18,7 +18,8 @@ from .views import (
     PhoneVerifyCode,
     PhoneSendCode,
     PickUpPointViewSet,
-    SetUserTokenGetView
+    SetUserTokenGetView,
+    ProductPartnerViewSet
 )
 router = DefaultRouter()
 router.register(r'product', ProductViewSet, basename='products')
@@ -27,6 +28,7 @@ router.register(r'feedback', FeedBackViewSet, basename='feedback')
 router.register(r'order', OrderViewSet, basename='order')
 router.register(r'order_item', OrderItemViewSet, basename='order_item')
 router.register(r'pickup_point', PickUpPointViewSet, basename='pickup_point')
+router.register(r'product_partner', ProductPartnerViewSet, basename='product_partner')
 
 urlpatterns = [
     path('set_user_token/', SetUserTokenGetView.as_view(), name='set_user_token'),

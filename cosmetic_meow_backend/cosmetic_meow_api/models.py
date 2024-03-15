@@ -62,20 +62,20 @@ class CustomUser(AbstractBaseUser):
 
     first_name = models.CharField(
         max_length=100,
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
         verbose_name='Имя'
     )
     last_name = models.CharField(
         max_length=100,
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
         verbose_name='Фамилия'
     )
     middle_name = models.CharField(
         max_length=100,
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
         verbose_name='Отчество'
     )
 
@@ -220,17 +220,17 @@ class Product(models.Model):
     )
     composition = models.TextField(
         null=False,
-        blank=False,
+        blank=True,
         verbose_name='Состав'
     )
     purpose = models.TextField(
         null=False,
-        blank=False,
+        blank=True,
         verbose_name='Назначение'
     )
     application_method = models.TextField(
         null=False,
-        blank=False,
+        blank=True,
         verbose_name='Способ применения'
     )
     price = models.ForeignKey(
@@ -238,8 +238,8 @@ class Product(models.Model):
         related_name='price',
         on_delete=models.CASCADE,
         verbose_name='Цена',
-        null=False,
-        blank=False
+        null=True,
+        blank=True
     )
     discount_price = models.ForeignKey(
         to=DiscountPrice,
@@ -260,12 +260,16 @@ class Product(models.Model):
     clinical_testing_result = models.ForeignKey(
         to='ProductClinicalTestingResult',
         on_delete=models.CASCADE,
+        null=True,
+        blank=True,
         verbose_name='Результаты клинических испытаний'
     )
     product_line = models.ForeignKey(
         to='ProductLine',
         on_delete=models.CASCADE,
-        verbose_name='Линия продукта'
+        verbose_name='Линия продукта',
+        null=True,
+        blank=True
     )
     product_tags = models.ManyToManyField(
         to=ProductTag,
@@ -277,6 +281,34 @@ class Product(models.Model):
         if self.discount_price:
             return self.discount_price.price_value
         return self.price.price_value
+
+
+class ProductMarketPlaceLink(models.Model):
+    MARKETPLACE_CHOICES = (
+        ('ozon', 'Ozon'),
+        ('wildberries', 'Wildberries'),
+        ('yandex_market', 'Yandex Market'),
+    )
+    link = models.URLField(
+        null=False,
+        blank=False,
+        verbose_name='Ссылка'
+    )
+    marketplace = models.CharField(
+        max_length=100,
+        choices=MARKETPLACE_CHOICES,
+        null=False,
+        blank=False,
+        verbose_name='Маркетплейс'
+    )
+    product = models.ForeignKey(
+        to=Product,
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+        verbose_name='Продукт',
+        related_name='market_place_links'
+    )
 
 
 class ProductClinicalTestingResult(models.Model):

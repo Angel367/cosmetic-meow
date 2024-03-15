@@ -63,13 +63,19 @@ class ProductActiveSubstanceSerializer(serializers.ModelSerializer):
 class BaseProductLineSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductLine
-        fields = ['name', 'description']
+        fields = ['id', 'name', 'description']
 
 
 class ProductTagSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProductTag
         fields = ['id', 'name', 'description']
+
+
+class ProductMarketPlaceLinkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductMarketPlaceLink
+        fields = '__all__'
 
 
 class ProductSerializer(serializers.ModelSerializer):
@@ -80,9 +86,18 @@ class ProductSerializer(serializers.ModelSerializer):
     active_substances = ProductActiveSubstanceSerializer(many=True)
     product_line = BaseProductLineSerializer()
     product_tags = ProductTagSerializer(many=True)
+    market_place_links = ProductMarketPlaceLinkSerializer(many=True)
 
     class Meta:
         model = Product
+        fields = '__all__'
+
+
+class ProductPartnerSerializer(serializers.ModelSerializer):
+    product_lines = BaseProductLineSerializer(many=True)
+
+    class Meta:
+        model = ProductPartner
         fields = '__all__'
 
 
