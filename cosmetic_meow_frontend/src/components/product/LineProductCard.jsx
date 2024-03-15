@@ -12,15 +12,8 @@ function LineProductCard({product}) {
             <Link className="small-product-box line-page"
                     to={`products/${product.id}`}>
                 <div className="small-product-img-box">
-                    {/*{% if product.get_images.count > 0 %}*/}
-                    {/*{% for image in product.get_images %}*/}
-                    {/*{% if image.is_main %}*/}
-                    {/*<img src="{{ image.image.url }}" alt="{{ product.name }} Image"/>*/}
-                    {/*{% endif %}*/}
-                    {/*{% endfor %}*/}
-                    {/*{%  else %}*/}
                     <img alt="product" src={product_image}/>
-                    {/*{% endif %}*/}
+
                 </div>
 
                 <div className="small-product-info-box">

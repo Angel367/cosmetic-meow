@@ -19,7 +19,7 @@ const HeaderLanding = () => {
                     </Link>
                     <Link to={'/'} className='link-index'>Главная</Link>
                     <Link to={'/lines/11'}>Bioactiv</Link>
-                    <Link to={'/products/11'}>Dr.Sechenov</Link>
+                    <Link to={'/lines/12'}>Dr.Sechenov</Link>
                     <Link to={'/development'}>Разработка</Link>
                 </nav>
         </div>

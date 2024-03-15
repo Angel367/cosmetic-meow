@@ -25,7 +25,7 @@ function ProductCard({product, noButton=false, isOrder=false}) {
 
     return (
         <div className="small-product-box">
-            <Link to={`/shop/product/${product.id}`}>
+            <Link to={`/lines/${product.product_line}/products/${product.id}`}>
                 <div className="small-product-img-box">
                     <img alt="product" src={product_image}/>
                 </div>
@@ -36,7 +36,7 @@ function ProductCard({product, noButton=false, isOrder=false}) {
             </Link>
             <div className="small-product-main-box">
                 <div className="small-product-price">{price}</div>
-                <ManageProductInCart product={product} quantity={quantity} noButton={noButton} isOrder={isOrder}/>
+                {/*<ManageProductInCart product={product} quantity={quantity} noButton={noButton} isOrder={isOrder}/>*/}
             </div>
         </div>
     );

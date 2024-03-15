@@ -7,6 +7,7 @@ import LineComposition from "./LineComposition";
 import LineApplication from "./LineApplication";
 import {useParams} from "react-router-dom";
 import fetchData from "../../requests/fetchData";
+import Loading from "../error/Loading";
 
 
 function Line() {
@@ -28,23 +29,19 @@ function Line() {
     fetchLineData();
     }, [id_line]);
 
-    let lineDescription = undefined;
+
     useEffect(() => {
             if (!lineData)
                 document.title = "Линейка продуктов";
             else
-                document.title = lineDescription?.name || "Линейка продуктов";
+                document.title = lineData.product_line?.name || "Линейка продуктов";
         window.scrollTo(0, 0);
     });
     if (!lineData || !products){
-        return (
-            <div>
-                Загрузка
-            </div>
-        );
+        return <Loading/>
     }
 
-        lineDescription = lineData.product_line
+        const lineDescription = lineData.product_line
         let advantages = lineData.advantages?.slice(0, 3) || []
         let active_substances = lineData.active_substances?.slice(0, 4) || []
         let purposes = lineData.purposes?.slice(0, 3) || []

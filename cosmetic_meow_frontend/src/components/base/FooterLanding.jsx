@@ -34,10 +34,10 @@ const FooterLanding = () => {
 
                 </div>
                 <div className="dr-sechenov">
-                    <Link className="main-link" to={'/products/11'}>Продукт Dr.Sechenov</Link>
-                    <Link to={'/products/11'}>Якорь1</Link>
-                    <Link to={'/products/11'}>Якорь2</Link>
-                    <Link to={'/products/11'}>Якорь3</Link>
+                    <Link className="main-link" to={'/lines/12'}>Продукт Dr.Sechenov</Link>
+                    <Link to={'/lines/12'}>Якорь1</Link>
+                    <Link to={'/lines/12'}>Якорь2</Link>
+                    <Link to={'/lines/12'}>Якорь3</Link>
                 </div>
                 <div className="about">
                     <Link className="main-link" to={'/'}>О компании</Link>

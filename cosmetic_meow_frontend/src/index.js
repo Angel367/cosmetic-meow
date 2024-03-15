@@ -5,7 +5,7 @@ import './styles/BaseStyles/ButtonStyles.css';
 import './styles/BaseStyles/SmallCardStyles.css';
 import './styles/FeedbackModule.css';
 import './styles/LineModule.css';
-
+import './styles/ProductModule.css';
 
 
 
@@ -58,11 +58,7 @@ const router = createBrowserRouter([
         element: <LayoutLanding children={<Feedback/>} title={"Обратная связь"}/>,
         errorElement: <ErrorPage/>,
     },
-    {
-        path: "products/:id_product",
-        element: <LayoutLanding children={<LineProduct/>} title={"Продукт"}/>,
-        errorElement: <ErrorPage/>,
-    },
+
     {
 
         path: "/lines/:id_line",

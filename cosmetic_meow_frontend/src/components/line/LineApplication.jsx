@@ -3,7 +3,7 @@ import React from 'react';
 
 function LineApplication({purposes}) {
     if (!purposes || purposes.length === 0)
-            return <div> Загрузка... </div>;
+            return
 
         return (
             <section className="application" id="application">

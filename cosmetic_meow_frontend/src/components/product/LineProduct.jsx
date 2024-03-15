@@ -5,6 +5,7 @@ import LineProductDescription from "./LineProductDescription";
 
 import React, {useEffect, useState} from 'react';
 import fetchData from "../../requests/fetchData";
+import Loading from "../error/Loading";
 const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
 
 
@@ -26,7 +27,7 @@ function LineProduct() {
         fetchProduct();
     }, [id_product]);
     if (!product)
-        return <div>Загрузка...</div>;
+        return <Loading/>;
 
     return (
             <main className="main-line-product">
