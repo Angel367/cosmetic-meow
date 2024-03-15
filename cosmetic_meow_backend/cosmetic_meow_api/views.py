@@ -87,15 +87,15 @@ class FullProductLineViewSet(viewsets.ReadOnlyModelViewSet):
             product__product_line=instance
         ).distinct().values()
 
-        applications_of_products_in_product_line = Product.objects.filter(
+        purposes_of_products_in_product_line = Product.objects.filter(
             product_line=instance
-        ).distinct().values('application_method')
+        ).distinct().values('purpose')
 
         return Response({
             'product_line': serializer.data,
             'active_substances': active_substances_of_products_in_product_line,
             'advantages': advantages_of_products_in_product_line,
-            'applications': [result['application_method'] for result in applications_of_products_in_product_line]
+            'purposes': purposes_of_products_in_product_line
         })
 
 

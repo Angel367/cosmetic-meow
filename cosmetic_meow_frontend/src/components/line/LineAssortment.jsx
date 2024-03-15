@@ -6,12 +6,15 @@ import LineProductCard from "../product/LineProductCard";
 function LineAssortment ({products} )  {
     products = products.results
     if (!products || products.length === 0)
-        return <div>Загрузка...</div>;
+        return
         return (
             <section className="production" id="production">
-                <h2>Продукция</h2>
-                <p>Lorem ipsum dolor sit amet consectetur.
-                    Leo nulla imperdiet quam tellus fringilla viverra eleifend tempor quis</p>
+                <h2 className={'not-main-h2'}>
+                    Ассортимент
+                </h2>
+                <p>
+                    Подберите продукт по вашим потребностям
+                </p>
                 <div className="production-holder">
                     {products.map(product => (
                         <LineProductCard product={product} key={product.id}/>

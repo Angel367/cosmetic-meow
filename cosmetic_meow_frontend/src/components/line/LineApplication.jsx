@@ -1,18 +1,18 @@
 import React from 'react';
 
 
-function LineApplication({applications} ){
-        if (!applications || !applications.length)
+function LineApplication({purposes}) {
+    if (!purposes || purposes.length === 0)
             return <div> Загрузка... </div>;
 
         return (
             <section className="application" id="application">
-                <h2>Назначение</h2>
+                <h2 className={'not-main-h2'}>Назначение</h2>
 
                 <div className="application-holder">
-                    {applications.map((application, index) => (
+                    {purposes.map((p, index) => (
                     <p className="application" key={index}>
-                        {application}
+                        {p.purpose}
                     </p>
                     ))}
                 </div>

@@ -19,14 +19,14 @@ function Line() {
         setProducts(data);
     }
     fetchProducts();
-    }, []);
+    }, [id_line]);
     useEffect(() => {
     async function fetchLineData() {
         let data = await fetchData(`product_line/${id_line}`);
         setLineData(data);
     }
     fetchLineData();
-    }, []);
+    }, [id_line]);
 
     let lineDescription = undefined;
     useEffect(() => {
@@ -45,9 +45,9 @@ function Line() {
     }
 
         lineDescription = lineData.product_line
-        let advantages = lineData.advantages.slice(0, 3)
-        let active_substances = lineData.active_substances.slice(0, 4)
-        let applications = lineData.applications.slice(0,5)
+        let advantages = lineData.advantages?.slice(0, 3) || []
+        let active_substances = lineData.active_substances?.slice(0, 4) || []
+        let purposes = lineData.purposes?.slice(0, 3) || []
 
 
         return (
@@ -56,7 +56,7 @@ function Line() {
                 <LineAssortment products={products}/>
                 <LineAdvantages advantages={advantages}/>
                 <LineComposition active_substances={active_substances}/>
-                <LineApplication applications={applications}/>
+                <LineApplication purposes={purposes}/>
             </main>
         );
 }

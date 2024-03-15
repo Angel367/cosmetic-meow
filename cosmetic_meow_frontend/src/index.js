@@ -2,8 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/BaseStyles/BaseStyles.css';
 import './styles/BaseStyles/ButtonStyles.css';
+import './styles/BaseStyles/SmallCardStyles.css';
 import './styles/FeedbackModule.css';
 import './styles/LineModule.css';
+
 
 
 

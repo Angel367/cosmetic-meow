@@ -58,10 +58,16 @@
 .line-module  .production-holder, .line-module .similar-holder{
     margin-top: 2rem;
     /*todo flex*/
-    display: grid;
-    grid: repeat(2, 1fr) / repeat(2, 1fr);
+    /*display: grid;*/
+    /*grid: repeat(2, 1fr) / repeat(2, 1fr);*/
+    display: flex;
+    flex-wrap: wrap;
     gap: 3rem;
 
+}
+.line-module .production-holder .small-product-box,
+.line-module .similar-holder .small-product-box{
+    max-width: 40%;
 }
 .line-module .advantages-holder{
     display: flex;
@@ -78,8 +84,10 @@
     align-items: center;
     justify-content: center;
     text-align: center;
+    max-width: 300px;
 
 }
+
 .line-module .application-holder{
     display: flex;
     gap: 2rem;
@@ -111,6 +119,9 @@
     .line-module {
         padding: 2rem 3rem;
     }
+        .line-module  .production-holder .small-product-box, .line-module .similar-holder .small-product-box{
+          max-width: 90%;
+     }
 }
 @media (max-width: 768px) {
 
@@ -151,6 +162,9 @@
         flex-direction: column;
         gap: 2rem;
     }
+    .line-module  .production-holder .small-product-box, .line-module .similar-holder .small-product-box{
+          max-width: 90%;
+     }
 
   .line-module   .application-holder .application::before{
         padding: 1rem 1.5rem;

@@ -27,7 +27,7 @@ const FooterLanding = () => {
                     </div>
                 </address>
                 <div className="bioactiv">
-                    <Link className="main-link" to={'/lines/12'}>Линейка Bioactiv</Link>
+                    <Link className="main-link" to={'/lines/11'}>Линейка Bioactiv</Link>
                     <Link to={'/lines/11'}>Якорь1</Link>
                     <Link to={'/lines/11'}>Якорь2</Link>
                     <Link to={'/lines/11'}>Якорь3</Link>
