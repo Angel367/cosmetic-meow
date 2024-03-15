@@ -2,10 +2,10 @@ import React from "react";
 
 function MainReview() {
     return (
-        <article id="review">
-            <div className="header-review">
-                <span className="font-review">Нам доверяют множество</span>
-                <span className="font-review">Экспертов Красоты</span>
+        <article id="review" className={"upper-line"}>
+            <div className="upper-line__header">
+                <span>Нам доверяют множество</span>
+                <span>Экспертов Красоты</span>
             </div>
             <p className="review-body">
                 “На этом веб-сайте представлен широкий

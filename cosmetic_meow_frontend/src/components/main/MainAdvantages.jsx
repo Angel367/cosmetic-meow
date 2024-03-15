@@ -7,15 +7,17 @@ const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
 function MainAdvantages() {
     return (
         <article id="advantages">
-            <h3>Преимущества</h3>
-            <h2>Почему нас выбирают</h2>
+            <h3 className={'not-main-h3'}>
+                Преимущества</h3>
+            <h2 className={"not-main-h1"}
+            >Почему нас выбирают</h2>
             <div className="slide-holder">
                 <div className="slide">
                     <div>
                         <img src={magicWand} alt=""/>
                     </div>
-                    <h4>Легкость</h4>
-                    <p>
+                    <h4 className={"not-main-h2"}>Удобство</h4>
+                    <p className={"not-main-p"}>
                         Удобный и простой онлайн-шоппинг
                         для всех любителей красоты
                     </p>
@@ -24,8 +26,8 @@ function MainAdvantages() {
                     <div>
                         <img src={confetti} alt=""/>
                     </div>
-                    <h4>Разнообразие</h4>
-                    <p>
+                    <h4 className={"not-main-h2"}>Выбор</h4>
+                    <p className={"not-main-p"} >
                         Доступ к широкому выбору косметических
                         товаров от разных компаний в одном месте
                     </p>
@@ -34,8 +36,8 @@ function MainAdvantages() {
                     <div>
                         <img src={following} alt=""/>
                     </div>
-                    <h4>Удобство</h4>
-                    <p>
+                    <h4 className={"not-main-h2"}>Отзывы</h4>
+                    <p className={"not-main-p"}>
                         Возможность сравнивать цены и читать
                         отзывы других покупателей перед совершением покупки
                     </p>

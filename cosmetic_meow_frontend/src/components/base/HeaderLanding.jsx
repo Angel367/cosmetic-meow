@@ -18,7 +18,7 @@ const HeaderLanding = () => {
                         <img alt="[logo]" src={logo}/>
                     </Link>
                     <Link to={'/'} className='link-index'>Главная</Link>
-                    <Link to={'/lines/11'}>Bioactiv</Link>
+                    <Link to={'/lines/11'}>BIOACTIV</Link>
                     <Link to={'/lines/12'}>Dr.Sechenov</Link>
                     <Link to={'/development'}>Разработка</Link>
                 </nav>

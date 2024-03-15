@@ -6,6 +6,7 @@ import './styles/BaseStyles/SmallCardStyles.css';
 import './styles/FeedbackModule.css';
 import './styles/LineModule.css';
 import './styles/ProductModule.css';
+import './styles/MainModule.css';
 
 
 

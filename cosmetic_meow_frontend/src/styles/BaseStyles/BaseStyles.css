@@ -46,6 +46,20 @@ h1, h2, h3, h4, h5, h6 , p, a{
     font-weight: 700;
     line-height: 50px;
 }
+.main-h1{
+    color: #1A2751;
+    font-family: 'Bergamasco Regular', sans-serif;
+    font-size: 100px;
+    font-weight: 600;
+    line-height: 100px;
+}
+.main-h2{
+    color: #E47A7C;
+    font-family: 'Bergamasco Regular', sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 30px;
+}
 
 .not-main-h2{
     color: #1A2751;
@@ -59,6 +73,14 @@ h1, h2, h3, h4, h5, h6 , p, a{
     /*font-family: 'Cygre', sans-serif;*/
     font-size: 0.875rem;
     font-weight: 400;
+}
+.main-h4{
+    color: #1A2751;
+    font-family: 'CygreBold', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+     line-height: 24px;
+
 }
 .not-main-p{
     color:  #5F6886;
@@ -78,10 +100,59 @@ h1, h2, h3, h4, h5, h6 , p, a{
     font-size: 1.2rem;
     font-weight: 700;
 }
+ .back{
+    color:rgba(26, 39, 81, 1);
+    font: 700 16px 'Cygre', sans-serif;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+}
+
+.main .upper-line .upper-line__header span{
+    font: 400 18px 'Cygre', sans-serif;
+    color: rgba(228, 122, 124, 1);
+     line-height: 24px;
+}
+.main .upper-line .upper-line__header span:first-child{
+    color: rgba(26, 39, 81, 1);
+}
+.main .upper-line .name-line{
+    color:  #E47A7C;
+    text-decoration: none;
+}
+
+.loading{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    z-index: 1000;
+}
+.loading__spinner{
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #1A2751;
+    border-radius: 50%;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
 @media (max-width:768px ) {
     main {
-        margin-top: calc(4rem + 26px);
+        margin-top: calc(4rem + 24px);
     }
 
    .not-main-h1{
@@ -96,5 +167,42 @@ h1, h2, h3, h4, h5, h6 , p, a{
         font-size: 20px;
         font-weight: 700;
     }
+    .not-main-p{
+        font-size: 14px;
+    }
+    .main-h1{
+        font-size: 50px;
+        line-height: 50px;
+    }
+    .main-h2{
+        font-size: 20px;
+        line-height: 20px;
+    }
+    .main-h4{
+        font-size: 20px;
+        line-height: 20px;
+    }
+    .contact-us span{
+        font-size: 14px;
+    }
+    .line-module .advantages-holder .advantage h3{
+        font-size: 16px;
+    }
+    .back{
+        font-size: 14px;
+    }
+    .main .upper-line .upper-line__header span{
+        font-size: 16px;
+    }
+    .main .upper-line .name-line{
+        font-size: 16px;
+    }
+    .loading__spinner{
+        width: 30px;
+        height: 30px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #1A2751;
+    }
+
 }
 

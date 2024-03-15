@@ -3,6 +3,7 @@ import {addProduct} from "../../redux/reduxCart";
 
 import ManageProductInCart from "./ManageProductInCart";
 import {useSelector} from "react-redux";
+import Loading from "../error/Loading";
 
 
 
@@ -12,7 +13,7 @@ function LineProductDescription({product}) {
         (p) => p.id === product.id)?.quantity || 0
     )
     if (!product)
-        return <div>Загрузка</div>
+        return <Loading/>;
 
      return (
     <section>

@@ -1,7 +1,8 @@
 import React from "react";
 
 
-const active_substance_image = process.env.PUBLIC_URL + '/img/main/product.png';
+const cream_1 = process.env.PUBLIC_URL + '/img/line-page/cream_1_1.jpg';
+
 
 function LineActiveSubstanceCard({active_substance}){
      if (!active_substance)
@@ -16,7 +17,7 @@ function LineActiveSubstanceCard({active_substance}){
                     {/*{% endif %}*/}
                     {/*{% endfor %}*/}
                     {/*{%  else %}*/}
-                    <img alt="product" src={active_substance_image}/>
+                    <img alt="product" src={cream_1}/>
                     {/*{% endif %}*/}
                 </div>
 

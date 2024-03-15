@@ -13,9 +13,12 @@ function LayoutLanding({children, title, scrollX=0, scrollY=0}) {
         if (scrollX === 0 && scrollY === 0)
             window.scrollTo(scrollX, scrollY);
     });
-    // createSession();
+    let className = '';
+    if (title === 'Главная') {
+        className = 'main-page';
+    }
     return (
-        <div>
+        <div className={className}>
             <HeaderLanding/>
             <div>
                 <NotificationContainer/>

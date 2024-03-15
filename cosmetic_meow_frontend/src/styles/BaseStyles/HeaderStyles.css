@@ -39,7 +39,7 @@ header nav a{
     white-space: nowrap;
     color: #5F6886;
     font-family: CygreBold, sans-serif;
-    font-size: 16px;
+    font-size: 1.25rem;
     font-weight: 700;
 }
 header nav a:hover{
