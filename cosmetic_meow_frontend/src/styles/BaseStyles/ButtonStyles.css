@@ -1,5 +1,5 @@
 
-.full_type input ,  .full_type textarea{
+input , textarea{
     padding: 1rem 1.5rem;
     border-radius: .935rem;
     border: 1px solid #DAD6E4;
@@ -12,8 +12,6 @@
     font-weight: 400;
     /*line-height: 1.125rem; !* 100% *!*/
 }
-
-
 
 .button{
     border: none;
@@ -65,12 +63,6 @@ button.blue.subscribe{
     border-top-left-radius: 0;
     border-bottom-right-radius: 0;
 }
-/*input[type=text]{*/
-/*    color: rgba(95, 104, 134, 1);*/
-/*    box-shadow: -5px -5px 20px 0 rgba(255, 255, 255, 0.8);*/
-/*    border-top-right-radius: 0;*/
-/*    border-bottom-left-radius: 0;*/
-/*}*/
 
 @media screen and (max-width: 768px ) {
     .button{

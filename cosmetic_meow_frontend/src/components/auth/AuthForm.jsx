@@ -53,7 +53,8 @@ function AuthForm({path="login/", buttonName="Войти"}) {
 
     }
     return (
-        <form className="auth" noValidate validated={validated.toString()} onSubmit={handleSubmit} method="POST">
+        <form className="auth" noValidate
+              validated={validated.toString()} onSubmit={handleSubmit} method="POST">
             <p>
                 <label htmlFor={"phone_number"}>Телефон</label>
                 <input id={"phone_number"} type="tel" placeholder="Ваш телефон..." required={true}

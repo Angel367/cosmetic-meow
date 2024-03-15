@@ -10,7 +10,7 @@ const Message = process.env.PUBLIC_URL + "/img/footer/Message.svg";
 const Location = process.env.PUBLIC_URL + "/img/footer/Location.svg";
 
 
-const Footer = () => {
+const FooterLanding = () => {
     return (
         <footer>
             <div className="link-with-addr">
@@ -89,4 +89,4 @@ const Footer = () => {
     );
 };
 
-export default Footer;
+export default FooterLanding;

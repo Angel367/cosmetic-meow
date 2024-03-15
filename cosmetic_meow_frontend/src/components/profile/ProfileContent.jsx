@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {fetcherUser} from "../../requests/axiosService";
 import {Link} from "react-router-dom";
-import {logout} from "../../hooks/user.actions";
+import {isAuth, logout} from "../../hooks/user.actions";
 
 const Message = process.env.PUBLIC_URL + "/img/footer/Message.svg";
 // const Phone = process.env.PUBLIC_URL + "/img/footer/Phone.svg";
@@ -14,6 +14,7 @@ function ProfileContent() {
     }
     const [userData, setUserDate] = useState({});
     useEffect(() => {
+        if (isAuth())
         fetcherUser()
             .then((data) => {
             setUserDate(data);

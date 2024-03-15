@@ -1,7 +1,7 @@
 import Cookies from "js-cookie";
 
 function isAuth() {
- return getAccessToken() !== null;
+ return getAccessToken() !== null && getAccessToken() !== undefined;
 }
 
 // Get the access token
@@ -22,6 +22,6 @@ function setUserData(data) {
  function logout() {
     Cookies.remove("access");
     Cookies.remove("refresh");
-
+    window.location.reload();
  }
  export {isAuth, getAccessToken, getRefreshToken, setUserData, logout};

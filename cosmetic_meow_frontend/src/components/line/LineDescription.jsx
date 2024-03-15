@@ -5,37 +5,45 @@ const down = process.env.PUBLIC_URL + '/img/dev/down.svg';
 const img = process.env.PUBLIC_URL + '/img/line-page/img.png';
 
  function LineDescription({lineDescription}) {
-
-     // let  = useParams();
     if (!lineDescription)
+        // todo add styles for loading
         return <div>Загрузка...</div>
         return (
-            <section className="description">
-                <div className="text">
-                    <h3>Продукция</h3>
-                    <h1>{lineDescription.name}</h1>
-                    <p>{lineDescription.description}
+            <section className="line-module__description">
+                <div className="line-module__description-text">
+                    <h3 className={'not-main-h3'}>
+                        Линейка продуктов
+                    </h3>
+                    <h1 className={'not-main-h1'}>
+                        {lineDescription.name}
+                    </h1>
+                    <p className={'not-main-p'}>
+                        {lineDescription.description}
                     </p>
                     <div className="link-holder">
-                        <Link to={`#production`}><span>Продукция</span><span>
+                        <Link to={`#production`} className={'contact-us'}
+                        ><span>Продукция</span><span>
 
             <img alt="" src={down}/>
                         </span></Link>
 
-                        <Link to={`#advantages`}><span>Преимущества</span><span>
+                        <Link to={`#advantages`} className={'contact-us'}
+                        ><span>Преимущества</span><span>
             <img alt="" src={down}/>
                         </span></Link>
 
-                        <Link to={`#composition`}><span>Состав</span><span>
+                        <Link to={`#composition`} className={'contact-us'}
+                        ><span>Состав</span><span>
             <img alt="" src={down}/>
                         </span></Link>
 
-                        <Link to={`#application`}><span>Применение</span><span>
+                        <Link to={`#application`} className={'contact-us'}
+                        ><span>Применение</span><span>
             <img alt="" src={down}/>
                         </span></Link>
                     </div>
                 </div>
-                <div className="img-holder">
+                <div className="line-module__description-img-holder">
                     <img alt="[img]" src={img}/>
                 </div>
             </section>

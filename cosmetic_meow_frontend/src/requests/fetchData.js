@@ -1,5 +1,5 @@
 import axios from "axios";
-import {useEffect, useState} from "react";
+
 import getBaseUrl from "./baseUrl";
 
 async function fetchData(urlPart, params = null) {

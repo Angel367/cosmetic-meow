@@ -1,6 +1,6 @@
 import axios from "axios";
 import createAuthRefreshInterceptor from "axios-auth-refresh";
-import {getAccessToken, getRefreshToken} from "../hooks/user.actions";
+import {getAccessToken, getRefreshToken, logout} from "../hooks/user.actions";
 import getBaseUrl from "./baseUrl";
 
 import Cookies from 'js-cookie';
@@ -25,8 +25,12 @@ axiosService.interceptors.response.use(
 );
 
 const refreshAuthLogic = async (failedRequest) => {
- const { refresh } = getRefreshToken();
- const {access} = getAccessToken();
+ const  refreshRes  = getRefreshToken();
+ const accessRes = getAccessToken();
+ if (refreshRes && accessRes){
+    const {refresh} = refreshRes;
+    const {access} = accessRes;
+
  return axios.post("token/refresh/", null, {
   baseURL: getBaseUrl()+"auth/",
      withCredentials: true,
@@ -46,15 +50,32 @@ const refreshAuthLogic = async (failedRequest) => {
  // localStorage.setItem("auth", JSON.stringify({access, refresh }));
  })
  .catch(() => {
-    // localStorage.removeItem("auth");
-      Cookies.remove('access');
-      Cookies.remove('refresh');
- });};
+    logout();
+
+ });}
+    else {
+        logout();
+    }
+}
+;
 createAuthRefreshInterceptor(axiosService,  refreshAuthLogic);
 export function fetcherUser() {
- return axiosService.get(getBaseUrl() + '/auth/update/').then((res) => res.data);
+ return axiosService.get(getBaseUrl() + 'auth/update/').then((res) => res.data)
+        .catch((error) => {
+            if (error.response.status === 401) {
+                logout();
+            }
+            return error.response.data;
+        });
+
 }
 export async function updateUser(data) {
- return await axiosService.put(getBaseUrl() + '/auth/update/', data).then((res) => res.data);
+ return await axiosService.put(getBaseUrl() + 'auth/update/', data).then((res) => res.data)
+     .catch((error) => {
+            if (error.response.status === 401) {
+                logout();
+            }
+         return error.response.data;
+     });
 }
 export default axiosService;

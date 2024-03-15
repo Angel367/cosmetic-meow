@@ -40,8 +40,8 @@ function FeedbackForm({type="other"}) {
     }
     return (
 
-    <form onSubmit={handleSubmit} method="POST" className="full_type">
-            <p>
+    <form onSubmit={handleSubmit} method="POST" className="feedback-module__form-holder__form">
+            <p className={"form-holder__form__input-holder"}>
             <label htmlFor={"name"}>Имя</label>
             <input id={"name"} type="text"
                      name={"name"}
@@ -49,7 +49,7 @@ function FeedbackForm({type="other"}) {
                    required={true}
                    onChange={(e) => setName(e.target.value)}/>
             </p>
-            <p>
+            <p className={"form-holder__form__input-holder"}>
             <label htmlFor={"email"}>Email</label>
             <input id={"email"} type="email" placeholder="Ваш email..." value={email}
                    name={"email"}
@@ -57,15 +57,15 @@ function FeedbackForm({type="other"}) {
 
                    onChange={(e) => setEmail(e.target.value)}/>
                 </p>
-            <p>
+            <p className={"form-holder__form__input-holder"}>
             <label htmlFor={"message"}>Сообщение</label>
             <textarea id={"message"} placeholder="Ваше сообщение..."
-                      value={message} rows={5} cols={3}
+                      value={message} rows={5} cols={15}
                       name={"message"}
                         required={true}
                       onChange={(e) => setMessage(e.target.value)}/>
             </p>
-            <p>
+            <p className={"form-holder__form__input-holder"}>
             <label htmlFor={"is_agreement_signed"}>
                 Я согласен с условиями обработки
                 персональных данных</label>
@@ -80,7 +80,7 @@ function FeedbackForm({type="other"}) {
             />
             </p>
 
-            <p>
+            <p className={"form-holder__form__input-holder"}>
                 <button type={"submit"} className="button blue" disabled={!isAgreementSigned}>Отправить</button>
             </p>
             </form>

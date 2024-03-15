@@ -1,7 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/BaseStyles/BaseStyles.css';
-import './styles/BaseStyles/BlueButtonStyles.css';
+import './styles/BaseStyles/ButtonStyles.css';
+import './styles/FeedbackModule.css';
+import './styles/LineModule.css';
+
+
+
+
 import {
     createBrowserRouter, Outlet,
     RouterProvider,
@@ -29,26 +35,32 @@ import Registration from "./components/auth/Login";
 import Login from "./components/auth/Login";
 import Orders from "./components/order/Orders";
 import Order from "./components/order/Order";
+import LayoutLanding from "./components/base/LayoutLanding";
 
 
 const router = createBrowserRouter([
+    // ************landing pages*************
     {
         index: true,
-        element: <Layout children={<Main/>} title={"Главная"}/>,
+        element: <LayoutLanding children={<Main/>} title={"Главная"}/>,
         errorElement: <ErrorPage/>,
     },
     {
 
         path: "/development",
-        element: <Layout children={<Dev/> } title={"Разработка"}/>,
+        element: <LayoutLanding children={<Dev/>} title={"Разработка"}/>,
         errorElement: <ErrorPage/>,
     },
      {
         path: "/feedback",
-        element: <Layout children={<Feedback/>} title={"Обратная связь"}/>,
+        element: <LayoutLanding children={<Feedback/>} title={"Обратная связь"}/>,
         errorElement: <ErrorPage/>,
     },
-
+    {
+        path: "products/:id_product",
+        element: <LayoutLanding children={<LineProduct/>} title={"Продукт"}/>,
+        errorElement: <ErrorPage/>,
+    },
     {
 
         path: "/lines/:id_line",
@@ -57,7 +69,7 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Layout children={<Line/>}/>,
+                element: <LayoutLanding children={<Line/>} title={"Линия"}/>,
                 errorElement: <ErrorPage/>,
 
             },
@@ -65,12 +77,16 @@ const router = createBrowserRouter([
             {
 
             path: "products/:id_product",
-            element: <Layout children={<LineProduct/>}/>,
+            element: <LayoutLanding children={<LineProduct/>} title={"Продукт"}/>,
             errorElement: <ErrorPage/>,
         },
 
         ],
     },
+
+    // ************shop pages***********
+
+
     {
         path: "/shop",
         element: <Outlet/>,
@@ -88,6 +104,8 @@ const router = createBrowserRouter([
             },
         ],
     },
+
+    // ************profile pages***********
     {
         path: "/profile",
         element: <OnlyForAuthenticatedRoute>
@@ -165,6 +183,7 @@ const router = createBrowserRouter([
         element: <Layout children={<Cart/>} title={"Корзина"}/>,
         errorElement: <ErrorPage/>,
     },
+    // ************auth pages***********
     {
         path: "/register",
         element: <OnlyForAnonymousRoute>

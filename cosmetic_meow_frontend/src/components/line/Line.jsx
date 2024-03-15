@@ -28,12 +28,12 @@ function Line() {
     fetchLineData();
     }, []);
 
-
+    let lineDescription = undefined;
     useEffect(() => {
             if (!lineData)
                 document.title = "Линейка продуктов";
             else
-                document.title = lineDescription.name || "Линейка продуктов";
+                document.title = lineDescription?.name || "Линейка продуктов";
         window.scrollTo(0, 0);
     });
     if (!lineData || !products){
@@ -44,14 +44,14 @@ function Line() {
         );
     }
 
-        let lineDescription = lineData.product_line
-        let advantages = lineData.advantages
-        let active_substances = lineData.active_substances
-        let applications = lineData.applications
+        lineDescription = lineData.product_line
+        let advantages = lineData.advantages.slice(0, 3)
+        let active_substances = lineData.active_substances.slice(0, 4)
+        let applications = lineData.applications.slice(0,5)
 
 
         return (
-            <main className='main-line'>
+            <main className='line-module'>
                 <LineDescription lineDescription={lineDescription} />
                 <LineAssortment products={products}/>
                 <LineAdvantages advantages={advantages}/>

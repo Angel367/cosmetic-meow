@@ -5,6 +5,7 @@ import NotificationContainer from "react-notifications/lib/NotificationContainer
 
 import axios from "axios";
 import createSession from "../../requests/createSession";
+import {Navigate, useNavigate} from "react-router-dom";
 
 function AuthLayout({children, title, scrollX=0, scrollY=0}) {
 
@@ -16,12 +17,13 @@ function AuthLayout({children, title, scrollX=0, scrollY=0}) {
     });
     createSession();
     return (
-        <div>
-            <div>
-                <NotificationContainer/>
-            </div>
-            {children}
-        </div>
+        <Navigate to={"/"} replace={true}/>
+        // <div>
+        //     <div>
+        //         <NotificationContainer/>
+        //     </div>
+        //     {children}
+        // </div>
     );
 }
 
