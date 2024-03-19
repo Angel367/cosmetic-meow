@@ -64,7 +64,7 @@ footer .logo img{
 }
 footer{
     padding: 2rem 5rem;
-    gap: 4rem;
+    gap: 2rem;
 }
 footer .link-with-addr address{
     position: relative;
@@ -87,7 +87,7 @@ footer .link-with-addr{
 @media (max-width:768px ) {
     footer{
         padding: 2rem 3rem;
-        gap: 3rem;
+        gap: 1.5rem;
     }
     footer .link-with-addr{
         flex-wrap: wrap;

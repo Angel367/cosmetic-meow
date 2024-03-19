@@ -37,7 +37,7 @@ function Line() {
                 document.title = lineData.product_line?.name || "Линейка продуктов";
         window.scrollTo(0, 0);
     });
-    if (!lineData || !products){
+    if (!lineData || !products) {
         return <Loading/>
     }
 
@@ -51,9 +51,12 @@ function Line() {
             <main className='line-module'>
                 <LineDescription lineDescription={lineDescription} />
                 <LineAssortment products={products}/>
-                <LineAdvantages advantages={advantages}/>
-                <LineComposition active_substances={active_substances}/>
-                <LineApplication purposes={purposes}/>
+                {advantages.length > 0 &&
+                <LineAdvantages advantages={advantages}/>}
+                {active_substances.length > 0 &&
+                <LineComposition active_substances={active_substances}/>}
+                {purposes.length > 0 &&
+                <LineApplication purposes={purposes}/>}
             </main>
         );
 }

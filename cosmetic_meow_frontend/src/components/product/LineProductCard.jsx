@@ -19,7 +19,7 @@ function LineProductCard({product}) {
 
                 <div className="small-product-info-box">
                     <div className="small-product-name">{product.name}</div>
-                    <div className="small-product-description">{product.short_description}</div>
+                    <div className="small-product-description">{product.description}</div>
                 </div>
 
             </Link>

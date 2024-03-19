@@ -1,64 +1,13 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import PartnerCard from "./PartnerCard";
-const partnerImg = process.env.PUBLIC_URL + '/img/main/partner.png';
-function MainPartners() {
-    let partners = [
-        {
-            id: 1,
-            img: partnerImg,
-            name: "MIREA",
-            lines: [
-                {
-                    id: 11,
-                    name: "1BIOACTIV",
-                },
+import Loading from "../error/Loading";
 
+function MainPartners({partners}) {
 
-            ]
-        },
-        {
-            id: 2,
-            img: partnerImg,
-            name: "РУДН",
-            lines: [
-                {
-                    id: 11,
-                    name: "1BIOACTIV",
-                },
+    if (!partners || partners.length === 0)
+        return <Loading/>;
 
-            ]
-        },
-        {
-            id: 3,
-            img: partnerImg,
-            name: "Техника",
-            lines: [
-                {
-                    id: 11,
-                    name: "1BIOACTIV",
-                },
-
-            ]
-        },
-        {
-            id: 4,
-            img: partnerImg,
-            name: "Sechenov",
-            lines: [
-                {
-                    id: 12,
-                    name: "1Dr.Sechenov"
-                },
-                {
-                    id: 12,
-                    name: "2Dr.Sechenov"
-                },
-
-            ]
-        }
-
-    ];
     return (
         <article id="partners" className={"partners upper-line"}>
             <div className="upper-line__header">
@@ -68,7 +17,7 @@ function MainPartners() {
             <div className="upper-line__body">
                 {partners.map((partner) => {
                     return (
-                        <PartnerCard key={partner.id} partner={partner}/>
+                        <PartnerCard key={partner.id } partner={partner}/>
                     );
                 })}
 

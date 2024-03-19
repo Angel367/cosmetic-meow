@@ -63,7 +63,9 @@ function FeedbackForm({type="other"}) {
                       value={message} rows={5} cols={15}
                       name={"message"}
                         required={true}
-                      onChange={(e) => setMessage(e.target.value)}/>
+                      onChange={(e) =>
+
+                          setMessage(e.target.value)}/>
             </p>
             <p className={"form-holder__form__input-holder"}>
             <label htmlFor={"is_agreement_signed"}>

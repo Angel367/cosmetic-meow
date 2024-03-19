@@ -10,7 +10,7 @@
 .main{
     display: flex;
     flex-direction: column;
-    padding: 2rem 0 10rem;
+    padding: 2rem 0 5rem;
     gap: 3rem;
 }
     #products{
@@ -140,7 +140,7 @@
         background-color: rgba(218, 214, 228, 1);
     }
     .main{
-        padding: 0 0 5rem;
+        padding: 0 0 2rem;
         gap:1.5rem;
     }
     .main article{

@@ -56,13 +56,13 @@
     flex-wrap: wrap;
 }
 .line-module  .production-holder, .line-module .similar-holder{
-    margin-top: 2rem;
+    /*margin-top: 2rem;*/
     /*todo flex*/
     /*display: grid;*/
     /*grid: repeat(2, 1fr) / repeat(2, 1fr);*/
     display: flex;
     flex-wrap: wrap;
-    gap: 3rem;
+    gap: 1rem;
 
 }
 .line-module .production-holder .small-product-box,
@@ -75,7 +75,7 @@
 
     flex-wrap: wrap;
     justify-content: space-between;
-    margin-top: 2rem;
+    /*margin-top: 2rem;*/
 }
 /*.line-module .advantages-holder .not-main-p, .line-module .advantages-holder .not-main-h2{*/
 /*    align-items: center;*/
@@ -95,7 +95,7 @@
 .line-module .application-holder{
     display: flex;
     gap: 2rem;
-    margin-top: 2rem;
+    /*margin-top: 2rem;*/
     flex-direction: column;
 }
 .line-module .application-holder .application{
@@ -122,6 +122,7 @@
 @media (max-width:992px ) {
     .line-module {
         padding: 2rem 3rem;
+        gap: 3rem;
     }
         .line-module  .production-holder .small-product-box, .line-module .similar-holder .small-product-box{
           max-width: 90%;
@@ -164,7 +165,7 @@
    .line-module  .production-holder, .line-module  .similar-holder{
         display: flex;
         flex-direction: column;
-        gap: 2rem;
+        /*gap: rem;*/
     }
     .line-module  .production-holder .small-product-box, .line-module .similar-holder .small-product-box{
           max-width: 90%;
@@ -176,8 +177,9 @@
         font: 700 1.2rem 'CygreBold', sans-serif;
     }
    .line-module  .advantages-holder{
-        flex-direction: column;
-    align-items: center;
+        /*flex-direction: column;*/
+       justify-content: center;
+     align-items: flex-start;
         gap: 1rem;
     }
 
@@ -194,6 +196,7 @@
     }
     .line-module {
         padding: 0 0 5rem;
+
     }
   .line-module   .line-module__description{
         flex-direction: column-reverse;
@@ -208,6 +211,12 @@
         width: 100%;
         border-radius: 0;
     }
+   .line-module .application-holder .application::before{
+       content: none;
+   }
+   /*.line-module .application-holder .application{*/
+   /*    align-items: flex-start;*/
+   /*}*/
 
 
 

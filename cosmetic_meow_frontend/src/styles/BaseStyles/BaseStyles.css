@@ -85,7 +85,7 @@ h1, h2, h3, h4, h5, h6 , p, a{
 }
 .not-main-p{
     color:  #5F6886;
-
+    /*text-indent: 2rem;*/
     font-size: 1rem;
     font-weight: 400;
 }
