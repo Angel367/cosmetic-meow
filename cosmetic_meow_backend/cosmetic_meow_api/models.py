@@ -1,6 +1,7 @@
 from django.contrib.auth.base_user import AbstractBaseUser
-from django.contrib.auth.models import BaseUserManager
+from django.contrib.auth.models import BaseUserManager, PermissionsMixin
 from django.db import models
+from .validators import *
 
 
 class CustomUserManager(BaseUserManager):
@@ -33,7 +34,7 @@ class CustomUserManager(BaseUserManager):
         return user
 
 
-class CustomUser(AbstractBaseUser):
+class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(
         verbose_name="email address",
         max_length=255,
@@ -57,6 +58,12 @@ class CustomUser(AbstractBaseUser):
         default=True
     )
     is_admin = models.BooleanField(
+        default=False
+    )
+    is_staff = models.BooleanField(
+        default=False
+    )
+    is_superuser = models.BooleanField(
         default=False
     )
 
@@ -86,24 +93,6 @@ class CustomUser(AbstractBaseUser):
 
     def __str__(self):
         return self.phone_number
-
-    @staticmethod
-    def has_perm(self, perm, obj=None):
-        """Does the user have a specific permission?"""
-        # Simplest possible answer: Yes, always
-        return True
-
-    @staticmethod
-    def has_module_perms(self, app_label):
-        """Does the user have permissions to view the app `app_label`?"""
-        # Simplest possible answer: Yes, always
-        return True
-
-    @property
-    def is_staff(self):
-        """Is the user a member of staff?"""
-        # Simplest possible answer: All admins are staff
-        return self.is_admin
 
 
 # class UserAddress(models.Model):
@@ -275,12 +264,34 @@ class Product(models.Model):
         to=ProductTag,
         verbose_name='Теги',
     )
+    is_ready_for_sale = models.BooleanField(
+        default=False,
+        null=False,
+        blank=False,
+        verbose_name='Готов к продаже'
+    )
 
     @property
     def get_price(self):
         if self.discount_price:
             return self.discount_price.price_value
         return self.price.price_value
+
+
+class ProductImage(models.Model):
+    image = models.ImageField(
+        null=False,
+        blank=False,
+        verbose_name='Изображение продукта',
+        upload_to='product_images',
+
+    )
+    product = models.ForeignKey(
+        to=Product,
+        on_delete=models.CASCADE,
+        verbose_name='Продукт',
+        related_name='images'
+    )
 
 
 class ProductMarketPlaceLink(models.Model):
@@ -323,7 +334,8 @@ class ProductClinicalTestingResultImage(models.Model):
     image = models.ImageField(
         null=True,
         blank=True,
-        verbose_name='Изображение'
+        verbose_name='Изображение',
+        upload_to='product_clinical_testing_results_images'
     )
     description = models.TextField(
         null=False,
@@ -339,6 +351,7 @@ class ProductClinicalTestingResultImage(models.Model):
     product_clinical_testing_result = models.ForeignKey(
         to=ProductClinicalTestingResult,
         on_delete=models.CASCADE,
+        related_name='images',
         verbose_name='Результаты клинических испытаний'
     )
 
@@ -372,7 +385,21 @@ class ProductPartner(models.Model):
         to='ProductLine',
         verbose_name='Линии продукта'
     )
-    # image
+
+
+class ProductPartnerImage(models.Model):
+    image = models.ImageField(
+        null=False,
+        blank=False,
+        verbose_name='Изображение партнера',
+        upload_to='product_partner_images'
+    )
+    product_partner = models.ForeignKey(
+        to=ProductPartner,
+        on_delete=models.CASCADE,
+        verbose_name='Партнер',
+        related_name='images'
+    )
 
 
 class ProductAdvantage(models.Model):
@@ -387,7 +414,29 @@ class ProductAdvantage(models.Model):
         blank=False,
         verbose_name='Описание'
     )
-    # image
+
+    class Meta:
+        verbose_name = 'Преимущество продукта'
+        verbose_name_plural = 'Преимущества продуктов'
+
+
+class ProductAdvantageImage(models.Model):
+    image = models.ImageField(
+        null=False,
+        blank=False,
+        verbose_name='Изображение преимущества',
+        upload_to='product_advantages_images'
+    )
+    product_advantage = models.ForeignKey(
+        to=ProductAdvantage,
+        on_delete=models.CASCADE,
+        verbose_name='Преимущество',
+        related_name='images'
+    )
+
+    class Meta:
+        verbose_name = 'Изображение преимущества'
+        verbose_name_plural = 'Изображения преимуществ'
 
 
 class ProductActiveSubstance(models.Model):
@@ -402,7 +451,25 @@ class ProductActiveSubstance(models.Model):
         blank=False,
         verbose_name='Описание'
     )
-    # image
+
+
+class ProductActiveSubstanceImage(models.Model):
+    image = models.ImageField(
+        null=False,
+        blank=False,
+        verbose_name='Изображение активного вещества',
+        upload_to='product_active_substances_images'
+    )
+    product_active_substance = models.ForeignKey(
+        to=ProductActiveSubstance,
+        on_delete=models.CASCADE,
+        verbose_name='Активное вещество',
+        related_name='images'
+    )
+
+    class Meta:
+        verbose_name = 'Изображение активного вещества'
+        verbose_name_plural = 'Изображения активных веществ'
 
 
 class ProductLine(models.Model):
@@ -417,6 +484,52 @@ class ProductLine(models.Model):
         blank=False,
         verbose_name='Описание'
     )
+
+
+class ProductLineImage(models.Model):
+    image = models.ImageField(
+        null=False,
+        blank=False,
+        verbose_name='Изображение линии продукта',
+        upload_to='product_line_images'
+    )
+    product_line = models.ForeignKey(
+        to=ProductLine,
+        on_delete=models.CASCADE,
+        verbose_name='Линия продукта',
+        related_name='images'
+    )
+
+
+class ProductCode(models.Model):
+    code = models.CharField(
+        max_length=16,
+        null=False,
+        blank=False,
+        validators=[product_code_code_validator],
+        verbose_name='Код',
+        unique=True,
+        primary_key=True
+    )
+    was_activated = models.BooleanField(
+        default=False,
+        null=False,
+        blank=False,
+        verbose_name='Был активирован'
+    )
+    product = models.ForeignKey(
+        to=Product,
+        on_delete=models.CASCADE,
+        null=False,
+        blank=False,
+        verbose_name='Продукт',
+        related_name='product_codes'
+    )
+
+    class Meta:
+        verbose_name = 'Код продукта'
+        verbose_name_plural = 'Коды продуктов'
+        unique_together = ('code', 'product')
 
 
 class OrderItem(models.Model):

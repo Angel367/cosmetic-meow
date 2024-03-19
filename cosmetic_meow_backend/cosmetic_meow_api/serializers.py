@@ -42,28 +42,66 @@ class DiscountPriceSerializer(serializers.ModelSerializer):
         fields = ['price_value', 'begin_date', 'end_date']
 
 
+class ProductClinicalTestingResultImageSerializer(serializers.ModelSerializer):
+    relative_path = serializers.CharField(source="image.url")
+    class Meta:
+        model = ProductClinicalTestingResultImage
+        fields = '__all__'
+
+
 class ProductClinicalTestingResultSerializer(serializers.ModelSerializer):
+    images = ProductClinicalTestingResultImageSerializer(many=True)
+
     class Meta:
         model = ProductClinicalTestingResult
-        fields = ['description']
+        fields = '__all__'
+
+
+class ProductAdvantageImageSerializer(serializers.ModelSerializer):
+    relative_path = serializers.CharField(source="image.url")
+
+    class Meta:
+        model = ProductAdvantageImage
+        fields = '__all__'
 
 
 class ProductAdvantageSerializer(serializers.ModelSerializer):
+    images = ProductAdvantageImageSerializer(many=True)
+
     class Meta:
         model = ProductAdvantage
-        fields = ['name', 'description']
+        fields = '__all__'
+
+
+class ProductActiveSubstanceImageSerializer(serializers.ModelSerializer):
+    relative_path = serializers.CharField(source="image.url")
+
+    class Meta:
+        model = ProductActiveSubstanceImage
+        fields = '__all__'
 
 
 class ProductActiveSubstanceSerializer(serializers.ModelSerializer):
+    images = ProductActiveSubstanceImageSerializer(many=True)
     class Meta:
         model = ProductActiveSubstance
-        fields = ['name', 'description']
+        fields = '__all__'
+
+
+class ProductLineImageSerializer(serializers.ModelSerializer):
+    relative_path = serializers.CharField(source="image.url")
+
+    class Meta:
+        model = ProductLineImage
+        fields = '__all__'
 
 
 class BaseProductLineSerializer(serializers.ModelSerializer):
+    images = ProductLineImageSerializer(many=True)
+
     class Meta:
         model = ProductLine
-        fields = ['id', 'name', 'description']
+        fields = '__all__'
 
 
 class ProductTagSerializer(serializers.ModelSerializer):
@@ -78,6 +116,13 @@ class ProductMarketPlaceLinkSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ProductImageSerializer(serializers.ModelSerializer):
+    relative_path = serializers.CharField(source="image.url")
+    class Meta:
+        model = ProductImage
+        fields = '__all__'
+
+
 class ProductSerializer(serializers.ModelSerializer):
     price = BasePriceSerializer()
     discount_price = DiscountPriceSerializer()
@@ -87,17 +132,33 @@ class ProductSerializer(serializers.ModelSerializer):
     product_line = BaseProductLineSerializer()
     product_tags = ProductTagSerializer(many=True)
     market_place_links = ProductMarketPlaceLinkSerializer(many=True)
+    images = ProductImageSerializer(many=True)
 
     class Meta:
         model = Product
         fields = '__all__'
 
 
+class ProductPartnerImageSerializer(serializers.ModelSerializer):
+    relative_path = serializers.CharField(source="image.url")
+
+    class Meta:
+        model = ProductPartnerImage
+        fields = '__all__'
+
+
 class ProductPartnerSerializer(serializers.ModelSerializer):
+    images = ProductPartnerImageSerializer(many=True)
     product_lines = BaseProductLineSerializer(many=True)
 
     class Meta:
         model = ProductPartner
+        fields = '__all__'
+
+
+class ProductCodeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductCode
         fields = '__all__'
 
 
