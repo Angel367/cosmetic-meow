@@ -9,7 +9,7 @@ from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from .filters import ProductFilter, FeedBackFilter
 from .serializers import *
 from .models import *
-from .permissions import AllCreateAdminAllAnother403
+from .permissions import AllCreateAdminAllAnother403, AllSafeAdminAllAnother403
 
 
 class SetUserTokenGetView(APIView):
@@ -97,6 +97,12 @@ class FullProductLineViewSet(viewsets.ReadOnlyModelViewSet):
             'advantages': advantages_of_products_in_product_line,
             'purposes': purposes_of_products_in_product_line
         })
+
+
+class ProductPartnerViewSet(viewsets.ModelViewSet):
+    queryset = ProductPartner.objects.all()
+    serializer_class = ProductPartnerSerializer
+    permission_classes = [AllSafeAdminAllAnother403]
 
 
 class OrderViewSet(viewsets.ModelViewSet):
