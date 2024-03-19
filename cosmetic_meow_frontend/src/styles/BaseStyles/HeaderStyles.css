@@ -66,6 +66,9 @@ header .link-index, header nav .logo{
         padding: 0 3rem;
         gap: 3rem;
     }
+    header nav a{
+        font-size: 1.1rem;
+    }
 }
 @media (max-width:768px ) {
     header label span{
@@ -113,9 +116,7 @@ header .link-index, header nav .logo{
         left: 0;
         right: 0;
     }
-    header nav a{
-        font-size: 17px;
-    }
+
     header label span,
     header label span::before,
     header label span::after {
@@ -187,7 +188,7 @@ header .link-index, header nav .logo{
 }
 @media (max-width: 576px) {
     header nav a{
-        font-size: 18px;
+        font-size: 1rem;
     }
 
 }

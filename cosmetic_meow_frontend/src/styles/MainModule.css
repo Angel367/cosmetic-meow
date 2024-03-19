@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     padding: 2rem 0 10rem;
-    gap: 6rem;
+    gap: 3rem;
 }
     #products{
         display: flex;
@@ -85,7 +85,7 @@
     justify-content: space-evenly;
     text-align: center;
     width: 100%;
-    gap: 1rem;
+    gap: 2rem;
 }
 .main .upper-line__body .partner{
     display: flex;
@@ -121,6 +121,7 @@
 @media (max-width:992px ) {
     .main{
         padding: 2rem 0;
+        gap: 2rem;
     }
     .main article{
         padding: 0 3rem;
@@ -140,7 +141,7 @@
     }
     .main{
         padding: 0 0 5rem;
-
+        gap:1.5rem;
     }
     .main article{
         padding: 0 1rem;
@@ -169,6 +170,10 @@
         visibility: visible;
         opacity: 1;
         position: relative;
+        width: 100%;
+    }
+    #main-title .main-title-img-mobile img{
+        width: 100%;
     }
     #main-title .main-title-description{
         width: 100%;

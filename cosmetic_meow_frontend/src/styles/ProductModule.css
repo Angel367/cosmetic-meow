@@ -135,15 +135,15 @@ h1, h3, h2, p{
         padding-right: 2rem;
 }
 .main-line-product .product-price{
-    font: 700 30px 'Cygre', sans-serif;
+    font: 700 2rem 'Cygre', sans-serif;
     color: rgba(228, 122, 124, 1);
 }
 .main-line-product .product-description{
-    font: 400 20px 'Cygre', sans-serif;
+       font: 400 1rem 'Cygre', sans-serif;
     color: rgba(95, 104, 134, 1) ;
 }
 .main-line-product .product-name{
-    font: 700 30px 'Cygre', sans-serif;
+    font: 700 2rem 'Cygre', sans-serif;
     color: rgba(26, 39, 81, 1);
 }
 
@@ -180,24 +180,27 @@ h1, h3, h2, p{
     border-radius: 20px;
     overflow: hidden;
     /*height: max-content;*/
-
+    flex-grow: 2;
     display: flex;
     justify-content: center;
     width: 600px;
-    height: 600px;
+    height: 800px;
     transition: all 0.3s;
 }
-
 .main-line-product .img-holder-section .img-main img{
-    object-fit: scale-down;
+         width: 100%;
+         /*max-height: 50vh;*/
+         height: auto;
+         object-fit: contain;
     transition: all 0.3s;
-    border-radius: 15px;
+         border-radius: 15px;
 
-}
-@media (max-width: 1300px) {
+    }
+
+@media (max-width: 1500px) {
     .main-line-product .img-holder-section{
         flex-direction: column;
-        justify-content: flex-end;
+        /*justify-content: flex-end;*/
         gap: 2rem;
     }
     .main-line-product .img-holder-section .img-holder{
@@ -207,13 +210,18 @@ h1, h3, h2, p{
     .main-line-product .img-holder-section .img-main{
         /*width: 100%;*/
         width: 400px;
-        height: 400px;
+        height: 600px;
         justify-content: start;
         align-self: center;
     }
     .main-line-product .img-holder-section .img-holder .img-small{
         max-width: 5rem;
         height: 5rem;
+    }
+    .main-line-product .img-holder-section .img-main img{
+
+         border-radius: 10px;
+
     }
 }
 
@@ -222,6 +230,7 @@ h1, h3, h2, p{
 @media (max-width:992px ) {
     .main-line-product{
         padding: 2rem 3rem;
+        gap: 2rem;
     }
    .main-line-product article{
         flex-direction: column;
@@ -231,24 +240,19 @@ h1, h3, h2, p{
         position: relative;
         flex-direction: column-reverse;
         align-items: center;
-
     }
     .main-line-product .img-holder{
         flex-direction: column;
-        /*visibility: hidden;*/
-        /*opacity: 0;*/
-        /*bottom: 0;*/
-        /*z-index: 1;*/
-        /*position: absolute;*/
     }
     .main-line-product .img-holder-section .img-main{
          /*max-width: 100%;*/
-         max-height: 50vh;
+         /*max-height: 50vh;*/
          width: 100%;
          height: auto;
+        /*object-fit: scale-down;*/
         justify-content: center;
         align-items: center;
-            border-radius: 0;
+        border-radius: 0;
          position: relative;
 
     }
@@ -259,17 +263,13 @@ h1, h3, h2, p{
      .main-line-product .img-holder .img-small{
          border-radius: 0;
      }
-    .main-line-product .img-holder-section .img-main img{
-         width: 100%;
-         max-height: 50vh;
-         height: auto;
-         object-fit: scale-down;
-         border-radius: 0;
 
-    }
 
 }
 @media (max-width: 768px) {
+    .main-line-product{
+        gap: 1rem;
+    }
     .main-line-product .close {
         position: absolute;
         opacity: 0;
@@ -293,7 +293,7 @@ h1, h3, h2, p{
     }
    .main-line-product .img-holder-section .img-main img{
          width: 100%;
-         max-height: 40vh;
+         /*max-height: 40vh;*/
          height: auto;
          object-fit: scale-down;
          border-radius: 0;

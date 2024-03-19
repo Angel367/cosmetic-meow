@@ -46,11 +46,11 @@ footer .link-with-addr > div  a{
     white-space: nowrap;
 }
 footer .link-with-addr > div a, footer .link-with-addr > address{
-    font-size: 14px;
+    font-size: 1rem;
     font-weight: 400;
 }
 footer .link-with-addr > div .main-link{
-    font-size: 18px;
+    font-size: 1.25rem;
     font-weight: 700;
 }
 footer .logo{
@@ -86,8 +86,8 @@ footer .link-with-addr{
 }
 @media (max-width:768px ) {
     footer{
-        padding: 1rem 3rem;
-        gap: 4rem;
+        padding: 2rem 3rem;
+        gap: 3rem;
     }
     footer .link-with-addr{
         flex-wrap: wrap;
@@ -95,36 +95,36 @@ footer .link-with-addr{
         column-gap: 2.5rem;
         justify-content: start;
     }
-    footer .link-with-addr .about{
-        order: 5;
-    }
-    footer .link-with-addr .training{
-        order: 3;
-    }
-    footer .link-with-addr .users{
-        order: 4;
-    }
+    /*footer .link-with-addr .about{*/
+    /*    order: 5;*/
+    /*}*/
+    /*footer .link-with-addr .training{*/
+    /*    order: 3;*/
+    /*}*/
+    /*footer .link-with-addr .users{*/
+    /*    order: 4;*/
+    /*}*/
 
-    footer .link-with-addr > div a, footer .link-with-addr > address{
-        font-size: 13px;
-    }
-    footer .link-with-addr > div .main-link{
-        font-size: 17px;
+    /*footer .link-with-addr > div a, footer .link-with-addr > address{*/
+    /*    font-size: 13px;*/
+    /*}*/
+    /*footer .link-with-addr > div .main-link{*/
+    /*    font-size: 17px;*/
 
-    }
+    /*}*/
 
 }
 @media (max-width: 576px) {
     footer{
-    padding: 1rem 2rem;
-
+    padding: 2rem;
+        gap: 2rem;
     }
-    footer .link-with-addr > div a, footer .link-with-addr > address{
-        font-size: 12px;
+    /*footer .link-with-addr > div a, footer .link-with-addr > address{*/
+    /*    font-size: 12px;*/
 
-    }
-    footer .link-with-addr > div .main-link{
-        font-size: 16px;
+    /*}*/
+    /*footer .link-with-addr > div .main-link{*/
+    /*    font-size: 16px;*/
 
-    }
+    /*}*/
 }

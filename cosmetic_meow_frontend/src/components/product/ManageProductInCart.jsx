@@ -1,6 +1,7 @@
 import React from "react";
 import {addProduct, addQuantity, removeProduct, subQuantity} from "../../redux/reduxCart";
 import {useDispatch} from "react-redux";
+import {Link} from "react-router-dom";
 
 const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
 function ManageProductInCart({product, quantity, noButton=false, isOrder=false}) {
@@ -13,7 +14,9 @@ function ManageProductInCart({product, quantity, noButton=false, isOrder=false})
                     {isOrder ? (
                         <div>{quantity}</div>
                     ) : null}
+                <Link to={`/lines/${product.product_line}/products/${product.id}`}>
                 <img src={arrow} alt={"Перейти"}/>
+                    </Link>
                 </>) :
                 (
                     <>{quantity === 0 ?

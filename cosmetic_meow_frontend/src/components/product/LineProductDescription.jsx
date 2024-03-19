@@ -18,15 +18,16 @@ function LineProductDescription({product}) {
      return (
     <section>
         <div className="main-info">
-            <p className="product-name">{product.name || 'product.name'}</p>
-            <p className="product-description">{product.product_line.name || 'product.product_line.name'}</p>
-            <p className="product-price">{product.price.price_value || 'product.price'}</p>
+            <p className="product-name not-main-p">{product.name || 'product.name'}</p>
+            <p className="product-description not-main-p">{product.product_line.name || 'product.product_line.name'}</p>
+            <p className="product-price  not-main-p">{product.price.price_value || 'product.price'}</p>
 
             {/*<ManageProductInCart    product={product} quantity={quantity} />*/}
 
-            <p>Shop product on other marketplaces</p>
+            <p className={ "not-main-p"}>Закажите наш продукт на популярных площадках:</p>
             <div className="link-holder">
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                {/*todo ссылки с бд*/}
                 <a href="" className="link-to-other">Ozon
                     <img alt="" src={arrow}/>
                 </a>
@@ -36,9 +37,7 @@ function LineProductDescription({product}) {
                     <img alt="" src={arrow}/>
                 </a>
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                <a href="" className="link-to-other">Beru
-                    <img alt="" src={arrow}/>
-                </a>
+
 
 
             </div>
@@ -52,39 +51,32 @@ function LineProductDescription({product}) {
                     <input type="radio" id="composition-radio" name="info" className="info-radio"/>
                     <label htmlFor="composition-radio" className="info-label">Состав</label>
                     <div>
-                        <p className="info-text" id="description-text">
-                            {product.short_description + ' ' || 'product.short_description'}
-                            {product.description || 'product.description' }
-
-                            {product.advantages.map((advantage) => {
-                                return ' ' + advantage.name + ' : ' + advantage.description + ' ';
+                        <p className="info-text not-main-p"
+                           id="description-text">
+                            <div>
+                            {product.description || 'product.description' }</div>
+                            {product.advantages.map((advantage, index) => {
+                                return (<div>{index + 1}. {advantage.description}</div>);
                             })}
 
 
                         </p>
 
-                        <p className="info-text" id="usage-text">
-                            {product.purpose || 'product.purpose' +
-
-                            + ' 2.product.purpose'  }
-
-                            { ' ' + product.application_method || 'product.application_method' +
-
-                            + ' 2.product.application_method'  }
-
-                            { ' ' + product.clinical_testing_result.description || 'product.clinical_testing_result' +
-                            + ' 2.product.clinical_testing_result' }
+                        <p className="info-text  not-main-p" id="usage-text">
+                            <div>Назначение: {product.purpose}</div>
+                            <div>Способ применения: {product.application_method}</div>
+                           <div>Результаты клинических испытаний: <br/>
+                            {product.clinical_testing_result.description }</div>
 
                         </p>
 
 
-                        <p className="info-text" id="composition-text">
-                            {product.composition || 'product.composition' }
-
-                            {product.active_substances.map((substance) => {
-                                return ' ' + substance.name + ' : '  + substance.description + ' ';
-                            })
-                             || 'product.active_substances' }
+                        <p className="info-text  not-main-p" id="composition-text">
+                            <div>Активные вещества:</div>
+                            {product.active_substances.map((substance, index) => {
+                                return (<div>{index+1}. {substance.description || ''}</div>);
+                            })}
+                            <div>{'Coстав: ' + product.composition || ''}</div>
                         </p>
                     </div>
                 </div>
