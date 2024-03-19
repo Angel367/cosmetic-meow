@@ -35,8 +35,9 @@ function MainTitle() {
             {/*    </div>*/}
             {/*</div>*/}
             </div>
-            <div className="main-title-img-mobile">
-                <img alt="" src={mainTitleMobile}/>
+            <div className="main-title-img">
+                <img src={mainTitleMobile} alt="" className={"main-title-img_mobile"}/>
+                <img src={mainTitle} alt="" className={"main-title-img_desktop"}/>
             </div>
         </article>
     );
