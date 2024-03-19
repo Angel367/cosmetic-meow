@@ -16,9 +16,9 @@ import FooterLanding from "../base/FooterLanding";
                 <p>
                     К сожалению, мы не нашли то, что вы искали.
                 </p>
-                {/*<p>*/}
-                {/*    <i>{error.statusText || error.message}</i>*/}
-                {/*</p>*/}
+                <p>
+                    <i>{error.statusText || error.message}</i>
+                </p>
                 <Link to={"/"}>Вернуться на главную</Link>
 
         </main>

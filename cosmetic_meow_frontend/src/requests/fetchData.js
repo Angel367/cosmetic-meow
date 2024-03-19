@@ -19,7 +19,8 @@ async function fetchData(urlPart, params = null) {
                     "response");
             })
             .catch((error) => {
-                console.log(error);
+                // console.log(error.response.data, "1error1");
+                variable = error.response.data;
             });
     return variable;
 }

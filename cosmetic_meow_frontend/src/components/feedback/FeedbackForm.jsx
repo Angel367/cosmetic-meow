@@ -12,8 +12,14 @@ function FeedbackForm({type="other"}) {
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
     const [isAgreementSigned, setIsAgreementSigned] = useState(false);
+    const [validated, setValidated] = useState(false);
 
     const handleSubmit = async (e) => {
+        const form = e.currentTarget;
+        if (form.checkValidity() === false) {
+            e.stopPropagation();
+        }
+        setValidated(true);
         e.preventDefault();
         let feedbackData;
 
@@ -40,7 +46,9 @@ function FeedbackForm({type="other"}) {
     }
     return (
 
-    <form onSubmit={handleSubmit} method="POST" className="feedback-module__form-holder__form">
+    <form onSubmit={handleSubmit} method="POST"
+          validated={validated.toString()}
+          className="feedback-module__form-holder__form">
             <p className={"form-holder__form__input-holder"}>
             <label htmlFor={"name"}>Имя</label>
             <input id={"name"} type="text"
