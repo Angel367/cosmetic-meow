@@ -16,7 +16,7 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
-import ErrorPage from "./components/error/ErrorPage";
+import ErrorLayout from "./components/error/ErrorLayout";
 import Cart from "./components/order/Cart";
 import {Provider} from "react-redux";
 import store from "./redux/store";
@@ -39,6 +39,7 @@ import Login from "./components/auth/Login";
 import Orders from "./components/order/Orders";
 import Order from "./components/order/Order";
 import LayoutLanding from "./components/base/LayoutLanding";
+import VerificationProduct from "./components/product/VerificationProduct";
 
 
 const router = createBrowserRouter([
@@ -46,38 +47,47 @@ const router = createBrowserRouter([
     {
         index: true,
         element: <LayoutLanding children={<Main/>} title={"Главная"}/>,
-        errorElement: <ErrorPage/>,
+        errorElement: <ErrorLayout/>,
+    },
+    {
+        path: "/verify-product/:code",
+        element: <LayoutLanding children={<VerificationProduct/>} title={"Верификация продукта"}/>,
+        errorElement: <ErrorLayout/>,
     },
     {
 
         path: "/development",
         element: <LayoutLanding children={<Dev/>} title={"Разработка"}/>,
-        errorElement: <ErrorPage/>,
+        errorElement: <ErrorLayout/>,
     },
      {
         path: "/feedback",
         element: <LayoutLanding children={<Feedback/>} title={"Обратная связь"}/>,
-        errorElement: <ErrorPage/>,
+        errorElement: <ErrorLayout/>,
     },
+    {
+        path: "/products/:id_product",
+        element: <LayoutLanding children={<LineProduct/>} title={"Продукт"}/>,
+        errorElement: <ErrorLayout/>,
 
+    },
     {
 
         path: "/lines/:id_line",
         element: <Outlet/>,
-        errorElement: <ErrorPage/>,
+        errorElement: <ErrorLayout/>,
         children: [
             {
                 index: true,
                 element: <LayoutLanding children={<Line/>} title={"Линия"}/>,
-                errorElement: <ErrorPage/>,
+                errorElement: <ErrorLayout/>,
 
             },
 
             {
-
-            path: "products/:id_product",
+                path: "products/:id_product",
             element: <LayoutLanding children={<LineProduct/>} title={"Продукт"}/>,
-            errorElement: <ErrorPage/>,
+            errorElement: <ErrorLayout/>,
         },
 
         ],
@@ -89,17 +99,17 @@ const router = createBrowserRouter([
     {
         path: "/shop",
         element: <Outlet/>,
-        errorElement: <ErrorPage/>,
+        errorElement: <ErrorLayout/>,
         children: [
             {
                 index: true,
                 element: <Layout children={<Shop/>} title={"Каталог"}/>,
-                errorElement: <ErrorPage/>,
+                errorElement: <ErrorLayout/>,
             },
             {
                 path: "product/:id_product",
                 element: <Layout children={<LineProduct/>} title={"Товар"}/>,
-                errorElement: <ErrorPage/>,
+                errorElement: <ErrorLayout/>,
             },
         ],
     },
@@ -110,7 +120,7 @@ const router = createBrowserRouter([
         element: <OnlyForAuthenticatedRoute>
             <Outlet/>
         </OnlyForAuthenticatedRoute>,
-        errorElement: <ErrorPage/>,
+        errorElement: <ErrorLayout/>,
         children: [
             {
                 index: true,
@@ -118,7 +128,7 @@ const router = createBrowserRouter([
                     children={<ProfileLayout content={<ProfileContent/>}/>}
                     title={"Профиль"}/>,
 
-                errorElement: <ErrorPage/>,
+                errorElement: <ErrorLayout/>,
 
             },
             {
@@ -133,7 +143,7 @@ const router = createBrowserRouter([
                         }
                                          title={"Личные данные"}/>,
 
-                        errorElement: <ErrorPage/>,
+                        errorElement: <ErrorLayout/>,
                     },
                     {
                         path: "edit/",
@@ -142,10 +152,10 @@ const router = createBrowserRouter([
                             <ProfileLayout content={<PersonalEdit/>}/>
                         }
                                          title={"Редактирование"}/>,
-                        errorElement: <ErrorPage/>,
+                        errorElement: <ErrorLayout/>,
                     },
                 ],
-                errorElement: <ErrorPage/>,
+                errorElement: <ErrorLayout/>,
             },
 
             {
@@ -160,7 +170,7 @@ const router = createBrowserRouter([
                             <ProfileLayout content={<Orders/>}/>
                         }
                                      title={"Заказы"}/>,
-                    errorElement: <ErrorPage/>,
+                    errorElement: <ErrorLayout/>,
                 },
                 {
                     path: "order/:id_order",
@@ -169,10 +179,10 @@ const router = createBrowserRouter([
                             <ProfileLayout content={<Order/>}/>
                         }
                                      title={"Заказ"}/>,
-                    errorElement: <ErrorPage/>,
+                    errorElement: <ErrorLayout/>,
                 },
                ],
-                errorElement: <ErrorPage/>,
+                errorElement: <ErrorLayout/>,
             },
 
         ],
@@ -180,7 +190,7 @@ const router = createBrowserRouter([
     {
         path: "/cart",
         element: <Layout children={<Cart/>} title={"Корзина"}/>,
-        errorElement: <ErrorPage/>,
+        errorElement: <ErrorLayout/>,
     },
     // ************auth pages***********
     {

@@ -31,6 +31,44 @@ body {
 main {
         margin-top: 0;
 }
+#error-page{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+#error-page h1{
+    color: #1A2751;
+    font-family: 'CygreBold', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+}
+#error-page p{
+    color: #5F6886;
+    font-size: 1rem;
+    font-weight: 400;
+}
+#error-page a{
+    color: #E47A7C;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+.error-layout{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+
+}
+.error-layout footer{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
 
 /* fonts */
 h1, h2, h3, h4, h5, h6 , p, a{
