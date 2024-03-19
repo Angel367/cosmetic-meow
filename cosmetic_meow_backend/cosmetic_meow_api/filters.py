@@ -29,10 +29,14 @@ class ProductFilter(filters.FilterSet):
         field_name='product_line__id',  # Assuming product_line is a ForeignKey
         lookup_expr='exact'
     )
+    is_ready_for_sale = filters.BooleanFilter(
+        field_name='is_ready_for_sale',
+        lookup_expr='exact'
+    )
 
     class Meta:
         model = Product
-        fields = ['min_price', 'max_price', 'name', 'all_tags', 'any_tags', 'product_line']
+        fields = ['min_price', 'max_price', 'name', 'all_tags', 'any_tags', 'product_line', 'is_ready_for_sale']
 
 
 class FeedBackFilter(filters.FilterSet):

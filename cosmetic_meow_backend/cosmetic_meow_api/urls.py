@@ -1,26 +1,12 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from .views import *
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
     TokenVerifyView
 )
 
-
-from .views import (
-    ProductViewSet,
-    FullProductLineViewSet,
-    UserCreateAPIView,
-    FeedBackViewSet,
-    UserUpdateAPIView,
-    OrderViewSet,
-    OrderItemViewSet,
-    PhoneVerifyCode,
-    PhoneSendCode,
-    PickUpPointViewSet,
-    SetUserTokenGetView,
-    ProductPartnerViewSet
-)
 router = DefaultRouter()
 router.register(r'product', ProductViewSet, basename='products')
 router.register(r'product_line', FullProductLineViewSet, basename='product_lines')
@@ -29,6 +15,8 @@ router.register(r'order', OrderViewSet, basename='order')
 router.register(r'order_item', OrderItemViewSet, basename='order_item')
 router.register(r'pickup_point', PickUpPointViewSet, basename='pickup_point')
 router.register(r'product_partner', ProductPartnerViewSet, basename='product_partner')
+router.register(r'product_code', ProductCodeViewSet, basename='product_code')
+
 
 urlpatterns = [
     path('set_user_token/', SetUserTokenGetView.as_view(), name='set_user_token'),

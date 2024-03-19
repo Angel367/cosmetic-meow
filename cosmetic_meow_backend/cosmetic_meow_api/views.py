@@ -57,7 +57,7 @@ class UserUpdateAPIView(generics.RetrieveUpdateAPIView):
         return self.request.user
 
 
-class ProductViewSet(viewsets.ReadOnlyModelViewSet):
+class ProductViewSet(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
     permission_classes = [permissions.AllowAny]
@@ -103,6 +103,25 @@ class ProductPartnerViewSet(viewsets.ModelViewSet):
     queryset = ProductPartner.objects.all()
     serializer_class = ProductPartnerSerializer
     permission_classes = [AllSafeAdminAllAnother403]
+
+
+class ProductCodeViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = ProductCode.objects.all()
+    serializer_class = ProductCodeSerializer
+    permission_classes = [permissions.AllowAny]
+
+    def list(self, request, *args, **kwargs):
+        return Response(
+            data={'error': 'Adelina no list for this method'}, status=status.HTTP_400_BAD_REQUEST
+        )
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        answer = self.get_serializer(instance).data
+        answer.update({'product_line': instance.product.product_line.id})
+        instance.was_activated = True
+        instance.save()
+        return Response(answer)
 
 
 class OrderViewSet(viewsets.ModelViewSet):

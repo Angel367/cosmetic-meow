@@ -135,6 +135,13 @@ def generate_products(num_products=10):
         product.product_tags.set(product_tags)
 
 
+def generate_product_codes(num_codes=100):
+    for _ in range(num_codes):
+        code = ''.join(random.choices('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ', k=16))
+        product = Product.objects.order_by('?').first()
+        ProductCode.objects.create(code=code, product=product)
+
+
 # Call the functions to generate fake data
 generate_custom_users()
 generate_base_prices()
@@ -148,4 +155,4 @@ generate_product_active_substances()
 generate_product_lines()
 generate_product_tags()
 generate_products()
-
+generate_product_codes()
