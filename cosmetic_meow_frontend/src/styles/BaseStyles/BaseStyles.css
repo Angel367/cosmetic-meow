@@ -27,13 +27,12 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
-    /*scrollbar-width: thin;*/
-    /*scrollbar-color: #5F6886 #1a2751;*/
 
 }
-body::-webkit-scrollbar {
 
+body::-webkit-scrollbar {
     width: 10px;
+    display: none;
 }
 body::-webkit-scrollbar-thumb {
     background-color: #1A2751;
@@ -44,7 +43,7 @@ body::-webkit-scrollbar-track {
 }
 main {
         margin-top: 0;
-        background-color: #FFFFFF;
+
 }
 #error-page{
     display: flex;
@@ -112,7 +111,14 @@ h1, h2, h3, h4, h5, h6 , p, a{
     font-family: 'Bergamasco Regular', sans-serif;
     font-size: 2rem;
     font-weight: 600;
+    line-height: 1;
 
+
+}
+.main-p{
+    color: #5F6886;
+    font-size: 1.2rem;
+    font-weight: 400;
 }
 
 .not-main-h2{
@@ -144,7 +150,6 @@ h1, h2, h3, h4, h5, h6 , p, a{
 }
 .contact-us span{
     color: #1A2751;
-
     font-size: 1rem;
     font-weight: 700;
 }
@@ -198,19 +203,6 @@ h1, h2, h3, h4, h5, h6 , p, a{
     border-radius: 50%;
     animation: spin 2s linear infinite;
 }
-
-
-body .main-page, body .not-main-page, body, main{
-    /*background: green;*/
-    overflow-x: hidden;
-    overflow-y: auto;
-    position: relative;
-}
-body .main-page, body .not-main-page, body{
-    background-color: #1a2751;
-}
-
-
 
 @keyframes spin {
     0% { transform: rotate(0deg); }

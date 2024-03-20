@@ -7,7 +7,7 @@ footer {
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-
+    z-index: 2;
     /*z-index: -3;*/
 
 }
@@ -30,6 +30,7 @@ footer .link-with-addr a, footer address div{
 footer .copy{
     color:  rgba(95, 104, 134, 1);
     align-self: center;
+    text-align: center;
 }
 footer .social{
     opacity: 0;
