@@ -275,6 +275,7 @@ h1, h3, h2, p{
 @media (max-width: 768px) {
     .main-line-product{
         gap: 1rem;
+        padding: 0 0 5rem;
     }
     .main-line-product .close {
         position: absolute;

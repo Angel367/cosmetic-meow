@@ -32,7 +32,7 @@ body {
 
 body::-webkit-scrollbar {
     width: 10px;
-    display: none;
+    /*display: none;*/
 }
 body::-webkit-scrollbar-thumb {
     background-color: #1A2751;
