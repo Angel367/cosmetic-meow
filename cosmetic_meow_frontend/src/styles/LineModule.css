@@ -41,6 +41,7 @@
     flex-grow: 2;
     overflow: hidden;
     border-radius: 20px;
+    max-width: 50%;
 
 }
 .line-module .line-module__description-img-holder img{
@@ -157,6 +158,8 @@
     }
  .line-module    .line-module__description-img-holder{
         border-radius: 20px;
+        max-width: unset;
+        max-height: 50vh;
     }
   .line-module   .production-holder,.line-module  .similar-holder{
         grid-template-columns: 1fr;

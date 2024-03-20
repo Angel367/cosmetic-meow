@@ -183,7 +183,14 @@ h1, h2, h3, h4, h5, h6 , p, a{
     border-radius: 50%;
     animation: spin 2s linear infinite;
 }
+/*todo*/
+body{
+    background: red;
+}
+body main{
+    background: blue;
 
+}
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }

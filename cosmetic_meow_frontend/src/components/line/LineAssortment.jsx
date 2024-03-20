@@ -12,7 +12,7 @@ function LineAssortment ({products} )  {
                 <h2 className={'not-main-h2'}>
                     Ассортимент
                 </h2>
-                <p>
+                <p className={'not-main-p'}>
                     Подберите продукт по вашим потребностям
                 </p>
                 <div className="production-holder">

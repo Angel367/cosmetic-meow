@@ -8,7 +8,7 @@ function LineAdvantages({advantages}) {
     if (!advantages || advantages.length === 0)
         return
         return (
-            <section className="advantages" >
+            <section className="advantages" id="advantages">
                 <h2 className="not-main-h2">Ключевые преимущества</h2>
                 <p className="not-main-p">Почему стоит выбрать нашу продукцию</p>
                 <div className="advantages-holder">

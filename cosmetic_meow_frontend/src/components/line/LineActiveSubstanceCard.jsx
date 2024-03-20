@@ -1,24 +1,20 @@
 import React from "react";
 
 
-const cream_1 = process.env.PUBLIC_URL + '/img/line-page/cream_1_1.jpg';
+let img_src = process.env.PUBLIC_URL + '/img/line-page/no_photo.jpg';
+
 
 
 function LineActiveSubstanceCard({active_substance}){
      if (!active_substance)
          return <div>Загрузка...</div>
+    if (active_substance.images && active_substance.images.length === 0)
+     img_src = active_substance.images[1].image
+
         return (
             <div className="small-product-box line-page">
                 <div className="small-product-img-box">
-                    {/*{% if product.get_images.count > 0 %}*/}
-                    {/*{% for image in product.get_images %}*/}
-                    {/*{% if image.is_main %}*/}
-                    {/*<img src="{{ image.image.url }}" alt="{{ product.name }} Image"/>*/}
-                    {/*{% endif %}*/}
-                    {/*{% endfor %}*/}
-                    {/*{%  else %}*/}
-                    <img alt="product" src={cream_1}/>
-                    {/*{% endif %}*/}
+                    <img alt={""} src={img_src}/>
                 </div>
 
                 <div className="small-product-info-box">

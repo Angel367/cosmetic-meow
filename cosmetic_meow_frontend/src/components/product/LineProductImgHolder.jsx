@@ -1,7 +1,6 @@
 import React from "react";
 
-const cream_1 = process.env.PUBLIC_URL + '/img/line-page/cream_1_1.jpg';
-const cream_2 = process.env.PUBLIC_URL + '/img/line-page/cream_1_2.jpg';
+const img = process.env.PUBLIC_URL + '/img/line-page/no_photo.jpg';
 class LineProductImgHolder extends React.Component {
     onClickImage = (e) => {
         if (e.target.tagName !== 'IMG') return;
@@ -37,14 +36,22 @@ class LineProductImgHolder extends React.Component {
         return (
             <section className="img-holder-section">
                 <div className="img-holder">
-                    {/*Todo брать избражения */}
-                    <div className="img-small"><img src={cream_1} alt=""/></div>
-                    <div className="img-small"><img src={cream_2} alt=""/></div>
-                    <div className="img-small"><img src={cream_1} alt=""/></div>
-                    <div className="img-small"><img src={cream_2} alt=""/></div>
+                    {this.props.imgs.length > 0 ?
+                        this.props.imgs.map((img, index) => {
+                            return <div key={index} className="img-small">
+                                <img src={img.image || img} alt=""/>
+                            </div>
+                        }) : <div className="img-small"><img src={img} alt=""/></div>
+                    }
+
                 </div>
                 <div className="img-main">
-                    <img id="mainImage" src={cream_1} alt=""/>
+                    {this.props.imgs.length > 0 ?
+                        <img id="mainImage" src={this.props.imgs[0].image
+                            || img} alt=""/> :
+                        <img id="mainImage" src={img} alt=""/>
+                    }
+
                 </div>
             </section>
 

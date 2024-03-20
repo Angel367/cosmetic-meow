@@ -1,4 +1,4 @@
-
+/*todo*/
 footer {
     position: relative;
     font-family: 'Cygre', sans-serif;
@@ -6,6 +6,7 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    /*z-index: -3;*/
 
 }
 footer .link-with-addr > div .main-link {

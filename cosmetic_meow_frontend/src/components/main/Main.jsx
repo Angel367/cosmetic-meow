@@ -15,7 +15,7 @@ function Main  ()  {
 
     useEffect(() => {
     async function fetchProducts(){
-        let data = await fetchData('product', {page_size: 6});
+        let data = await fetchData('product', {page_size: 6, is_ready_for_sale: true});
         setProducts(data?.results);
     }
     fetchProducts();

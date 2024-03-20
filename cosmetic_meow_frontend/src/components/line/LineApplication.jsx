@@ -2,7 +2,7 @@ import React from 'react';
 
 
 function LineApplication({purposes}) {
-    if (!purposes || purposes.length === 0)
+    if (!purposes || purposes.length === 0 || purposes[0].purpose === '')
             return
 
         return (

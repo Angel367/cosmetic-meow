@@ -1,13 +1,17 @@
 import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
+import Loading from "../error/Loading";
 
 const down = process.env.PUBLIC_URL + '/img/dev/down.svg';
-const img = process.env.PUBLIC_URL + '/img/line-page/favicon.png';
+let img = process.env.PUBLIC_URL + '/img/line-page/no_photo.jpg';
 
  function LineDescription({lineDescription}) {
     if (!lineDescription)
-        // todo add styles for loading
-        return <div>Загрузка...</div>
+
+        return <Loading/>
+    if (lineDescription.images && lineDescription.images.length > 0)
+        img = lineDescription.images[0].image;
+
         return (
             <section className="line-module__description">
                 <div className="line-module__description-text">
@@ -32,7 +36,7 @@ const img = process.env.PUBLIC_URL + '/img/line-page/favicon.png';
             <img alt="" src={down}/>
                         </span></Link>
 
-                        <Link to={`#composition`} className={'contact-us'}
+                        <Link to={`#similar`} className={'contact-us'}
                         ><span>Состав</span><span>
             <img alt="" src={down}/>
                         </span></Link>
@@ -44,7 +48,7 @@ const img = process.env.PUBLIC_URL + '/img/line-page/favicon.png';
                     </div>
                 </div>
                 <div className="line-module__description-img-holder">
-                    <img alt="[img]" src={img}/>
+                    <img alt="" src={img}/>
                 </div>
             </section>
         );

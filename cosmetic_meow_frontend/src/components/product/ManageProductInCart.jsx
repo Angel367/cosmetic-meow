@@ -6,6 +6,8 @@ import {Link} from "react-router-dom";
 const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
 function ManageProductInCart({product, quantity, noButton=false, isOrder=false}) {
     let dispatch = useDispatch();
+    console.log(product.product_line.id);
+
     return (
 
         <div className="small-product-link">
@@ -14,7 +16,8 @@ function ManageProductInCart({product, quantity, noButton=false, isOrder=false})
                     {isOrder ? (
                         <div>{quantity}</div>
                     ) : null}
-                <Link to={`/lines/${product.product_line}/products/${product.id}`}>
+                <Link
+                    to={`/lines/${product.product_line.id}/products/${product.id}`}>
                 <img src={arrow} alt={"Перейти"}/>
                     </Link>
                 </>) :

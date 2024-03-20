@@ -11,7 +11,6 @@ const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
 
 function LineProduct() {
     const {id_product, id_line} = useParams();
-
     const [product, setProduct] = useState(null);
     let navigate = useNavigate();
     useEffect(() => {
@@ -29,8 +28,8 @@ function LineProduct() {
     }, [id_product]);
     if (!product)
         return <Loading/>;
-    if (!id_line || product.product_line) {
-        return <Navigate to={`/lines/${product.product_line.id}/` + id_product}/>
+    if (!id_line && product.product_line) {
+        navigate(`/lines/${product.product_line.id}/products/${id_product}`);
     }
     return (
             <main className="main-line-product">
@@ -41,8 +40,7 @@ function LineProduct() {
                 </a>
                 {/* todo fix cursor*/}
                 <article>
-                    <LineProductImgHolder/>
-                    {/* todo fix img*/}
+                    <LineProductImgHolder imgs={product.images}/>
                     <LineProductDescription product={product}/>
                 </article>
 

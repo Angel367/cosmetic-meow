@@ -10,7 +10,7 @@ function LineComposition({active_substances}) {
                 <h2 className={'not-main-h2'} >
                     Активные компоненты
                 </h2>
-                <p>
+                <p className={'not-main-p'}>
                     Побробнее о том, какие активные компоненты входят в состав продуктов линейки
 
                 </p>

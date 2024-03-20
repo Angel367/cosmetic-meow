@@ -21,7 +21,7 @@ function LineProductDescription({product}) {
         <div className="main-info">
             <p className="product-name not-main-p">{product.name || 'product.name'}</p>
             <p className="product-description not-main-p">{product.product_line.name || 'product.product_line.name'}</p>
-            {/*<p className="product-price  not-main-p">{product.price.price_value || 'product.price'}</p>*/}
+            {/*<p className="product-price  not-main-p">{product.price?.price_value || 'product.price'}</p>*/}
 
             {/*<ManageProductInCart    product={product} quantity={quantity} />*/}
             { marketplaces?.length === 0 ?  <p className={ "not-main-p"}>Продукт еще недоступен для заказа</p> :
@@ -54,8 +54,7 @@ function LineProductDescription({product}) {
                     <input type="radio" id="composition-radio" name="info" className="info-radio"/>
                     <label htmlFor="composition-radio" className="info-label">Состав</label>
                     <div>
-                        <p className="info-text not-main-p"
-                           id="description-text">
+                        <p className="info-text not-main-p" id="description-text">
                             <div>
                             {product.description || 'product.description' }</div>
                             {product.advantages.length === 0 ? null : <div>Преимущества:</div>

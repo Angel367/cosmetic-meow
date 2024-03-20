@@ -10,22 +10,22 @@ function LayoutLanding({children, title, scrollX=0, scrollY=0}) {
         if (title !== undefined) {
              document.title = title;
         }
-        if (scrollX === 0 && scrollY === 0)
-            window.scrollTo(scrollX, scrollY);
+        // if (scrollX === 0 && scrollY === 0)
+        //     window.scrollTo(scrollX, scrollY);
     });
-    let className = '';
+    let className = 'not-main-page';
     if (title === 'Главная') {
         className = 'main-page';
     }
     return (
-        <div className={className}>
-            <HeaderLanding/>
+        <>
+            {/*<HeaderLanding/>*/}
             <div>
                 <NotificationContainer/>
             </div>
             {children}
-            <FooterLanding/>
-        </div>
+            {/*<FooterLanding/>*/}
+        </>
     );
 }
 
