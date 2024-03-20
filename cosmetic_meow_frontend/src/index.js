@@ -52,7 +52,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/verify-product/:code",
-        element: <LayoutLanding children={<VerificationProduct/>} title={"Верификация продукта"}/>,
+        element:  <LayoutLanding children={<VerificationProduct/>} title={"Верификация продукта"}/>,
         errorElement: <ErrorLayout/>,
     },
     {

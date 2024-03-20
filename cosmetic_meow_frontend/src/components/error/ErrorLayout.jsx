@@ -6,6 +6,28 @@ import FooterLanding from "../base/FooterLanding";
 
  function ErrorLayout() {
     const error = useRouteError();
+    const {heightWindow, setHeightWindow} = React.useState(window.innerHeight);
+    const {heightBody, setHeightBody} = React.useState(document.body.clientHeight);
+
+    React.useEffect(() => {
+        window.addEventListener('resize', () => {
+            setHeightWindow(window.innerHeight);
+        });
+        return () => {
+            window.removeEventListener('resize', () => {
+                setHeightWindow(window.innerHeight);
+            });
+        };
+    }, []);
+    React.useEffect(() => {
+        setHeightBody(document.body.clientHeight);
+        if (heightWindow > heightBody) {
+            document.body.style.height = heightWindow + "px";
+        }
+
+    }, [heightWindow, heightBody]);
+
+
     console.error(error);
     return (
         <div className={"error-layout"}>

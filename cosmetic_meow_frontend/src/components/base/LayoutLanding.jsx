@@ -6,21 +6,27 @@ import {useLocation} from "react-router-dom";
 
 
 function LayoutLanding({children, title}) {
-    const { pathname, hash } = useLocation();
+    const {hash } = useLocation();
+
     useEffect(() => {
         if (title !== undefined) {
              document.title = title;
         }
-        if (hash === '')
+        if (hash === '') {
             window.scrollTo(0, 0);
-        else {
-            const element = document.getElementById(hash.slice(1));
-            if (element) {
-                element.scrollIntoView({behavior: "smooth", block: "start"});
-            }
         }
+        else {
+            // todo
+            let el = document.getElementById(hash.slice(1));
+            console.log(el);
+            if (el) {
+                el.scrollIntoView({behavior: "smooth", block: "start"});
+            } else {
+                window.scrollTo(0, 0);
+            }
 
-    });
+        }
+    }, []);
     let className = 'not-main-page';
     if (title === 'Главная') {
         className = 'main-page';

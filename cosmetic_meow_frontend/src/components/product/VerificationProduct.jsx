@@ -1,11 +1,12 @@
 import React, {useEffect} from "react";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {NotificationManager} from "react-notifications";
 import fetchData from "../../requests/fetchData";
 import Loading from "../error/Loading";
 
 const VerificationProduct = () => {
-    const {code} = useParams();
+    const {code} = useParams() || '';
+    const navigation = useNavigate();
     const [validated, setValidated] = React.useState(false);
     const [productCode, setProductCode] = React.useState(code);
     const [codeWasSent, setCodeWasSent] = React.useState(false);
@@ -18,11 +19,10 @@ const VerificationProduct = () => {
                 const data = await fetchData(`product_code/${productCode}`);
                 setProductData(data);
 
-
             }
         }
         getProduct();
-    }, [codeWasSent]);
+    }, [codeWasSent, productCode]);
     const handleSubmit =  (e) => {
         e.preventDefault();
         if (e.currentTarget.checkValidity() === false) {
@@ -33,12 +33,12 @@ const VerificationProduct = () => {
         setValidated(true);
         setCodeWasSent(true);
         setDisabled(true);
+        navigation(`/verify-product/${productCode}`);
 
     }
-    if (codeWasSent) {
-        if (productData === undefined || productData === null)
-            return <Loading/>;
-        else{
+    useEffect(() => {
+        if (productData !== undefined && productData !== null){
+
             if (productData.product !== undefined) {
                 NotificationManager.success(
                     "Продукт подлинный", "Успешно", 5000);
@@ -49,7 +49,10 @@ const VerificationProduct = () => {
             }
             setCodeWasSent(false);
         }
-    }
+
+    }, [productData]);
+
+
     return (
         <main id="verification-product">
             <h2 className={"not-main-h3"}>Проверьте подлинность продукта</h2>
@@ -68,6 +71,7 @@ const VerificationProduct = () => {
                                setCodeWasSent(false);
                                if (e.target.value.length >= 5)
                                     setDisabled(false);
+
                                  else
                                      setDisabled(true);
                             } }
