@@ -27,9 +27,24 @@ body {
     position: relative;
     display: flex;
     flex-direction: column;
+    /*scrollbar-width: thin;*/
+    /*scrollbar-color: #5F6886 #1a2751;*/
+
+}
+body::-webkit-scrollbar {
+
+    width: 10px;
+}
+body::-webkit-scrollbar-thumb {
+    background-color: #1A2751;
+    /*border-radius: 10px;*/
+}
+body::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.7);
 }
 main {
         margin-top: 0;
+        background-color: #FFFFFF;
 }
 #error-page{
     display: flex;
@@ -190,11 +205,12 @@ body .main-page, body .not-main-page, body, main{
     overflow-x: hidden;
     overflow-y: auto;
     position: relative;
+}
+body .main-page, body .not-main-page, body{
+    background-color: #1a2751;
+}
 
-}
-body::-webkit-scrollbar {
-  /*display: none;*/
-}
+
 
 @keyframes spin {
     0% { transform: rotate(0deg); }

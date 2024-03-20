@@ -99,11 +99,11 @@
         padding: 0 0 5rem;
     }
 
-.feedback-module .contact-us{
-        visibility: hidden;
-        opacity: 0;
-        position: absolute;
-    }
+/*.feedback-module .contact-us{*/
+/*        visibility: hidden;*/
+/*        opacity: 0;*/
+/*        position: absolute;*/
+/*    }*/
 .feedback-module .feedback-module__description{
         flex-direction: column-reverse;
         gap: 2rem;

@@ -8,7 +8,7 @@ function LineAssortment ({products} )  {
     if (!products || products.length === 0)
         return
         return (
-            <section className="production" id="production">
+            <section className="production" id="production-line">
                 <h2 className={'not-main-h2'}>
                     Ассортимент
                 </h2>

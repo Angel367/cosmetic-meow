@@ -12,7 +12,7 @@ import Loading from "../error/Loading";
 
 function Line() {
     let {id_line} = useParams();
-    const [products, setProducts] = React.useState(null);
+    const [products, setProducts] = React.useState([]);
     const [lineData, setLineData] = React.useState(null);
     useEffect(() => {
     async function fetchProducts(){
@@ -49,7 +49,12 @@ function Line() {
 
         return (
             <main className='line-module'>
-                <LineDescription lineDescription={lineDescription} />
+                <LineDescription lineDescription={lineDescription}
+                                 productsCount={products.count}
+                                 advantagesCount={advantages.length}
+                                    activeSubstancesCount={active_substances.length}
+                                    purposesCount={purposes.length}/>
+
                 <LineAssortment products={products}/>
                 {advantages.length > 0 &&
                 <LineAdvantages advantages={advantages}/>}

@@ -6,7 +6,7 @@ function LineApplication({purposes}) {
             return
 
         return (
-            <section className="application" id="application">
+            <section className="application" id="applications-line">
                 <h2 className={'not-main-h2'}>Назначение</h2>
 
                 <div className="application-holder">

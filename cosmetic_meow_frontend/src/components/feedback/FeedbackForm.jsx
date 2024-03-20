@@ -7,7 +7,7 @@ import postData from "../../requests/postData";
 
 
 
-function FeedbackForm({type="other"}) {
+function FeedbackForm({type="other" ,id=""}) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [message, setMessage] = useState("");
@@ -48,6 +48,7 @@ function FeedbackForm({type="other"}) {
 
     <form onSubmit={handleSubmit} method="POST"
           validated={validated.toString()}
+          id={id}
           className="feedback-module__form-holder__form">
             <p className={"form-holder__form__input-holder"}>
             <label htmlFor={"name"}>Имя</label>

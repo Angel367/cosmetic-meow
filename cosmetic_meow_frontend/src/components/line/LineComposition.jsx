@@ -6,7 +6,7 @@ function LineComposition({active_substances}) {
         return
     }
         return (
-            <section className="similar" id="similar">
+            <section className="active-substances-line" id={"active-substances-line"}>
                 <h2 className={'not-main-h2'} >
                     Активные компоненты
                 </h2>
@@ -14,7 +14,7 @@ function LineComposition({active_substances}) {
                     Побробнее о том, какие активные компоненты входят в состав продуктов линейки
 
                 </p>
-                <div className="similar-holder">
+                <div className="active-substances-holder">
                     {active_substances.map((active_substance, index) => (
                         <LineActiveSubstanceCard key={index} active_substance={active_substance}/>
                     ))}

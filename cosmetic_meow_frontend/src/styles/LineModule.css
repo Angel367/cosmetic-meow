@@ -56,7 +56,7 @@
     justify-content: center;
     flex-wrap: wrap;
 }
-.line-module  .production-holder, .line-module .similar-holder{
+.line-module  .production-holder, .line-module .active-substances-holder{
     /*margin-top: 2rem;*/
     /*todo flex*/
     /*display: grid;*/
@@ -67,7 +67,7 @@
 
 }
 .line-module .production-holder .small-product-box,
-.line-module .similar-holder .small-product-box{
+.line-module .active-substances-holder .small-product-box{
     max-width: 40%;
 }
 .line-module .advantages-holder{
@@ -125,20 +125,20 @@
         padding: 2rem 3rem;
         gap: 3rem;
     }
-        .line-module  .production-holder .small-product-box, .line-module .similar-holder .small-product-box{
+        .line-module  .production-holder .small-product-box, .line-module .active-substance-holder .small-product-box{
           max-width: 90%;
      }
 }
 @media (max-width: 768px) {
 
-  .line-module   .production-holder .small-product-box, .line-module .similar-holder .small-product-box,
+  .line-module   .production-holder .small-product-box, .line-module .active-substance-holder .small-product-box,
    .line-module  .advantages-holder .advantage:nth-child(4){
         visibility: hidden;
         opacity: 0;
         position: absolute;
     }
  .line-module    .production-holder .small-product-box:nth-child(1),
- .line-module  .similar-holder .small-product-box:nth-child(1){
+ .line-module  .active-substance-holder .small-product-box:nth-child(1){
         visibility: visible;
         opacity: 1;
         position: relative;
@@ -161,16 +161,16 @@
         max-width: unset;
         max-height: 50vh;
     }
-  .line-module   .production-holder,.line-module  .similar-holder{
+  .line-module   .production-holder,.line-module  .active-substances-holder{
         grid-template-columns: 1fr;
     }
 
-   .line-module  .production-holder, .line-module  .similar-holder{
+   .line-module  .production-holder, .line-module  .active-substances-holder{
         display: flex;
         flex-direction: column;
         /*gap: rem;*/
     }
-    .line-module  .production-holder .small-product-box, .line-module .similar-holder .small-product-box{
+    .line-module  .production-holder .small-product-box, .line-module .active-substances-holder .small-product-box{
           max-width: 90%;
      }
 

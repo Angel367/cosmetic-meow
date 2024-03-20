@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 import FeedbackForm from "./FeedbackForm";
+import getBaseUrl from "../../requests/baseUrl";
 
 
 const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
@@ -22,10 +23,14 @@ function Dev() {
                             разработать и произвести любой продукт, который вам необходим. Мы готовы взять на себя
                             все этапы производства, начиная от разработки и заканчивая поставкой готового продукта.
                         </p>
-                        <Link to={'/development'} className="contact-us" >
-                            <span>Связаться</span>
+                        {/*<a href="#contract_request" className="contact-us" >*/}
+                        {/*    <span>Связаться</span>*/}
+                        {/*    <span><img alt="" src={arrow}/></span>*/}
+                        {/*</a>*/}
+                        <a href={getBaseUrl(true)} className="contact-us" >
+                            <span>Связаться с нами по почте {getBaseUrl(true)}</span>
                             <span><img alt="" src={arrow}/></span>
-                        </Link>
+                        </a>
                     </div>
                     <div className="feedback-module__description-img-holder">
                         <img alt="[img]" src={page}/>
@@ -42,7 +47,7 @@ function Dev() {
                         <img alt="" src={icon2}/>
                         <img alt="" src={icon3}/>
                     </div>
-                    <FeedbackForm type={"contract_request"}/>
+                    <FeedbackForm type={"contract_request"} id={"contract_request"}/>
                 </section>
             </main>
         );

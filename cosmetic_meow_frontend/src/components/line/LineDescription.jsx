@@ -1,13 +1,14 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import Loading from "../error/Loading";
 
 const down = process.env.PUBLIC_URL + '/img/dev/down.svg';
 let img = process.env.PUBLIC_URL + '/img/line-page/no_photo.jpg';
 
- function LineDescription({lineDescription}) {
-    if (!lineDescription)
+ function LineDescription({lineDescription, productsCount, advantagesCount, activeSubstancesCount, purposesCount}) {
 
+
+    if (!lineDescription)
         return <Loading/>
     if (lineDescription.images && lineDescription.images.length > 0)
         img = lineDescription.images[0].image;
@@ -24,27 +25,36 @@ let img = process.env.PUBLIC_URL + '/img/line-page/no_photo.jpg';
                     <p className={'not-main-p'}>
                         {lineDescription.description}
                     </p>
+
+
                     <div className="link-holder">
-                        <Link to={`#production`} className={'contact-us'}
-                        ><span>Продукция</span><span>
-
+                        { productsCount > 0 ? (
+                        <a href="#production-line" className={'contact-us'}><span>Продукция</span><span>
             <img alt="" src={down}/>
-                        </span></Link>
-
-                        <Link to={`#advantages`} className={'contact-us'}
+                        </span></a>) : null}
+                        {advantagesCount > 0 ? (
+                        <a href={`#advantages-line`} className={'contact-us'}
                         ><span>Преимущества</span><span>
             <img alt="" src={down}/>
-                        </span></Link>
+                        </span></a>)
+                        : null}
 
-                        <Link to={`#similar`} className={'contact-us'}
+                        {activeSubstancesCount > 0 ? (
+                        <a href={`#active-substances-line`}
+                           className={'contact-us'}
+
                         ><span>Состав</span><span>
             <img alt="" src={down}/>
-                        </span></Link>
+                        </span></a>)
+                        : null}
+                        {purposesCount > 0 ?
 
-                        <Link to={`#application`} className={'contact-us'}
+                        <a href={`#applications-line`}
+                              className={'contact-us'}
                         ><span>Применение</span><span>
             <img alt="" src={down}/>
-                        </span></Link>
+                        </span></a>
+                        : null}
                     </div>
                 </div>
                 <div className="line-module__description-img-holder">
