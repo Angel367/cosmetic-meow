@@ -52,6 +52,7 @@
 .line-page .small-product-img-box{
     flex-shrink: 0;
     /*background: #DAD6E4;*/
+
     overflow: hidden;
     /*grid-area: img;*/
 }
