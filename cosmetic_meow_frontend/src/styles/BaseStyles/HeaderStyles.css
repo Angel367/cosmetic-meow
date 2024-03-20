@@ -95,7 +95,7 @@ header .link-index, header nav .logo{
         left: 0;
         top: 99%;
         right: 0;
-        height: calc(100vh - 4rem - 22px);
+        height: calc(100vh - 8rem);
     }
 
     header .nav_box{

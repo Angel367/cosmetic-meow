@@ -18,14 +18,14 @@ function LayoutLanding({children, title, scrollX=0, scrollY=0}) {
         className = 'main-page';
     }
     return (
-        <>
-            {/*<HeaderLanding/>*/}
+        <div className={className}>
+            <HeaderLanding/>
             <div>
                 <NotificationContainer/>
             </div>
             {children}
-            {/*<FooterLanding/>*/}
-        </>
+            <FooterLanding/>
+        </div>
     );
 }
 

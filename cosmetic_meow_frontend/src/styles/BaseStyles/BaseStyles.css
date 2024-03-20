@@ -183,14 +183,19 @@ h1, h2, h3, h4, h5, h6 , p, a{
     border-radius: 50%;
     animation: spin 2s linear infinite;
 }
-/*todo*/
-body{
-    background: red;
-}
-body main{
-    background: blue;
+
+
+body .main-page, body .not-main-page, body, main{
+    /*background: green;*/
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: relative;
 
 }
+body::-webkit-scrollbar {
+  /*display: none;*/
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
