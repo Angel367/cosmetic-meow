@@ -33,10 +33,15 @@ class ProductFilter(filters.FilterSet):
         field_name='is_ready_for_sale',
         lookup_expr='exact'
     )
+    is_active = filters.BooleanFilter(
+        field_name='is_active',
+        lookup_expr='exact'
+    )
 
     class Meta:
         model = Product
-        fields = ['min_price', 'max_price', 'name', 'all_tags', 'any_tags', 'product_line', 'is_ready_for_sale']
+        fields = ['min_price', 'max_price', 'name', 'all_tags', 'any_tags', 'product_line', 'is_ready_for_sale',
+                  'is_active']
 
 
 class FeedBackFilter(filters.FilterSet):
