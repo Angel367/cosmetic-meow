@@ -116,7 +116,8 @@
 }
 #main-title .main-title-img .main-title-img_desktop img{
     object-fit: cover;
-    width: 100%;
+    object-position: center;
+
 }
 #main-title .main-title-description{
         width: 45%;

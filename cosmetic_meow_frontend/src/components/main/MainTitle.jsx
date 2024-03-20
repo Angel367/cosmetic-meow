@@ -6,37 +6,56 @@ const mainTitleMobile = process.env.PUBLIC_URL + '/img/main/main_title_mobile.pn
 const mainTitle = process.env.PUBLIC_URL + '/img/main/main_title.png';
 const proportion = 2880 / 2074;
 function MainTitle() {
-    let [startHeight, setStartHeight] = React.useState(0);
-    let [startPadding, setStartPadding] = React.useState(0);
+    let [imgHeight, setImgHeight] = React.useState(0);
+    let [descriptionHeight, setDescriptionHeight] = React.useState(0);
     let [clientWidth, setClientWidth] = React.useState(window.innerWidth);
     let [headerHeight, setHeaderHeight] = React.useState(0);
+
     let newHeight = 0;
     React.useEffect(() => {
         const handleResize = () => {
             setClientWidth(window.innerWidth);
+
         };
         window.addEventListener('resize', handleResize);
-
-        const mainTitleDescription = document.getElementById("main-title-description");
-        if (mainTitleDescription) {
-            setStartHeight(mainTitleDescription.clientHeight);
-            let computedStyle = getComputedStyle(mainTitleDescription);
-            setStartPadding(parseInt(computedStyle.paddingTop) + parseInt(computedStyle.paddingBottom));
-        }
-        if (document.getElementById("main-header")) {
-            setHeaderHeight(document.getElementById("main-header").clientHeight);
-        }
-
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
-    if (startHeight !== 0) {
-        newHeight = clientWidth / proportion;
-        if (newHeight > startHeight) {
-            setStartHeight(newHeight);
-            document.getElementById("main-title-description").style.height =
-                (newHeight - headerHeight - startPadding) + "px";
+
+    React.useEffect(() => {
+        console.log("clientWidth: " + clientWidth);
+        const img = document.getElementById("main-title-img_desktop");
+        const mainTitle = document.getElementById("main-title");
+        if (img) {
+            setImgHeight(clientWidth / proportion);
+        }
+        if (document.getElementById("main-title-description")) {
+            setDescriptionHeight(document.getElementById("main-title-description").clientHeight);
+        }
+        if (document.getElementById("main_header")) {
+            setHeaderHeight(document.getElementById("main_header").clientHeight);
+        }
+        if (imgHeight > mainTitle.clientHeight + headerHeight) {
+            console.log("imgHeight > mainTitle.clientHeight + headerHeight");
+            mainTitle.style.height =
+                (imgHeight - headerHeight) + "px";
+
+            img.style.width = clientWidth + "px";
+            img.style.height = "auto";
+        } else if (descriptionHeight > imgHeight - headerHeight) {
+            console.log("descriptionHeight > imgHeight - headerHeight");
+            mainTitle.style.height =
+                (descriptionHeight) + "px";
+            img.style.height = (mainTitle.clientHeight + headerHeight) + "px";
+            img.style.width = "auto";
 
         }
-    }
+
+
+    }, [clientWidth, imgHeight, descriptionHeight, headerHeight]);
+
+
 
     return (
         <article id="main-title">
