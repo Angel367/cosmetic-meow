@@ -159,6 +159,13 @@ class BasePrice(models.Model):
         verbose_name='Цена'
     )
 
+    class Meta:
+        verbose_name = 'Базовая (обычная) цена'
+        verbose_name_plural = 'Базовые (обычные) цены'
+
+    def __str__(self):
+        return str(self.price_value)
+
 
 class DiscountPrice(BasePrice):
     begin_date = models.DateField(
@@ -171,6 +178,13 @@ class DiscountPrice(BasePrice):
         blank=False,
         verbose_name='Дата окончания действия скидки'
     )
+
+    class Meta:
+        verbose_name = 'Цена со скидкой'
+        verbose_name_plural = 'Цены со скидкой'
+
+    def __str__(self):
+        return super().__str__()
 
 
 class ProductTag(models.Model):
@@ -185,6 +199,10 @@ class ProductTag(models.Model):
         blank=False,
         verbose_name='Описание'
     )
+
+    class Meta:
+        verbose_name = 'Тег продукта'
+        verbose_name_plural = 'Теги продуктов'
 
     def __str__(self):
         return self.name
@@ -270,12 +288,25 @@ class Product(models.Model):
         blank=False,
         verbose_name='Готов к продаже'
     )
+    is_active = models.BooleanField(
+        default=True,
+        null=False,
+        blank=False,
+        verbose_name='Активен'
+    )
 
     @property
     def get_price(self):
         if self.discount_price:
             return self.discount_price.price_value
         return self.price.price_value
+
+    class Meta:
+        verbose_name = 'Продукт'
+        verbose_name_plural = 'Продукты'
+
+    def __str__(self):
+        return self.name
 
 
 class ProductImage(models.Model):
@@ -292,6 +323,13 @@ class ProductImage(models.Model):
         verbose_name='Продукт',
         related_name='images'
     )
+
+    class Meta:
+        verbose_name = 'Изображение продукта'
+        verbose_name_plural = 'Изображения продуктов'
+
+    def __str__(self):
+        return f'{self.product.name} - {self.image}'
 
 
 class ProductMarketPlaceLink(models.Model):
@@ -321,6 +359,13 @@ class ProductMarketPlaceLink(models.Model):
         related_name='market_place_links'
     )
 
+    class Meta:
+        verbose_name = 'Ссылка на маркетплейс'
+        verbose_name_plural = 'Ссылки на маркетплейсы'
+
+    def __str__(self):
+        return f'{self.marketplace}'
+
 
 class ProductClinicalTestingResult(models.Model):
     description = models.TextField(
@@ -328,6 +373,13 @@ class ProductClinicalTestingResult(models.Model):
         blank=False,
         verbose_name='Описание'
     )
+
+    class Meta:
+        verbose_name = 'Результаты клинических испытаний'
+        verbose_name_plural = 'Результаты клинических испытаний'
+
+    def __str__(self):
+        return super().__str__()
 
 
 class ProductClinicalTestingResultImage(models.Model):
@@ -355,6 +407,13 @@ class ProductClinicalTestingResultImage(models.Model):
         verbose_name='Результаты клинических испытаний'
     )
 
+    class Meta:
+        verbose_name = 'Изображение результатов клинических испытаний'
+        verbose_name_plural = 'Изображения результатов клинических испытаний'
+
+    def __str__(self):
+        return f'{self.name} + {self.product_clinical_testing_result.id}'
+
 
 class BasePriceHistory(models.Model):
     old_price = models.ForeignKey(
@@ -367,6 +426,13 @@ class BasePriceHistory(models.Model):
         blank=False,
         verbose_name='Дата изменения'
     )
+
+    class Meta:
+        verbose_name = 'История изменения базовой цены'
+        verbose_name_plural = 'Истории изменения базовой цены'
+
+    def __str__(self):
+        return f'{self.old_price.price_value} - {self.end_date}'
 
 
 class ProductPartner(models.Model):
@@ -386,6 +452,13 @@ class ProductPartner(models.Model):
         verbose_name='Линии продукта'
     )
 
+    class Meta:
+        verbose_name = 'Партнер'
+        verbose_name_plural = 'Партнеры'
+
+    def __str__(self):
+        return self.name
+
 
 class ProductPartnerImage(models.Model):
     image = models.ImageField(
@@ -400,6 +473,13 @@ class ProductPartnerImage(models.Model):
         verbose_name='Партнер',
         related_name='images'
     )
+
+    class Meta:
+        verbose_name = 'Изображение партнера'
+        verbose_name_plural = 'Изображения партнеров'
+
+    def __str__(self):
+        return f'{self.product_partner.name} - {self.image}'
 
 
 class ProductAdvantage(models.Model):
@@ -418,6 +498,9 @@ class ProductAdvantage(models.Model):
     class Meta:
         verbose_name = 'Преимущество продукта'
         verbose_name_plural = 'Преимущества продуктов'
+
+    def __str__(self):
+        return self.name
 
 
 class ProductAdvantageImage(models.Model):
@@ -438,6 +521,9 @@ class ProductAdvantageImage(models.Model):
         verbose_name = 'Изображение преимущества'
         verbose_name_plural = 'Изображения преимуществ'
 
+    def __str__(self):
+        return f'{self.product_advantage.name} - {self.image}'
+
 
 class ProductActiveSubstance(models.Model):
     name = models.CharField(
@@ -451,6 +537,13 @@ class ProductActiveSubstance(models.Model):
         blank=False,
         verbose_name='Описание'
     )
+
+    class Meta:
+        verbose_name = 'Активное вещество'
+        verbose_name_plural = 'Активные вещества'
+
+    def __str__(self):
+        return self.name
 
 
 class ProductActiveSubstanceImage(models.Model):
@@ -471,6 +564,9 @@ class ProductActiveSubstanceImage(models.Model):
         verbose_name = 'Изображение активного вещества'
         verbose_name_plural = 'Изображения активных веществ'
 
+    def __str__(self):
+        return f'{self.product_active_substance.name} - {self.image}'
+
 
 class ProductLine(models.Model):
     name = models.CharField(
@@ -484,6 +580,13 @@ class ProductLine(models.Model):
         blank=False,
         verbose_name='Описание'
     )
+
+    class Meta:
+        verbose_name = 'Линия продукта'
+        verbose_name_plural = 'Линии продуктов'
+
+    def __str__(self):
+        return self.name
 
 
 class ProductLineImage(models.Model):
@@ -499,6 +602,13 @@ class ProductLineImage(models.Model):
         verbose_name='Линия продукта',
         related_name='images'
     )
+
+    class Meta:
+        verbose_name = 'Изображение линии продукта'
+        verbose_name_plural = 'Изображения линий продуктов'
+
+    def __str__(self):
+        return f'{self.product_line.name} - {self.image}'
 
 
 class ProductCode(models.Model):
@@ -531,6 +641,9 @@ class ProductCode(models.Model):
         verbose_name_plural = 'Коды продуктов'
         unique_together = ('code', 'product')
 
+    def __str__(self):
+        return self.code
+
 
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='order_items')
@@ -543,6 +656,10 @@ class OrderItem(models.Model):
     @property
     def total_price(self):
         return self.product.get_price * self.quantity
+
+    class Meta:
+        verbose_name = 'Элемент заказа'
+        verbose_name_plural = 'Элементы заказа'
 
 
 class Order(models.Model):
@@ -625,6 +742,13 @@ class Order(models.Model):
     def clear_cart(self):
         self.order_items.all().delete()
 
+    class Meta:
+        verbose_name = 'Заказ'
+        verbose_name_plural = 'Заказы'
+
+    def __str__(self):
+        return f'{self.user} - {self.created_at}'
+
 
 class PickUpPoint(models.Model):
     name = models.CharField(
@@ -639,6 +763,13 @@ class PickUpPoint(models.Model):
         blank=False,
         verbose_name='Адрес'
     )
+
+    class Meta:
+        verbose_name = 'Пункт выдачи'
+        verbose_name_plural = 'Пункты выдачи'
+
+    def __str__(self):
+        return self.name
 
 
 class FeedBack(models.Model):
@@ -682,3 +813,10 @@ class FeedBack(models.Model):
         blank=False,
         verbose_name='Активно'
     )
+
+    class Meta:
+        verbose_name = 'Обратная связь'
+        verbose_name_plural = 'Обратная связь'
+
+    def __str__(self):
+        return f'{self.name} - {self.type} - {self.created_at}'
