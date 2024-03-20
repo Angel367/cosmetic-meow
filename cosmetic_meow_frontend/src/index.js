@@ -13,7 +13,7 @@ import './styles/VerifyProductModule.css';
 
 
 import {
-    createBrowserRouter, Outlet,
+    createBrowserRouter, Navigate, Outlet,
     RouterProvider,
 } from "react-router-dom";
 import reportWebVitals from './reportWebVitals';
@@ -49,6 +49,10 @@ const router = createBrowserRouter([
         index: true,
         element: <LayoutLanding children={<Main/>} title={"Главная"}/>,
         errorElement: <ErrorLayout/>,
+    },
+    {
+        path: "/verify-product",
+        element: <Navigate to={"/verify-product/code"}/>
     },
     {
         path: "/verify-product/:code",
