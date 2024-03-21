@@ -10,6 +10,7 @@ function LineActiveSubstanceCard({active_substance}){
          return <div>Загрузка...</div>
     if (active_substance.images && active_substance.images.length === 0)
      img_src = active_substance.images[1].image
+    img_src.replace("http", "https")
 
         return (
             <div className="small-product-box line-page">
