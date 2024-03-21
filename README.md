@@ -10,7 +10,9 @@ python -Xutf8 manage.py dumpdata -o db.json
 ```bash
 python manage.py loaddata db.json
 ```
-
+###
+https://phoenixnap.com/kb/letsencrypt-docker
+docker-compose run --rm certbot renew --force-renewal
 
 #### for future
 https://codewithstein.com/django-tip-transfering-data-from-sqlite-to-other-databases-mysql-postgresql-etc/
