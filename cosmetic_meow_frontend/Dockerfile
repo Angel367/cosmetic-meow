@@ -10,7 +10,7 @@ COPY package*.json ./
 RUN npm install
 
 # Copy the entire project
-COPY . .
+COPY cosmetic_meow_frontend/ /app/
 
 # Build the React app
 RUN npm run build
