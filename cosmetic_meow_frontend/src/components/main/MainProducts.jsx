@@ -6,7 +6,8 @@ import Loading from "../error/Loading";
 
 function MainProducts({products}) {
     if (!products) {
-        return <Loading/>
+        products = []
+        // return <Loading/>
     }
     return (
         <article id="products">

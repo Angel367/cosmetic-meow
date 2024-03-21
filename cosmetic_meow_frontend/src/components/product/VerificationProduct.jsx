@@ -33,7 +33,7 @@ const VerificationProduct = () => {
         setValidated(true);
         setCodeWasSent(true);
         setDisabled(true);
-        navigation(`/verify-product/${productCode}`);
+        navigation(`/verify_product/${productCode}`);
 
     }
     useEffect(() => {

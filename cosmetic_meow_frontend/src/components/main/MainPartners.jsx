@@ -4,9 +4,10 @@ import PartnerCard from "./PartnerCard";
 import Loading from "../error/Loading";
 
 function MainPartners({partners}) {
-
-    if (!partners || partners.length === 0)
-        return <Loading/>;
+    if (!partners)
+        partners = []
+    // if (!partners || partners.length === 0)
+    //     return <Loading/>;
 
     return (
         <article id="partners" className={"partners upper-line"}>
