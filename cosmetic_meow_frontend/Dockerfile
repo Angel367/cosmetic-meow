@@ -14,4 +14,4 @@ RUN npm install
 COPY cosmetic_meow_frontend/ /app/
 
 # Запустите приложение React
-CMD ["npm", "run", "build"]
+CMD ["npm", "start"]
