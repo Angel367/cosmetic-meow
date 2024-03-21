@@ -19,7 +19,7 @@ COPY cosmetic_meow_backend/ /backend/
 # Run migrations
 RUN python manage.py makemigrations
 RUN python manage.py migrate
-RUN python manage.py loaddata db.json
+RUN python manage.py loaddata -e contenttypes -e auth.Permission db.json
 
 # Specify the command to run on container start
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
