@@ -2519,6 +2519,14 @@
         }
     },
     {
+        "model": "cosmetic_meow_api.productcode",
+        "pk": "qwerla13",
+        "fields": {
+            "was_activated": true,
+            "product": 11
+        }
+    },
+    {
         "model": "cosmetic_meow_api.orderitem",
         "pk": 1,
         "fields": {
