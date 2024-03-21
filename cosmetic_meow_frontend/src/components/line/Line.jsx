@@ -5,7 +5,7 @@ import LineDescription from "./LineDescription";
 import LineAdvantages from "./LineAdvantages";
 import LineComposition from "./LineComposition";
 import LineApplication from "./LineApplication";
-import {useParams} from "react-router-dom";
+import {Navigate, useParams} from "react-router-dom";
 import fetchData from "../../requests/fetchData";
 import Loading from "../error/Loading";
 
@@ -38,8 +38,12 @@ function Line() {
         window.scrollTo(0, 0);
     });
     if (!lineData || !products) {
-        return <Loading/>
+        return <Loading/>;
     }
+    if (lineData.response && lineData.response.status){
+        return <Navigate to={'/error'}/>
+    }
+
 
         const lineDescription = lineData.product_line
         let advantages = lineData.advantages?.slice(0, 3) || []

@@ -26,9 +26,17 @@ function LineProduct() {
         }
         fetchProduct();
     }, [id_product]);
-    if (!product)
+    if (!product){
+
         return <Loading/>;
-    if (!id_line && product.product_line) {
+    }
+    if (product.response && product.response.status){
+
+        return <Navigate to={'/error'}/>
+    }
+
+
+    if (product.product_line && (!id_line  || id_line !== product.product_line) ) {
         navigate(`/lines/${product.product_line.id}/products/${id_product}`);
     }
     return (
