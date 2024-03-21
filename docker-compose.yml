@@ -29,5 +29,5 @@ services:
       context: .
       dockerfile: cosmetic_meow_frontend/Dockerfile
     ports:
-      - "3000:80" # Assuming React app runs on port 80 inside the container
+      - "3000:3000" # Assuming React app runs on port 80 inside the container
     restart: always
