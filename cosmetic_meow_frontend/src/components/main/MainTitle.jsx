@@ -69,7 +69,7 @@ function MainTitle() {
                     // style={{height: startHeight}}
             >
                 <div className="main-title-description-header">
-                <h1 className={"main-h1"}>SIDERID</h1>
+                <h1 className={"main-h1"}>SIDERIS</h1>
                 <h2 className={"main-h2"}>Твой Онлайн Гламур Гайд</h2>
                 </div>
                 <p className={"main-p"}
