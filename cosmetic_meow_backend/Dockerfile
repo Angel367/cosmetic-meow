@@ -14,12 +14,12 @@ ENV PIP_TIMEOUT=100
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy the current directory contents into the container at /code/
-COPY cosmetic_meow_backend/* /backend/
+COPY cosmetic_meow_backend/ /backend/
 
 # Run migrations
 RUN python manage.py makemigrations
 RUN python manage.py migrate
-RUN python manage.py import_data
+RUN python manage.py loaddata db.json
 
 # Specify the command to run on container start
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
