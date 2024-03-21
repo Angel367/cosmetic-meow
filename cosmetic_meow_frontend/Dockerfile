@@ -1,15 +1,17 @@
-FROM node:14-alpine as build
+# Используйте Node.js в качестве базового образа
+FROM node:latest
 
-# Set the working directory in the container
+# Установите рабочую директорию внутри контейнера
 WORKDIR /app
 
+# Скопируйте зависимости package.json и package-lock.json (или yarn.lock, если используется Yarn)
+COPY cosmetic_meow_frontend/package*.json /app/
 
-COPY cosmetic_meow_frontend/ /app/
-# Install dependencies
+# Установите зависимости
 RUN npm install
 
-# Build the React app
-RUN npm run build
+# Скопируйте все файлы из текущего каталога хоста в рабочую директорию внутри контейнера
+COPY cosmetic_meow_frontend/ /app/
 
-# Expose port 80
-EXPOSE 3000
+# Запустите приложение React
+CMD ["npm", "start"]
