@@ -51,11 +51,13 @@ const router = createBrowserRouter([
         errorElement: <ErrorLayout/>,
     },
     {
-        path: "/verify-product",
-        element: <Navigate to={"/verify-product/code"}/>
+        path: "/verify_product",
+        element: <Navigate to={"/verify_product/code"}/>,
+        errorElement: <ErrorLayout/>
+
     },
     {
-        path: "/verify-product/:code",
+        path: "/verify_product/:code",
         element:  <LayoutLanding children={<VerificationProduct/>} title={"Верификация продукта"}/>,
         errorElement: <ErrorLayout/>,
     },
