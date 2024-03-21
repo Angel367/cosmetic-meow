@@ -17,8 +17,6 @@ services:
       - ./deploy/certbot/conf/:/etc/letsencrypt/:rw
       - ./deploy/certbot/conf/live/:/etc/nginx/ssl/live/d
   django:
-    network_mode: host
-    dns: 8.8.8.8
     build:
       context: .
       dockerfile: cosmetic_meow_backend/Dockerfile
