@@ -101,6 +101,7 @@
 #main-title{
     position: relative;
 }
+
 #main-title .main-title-img .main-title-img_mobile{
     visibility: hidden;
     opacity: 0;
@@ -166,6 +167,7 @@
     .main{
         padding: 0 0 2rem;
         gap:1.5rem;
+        margin-top: calc(4rem + 24px);
     }
     .main article{
         padding: 0 1rem;
@@ -197,12 +199,25 @@
         padding:0 2rem 5rem;
 
     }
+    #main-title .main-title-img{
+        height: 35vh;
+        width: 100%;
+        position: relative;
+        align-self: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
 
     #main-title .main-title-img .main-title-img_mobile{
         visibility: visible;
         opacity: 1;
+        height: 100%;
+        width: auto;
         position: relative;
-        max-height: 30vh;
+
+
     }
     #main-title .main-title-img .main-title-img_desktop {
     visibility: hidden;

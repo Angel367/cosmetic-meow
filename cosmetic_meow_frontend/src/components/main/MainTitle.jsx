@@ -27,28 +27,34 @@ function MainTitle() {
         console.log("clientWidth: " + clientWidth);
         const img = document.getElementById("main-title-img_desktop");
         const mainTitle = document.getElementById("main-title");
-        if (img) {
-            setImgHeight(clientWidth / proportion);
-        }
-        if (document.getElementById("main-title-description")) {
-            setDescriptionHeight(document.getElementById("main-title-description").clientHeight);
-        }
-        if (document.getElementById("main_header")) {
-            setHeaderHeight(document.getElementById("main_header").clientHeight);
-        }
-        if (imgHeight > mainTitle.clientHeight + headerHeight) {
-            console.log("imgHeight > mainTitle.clientHeight + headerHeight");
-            mainTitle.style.height =
-                (imgHeight - headerHeight) + "px";
+         if (clientWidth > 768) {
+             if (img) {
+                 setImgHeight(clientWidth / proportion);
+             }
+             if (document.getElementById("main-title-description")) {
+                 setDescriptionHeight(document.getElementById("main-title-description").clientHeight);
+             }
+             if (document.getElementById("main_header")) {
+                 setHeaderHeight(document.getElementById("main_header").clientHeight);
+             }
+             if (imgHeight > mainTitle.clientHeight + headerHeight) {
+                 console.log("imgHeight > mainTitle.clientHeight + headerHeight");
+                 mainTitle.style.height =
+                     (imgHeight - headerHeight) + "px";
 
-            img.style.width = clientWidth + "px";
-            img.style.height = "auto";
-        } else if (descriptionHeight > imgHeight - headerHeight) {
-            console.log("descriptionHeight > imgHeight - headerHeight");
-            mainTitle.style.height =
-                (descriptionHeight) + "px";
-            img.style.height = (mainTitle.clientHeight + headerHeight) + "px";
-            img.style.width = "auto";
+                 img.style.width = clientWidth + "px";
+                 img.style.height = "auto";
+             } else if (descriptionHeight > imgHeight - headerHeight) {
+                 console.log("descriptionHeight > imgHeight - headerHeight");
+                 mainTitle.style.height =
+                     (descriptionHeight) + "px";
+                 img.style.height = (mainTitle.clientHeight + headerHeight) + "px";
+                 img.style.width = "auto";
+             }
+         } else {
+
+            img.style.height = "0";
+            img.style.width = "0";
 
         }
 
