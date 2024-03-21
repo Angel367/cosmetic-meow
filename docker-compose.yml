@@ -23,3 +23,11 @@ services:
     ports:
       - "8000:8000"
     restart: always
+
+  react-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80" # Assuming React app runs on port 80 inside the container
+    restart: always
