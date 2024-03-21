@@ -1,7 +1,6 @@
 {
   "name": "react_isderis",
   "version": "0.1.0",
-  "proxy": "*",
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.1",
