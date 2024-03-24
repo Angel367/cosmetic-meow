@@ -96,6 +96,10 @@
     max-width: 300px;
 
 }
+.line-module .advantages-holder .advantage img{
+    width: 10rem;
+    height: auto;
+}
 
 .line-module .application-holder{
     display: flex;
@@ -177,6 +181,7 @@
     .line-module  .production-holder .small-product-box, .line-module .active-substances-holder .small-product-box{
           max-width: 90%;
      }
+
 
   .line-module   .application-holder .application::before{
         padding: 1rem 1.5rem;

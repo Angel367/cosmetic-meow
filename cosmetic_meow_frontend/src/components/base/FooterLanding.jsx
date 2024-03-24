@@ -50,7 +50,7 @@ const FooterLanding = () => {
                     {window.location.pathname === '/development' ? <Link className="main-link active" to={'/development'}>Разработка и производство</Link>:
                     <Link className="main-link" to={'/development'}>Разработка и производство</Link>}
                     {/*<Link to={'/lines/11#production-line'}>Продукция</Link>*/}
-                    {/*<Link to={'/lines/11#advantages-line'}>Преимущества</Link>*/}
+                    {/*<Link to={'/lines/11#advantages-line'}>advantages</Link>*/}
                     {/*<Link to={'/lines/11#active-substances-line'}>Активные вещества</Link>*/}
                 </div>
                 <a className={"icons-free-source"} href="https://www.flaticon.com" >Icons created by Freepik - Flaticon</a>

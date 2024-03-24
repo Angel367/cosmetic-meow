@@ -103,8 +103,9 @@
 }
 
 .main .upper-line__body .partner img{
-    width: 7rem;
+
     height: 7rem;
+    width: auto;
 }
 #main-title{
     position: relative;

@@ -56,6 +56,12 @@
     overflow: hidden;
     /*grid-area: img;*/
 }
+.small-product-img-box-subst img{
+    max-width: 10rem;
+    max-height: 10rem;
+    object-fit: cover;
+
+}
 .small-product-img-box img{
     border-radius: 1rem;
     object-fit: cover;
@@ -88,7 +94,28 @@
     height: 1.5rem;
     width: 1.5rem;
 }
+@media (max-width: 768px) {
+    .small-product-box {
+        padding: 20px;
+    }
+    .small-product-name {
+      font-size: 1.5rem;
+    }
+    .small-product-description {
+      font-size: 1rem;
+    }
+    .small-product-price, .small-product-progress {
+      font-size: 24px;
+    }
+    .small-product-time {
+      font-size: 20px;
+    }
+    .small-product-img-box-subst img{
 
+    object-fit: cover;
+
+}
+  }
   @media (max-width: 425px) {
     .small-product-box.line-page {
         padding: 20px;

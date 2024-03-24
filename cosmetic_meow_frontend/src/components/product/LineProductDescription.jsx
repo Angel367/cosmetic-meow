@@ -15,7 +15,8 @@ function LineProductDescription({product}) {
 
     if (!product)
         return <Loading/>;
-    let marketplaces = product.market_place_links || [];
+    let marketplaces = [];
+        // product.market_place_links || [];
 
      return (
     <section>
@@ -86,7 +87,7 @@ function LineProductDescription({product}) {
 
                         <div className="info-text" id="composition-text">
                             {product.active_substances.length === 0 ? null :
-                            <p className={ "not-main-p"}>Активные вещества:</p>}
+                            <p className={ "not-main-p"}>Активные компоненты:</p>}
                             {product.active_substances.map((substance, index) => {
                                 return (<p className={ "not-main-p"}>{index+1}. {substance.description || ''}</p>);
                             })}

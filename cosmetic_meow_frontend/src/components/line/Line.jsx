@@ -46,13 +46,15 @@ function Line() {
 
 
         const lineDescription = lineData.product_line
+        // let advantages = lineData.advantages?.sort((a, b) => a.images.length - b.images.length);
         let advantages = lineData.advantages?.slice(0, 3) || []
         let active_substances = lineData.active_substances?.slice(0, 4) || []
         let purposes = lineData.purposes?.slice(0, 3) || []
         console.log(window.location.pathname, );
-        if (document.getElementById('line/12') && window.location.pathname === '/lines/12'){
+        if (document.getElementById('line/12') && window.location.pathname === '/lines/12') {
             document.getElementById('line/12').classList.add('not-main-h2-link-active');
             document.getElementById('line/11').classList.remove('not-main-h2-link-active');
+
         }
         if (document.getElementById('line/11') && window.location.pathname === '/lines/11'){
             document.getElementById('line/11').classList.add('not-main-h2-link-active');
@@ -76,9 +78,9 @@ function Line() {
 
                 <LineAssortment products={products}/>
                 {advantages.length > 0 &&
-                    <LineAdvantages advantages={advantages}/>}
+                    <LineAdvantages advantages={advantages} line_id={lineData.product_line.id}/>}
                 {active_substances.length > 0 &&
-                    <LineComposition active_substances={active_substances}/>}
+                    <LineComposition active_substances={active_substances} line_id={lineData.product_line.id}/>}
                 {purposes.length > 0 &&
                     <LineApplication purposes={purposes}/>}
             </main>

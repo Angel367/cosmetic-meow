@@ -46,7 +46,7 @@ function MainAdvantages() {
     return (
         <section id="advantages">
             {/*<h3 className={'not-main-h3'}>*/}
-            {/*    Преимущества</h3>*/}
+            {/*    advantages</h3>*/}
             <h2 className={"not-main-h1"}
             >Наши преимущества</h2>
             <div className="slide-holder">
