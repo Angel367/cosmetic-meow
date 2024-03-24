@@ -13,17 +13,19 @@ function PartnerCard({partner}) {
                 <img src={partnerImg} alt=""/>
             </div>
 
-                <p>
-                    Совместно с {partner.name} мы разработали линии:
-                    {partner.product_lines.map((line, index) => {
-                        return (
-                            <>
-                            <Link className={"name-line"} to={`/lines/${line.id}`}
-                                  key={index + " " + partner.id}> {line.name}</Link>
-                            {index !== partner.product_lines.length - 1 ? ", " : ""}
-                            </>
-                        );
-                    })}
+                <p className="p-not-main">
+                    {/*Совместно с */}
+                    {partner.name}
+                    {/*мы разработали линии:*/}
+                    {/*{partner.product_lines.map((line, index) => {*/}
+                    {/*    return (*/}
+                    {/*        <>*/}
+                    {/*        <Link className={"name-line"} to={`/lines/${line.id}`}*/}
+                    {/*              key={index + " " + partner.id}> {line.name}</Link>*/}
+                    {/*        {index !== partner.product_lines.length - 1 ? ", " : ""}*/}
+                    {/*        </>*/}
+                    {/*    );*/}
+                    {/*})}*/}
                 </p>
 
         </div>

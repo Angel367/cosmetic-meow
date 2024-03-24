@@ -127,6 +127,23 @@ h1, h2, h3, h4, h5, h6 , p, a{
     font-size: 1.5rem;
     font-weight: 700;
 }
+.not-main-h2-link{
+    color: rgba(26, 39, 81, 0.5);
+    font-family: 'CygreBold', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.not-main-h2-link-active{
+    color: rgba(26, 39, 81, 1);
+   border-bottom: 2px solid #1A2751;
+}
+.not-main-h2-link-separator{
+    color: rgba(26, 39, 81, 0.5);
+    font-family: 'CygreBold', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+
+}
 
 .not-main-h3{
     color:  #E47A7C;
@@ -143,12 +160,19 @@ h1, h2, h3, h4, h5, h6 , p, a{
 
 }
 .not-main-p{
+    white-space: pre-wrap;
     color:  #5F6886;
     /*text-indent: 2rem;*/
     font-size: 1rem;
     font-weight: 400;
 }
-.contact-us span{
+.contact-us{
+    display: flex;
+    gap: 1rem;
+    /*align-items: center;*/
+    justify-content: center;
+}
+.contact-us span, .link-ver{
     color: #1A2751;
     font-size: 1rem;
     font-weight: 700;

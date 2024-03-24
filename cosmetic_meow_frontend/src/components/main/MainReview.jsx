@@ -2,7 +2,7 @@ import React from "react";
 
 function MainReview() {
     return (
-        <article id="review" className={"upper-line"}>
+        <section id="review" className={"upper-line"}>
             <div className="upper-line__header">
                 <span>Нам доверяют множество</span>
                 <span>Экспертов Красоты</span>
@@ -15,7 +15,7 @@ function MainReview() {
                 изучающих и покупающих свои любимые товары”
             </p>
             <p className="author font-review">Джессика Саймон</p>
-        </article>
+        </section>
     );
 }
 export default MainReview;

@@ -8,10 +8,6 @@ import './styles/LineModule.css';
 import './styles/ProductModule.css';
 import './styles/MainModule.css';
 import './styles/VerifyProductModule.css';
-
-
-
-
 import {
     createBrowserRouter, Navigate, Outlet,
     RouterProvider,
@@ -32,7 +28,7 @@ import PersonalEdit from "./components/profile/PersonalEdit";
 import Personal from "./components/profile/Personal";
 import Layout from "./components/base/Layout";
 import Dev from "./components/feedback/Dev";
-import Feedback from "./components/feedback/Feedback";
+import Contacts from "./components/feedback/Contacts";
 import OnlyForAuthenticatedRoute from "./routes/OnlyForAuthenticatedRoute";
 import AuthLayout from "./components/auth/AuthLayout";
 import Registration from "./components/auth/Login";
@@ -41,6 +37,7 @@ import Orders from "./components/order/Orders";
 import Order from "./components/order/Order";
 import LayoutLanding from "./components/base/LayoutLanding";
 import VerificationProduct from "./components/product/VerificationProduct";
+
 
 
 const router = createBrowserRouter([
@@ -68,34 +65,44 @@ const router = createBrowserRouter([
         errorElement: <ErrorLayout/>,
     },
      {
-        path: "/feedback",
-        element: <LayoutLanding children={<Feedback/>} title={"Обратная связь"}/>,
+        path: "/contacts",
+        element: <LayoutLanding children={<Contacts/>} title={"Контакты"}/>,
         errorElement: <ErrorLayout/>,
     },
+    // {
+    //     path: "/products/:id_product",
+    //     element: <LayoutLanding children={<LineProduct/>} title={"Продукт"}/>,
+    //     errorElement: <ErrorLayout/>,
+    //
+    // },
     {
-        path: "/products/:id_product",
-        element: <LayoutLanding children={<LineProduct/>} title={"Продукт"}/>,
-        errorElement: <ErrorLayout/>,
 
-    },
-    {
-
-        path: "/lines/:id_line",
+        path: "/lines/",
         element: <Outlet/>,
         errorElement: <ErrorLayout/>,
         children: [
             {
                 index: true,
-                element: <LayoutLanding children={<Line/>} title={"Линия"}/>,
+                element: <Navigate to={"/lines/11"}/>,
                 errorElement: <ErrorLayout/>,
 
             },
-
             {
-                path: "products/:id_product",
-            element: <LayoutLanding children={<LineProduct/>} title={"Продукт"}/>,
-            errorElement: <ErrorLayout/>,
-        },
+                path: ":id_line",
+                children: [
+                    {
+                        index: true,
+                        element: <LayoutLanding children={<Line/>} title={"Линейка"}/>,
+                        errorElement: <ErrorLayout/>,
+                    },
+                    {
+                        path: "products/:id_product",
+                        element: <LayoutLanding children={<LineProduct/>} title={"Продукт"}/>,
+                        errorElement: <ErrorLayout/>,
+                    },
+                ],
+            }
+
 
         ],
     },

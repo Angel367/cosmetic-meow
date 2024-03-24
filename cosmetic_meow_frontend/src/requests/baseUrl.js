@@ -1,5 +1,5 @@
 function getBaseUrl(isMail=false) {
-     return isMail ? "mailto:simple@mail.com" : "https://licsideris.ru/api/";
+     return isMail ? "info@licsideris.ru" : "https://licsideris.ru/api/";
 
 }
 

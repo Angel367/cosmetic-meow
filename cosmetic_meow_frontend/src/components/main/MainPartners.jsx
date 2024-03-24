@@ -10,10 +10,14 @@ function MainPartners({partners}) {
     //     return <Loading/>;
 
     return (
-        <article id="partners" className={"partners upper-line"}>
+        <section id="partners" className={"partners upper-line"}>
             <div className="upper-line__header">
-                <span>Нам доверяют множество </span>
-                <span> Экспертов Красоты</span>
+                <span>Наши </span>
+                <span> партнеры</span>
+            </div>
+            <div className="p-not-main upper-line__description">
+                Мы сотрудничаем с различными научными, медицинскими организациями для создания
+совершенных решений и оценки их клинической эффективности
             </div>
             <div className="upper-line__body">
                 {partners.map((partner) => {
@@ -27,7 +31,7 @@ function MainPartners({partners}) {
                   className="back">Стать партнером
                 <img alt="arrow" src={process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg'}/>
             </Link>
-        </article>
+        </section>
     );
 }
 

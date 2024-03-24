@@ -8,8 +8,10 @@ admin.site.register(ProductPartnerImage)
 admin.site.register(ProductLine)
 admin.site.register(ProductLineImage)
 admin.site.register(ProductAdvantage)
+
 admin.site.register(ProductAdvantageImage)
 admin.site.register(ProductActiveSubstance)
 admin.site.register(ProductActiveSubstanceImage)
+
 
 

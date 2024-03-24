@@ -262,7 +262,7 @@ class Product(models.Model):
     )
     advantages = models.ManyToManyField(
         to='ProductAdvantage',
-        verbose_name='Преимущества'
+        verbose_name='advantages'
     )
     clinical_testing_result = models.ForeignKey(
         to='ProductClinicalTestingResult',
@@ -497,7 +497,7 @@ class ProductAdvantage(models.Model):
 
     class Meta:
         verbose_name = 'Преимущество продукта'
-        verbose_name_plural = 'Преимущества продуктов'
+        verbose_name_plural = 'advantages продуктов'
 
     def __str__(self):
         return self.name
