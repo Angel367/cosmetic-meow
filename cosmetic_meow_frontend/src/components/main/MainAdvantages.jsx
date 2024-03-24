@@ -1,14 +1,17 @@
 import React from "react";
 import {Link} from "react-router-dom";
 import AdvantageCard from "./AdvantageCard";
-const magicWand = process.env.PUBLIC_URL + '/img/main/fi-rr-magic-wand.svg';
-const confetti = process.env.PUBLIC_URL + '/img/main/fi-rr-confetti.svg';
-const following = process.env.PUBLIC_URL + '/img/main/fi-rr-following.svg';
+
 const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
+const innovative = process.env.PUBLIC_URL + '/img/main/innovative.png';
+const safety = process.env.PUBLIC_URL + '/img/main/safety.png';
+const quality = process.env.PUBLIC_URL + '/img/main/quality.png';
+const efficiency = process.env.PUBLIC_URL + '/img/main/efficiency.png';
+
 function MainAdvantages() {
     const advantages = [
         {
-            icon: magicWand,
+            icon: innovative,
             title: 'ИННОВАЦИИ',
             text: 'Мы используем передовые ' +
                 'достижения науки: ламеллярные ' +
@@ -19,20 +22,20 @@ function MainAdvantages() {
                 'ингредиентов и многое другое'
         },
         {
-            icon: confetti,
+            icon: safety,
             title: 'БЕЗОПАСНОСТЬ',
             text: 'Все продукты проходят полноценные ' +
                 'клинические испытания на базах ' +
                 'ведущих медицинских центров'
         },
         {
-            icon: following,
+            icon: quality,
             title: 'КАЧЕСТВО',
             text: 'Фармацевтические стандарты качества.' +
                 'Ингредиенты с доказанной эффективностью'
         },
         {
-            icon: magicWand,
+            icon: efficiency,
             title: 'ЭФФЕКТИВНОСТЬ',
             text: 'Ингредиенты с доказанной ' +
                 'эффективностью от ведущих ' +
