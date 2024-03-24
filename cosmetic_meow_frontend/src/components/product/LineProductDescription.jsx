@@ -78,9 +78,7 @@ function LineProductDescription({product}) {
                         {product.application_method === '' ? null :
                             <><span className='link-ver'>Способ применения</span>: <p className={"not-main-p"}>{product.application_method}</p></>
                         }
-                        {product.clinical_testing_result.description  === '' ? null :
-                            <><span className='link-ver'>Результаты клинических испытаний</span>: <p className={"not-main-p"}>{product.clinical_testing_result.description}</p></>
-                        }
+
 
                         </div>
 
