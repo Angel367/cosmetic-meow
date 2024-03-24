@@ -19,7 +19,7 @@ function LineProduct() {
                 const productData = await fetchData('product/' + id_product);
                 setProduct(productData);
                 document.title = productData.name || "Продукт";
-                window.scrollTo(0, 0);
+
             } catch (error) {
                 console.error('Error fetching product:', error);
             }
@@ -36,16 +36,16 @@ function LineProduct() {
     }
 
 
-    if (product.product_line && (!id_line  || id_line !== product.product_line) ) {
-        navigate(`/lines/${product.product_line.id}/products/${id_product}`);
-    }
+    // if (product.product_line && (!id_line  || id_line !== product.product_line) ) {
+    //     navigate(`/lines/${product.product_line.id}/products/${id_product}`);
+    // }
     return (
             <main className="main-line-product">
-                <a href='#'>
-                <div
-                    onClick={() => navigate(-1)}
-                      className="close"/>
-                </a>
+                {/*<a href='#'>*/}
+                {/*<div*/}
+                {/*    onClick={() => navigate(-1)}*/}
+                {/*      className="close"/>*/}
+                {/*</a>*/}
                 {/* todo fix cursor*/}
                 <article>
                     <LineProductImgHolder imgs={product.images}/>

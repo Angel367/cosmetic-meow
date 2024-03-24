@@ -13,14 +13,16 @@ const HeaderLanding = () => {
                 <label htmlFor="menu_toggle">
                     <span></span>
                 </label>
-                <nav>
+                <nav onClick={() => document.getElementById('menu_toggle').checked = false}>
                     <Link to={'/'} className="logo">
                         <img alt="[logo]" src={logo}/>
                     </Link>
                     <Link to={'/'} className='link-index'>Главная</Link>
-                    <Link to={'/lines/11'}>BIOACTIV</Link>
-                    <Link to={'/lines/12'}>Dr.Sechenov</Link>
+                    {/*<Link to={'/lines/11'}>BIOACTIV</Link>*/}
+                    {/*<Link to={'/lines/12'}>Dr.Sechenov</Link>*/}
+                    <Link to={'/lines'}>Каталог</Link>
                     <Link to={'/development'}>Разработка</Link>
+                    <Link to={'/contacts'}>Контакты</Link>
                 </nav>
         </div>
     </header>

@@ -4,6 +4,32 @@ h1, h3, h2, p{
     padding: 0;
 
 }
+.arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.arrow:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.arrow-left {
+    left: 10px;
+}
+
+.arrow-right {
+    right: 10px;
+}
 
 .close{
     text-decoration: none;
@@ -86,11 +112,11 @@ h1, h3, h2, p{
 .main-line-product .controls-text label[for="composition-radio"]{
     grid-area: label3;
 }
-.main-line-product .controls-text div{
+.main-line-product .controls-text > div{
     grid-area: div;
     display: flex;
 }
-.main-line-product .controls-text div p{
+.main-line-product .controls-text > div > div{
     position: absolute;
     opacity: 0;
     visibility: hidden;

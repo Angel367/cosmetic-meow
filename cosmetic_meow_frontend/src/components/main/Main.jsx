@@ -7,6 +7,7 @@ import MainPartners from "./MainPartners";
 
 import MainTitle from "./MainTitle";
 import fetchData from "../../requests/fetchData";
+import FeedbackSection from "../feedback/FeedbackSection";
 
 
 function Main  ()  {
@@ -35,7 +36,8 @@ function Main  ()  {
             <MainAdvantages/>
             {/*<MainReview/>*/}
             <MainPartners partners={partners}/>
-            <MainProducts products={products}/>
+            <FeedbackSection/>
+            {/*<MainProducts products={products}/>*/}
             {/*<MainSubscribe arrow={arrow}/>*/}
         </main>
     );

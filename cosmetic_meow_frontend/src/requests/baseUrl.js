@@ -1,5 +1,5 @@
-function getBaseUrl(isMail=false) {
-     return isMail ? "mailto:simple@mail.com" : "http://localhost/api/";
+function getBaseUrl(isMail=false, isPhone=false) {
+     return isMail ? "info@licsideris.ru" : "http://localhost/api/";
 
 }
 

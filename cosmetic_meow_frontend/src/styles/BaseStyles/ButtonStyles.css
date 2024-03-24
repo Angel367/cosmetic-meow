@@ -9,6 +9,20 @@ input , textarea{
     font-weight: 400;
 
 }
+span.verified{
+    color: #22ce22;
+}
+span.not-verified{
+    color: #bb2222;
+}
+input.verified{
+    border: 1px solid #22ce22;
+    background-color: rgba(34, 206, 34, 0.1);
+}
+input.not-verified{
+    border: 1px solid #bb2222;
+    background-color: rgba(187, 34, 34, 0.1);
+}
 
 .button{
     border: none;

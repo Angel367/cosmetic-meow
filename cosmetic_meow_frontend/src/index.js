@@ -32,7 +32,7 @@ import PersonalEdit from "./components/profile/PersonalEdit";
 import Personal from "./components/profile/Personal";
 import Layout from "./components/base/Layout";
 import Dev from "./components/feedback/Dev";
-import Feedback from "./components/feedback/Feedback";
+import Contacts from "./components/feedback/Contacts";
 import OnlyForAuthenticatedRoute from "./routes/OnlyForAuthenticatedRoute";
 import AuthLayout from "./components/auth/AuthLayout";
 import Registration from "./components/auth/Login";
@@ -68,16 +68,16 @@ const router = createBrowserRouter([
         errorElement: <ErrorLayout/>,
     },
      {
-        path: "/feedback",
-        element: <LayoutLanding children={<Feedback/>} title={"Обратная связь"}/>,
+        path: "/contacts",
+        element: <LayoutLanding children={<Contacts/>} title={"Контакты"}/>,
         errorElement: <ErrorLayout/>,
     },
-    {
-        path: "/products/:id_product",
-        element: <LayoutLanding children={<LineProduct/>} title={"Продукт"}/>,
-        errorElement: <ErrorLayout/>,
-
-    },
+    // {
+    //     path: "/products/:id_product",
+    //     element: <LayoutLanding children={<LineProduct/>} title={"Продукт"}/>,
+    //     errorElement: <ErrorLayout/>,
+    //
+    // },
     {
 
         path: "/lines/:id_line",
