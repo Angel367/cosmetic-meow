@@ -11,6 +11,13 @@ footer {
     /*z-index: -3;*/
 
 }
+footer .icons-free-source{
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
 footer .link-with-addr  .main-link {
     font-family: 'CygreBold', sans-serif;
 }
@@ -24,7 +31,7 @@ footer .contacts_ img{
     height: 1.5rem;
 }
 
-footer .link-with-addr > div  a:hover{
+footer .link-with-addr > div  a:hover, footer .link-with-addr > address a:hover, footer .link-with-addr > div a.active{
     color: rgba(255, 255, 255, 1);
 }
 footer .link-with-addr a, footer address div{

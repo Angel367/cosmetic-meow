@@ -13,7 +13,7 @@ function PartnerCard({partner}) {
                 <img src={partnerImg} alt=""/>
             </div>
 
-                <p>
+                <p className="p-not-main">
                     {/*Совместно с */}
                     {partner.name}
                     {/*мы разработали линии:*/}

@@ -26,7 +26,7 @@ function LayoutLanding({children, title}) {
             }
 
         }
-    }, []);
+    }, [title, hash]);
     let className = 'not-main-page';
     if (title === 'Главная') {
         className = 'main-page';

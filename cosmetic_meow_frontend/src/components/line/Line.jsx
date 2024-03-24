@@ -5,7 +5,7 @@ import LineDescription from "./LineDescription";
 import LineAdvantages from "./LineAdvantages";
 import LineComposition from "./LineComposition";
 import LineApplication from "./LineApplication";
-import {Navigate, useParams} from "react-router-dom";
+import {Link, Navigate, useParams} from "react-router-dom";
 import fetchData from "../../requests/fetchData";
 import Loading from "../error/Loading";
 
@@ -49,24 +49,40 @@ function Line() {
         let advantages = lineData.advantages?.slice(0, 3) || []
         let active_substances = lineData.active_substances?.slice(0, 4) || []
         let purposes = lineData.purposes?.slice(0, 3) || []
-
-
+        console.log(window.location.pathname, );
+        if (document.getElementById('line/12') && window.location.pathname === '/lines/12'){
+            document.getElementById('line/12').classList.add('not-main-h2-link-active');
+            document.getElementById('line/11').classList.remove('not-main-h2-link-active');
+        }
+        if (document.getElementById('line/11') && window.location.pathname === '/lines/11'){
+            document.getElementById('line/11').classList.add('not-main-h2-link-active');
+            document.getElementById('line/12').classList.remove('not-main-h2-link-active');
+        }
         return (
-            <div className='line-module'>
+            <main className='line-module'>
+                <section className="line-links">
+                    <p className={'not-main-p'}>На данной странице представлена информация о наших линейках продуктов</p>
+                    <div className="line-links-holder">
+                    <Link id={"line/12"} to={'/lines/12'} className={'not-main-h2-link'}>Dr.Sechenov</Link>
+                    <span className={'not-main-h2-link-separator'}> | </span>
+                    <Link id={"line/11"} to={'/lines/11'} className={'not-main-h2-link'}>BIOACTIV</Link>
+                    </div>
+                </section>
                 <LineDescription lineDescription={lineDescription}
                                  productsCount={products.count}
                                  advantagesCount={advantages.length}
-                                    activeSubstancesCount={active_substances.length}
-                                    purposesCount={purposes.length}/>
+                                 activeSubstancesCount={active_substances.length}
+                                 purposesCount={purposes.length}/>
 
                 <LineAssortment products={products}/>
                 {advantages.length > 0 &&
-                <LineAdvantages advantages={advantages}/>}
+                    <LineAdvantages advantages={advantages}/>}
                 {active_substances.length > 0 &&
-                <LineComposition active_substances={active_substances}/>}
+                    <LineComposition active_substances={active_substances}/>}
                 {purposes.length > 0 &&
-                <LineApplication purposes={purposes}/>}
-            </div>
+                    <LineApplication purposes={purposes}/>}
+            </main>
         );
 }
+
 export default Line;

@@ -127,6 +127,23 @@ h1, h2, h3, h4, h5, h6 , p, a{
     font-size: 1.5rem;
     font-weight: 700;
 }
+.not-main-h2-link{
+    color: rgba(26, 39, 81, 0.5);
+    font-family: 'CygreBold', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+.not-main-h2-link-active{
+    color: rgba(26, 39, 81, 1);
+   border-bottom: 2px solid #1A2751;
+}
+.not-main-h2-link-separator{
+    color: rgba(26, 39, 81, 0.5);
+    font-family: 'CygreBold', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+
+}
 
 .not-main-h3{
     color:  #E47A7C;

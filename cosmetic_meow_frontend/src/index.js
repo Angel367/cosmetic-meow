@@ -8,10 +8,6 @@ import './styles/LineModule.css';
 import './styles/ProductModule.css';
 import './styles/MainModule.css';
 import './styles/VerifyProductModule.css';
-
-
-
-
 import {
     createBrowserRouter, Navigate, Outlet,
     RouterProvider,
@@ -41,6 +37,7 @@ import Orders from "./components/order/Orders";
 import Order from "./components/order/Order";
 import LayoutLanding from "./components/base/LayoutLanding";
 import VerificationProduct from "./components/product/VerificationProduct";
+
 
 
 const router = createBrowserRouter([
@@ -80,22 +77,32 @@ const router = createBrowserRouter([
     // },
     {
 
-        path: "/lines/:id_line",
+        path: "/lines/",
         element: <Outlet/>,
         errorElement: <ErrorLayout/>,
         children: [
             {
                 index: true,
-                element: <LayoutLanding children={<Line/>} title={"Линия"}/>,
+                element: <Navigate to={"/lines/11"}/>,
                 errorElement: <ErrorLayout/>,
 
             },
-
             {
-                path: "products/:id_product",
-            element: <LayoutLanding children={<LineProduct/>} title={"Продукт"}/>,
-            errorElement: <ErrorLayout/>,
-        },
+                path: ":id_line",
+                children: [
+                    {
+                        index: true,
+                        element: <LayoutLanding children={<Line/>} title={"Линейка"}/>,
+                        errorElement: <ErrorLayout/>,
+                    },
+                    {
+                        path: "products/:id_product",
+                        element: <LayoutLanding children={<LineProduct/>} title={"Продукт"}/>,
+                        errorElement: <ErrorLayout/>,
+                    },
+                ],
+            }
+
 
         ],
     },

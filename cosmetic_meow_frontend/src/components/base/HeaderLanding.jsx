@@ -17,12 +17,22 @@ const HeaderLanding = () => {
                     <Link to={'/'} className="logo">
                         <img alt="[logo]" src={logo}/>
                     </Link>
-                    <Link to={'/'} className='link-index'>Главная</Link>
-                    {/*<Link to={'/lines/11'}>BIOACTIV</Link>*/}
-                    {/*<Link to={'/lines/12'}>Dr.Sechenov</Link>*/}
-                    <Link to={'/lines'}>Каталог</Link>
-                    <Link to={'/development'}>Разработка</Link>
-                    <Link to={'/contacts'}>Контакты</Link>
+
+                    {window.location.pathname === '/' ? <Link to={'/'} className={'active'}>Главная</Link> :
+                        <Link to={'/'}>Главная</Link>
+                    }
+
+                    {(window.location.pathname === '/lines/11' || window.location.pathname === '/lines/12')
+                        ? <Link to={'/lines'} className={'active'}>Каталог</Link> :
+                        <Link to={'/lines'}>Каталог</Link>
+                    }
+                    {window.location.pathname === '/development' ? <Link to={'/development'} className={'active'}>Разработка</Link> :
+                        <Link to={'/development'}>Разработка</Link>
+                    }
+                    {window.location.pathname === '/contacts' ? <Link to={'/contacts'} className={'active'}>Контакты</Link> :
+                        <Link to={'/contacts'}>Контакты</Link>
+                    }
+
                 </nav>
         </div>
     </header>

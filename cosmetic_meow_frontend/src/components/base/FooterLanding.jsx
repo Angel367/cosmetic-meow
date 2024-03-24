@@ -14,11 +14,11 @@ const FooterLanding = () => {
                 <div className="contacts">
                     <Link to={'/'} className="logo">
                         <img alt="[logo]" src
-                        ={logo}/>
+                            ={logo}/>
                     </Link>
                 </div>
                 <address className="contacts_">
-                     <Link className="main-link" to={'/contacts'}>Контакты</Link>
+                    <Link className="main-link" to={'/contacts'}>Контакты</Link>
                     {/*<Link to={'/'} className="logo">*/}
                     {/*    <img alt="[logo]" src={logo}/>*/}
                     {/*</Link>*/}
@@ -26,7 +26,7 @@ const FooterLanding = () => {
                         <img alt="" src={Message}/>
 
                         <div className="div-6">
-                            <a href={'mailto:'+getBaseUrl(true)}>{getBaseUrl(true)}</a>
+                            <a href={'mailto:' + getBaseUrl(true)}>{getBaseUrl(true)}</a>
                         </div>
                     </div>
                     <div className="address">
@@ -42,13 +42,18 @@ const FooterLanding = () => {
                     </div>
                 </address>
                 <div className="products-link">
-                    <Link className="main-link" to={'/catalog'}>Каталог</Link>
-                    <Link className="main-link" to={'/development'}>Разработка и производство</Link>
+                    {window.location.pathname === '/' ? <Link className="main-link active" to={'/'}>Главная</Link> :
+                    <Link className="main-link" to={'/'}>Главная</Link>}
+                    {(window.location.pathname === '/lines/11' || window.location.pathname === '/lines/12')
+                        ? <Link className="main-link active" to={'/lines/11'}>Каталог</Link>:
+                    <Link className="main-link" to={'/lines/11'}>Каталог</Link>}
+                    {window.location.pathname === '/development' ? <Link className="main-link active" to={'/development'}>Разработка и производство</Link>:
+                    <Link className="main-link" to={'/development'}>Разработка и производство</Link>}
                     {/*<Link to={'/lines/11#production-line'}>Продукция</Link>*/}
                     {/*<Link to={'/lines/11#advantages-line'}>Преимущества</Link>*/}
                     {/*<Link to={'/lines/11#active-substances-line'}>Активные вещества</Link>*/}
-
                 </div>
+                <a className={"icons-free-source"} href="https://www.flaticon.com" >Icons created by Freepik - Flaticon</a>
 
                 {/*<div className="about">*/}
                 {/*    <Link className="main-link" to={'/development'}>Разработка и производство</Link>*/}
@@ -56,6 +61,7 @@ const FooterLanding = () => {
                 {/*    /!*<Link to={'/development'}>Стать партнером</Link>*!/*/}
                 {/*    /!*<Link to={'/feedback'}>Обратная связь</Link>*!/*/}
                 {/*</div>*/}
+
 
             </div>
             <div className="copy">&copy; 2023-2024 ООО "ЛИК Сидерис". Все права защищены</div>

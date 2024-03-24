@@ -94,8 +94,40 @@ function Dev() {
 
                     </div>
                 </section>
-                    <FeedbackSection/>
+                <section className={"dev-types-of-works"}>
+                    <h2 className={"not-main-h1"}>Что мы можем предложить</h2>
+                    <p className={"not-main-p"}>
+                        Мы работаем во всех сегмента косметического рынка
+                    </p>
+                    <div className="dev-types-of-works__cards">
+                        <div className="dev-types-of-works__card">
+                            <h3 className={"not-main-h2"}>Специализированная косметика</h3>
+                        </div>
+                        <div className="dev-types-of-works__card">
+                            <h3 className={"not-main-h2"}>Высокотехнологичная косметика</h3>
+
+                        </div>
+                        <div className="dev-types-of-works__card">
+                            <h3 className={"not-main-h2"}>Профессиональная косметика</h3>
+                        </div>
+
+                        <div className="dev-types-of-works__card">
+                            <h3 className={"not-main-h2"}>Премиальная косметика</h3>
+                        </div>
+                        <div className="dev-types-of-works__card">
+                            <h3 className={"not-main-h2"}>Лечебная косметика</h3>
+
+                        </div>
+                        <div className="dev-types-of-works__card">
+                            <h3 className={"not-main-h2"}>Масс-маркет</h3>
+                        </div>
+
+                    </div>
+                </section>
+
+                <FeedbackSection/>
             </main>
-);
+        );
 }
+
 export default Dev;

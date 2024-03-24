@@ -43,7 +43,7 @@ header nav a{
     font-size: 1.25rem;
     font-weight: 700;
 }
-header nav a:hover{
+header nav a:hover, header nav a:active, header nav a:focus, header nav a.active{
     color: #1A2751;
     font-family: CygreExtraBold, sans-serif;
     font-weight: 700;
