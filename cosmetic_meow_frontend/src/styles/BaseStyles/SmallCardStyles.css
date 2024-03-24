@@ -82,11 +82,16 @@
     color: #dad6e4;
     font: 700 18px Cygre, sans-serif;
   }
+  .small-product-link {
+      align-self: flex-end;
+      justify-content: flex-end;
+  }
   .small-product-link a, .small-product-link span{
     color: #5F6886;
     font-family: CygreBold, sans-serif;
     font-size: 1.5rem;
     font-weight: 700;
+
 
   }
   .small-product-link img

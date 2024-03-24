@@ -35,8 +35,18 @@ function Line() {
                 document.title = "Линейка продуктов";
             else
                 document.title = lineData.product_line?.name || "Линейка продуктов";
+            if (document.getElementById('line/12') && window.location.pathname === '/lines/12') {
+            document.getElementById('line/12').classList.add('not-main-h2-link-active');
+            document.getElementById('line/11').classList.remove('not-main-h2-link-active');
+
+            }
+            if (document.getElementById('line/11') && window.location.pathname === '/lines/11'){
+                document.getElementById('line/11').classList.add('not-main-h2-link-active');
+                document.getElementById('line/12').classList.remove('not-main-h2-link-active');
+            }
 
     });
+
     if (!lineData || !products) {
         return <Loading/>;
     }
@@ -65,7 +75,7 @@ function Line() {
                 <section className="line-links">
                     <p className={'not-main-p'}>На данной странице представлена информация о наших линейках продуктов</p>
                     <div className="line-links-holder">
-                    <Link id={"line/12"} to={'/lines/12'} className={'not-main-h2-link'}>Dr.Sechenov</Link>
+                    <Link id={"line/12"} to={'/lines/12'} className={'not-main-h2-link not-main-h2-link-active'}>Dr.Sechenov</Link>
                     <span className={'not-main-h2-link-separator'}> | </span>
                     <Link id={"line/11"} to={'/lines/11'} className={'not-main-h2-link'}>BIOACTIV</Link>
                     </div>
