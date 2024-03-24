@@ -143,12 +143,19 @@ h1, h2, h3, h4, h5, h6 , p, a{
 
 }
 .not-main-p{
+    white-space: pre-wrap;
     color:  #5F6886;
     /*text-indent: 2rem;*/
     font-size: 1rem;
     font-weight: 400;
 }
-.contact-us span{
+.contact-us{
+    display: flex;
+    gap: 1rem;
+    /*align-items: center;*/
+    justify-content: center;
+}
+.contact-us span, .link-ver{
     color: #1A2751;
     font-size: 1rem;
     font-weight: 700;
