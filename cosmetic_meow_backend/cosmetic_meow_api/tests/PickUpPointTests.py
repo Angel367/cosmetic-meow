@@ -1,8 +1,8 @@
 from django.test import TestCase
 from rest_framework.test import APIClient
 from rest_framework import status
-from .models import PickUpPoint
-from .serializers import PickUpPointSerializer
+from cosmetic_meow_api.models import PickUpPoint
+from cosmetic_meow_api.serializers import PickUpPointSerializer
 
 
 class PickUpPointAPITestCase(TestCase):
