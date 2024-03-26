@@ -1,15 +1,27 @@
 from django.test import TestCase
 from rest_framework.test import APIClient
 from rest_framework import status
-from cosmetic_meow_api.models import PickUpPoint
-from cosmetic_meow_api.serializers import PickUpPointSerializer
+from cosmetic_meow_api.models import FeedBack
+from cosmetic_meow_api.serializers import FeedBackSerializer
 
 
-class PickUpPointAPITestCase(TestCase):
+class FeedBackAPITestCase(TestCase):
     def setUp(self):
-        self.client = APIClient()
-        self.pickup_point1 = PickUpPoint.objects.create(name='Point 1', address='Address 1')
-        self.pickup_point2 = PickUpPoint.objects.create(name='Point 2', address='Address 2')
+        self.client = APIClient
+        self.feedback1 = FeedBack.objects.create(
+            name='Name 1',
+            email='test1email@example.org',
+            message='Message 1',
+            type='other',
+            is_active=False
+        )
+        self.feedback2 = FeedBack.objects.create(
+            name='Name 2',
+            email='test2email@example.org',
+            message='Message 2',
+            type='support',
+            is_active=True
+        )
 
     def test_list_pickup_points(self):
         response = self.client.get('/api/pickup_point/')
@@ -43,3 +55,5 @@ class PickUpPointAPITestCase(TestCase):
         response = self.client.delete(f'/api/pickup_point/{self.pickup_point1.id}/')
         self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
         self.assertEqual(PickUpPoint.objects.count(), initial_count)
+
+
