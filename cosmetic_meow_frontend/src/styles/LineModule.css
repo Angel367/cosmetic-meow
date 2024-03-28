@@ -180,6 +180,7 @@
     }
     .line-module  .production-holder .small-product-box, .line-module .active-substances-holder .small-product-box{
           max-width: 90%;
+            /*max-height: 50vh;*/
      }
 
 

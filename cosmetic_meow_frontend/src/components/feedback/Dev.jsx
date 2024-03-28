@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
 import FeedbackForm from "./FeedbackForm";
 import getBaseUrl from "../../requests/baseUrl";
@@ -15,6 +15,17 @@ const lab = process.env.PUBLIC_URL + '/img/dev/lab.png';
 const management = process.env.PUBLIC_URL + '/img/dev/managment-exp.png';
 
 function Dev() {
+    const [clientWidth, setClientWidth] = React.useState(window.innerWidth);
+    const [isMobile, setIsMobile] = React.useState(null);
+    useEffect(() => {
+        if (clientWidth > 768) {
+            setIsMobile(null);
+        } else if (clientWidth > 576) {
+            setIsMobile(false);
+        } else {
+            setIsMobile(true);
+        }
+    }, [clientWidth]);
     const advantages = [
         {
             icon: fullCycle,
@@ -166,7 +177,8 @@ function Dev() {
                     <h4 className="not-main-h2" id={"dev-live-cycles__product"}>
                         Продукт
                     </h4>
-                    <div id={"dev-live-cycles__line"}>
+                    <div id={"dev-live-cycles__line"} className={isMobile === null ? "desktop" :
+                        (isMobile === true ? "mobile" : "tablet") }>
                         <div className={"dev-live-cycles__line__start"}></div>
                         <div className={"dev-live-cycles__line__second"}></div>
                         <div className={"dev-live-cycles__line__third"}></div>

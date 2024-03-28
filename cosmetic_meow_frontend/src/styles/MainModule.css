@@ -45,7 +45,7 @@
     flex-wrap: wrap;
     gap: 3rem;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     margin: 3rem 0;
 }
 
@@ -56,9 +56,9 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    width: 22%;
+    width: 300px;
 }#dev-advantages .slide{
-    width: 30%;
+    width: 300px;
  }
   #advantages .slide img, #dev-advantages .slide img{
     width: 10rem;
@@ -99,7 +99,7 @@
 .main .upper-line__body .partner{
     display: flex;
     flex-direction: column;
-    max-width: 200px;
+    width: 200px;
 }
 
 .main .upper-line__body .partner img{
@@ -113,6 +113,7 @@
     justify-content: center;
     gap: 1rem;
     align-items: center;
+    /*min-height: calc(100vh - 4rem);*/
 
 }
 #main-title .main-title-img{

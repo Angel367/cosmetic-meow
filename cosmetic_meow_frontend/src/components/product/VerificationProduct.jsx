@@ -101,7 +101,7 @@ const VerificationProduct = () => {
                         <span className={"verified"}>Продукт подлинный</span>
                         {realProduct !== null && realProduct !== undefined ?
                             <>
-                                <div><span className={"link-ver"}> Название продукта: </span>{realProduct.name}</div>
+                                <div><span className={"link-ver"}>Название продукта: </span>{realProduct.name}</div>
                                 <div ><span className={"link-ver"}>Линия продукта: </span>{realProduct.product_line.name}</div>
                                 <div ><span className={"link-ver"}>Состав продукта: </span>{realProduct.composition}</div>
                             <Link to={`/lines/${realProduct.product_line.id}/products/${realProduct.id}`} className={"contact-us"}>
