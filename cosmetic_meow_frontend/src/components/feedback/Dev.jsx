@@ -7,7 +7,7 @@ import AdvantageCard from "../main/AdvantageCard";
 
 
 const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
-const page = process.env.PUBLIC_URL + '/img/main/course.png';
+const page = process.env.PUBLIC_URL + '/img/dev/red-main.jpg';
 const fullCycle = process.env.PUBLIC_URL + '/img/dev/full-cycle.png';
 const clinicalTrial = process.env.PUBLIC_URL + '/img/dev/clinical-test.png';
 const business = process.env.PUBLIC_URL + '/img/dev/business.png';

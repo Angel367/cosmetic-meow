@@ -28,12 +28,14 @@
     align-items: center;
     flex-grow: 2;
     overflow: hidden;
-    border-radius: 20px;
+    width: 45%;
+    /*border-radius: 20px;*/
 }
 
 .feedback-module .feedback-module__description-img-holder img{
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    border-radius: 20px;
 }
 .feedback-module__form-holder{
     display: flex;

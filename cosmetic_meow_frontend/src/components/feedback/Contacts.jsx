@@ -5,7 +5,7 @@ import getBaseUrl from "../../requests/baseUrl";
 import FeedbackSection from "./FeedbackSection";
 
 const arrow = process.env.PUBLIC_URL + '/img/line-page/black-arrow.svg';
-const page = process.env.PUBLIC_URL + '/img/main/course.png';
+const page = process.env.PUBLIC_URL + '/img/dev/blue-main.jpg';
 const icon = process.env.PUBLIC_URL + '/img/dev/social/Icon.svg';
 const icon1 = process.env.PUBLIC_URL + '/img/dev/social/Icon-1.svg';
 const icon2 = process.env.PUBLIC_URL + '/img/dev/social/Icon-2.svg';
