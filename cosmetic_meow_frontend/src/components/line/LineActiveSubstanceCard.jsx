@@ -10,7 +10,9 @@ function LineActiveSubstanceCard({active_substance}) {
          return <div>Загрузка...</div>
     if (active_substance.image)
      img_src = active_substance.image
-
+    let descr = active_substance.description;
+    if (active_substance.description.length > 150)
+        descr = descr.slice(0, 150) + '...';
         return (
             <div className="small-product-box line-page active-sub">
                 <div className="small-product-img-box-subst">
@@ -19,7 +21,7 @@ function LineActiveSubstanceCard({active_substance}) {
 
                 <div className="small-product-info-box">
                     <div className="small-product-name">{active_substance.name}</div>
-                    <div className="small-product-description">{active_substance.description}</div>
+                    <div className="small-product-description">{descr}</div>
                 </div>
 
             </div>

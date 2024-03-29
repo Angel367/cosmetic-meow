@@ -7,6 +7,14 @@ class LineProductImgHolder extends React.Component {
 
     onClickImage = (e) => {
         if (e.target.tagName !== 'IMG') return;
+        const images = document.querySelectorAll('.img-small');
+        images.forEach(image => {
+            image.style.backgroundColor = '#FFFFFF';
+            image.style.borderColor = '#5F6886'
+        });
+        e.target.parentElement.style.backgroundColor = '#E47A7C';
+        e.target.parentElement.style.borderColor = '#E47A7C';
+
         const imageUrl = e.target.src;
         const currentIndex = Array.from(e.currentTarget.parentNode.children).indexOf(e.currentTarget);
         this.setState({ currentImageIndex: currentIndex });
