@@ -12,7 +12,7 @@ function LineActiveSubstanceCard({active_substance}) {
      img_src = active_substance.image
 
         return (
-            <div className="small-product-box line-page">
+            <div className="small-product-box line-page active-sub">
                 <div className="small-product-img-box-subst">
                     <img alt={""} src={img_src}/>
                 </div>
