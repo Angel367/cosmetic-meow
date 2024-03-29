@@ -47,7 +47,8 @@ function LineAdvantages({advantages, line_id}) {
                         <div className="advantage" key={index}>
                             <img alt="1" src={advantage.image}/>
                             {/*<h3>{advantage.name}</h3>*/}
-                            <p>{advantage.description}</p>
+                            <p className={'not-main-p'}
+                            >{advantage.description}</p>
                         </div>
                     ))}
                 </div>

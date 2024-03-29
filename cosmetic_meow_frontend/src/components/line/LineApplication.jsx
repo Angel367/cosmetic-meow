@@ -14,7 +14,7 @@ function LineApplication({purposes}) {
 
                 <div className="application-holder">
                     {purposes.map((p, index) => (
-                    <p className="application" key={index}>
+                    <p className="application not-main-p" key={index}>
                         {p.purpose}
                     </p>
                     ))}

@@ -17,6 +17,7 @@ h1, h3, h2, p{
     justify-content: center;
     align-items: center;
     transition: background-color 0.3s ease;
+    border: #E47A7C solid 1px;
 }
 
 .arrow:hover {
@@ -212,6 +213,7 @@ h1, h3, h2, p{
     width: 600px;
     height: 800px;
     transition: all 0.3s;
+     position: relative;
 }
 .main-line-product .img-holder-section .img-main img{
          width: 100%;
@@ -272,6 +274,7 @@ h1, h3, h2, p{
     }
     .main-line-product .img-holder-section .img-main{
         /*width: 100%;*/
+
         width: 400px;
         height: 600px;
         justify-content: start;

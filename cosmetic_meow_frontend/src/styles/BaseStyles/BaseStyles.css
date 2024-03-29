@@ -44,8 +44,8 @@ body::-webkit-scrollbar-track {
     background-color: rgba(255, 255, 255, 0.7);
 }
 main {
-        margin-top: 0;
-    min-height: calc(100vh - 4rem);
+    margin-top: 0;
+
 
 }
 #error-page{
@@ -55,6 +55,7 @@ main {
     justify-content: center;
     align-items: center;
     text-align: center;
+    height: calc(100vh - 9rem);
 }
 #error-page h1{
     color: #1A2751;
@@ -237,6 +238,11 @@ h1, h2, h3, h4, h5, h6 , p, a{
 }
 
 @media (max-width:768px ) {
+    #error-page{
+
+    height: calc(100vh - 4rem - 24px);
+}
+
     main {
         margin-top: calc(4rem + 24px);
     }
