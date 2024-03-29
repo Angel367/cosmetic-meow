@@ -37,6 +37,21 @@ function LineAdvantages({advantages, line_id}) {
                 image: process.env.PUBLIC_URL + '/img/advantages/6.png',
             }
         ]
+    } else if (line_id === 13){
+        advantages = [{
+                description: 'Полный спектр физико-химических исследований',
+                image: process.env.PUBLIC_URL + '/img/advantages/5.png'
+                },
+                {
+                    description: 'Мягкая система консервантов',
+                    image: process.env.PUBLIC_URL + '/img/advantages/3.png',
+                },
+                {
+                    description: 'Пролонгируемый эффект',
+                    image: process.env.PUBLIC_URL + '/img/advantages/2.png',
+                }
+        ]
+
     }
         return (
             <section className="advantages" id="advantages-line">

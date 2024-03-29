@@ -2,7 +2,30 @@ import React from "react";
 
 class LineProductImgHolder extends React.Component {
     state = {
-        currentImageIndex: 0
+        currentImageIndex: 0,
+        touchStartX: null,
+        touchEndX: null
+    };
+    handleTouchStart = (e) => {
+        this.setState({ touchStartX: e.touches[0].clientX });
+    };
+
+    handleTouchMove = (e) => {
+        if (!this.state.touchStartX) return;
+        this.setState({ touchEndX: e.touches[0].clientX });
+    };
+
+    handleTouchEnd = () => {
+        const { touchStartX, touchEndX } = this.state;
+        if (touchStartX && touchEndX) {
+            const diff = touchStartX - touchEndX;
+            if (diff > 0) {
+                this.handleNextImage();
+            } else if (diff < 0) {
+                this.handlePrevImage();
+            }
+            this.setState({ touchStartX: null, touchEndX: null });
+        }
     };
     setCurrentActive(cur) {
         const images = document.querySelectorAll('.img-small');
@@ -53,6 +76,9 @@ class LineProductImgHolder extends React.Component {
         this.setCurrentActive(images[0]);
         images.forEach(image => {
             image.addEventListener('click', this.onClickImage);
+            image.addEventListener('touchstart', this.handleTouchStart);
+            image.addEventListener('touchmove', this.handleTouchMove);
+            image.addEventListener('touchend', this.handleTouchEnd);
         });
     }
 

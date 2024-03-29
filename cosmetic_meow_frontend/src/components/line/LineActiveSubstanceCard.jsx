@@ -11,8 +11,8 @@ function LineActiveSubstanceCard({active_substance}) {
     if (active_substance.image)
      img_src = active_substance.image
     let descr = active_substance.description;
-    if (active_substance.description.length > 150)
-        descr = descr.slice(0, 150) + '...';
+    if (active_substance.description.length > 250)
+        descr = descr.slice(0, 250) + '...';
         return (
             <div className="small-product-box line-page active-sub">
                 <div className="small-product-img-box-subst">
