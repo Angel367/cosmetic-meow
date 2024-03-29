@@ -4,17 +4,19 @@ class LineProductImgHolder extends React.Component {
     state = {
         currentImageIndex: 0
     };
-
-    onClickImage = (e) => {
-        if (e.target.tagName !== 'IMG') return;
+    setCurrentActive(cur) {
         const images = document.querySelectorAll('.img-small');
         images.forEach(image => {
             image.style.backgroundColor = '#FFFFFF';
             image.style.borderColor = '#5F6886'
         });
-        e.target.parentElement.style.backgroundColor = '#E47A7C';
-        e.target.parentElement.style.borderColor = '#E47A7C';
+        cur.style.backgroundColor = '#E47A7C';
+        cur.style.borderColor = '#E47A7C';
 
+    }
+    onClickImage = (e) => {
+        if (e.target.tagName !== 'IMG') return;
+        this.setCurrentActive(e.target.parentElement)
         const imageUrl = e.target.src;
         const currentIndex = Array.from(e.currentTarget.parentNode.children).indexOf(e.currentTarget);
         this.setState({ currentImageIndex: currentIndex });
@@ -31,6 +33,8 @@ class LineProductImgHolder extends React.Component {
         const nextImageUrl = imgs[nextIndex].image || imgs[nextIndex];
         this.setState({ currentImageIndex: nextIndex });
         this.showImage(nextImageUrl);
+        const images_div = document.querySelectorAll('.img-small');
+        this.setCurrentActive(images_div[nextIndex])
     };
 
     handlePrevImage = () => {
@@ -39,13 +43,14 @@ class LineProductImgHolder extends React.Component {
         const prevImageUrl = imgs[prevIndex].image || imgs[prevIndex];
         this.setState({ currentImageIndex: prevIndex });
         this.showImage(prevImageUrl);
+        const images_div = document.querySelectorAll('.img-small');
+        this.setCurrentActive(images_div[prevIndex])
     };
 
     componentDidMount() {
         const images = document.querySelectorAll('.img-small');
-        this.showImage(images[0].firstChild.src);
-        images[0].style.backgroundColor = '#E47A7C';
-        images[0].style.borderColor = '#E47A7C';
+        this.showImage(images[0].firstChild?.src);
+        this.setCurrentActive(images[0]);
         images.forEach(image => {
             image.addEventListener('click', this.onClickImage);
         });
