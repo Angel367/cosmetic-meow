@@ -1,3 +1,5 @@
+import asyncio
+
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import viewsets, permissions, generics, status
 from rest_framework.decorators import action
@@ -242,6 +244,24 @@ class FeedBackViewSet(viewsets.ModelViewSet):
     permission_classes = [AllCreateAdminAllAnother403]
     filter_backends = [DjangoFilterBackend]
     filterset_class = FeedBackFilter
+
+    def create(self, request, *args, **kwargs):
+        try:
+            message = (
+               f"⚠️ Новая обратная связь! ⚠️\n"
+               f"Имя: {request.data.get('name')}\n"
+               f"Email: {request.data.get('email')}\n"
+               f"Сообщение: {request.data.get('message')}\n"
+               f"Тип: {request.data.get('type')}\n"
+            )
+            import aiogram
+            bot = aiogram.Bot(token="7100921854:AAEArbpzBfYZZNUicgZQM8c9VZfUPqSDF_4")
+            loop = asyncio.new_event_loop()
+            asyncio.set_event_loop(loop)
+            loop.run_until_complete(bot.send_message(-4110901516, message))
+        except Exception as e:
+            print(e)
+        return super().create(request, *args, **kwargs)
 
 
 class PhoneSendCode(APIView):
