@@ -1,4 +1,3 @@
-require('dotenv').config()
 const env = dotenv.config({ path: '.env.local' }).parsed;
 
 function getBaseUrl(isMail = false, isPhone = false) {
