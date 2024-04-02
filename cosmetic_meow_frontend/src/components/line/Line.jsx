@@ -16,7 +16,7 @@ function Line() {
     const [lineData, setLineData] = React.useState(null);
     useEffect(() => {
     async function fetchProducts(){
-        let data = await fetchData('product', {page_size: 6, product_line: id_line});
+        let data = await fetchData('product', {page_size: 4, product_line: id_line, is_active: true});
         setProducts(data);
     }
     fetchProducts();
@@ -35,15 +35,34 @@ function Line() {
                 document.title = "Линейка продуктов";
             else
                 document.title = lineData.product_line?.name || "Линейка продуктов";
-            if (document.getElementById('line/12') && window.location.pathname === '/lines/12') {
+            // if (document.getElementById('line/12') && window.location.pathname === '/lines/12') {
+            // document.getElementById('line/12').classList.add('not-main-h2-link-active');
+            // document.getElementById('line/11').classList.remove('not-main-h2-link-active');
+            //
+            // }
+            // if (document.getElementById('line/11') && window.location.pathname === '/lines/11'){
+            //     document.getElementById('line/11').classList.add('not-main-h2-link-active');
+            //     document.getElementById('line/12').classList.remove('not-main-h2-link-active');
+            // }
+        if (document.getElementById('line/12') && window.location.pathname === '/lines/12') {
             document.getElementById('line/12').classList.add('not-main-h2-link-active');
             document.getElementById('line/11').classList.remove('not-main-h2-link-active');
+            document.getElementById('line/13').classList.remove('not-main-h2-link-active');
 
-            }
-            if (document.getElementById('line/11') && window.location.pathname === '/lines/11'){
-                document.getElementById('line/11').classList.add('not-main-h2-link-active');
-                document.getElementById('line/12').classList.remove('not-main-h2-link-active');
-            }
+
+        } else
+        if (document.getElementById('line/11') && window.location.pathname === '/lines/11'){
+            document.getElementById('line/11').classList.add('not-main-h2-link-active');
+            document.getElementById('line/12').classList.remove('not-main-h2-link-active');
+            document.getElementById('line/13').classList.remove('not-main-h2-link-active');
+
+        } else
+        if (document.getElementById('line/13') && window.location.pathname === '/lines/13'){
+            document.getElementById('line/13').classList.add('not-main-h2-link-active');
+            document.getElementById('line/12').classList.remove('not-main-h2-link-active');
+            document.getElementById('line/11').classList.remove('not-main-h2-link-active');
+
+        }
 
     });
 
@@ -60,25 +79,21 @@ function Line() {
         let advantages = lineData.advantages?.slice(0, 3) || []
         let active_substances = lineData.active_substances?.slice(0, 4) || []
         let purposes = lineData.purposes?.slice(0, 3) || []
-        console.log(window.location.pathname, );
-        if (document.getElementById('line/12') && window.location.pathname === '/lines/12') {
-            document.getElementById('line/12').classList.add('not-main-h2-link-active');
-            document.getElementById('line/11').classList.remove('not-main-h2-link-active');
+        // console.log(window.location.pathname, );
 
-        }
-        if (document.getElementById('line/11') && window.location.pathname === '/lines/11'){
-            document.getElementById('line/11').classList.add('not-main-h2-link-active');
-            document.getElementById('line/12').classList.remove('not-main-h2-link-active');
-        }
         return (
             <main className='line-module'>
                 <section className="line-links">
                     <p className={'not-main-p'}>На данной странице представлена информация о наших линейках продуктов</p>
                     <div className="line-links-holder">
-                    <Link id={"line/12"} to={'/lines/12'} className={'not-main-h2-link not-main-h2-link-active'}>Dr.Sechenov</Link>
-                    <span className={'not-main-h2-link-separator'}> | </span>
-                    <Link id={"line/11"} to={'/lines/11'} className={'not-main-h2-link'}>BIOACTIV</Link>
+                        <Link id={"line/12"} to={'/lines/12'}
+                              className={'not-main-h2-link not-main-h2-link-active'}>Dr.Sechenov</Link>
+                        <span className={'not-main-h2-link-separator'}> | </span>
+                        <Link id={"line/11"} to={'/lines/11'} className={'not-main-h2-link'}>BIOACTIV</Link>
+                        <span className={'not-main-h2-link-separator'}> | </span>
+                        <Link id={"line/13"} to={'/lines/13'} className={'not-main-h2-link'}>ORTO</Link>
                     </div>
+
                 </section>
                 <LineDescription lineDescription={lineDescription}
                                  productsCount={products.count}

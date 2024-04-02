@@ -17,7 +17,7 @@ function ManageProductInCart({product, quantity, noButton=false, isOrder=false})
                         <div>{quantity}</div>
                     ) : null}
                     {product.is_ready_for_sale  ? (
-                <Link
+                <Link target="_blank"
                     to={`/lines/${product.product_line.id}/products/${product.id}`}>
                 <img src={arrow} alt={"Перейти"}/>
                     </Link>) : null}

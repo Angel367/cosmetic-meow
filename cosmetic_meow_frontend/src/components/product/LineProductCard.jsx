@@ -9,8 +9,8 @@ function LineProductCard({product}) {
     if (!product)
         return <div>Загрузка...</div>;
     let descr = product.description;
-    if (product.description.length > 200)
-        descr = descr.slice(0, 200) + '...';
+    if (product.description.length > 500)
+        descr = descr.slice(0, 500) + '...';
 
     let product_component =
         <>
