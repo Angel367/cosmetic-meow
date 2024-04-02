@@ -11,7 +11,14 @@ footer {
     /*z-index: -3;*/
 
 }
-footer .link-with-addr > div .main-link {
+footer .icons-free-source{
+    opacity: 0;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    position: absolute;
+}
+footer .link-with-addr  .main-link {
     font-family: 'CygreBold', sans-serif;
 }
 footer .link-with-addr{
@@ -19,8 +26,12 @@ footer .link-with-addr{
     align-items: flex-start;
     justify-content: space-between;
 }
+footer .contacts_ img{
+    width: 1.5rem;
+    height: 1.5rem;
+}
 
-footer .link-with-addr > div  a:hover{
+footer .link-with-addr > div  a:hover, footer .link-with-addr > address a:hover, footer .link-with-addr > div a.active{
     color: rgba(255, 255, 255, 1);
 }
 footer .link-with-addr a, footer address div{
@@ -54,7 +65,7 @@ footer .link-with-addr > div a, footer .link-with-addr > address{
     font-size: 1rem;
     font-weight: 400;
 }
-footer .link-with-addr > div .main-link{
+footer .link-with-addr  .main-link{
     font-size: 1.25rem;
     font-weight: 700;
 }
@@ -83,13 +94,13 @@ footer .link-with-addr{
 
 
 @media (max-width:992px ) {
-    footer .link-with-addr address{
-        position: absolute;
-        visibility: hidden;
-        opacity: 0;
-        height: 0;
-        width: 0;
-    }
+    /*footer .link-with-addr address{*/
+    /*    position: absolute;*/
+    /*    visibility: hidden;*/
+    /*    opacity: 0;*/
+    /*    height: 0;*/
+    /*    width: 0;*/
+    /*}*/
 }
 @media (max-width:768px ) {
     footer{
@@ -97,6 +108,7 @@ footer .link-with-addr{
         gap: 1.5rem;
     }
     footer .link-with-addr{
+        flex-direction: row-reverse;
         flex-wrap: wrap;
         row-gap: 4rem;
         column-gap: 2.5rem;

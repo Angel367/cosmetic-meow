@@ -20,7 +20,8 @@ async function fetchData(urlPart, params = null) {
             })
             .catch((error) => {
                 // console.log(error.response.data, "1error1");
-                variable = error.response.data;
+                variable = error
+                console.log(variable, "error-response")
             });
     return variable;
 }

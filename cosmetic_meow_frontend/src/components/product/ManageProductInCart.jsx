@@ -16,10 +16,11 @@ function ManageProductInCart({product, quantity, noButton=false, isOrder=false})
                     {isOrder ? (
                         <div>{quantity}</div>
                     ) : null}
+                    {product.is_ready_for_sale  ? (
                 <Link
                     to={`/lines/${product.product_line.id}/products/${product.id}`}>
                 <img src={arrow} alt={"Перейти"}/>
-                    </Link>
+                    </Link>) : null}
                 </>) :
                 (
                     <>{quantity === 0 ?

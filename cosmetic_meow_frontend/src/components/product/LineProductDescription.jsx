@@ -15,7 +15,9 @@ function LineProductDescription({product}) {
 
     if (!product)
         return <Loading/>;
-    let marketplaces = product.market_place_links || [];
+    let marketplaces = [];
+        // product.market_place_links || [];
+
      return (
     <section>
         <div className="main-info">
@@ -54,40 +56,42 @@ function LineProductDescription({product}) {
                     <input type="radio" id="composition-radio" name="info" className="info-radio"/>
                     <label htmlFor="composition-radio" className="info-label">Состав</label>
                     <div>
-                        <p className="info-text not-main-p" id="description-text">
-                            <div>
-                            {product.description || 'product.description' }</div>
-                            {product.advantages.length === 0 ? null : <div>Преимущества:</div>
+                        <div className="info-text" id="description-text">
+
+                            <p className={ "not-main-p"}>{product.description}</p>
+                            {product.advantages.length === 0 ? null :
+                                ( <p className={ "not-main-p link-ver"}>Преимущества:</p>)
                             }
 
                             {product.advantages.map((advantage, index) => {
-                                return (<div>{index + 1}. {advantage.description}</div>);
+                               return <p className={ "not-main-p"}>{index+1}. {advantage.description}</p>
                             })}
 
 
-                        </p>
+                        </div>
 
-                        <p className="info-text  not-main-p" id="usage-text">
+                        <div className={ "info-text"} id="usage-text">
+
                             {product.purpose === '' ? null :
-                            <div>Назначение: {product.purpose}</div> }
-                            {product.indications === '' ? null :
-                            <div>Способ применения: {product.application_method}</div>}
-                            {product.clinical_testing_result.description  === '' ? null :
-                           <div>Результаты клинических испытаний: <br/>
-                            {product.clinical_testing_result.description }</div> }
-
-                        </p>
+                               <><span className='link-ver'>Назначение</span>: <p className={"not-main-p"}>{product.purpose}</p></>
+                        }
+                        {product.application_method === '' ? null :
+                            <><span className='link-ver'>Способ применения</span>: <p className={"not-main-p"}>{product.application_method}</p></>
+                        }
 
 
-                        <p className="info-text  not-main-p" id="composition-text">
+                        </div>
+
+
+                        <div className="info-text" id="composition-text">
                             {product.active_substances.length === 0 ? null :
-                            <div>Активные вещества:</div>}
+                            <p className={ "not-main-p"}>Активные компоненты:</p>}
                             {product.active_substances.map((substance, index) => {
-                                return (<div>{index+1}. {substance.description || ''}</div>);
+                                return (<p className={ "not-main-p"}>{index+1}. {substance.description || ''}</p>);
                             })}
                             {product.composition === '' ? null :
-                            <div>{'Coстав: ' + product.composition || ''}</div>}
-                        </p>
+                            <p className={ "not-main-p"}>{'Coстав: ' + product.composition || ''}</p>}
+                        </div>
                     </div>
                 </div>
             </div>

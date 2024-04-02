@@ -3,7 +3,7 @@
 
 }
 
-.main article{
+.main section{
     padding-left: 5rem;
     padding-right: 5rem;
 }
@@ -32,7 +32,7 @@
         width: 300px;
 
     }
-#advantages{
+#advantages, #dev-advantages{
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -40,23 +40,30 @@
     align-items: center;
     /*margin: 3rem 0;*/
 }
-#advantages .slide-holder{
+#advantages .slide-holder, #dev-advantages .slide-holder{
     display: flex;
+    flex-wrap: wrap;
     gap: 3rem;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    align-items: flex-start;
     margin: 3rem 0;
 }
 
-.main .slide {
+#advantages .slide, #dev-advantages .slide{
     display: flex;
     flex-direction: column;
     gap: 1rem;
     align-items: center;
     justify-content: center;
     text-align: center;
-    width: 25%;
-}
+    width: 300px;
+}#dev-advantages .slide{
+    width: 300px;
+ }
+  #advantages .slide img, #dev-advantages .slide img{
+    width: 10rem;
+    height: 10rem;
+  }
 .upper-line{
     position: relative;
     display: flex;
@@ -92,34 +99,35 @@
 .main .upper-line__body .partner{
     display: flex;
     flex-direction: column;
-    max-width: 200px;
+    width: 200px;
 }
 
 .main .upper-line__body .partner img{
-    max-width: 100%;
+
+    height: 7rem;
+    width: auto;
 }
 #main-title{
     position: relative;
-}
-#main-title .main-title-img .main-title-img_mobile{
-    visibility: hidden;
-    opacity: 0;
-    position: absolute;
-}
-#main-title .main-title-img .main-title-img_desktop {
-    position: absolute;
-    width: calc(100% + 5rem);
-    top: -10rem;
-    right: 0;
-    z-index: -1;
-
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    /*min-height: calc(100vh - 4rem);*/
 
 }
-#main-title .main-title-img .main-title-img_desktop img{
-    object-fit: cover;
-    object-position: center;
-
+#main-title .main-title-img{
+    width: 45%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+#main-title .main-title-img img{
+    width: 100%;
+    height: auto;
+}
+
+
 #main-title .main-title-description{
         width: 45%;
         display: flex;
@@ -133,21 +141,14 @@
     flex-direction: column;
     gap: .1rem;
 }
-#main-title .main-title-description .button-holder{
-        display: flex;
-        column-gap: 2rem;
-        row-gap: 1rem;
-        flex-wrap: wrap;
-        /*justify-content: center;*/
-        align-items: center;
-}
+
 
 @media (max-width:992px ) {
     .main{
         padding: 2rem 0;
         gap: 2rem;
     }
-    .main article{
+    .main section{
         padding: 0 3rem;
     }
     .main .upper-line{
@@ -161,25 +162,26 @@
 }
 @media (max-width: 768px) {
     .main-page header{
-        background-color: rgba(218, 214, 228, 1);
+        background-color: rgba(255, 255, 255, 1);
     }
     .main{
         padding: 0 0 2rem;
         gap:1.5rem;
+        margin-top: calc(4rem + 24px);
     }
-    .main article{
+    .main section, #dev-advantages{
         padding: 0 1rem;
     }
-    .main .slide-holder{
+ #advantages .slide-holder, #dev-advantages .slide-holder{
         flex-direction: column;
         gap: 3rem;
 
     }
-    #advantages{
+    #advantages, #dev-advantages{
         text-align: center;
     }
 
-   .main .slide{
+    #advantages .slide, #dev-advantages .slide{
         width: unset;
         padding: 0 1rem;
     }
@@ -192,25 +194,19 @@
         display: flex;
         flex-direction: column-reverse;
         gap: 1rem;
-        background-color: rgba(218, 214, 228, 1);
+        /*background-color: rgba(218, 214, 228, 1);*/
         align-items: center;
         padding:0 2rem 5rem;
 
     }
+    #main-title .main-title-img img{
+        width: unset;
+        max-height: 40vh;
+    }
 
-    #main-title .main-title-img .main-title-img_mobile{
-        visibility: visible;
-        opacity: 1;
-        position: relative;
-        max-height: 30vh;
-    }
-    #main-title .main-title-img .main-title-img_desktop {
-    visibility: hidden;
-    opacity: 0;
-    position: absolute;
-        width: 0;
-        height: 0;
-    }
+
+
+
     #main-title .main-title-description{
         width: 100%;
 

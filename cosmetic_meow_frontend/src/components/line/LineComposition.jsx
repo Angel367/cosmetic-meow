@@ -1,9 +1,16 @@
 import React from "react";
 import LineActiveSubstanceCard from "./LineActiveSubstanceCard";
-function LineComposition({active_substances}) {
+function LineComposition({active_substances, line_id}) {
 
     if (!active_substances || active_substances.length === 0) {
         return
+    }
+    if (line_id === 12){
+        active_substances[0].image = process.env.PUBLIC_URL + '/img/active_substances/1.png';
+        active_substances[1].image = process.env.PUBLIC_URL + '/img/active_substances/2.png';
+        active_substances[2].image = process.env.PUBLIC_URL + '/img/active_substances/3.png';
+        active_substances[3].image = process.env.PUBLIC_URL + '/img/active_substances/4.png';
+
     }
         return (
             <section className="active-substances-line" id={"active-substances-line"}>

@@ -1,5 +1,6 @@
 import React from "react";
 import {Link} from "react-router-dom";
+import ManageProductInCart from "./ManageProductInCart";
 
 const no_image = process.env.PUBLIC_URL + '/img/line-page/no_photo.jpg';
 
@@ -7,6 +8,10 @@ const no_image = process.env.PUBLIC_URL + '/img/line-page/no_photo.jpg';
 function LineProductCard({product}) {
     if (!product)
         return <div>Загрузка...</div>;
+    let descr = product.description;
+    if (product.description.length > 200)
+        descr = descr.slice(0, 200) + '...';
+
     let product_component =
         <>
             <div className="small-product-img-box">
@@ -16,7 +21,8 @@ function LineProductCard({product}) {
 
             <div className="small-product-info-box">
                 <div className="small-product-name">{product.name}</div>
-                <div className="small-product-description">{product.description}</div>
+                <div className="small-product-description">{descr}</div>
+                <ManageProductInCart product={product} quantity={0} noButton={true} isOrder={false}/>
             </div>
         </>
     if (product.is_ready_for_sale === true)
