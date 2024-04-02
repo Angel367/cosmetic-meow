@@ -6,6 +6,7 @@ WORKDIR /app
 
 # Скопируйте зависимости package.json и package-lock.json (или yarn.lock, если используется Yarn)
 COPY cosmetic_meow_frontend/package*.json /app/
+COPY ../.env.local /app/
 
 # Установите зависимости
 RUN npm install
