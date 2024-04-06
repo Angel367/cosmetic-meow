@@ -14,7 +14,7 @@ function FeedbackSection({type="contract_request"}) {
             {/*    <img alt="" src={icon2}/>*/}
             {/*    <img alt="" src={icon3}/>*/}
             {/*</div>*/}
-            <FeedbackForm  id={"contract_request"}/>
+            <FeedbackForm  type={type} />
         </section>
     );
 }

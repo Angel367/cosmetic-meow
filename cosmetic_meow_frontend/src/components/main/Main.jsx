@@ -36,7 +36,7 @@ function Main  ()  {
             <MainAdvantages/>
             {/*<MainReview/>*/}
             <MainPartners partners={partners}/>
-            <FeedbackSection/>
+            <FeedbackSection />
             {/*<MainProducts products={products}/>*/}
             {/*<MainSubscribe arrow={arrow}/>*/}
         </main>
