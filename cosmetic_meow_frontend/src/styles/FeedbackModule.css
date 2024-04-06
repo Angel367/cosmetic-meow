@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     padding: 2rem 5rem 10rem;
-    gap: 4rem;
+    gap: 6rem;
 }
 .feedback-module .contact-us{
     display: flex;
@@ -86,19 +86,20 @@
     grid-area: button_;
 }
 .feedback-module__form-holder__form .form-holder__form__input-holder button.blue.button{
-    max-width: 50%;
+    /*max-width: 50%;*/
+    width: max-content;
     margin-top: 2rem;
 }
 .dev-types-of-works{
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
     flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 .dev-types-of-works .dev-types-of-works__cards{
     display: flex;
-    gap: 1rem;
+    gap: 2rem;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;

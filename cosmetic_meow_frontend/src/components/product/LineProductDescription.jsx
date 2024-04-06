@@ -57,14 +57,17 @@ function LineProductDescription({product}) {
                     <label htmlFor="composition-radio" className="info-label">Состав</label>
                     <div>
                         <div className="info-text" id="description-text">
-
-                            <p className={ "not-main-p"}>{product.description}</p>
+                            {/*<br/>*/}
+                            <p className={"not-main-p"}>{product.description}</p>
                             {product.advantages.length === 0 ? null :
-                                ( <p className={ "not-main-p link-ver"}>Преимущества:</p>)
+                                (<>
+                                    <br/>
+                                    <p className={"not-main-p link-ver"}>Преимущества:</p>
+                                    </>)
                             }
 
                             {product.advantages.map((advantage, index) => {
-                               return <p className={ "not-main-p"}>{index+1}. {advantage.description}</p>
+                                return <p className={"not-main-p"}>{index + 1}. {advantage.description}</p>
                             })}
 
 
@@ -73,10 +76,11 @@ function LineProductDescription({product}) {
                         <div className={ "info-text"} id="usage-text">
 
                             {product.purpose === '' ? null :
-                               <><span className='link-ver'>Назначение</span>: <p className={"not-main-p"}>{product.purpose}</p></>
+                               <><br/><span className='link-ver'>Назначение</span>: <p className={"not-main-p"}>{product.purpose}</p></>
                         }
+
                         {product.application_method === '' ? null :
-                            <><span className='link-ver'>Способ применения</span>: <p className={"not-main-p"}>{product.application_method}</p></>
+                            <><br/><span className='link-ver'>Способ применения</span>: <p className={"not-main-p"}>{product.application_method}</p></>
                         }
 
 
@@ -85,12 +89,22 @@ function LineProductDescription({product}) {
 
                         <div className="info-text" id="composition-text">
                             {product.active_substances.length === 0 ? null :
-                            <p className={ "not-main-p"}>Активные компоненты:</p>}
-                            {product.active_substances.map((substance, index) => {
-                                return (<p className={ "not-main-p"}>{index+1}. {substance.description || ''}</p>);
-                            })}
+                                <><br/>
+                                    <p className={"not-main-p link-ver"}>Активные компоненты:</p>
+                                    {product.active_substances.map((substance, index) => {
+                                        return (
+                                            <p className={"not-main-p"}>{index + 1}. {substance.description || ''}</p>);
+                                    })}
+
+                                </>
+                            }
+
                             {product.composition === '' ? null :
-                            <p className={ "not-main-p"}>{'Coстав: ' + product.composition || ''}</p>}
+                                <><br/>
+                                    <span className='link-ver'>Состав</span>: <p
+                                        className={"not-main-p"}>{product.composition}</p>
+                                </>
+                            }
                         </div>
                     </div>
                 </div>
