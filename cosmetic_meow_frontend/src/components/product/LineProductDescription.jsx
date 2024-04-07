@@ -9,9 +9,7 @@ import Loading from "../error/Loading";
 
 const arrow = process.env.PUBLIC_URL + '/img/line-page/pink-arrow.svg';
 function LineProductDescription({product}) {
-    let quantity = useSelector(state => state.cart.products.find(
-        (p) => p.id === product.id)?.quantity || 0
-    )
+    let orderItem = useSelector(state => state.cart.products.find((p) => p.id === product.id))
 
     if (!product)
         return <Loading/>;
@@ -25,7 +23,7 @@ function LineProductDescription({product}) {
             <p className="product-description not-main-p">{product.product_line.name || 'product.product_line.name'}</p>
             {/*<p className="product-price  not-main-p">{product.price?.price_value || 'product.price'}</p>*/}
 
-            {/*<ManageProductInCart    product={product} quantity={quantity} />*/}
+            <ManageProductInCart    product={product} orderItem={orderItem}/>
             { marketplaces?.length === 0 ?  <p className={ "not-main-p"}>Продукт еще недоступен для заказа</p> :
                 <p className={ "not-main-p"}>Закажите наш продукт на популярных площадках:</p> }
             <div className="link-holder">
