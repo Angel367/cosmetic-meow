@@ -8,6 +8,8 @@ import './styles/LineModule.css';
 import './styles/ProductModule.css';
 import './styles/MainModule.css';
 import './styles/VerifyProductModule.css';
+import './styles/ShopModule.css';
+import './styles/CartModule.css';
 import {
     createBrowserRouter, Navigate, Outlet,
     RouterProvider,
@@ -31,7 +33,7 @@ import Dev from "./components/feedback/Dev";
 import Contacts from "./components/feedback/Contacts";
 import OnlyForAuthenticatedRoute from "./routes/OnlyForAuthenticatedRoute";
 import AuthLayout from "./components/auth/AuthLayout";
-import Registration from "./components/auth/Login";
+import Registration from "./components/auth/Registration";
 import Login from "./components/auth/Login";
 import Orders from "./components/order/Orders";
 import Order from "./components/order/Order";
@@ -117,12 +119,12 @@ const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Layout children={<Shop/>} title={"Каталог"}/>,
+                element: <LayoutLanding children={<Shop/>} title={"Каталог"}/>,
                 errorElement: <ErrorLayout/>,
             },
             {
                 path: "product/:id_product",
-                element: <Layout children={<LineProduct/>} title={"Товар"}/>,
+                element: <LayoutLanding children={<LineProduct/>} title={"Товар"}/>,
                 errorElement: <ErrorLayout/>,
             },
         ],
@@ -203,7 +205,7 @@ const router = createBrowserRouter([
     },
     {
         path: "/cart",
-        element: <Layout children={<Cart/>} title={"Корзина"}/>,
+        element: <LayoutLanding children={<Cart/>} title={"Корзина"}/>,
         errorElement: <ErrorLayout/>,
     },
     // ************auth pages***********

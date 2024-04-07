@@ -15,21 +15,33 @@ const Header = () => {
                 <label htmlFor="menu_toggle">
                     <span></span>
                 </label>
-                <nav>
-                    <Link to={'/'} className="logo">
-                        <img alt="[logo]" src={logo}/>
-                    </Link>
-                    <Link to={'/'} className='link-index'>Главная</Link>
-                    <Link to={'/lines/3/'}>[НАЗВАНИЕ ЛИНИИ]</Link>
-                    <Link to={'/shop'}>Магазин</Link>
+            <nav onClick={() => document.getElementById('menu_toggle').checked = false}>
+                <Link to={'/'} className="logo">
+                    <img alt="[logo]" src={logo}/>
+                </Link>
+
+                {window.location.pathname === '/' ? <Link to={'/'} className={'active'}>Главная</Link> :
+                    <Link to={'/'}>Главная</Link>
+                }
+
+                {(window.location.pathname === '/lines/11' || window.location.pathname === '/lines/12')
+                    ? <Link to={'/lines'} className={'active'}>Каталог</Link> :
+                    <Link to={'/lines'}>Каталог</Link>
+                }
+                {window.location.pathname === '/development' ?
+                    <Link to={'/development'} className={'active'}>Разработка</Link> :
                     <Link to={'/development'}>Разработка</Link>
-                </nav>
+                }
+                {window.location.pathname === '/contacts' ?
+                    <Link to={'/contacts'} className={'active'}>Контакты</Link> :
+                    <Link to={'/contacts'}>Контакты</Link>
+                }
+            </nav>
         </div>
 
         <div className="button-holder">
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <Link to={'/cart'} className="basket">
-
                 <img alt="[cart]" src={cart}/>
             </Link>
             {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}

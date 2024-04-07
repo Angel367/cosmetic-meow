@@ -25,7 +25,7 @@ function FilterPanel() {
             <div className="filter-panel__price">
                 <h2>Price</h2>
                 <div className="filter-panel__price-box">
-                    <input type="text" id="price" name="price1" value="price1" />
+                    <input type="text" id="price" name="price1" value="price1" readOnly={true}/>
                     <label htmlFor="price">Price1</label>
                 </div>
             </div>

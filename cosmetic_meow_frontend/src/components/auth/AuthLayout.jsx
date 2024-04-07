@@ -15,15 +15,15 @@ function AuthLayout({children, title, scrollX=0, scrollY=0}) {
         }
         window.scrollTo(scrollX, scrollY);
     });
-    createSession();
+    // createSession();
     return (
-        <Navigate to={"/"} replace={true}/>
-        // <div>
-        //     <div>
-        //         <NotificationContainer/>
-        //     </div>
-        //     {children}
-        // </div>
+        // <Navigate to={"/"} replace={true}/>
+        <div>
+            <div>
+                <NotificationContainer/>
+            </div>
+            {children}
+        </div>
     );
 }
 

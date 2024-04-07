@@ -1,6 +1,6 @@
 import {Link, useRouteError} from "react-router-dom";
 import React from "react";
-import HeaderLanding from "../base/HeaderLanding";
+import HeaderLanding from "../base/Header";
 import FooterLanding from "../base/FooterLanding";
 
 

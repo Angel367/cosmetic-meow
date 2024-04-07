@@ -3,6 +3,7 @@
     display: flex;
     border-radius: 15px;
     width: 300px;
+    height: 400px;
     flex-direction: column;
     padding: 30px;
     justify-content: space-between;
@@ -55,8 +56,18 @@
       padding: .5rem 0;
       /*grid-area: box_;*/
   }
-
-.line-page .small-product-img-box, .small-product-img-box-subst{
+.small-product-img-box{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    justify-self: center;
+    overflow: hidden;
+    height: 200px;
+    width: 200px;
+    /*grid-area: img;*/
+}
+.line-page .small-product-img-box,  .small-product-img-box-subst{
     flex-shrink: 0;
     /*background: #DAD6E4;*/
     display: flex;
@@ -66,6 +77,8 @@
     justify-self: center;
     overflow: hidden;
     max-height: 100%;
+    width: unset;
+    height: unset;
 
 
     /*grid-area: img;*/

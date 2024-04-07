@@ -172,6 +172,10 @@ header .link-index, header nav .logo{
     header input[type=checkbox]:checked ~ nav a{
         animation: fadeIn 1s ease-in-out;
     }
+    header .button-holder a{
+        height: 24px;
+        width: 24px;
+    }
 
     @keyframes fadeIn {
         from{

@@ -3,7 +3,7 @@ import LoginForm from "./AuthForm";
 import NotificationContainer from "react-notifications/lib/NotificationContainer";
 import {Link} from "react-router-dom";
 
-function Registration() {
+function Login() {
     return (
             <main>
                 <div>
@@ -15,4 +15,4 @@ function Registration() {
     );
 }
 
-export default Registration;
+export default Login;

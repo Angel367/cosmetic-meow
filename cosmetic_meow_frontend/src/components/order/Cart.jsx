@@ -4,8 +4,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import ProductCard from "../product/ProductCard";
 import fetchData from "../../requests/fetchData";
 import {initiateProducts} from "../../redux/reduxCart";
-
-
+import {Link} from "react-router-dom";
+import Loading from "../error/Loading";
 
 
 function Cart() {
@@ -29,18 +29,18 @@ function Cart() {
     }, []);
     useEffect(() => {
         if (cart && products) {
-            if (cart[0].order_items.length === 0) {
+            console.log("cart", cart);
+            if (cart.length === 0 || cart[0].order_items.length === 0) {
                 return;
             }
             let new_order_items = [];
             for (let order_item of cart[0].order_items) {
-                let product = products.find(p => p.id === order_item.id);
+                let product = products.find(p => p.id === order_item.product);
                 let new_order_item = {
-                    price:product.discount_price.price_value,
-                    name: product.name,
-                    short_description: product.short_description,
-                    id: order_item.id,
-                    quantity: order_item.quantity
+                    id: product.id,
+                    quantity: order_item.quantity,
+                    id_in_cart: order_item.id,
+                    price: product.price?.price_value || 100,
                 };
                 new_order_items.push(new_order_item);
             }
@@ -55,33 +55,42 @@ function Cart() {
 
     const [total, setTotal] = useState(0);
      useEffect(() => {
-
           setTotal(productsInCart.reduce((total, product) => total
                 + product.price * product.quantity, 0));
         }, [productsInCart, cart]);
     if (!cart || cart.length === 0 ) {
         return (
-            <div>
+            <main>
                 <h1>Cart</h1>
                 <h2>Cart is empty</h2>
-            </div>
+                <Link to={"/shop"}>Go to shop</Link>
+            </main>
+        );
+    }
+    if (!products || products.length === 0 || productsInCart.length === 0) {
+        return (
+            <Loading/>
         );
     }
 
 
 
     return (
-        <main>
-            <h1>Cart</h1>
-            <div>
-                <h2>Products</h2>
-                {productsInCart.map((product, index=product.id) => (
-                   <ProductCard key={index} product={product} />
+        <main className={'cart-module'}>
+            <h1 className={'not-main-p'}>Cart</h1>
+            <div className={'cart-module__content'}>
+                <div className={'cart-module__products'}>
+                {productsInCart.map((product_in, index=product_in.id) => (
+                   <ProductCard key={index} product={products.find(p => p.id === product_in.id)}
+                                orderItem={product_in} />
                 ))}
-            </div>
-            <div>
+                    </div>
+
+            <div className={'cart-module__information'}>
+                <Link to={"/shop"}>Go to shop</Link>
                 <h2>Total</h2>
                 <h3>{total}</h3>
+            </div>
             </div>
         </main>
     );

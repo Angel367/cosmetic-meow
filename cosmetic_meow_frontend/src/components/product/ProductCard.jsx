@@ -3,24 +3,25 @@ import {Link} from "react-router-dom";
 
 import ManageProductInCart from "./ManageProductInCart";
 import {useSelector} from "react-redux";
+import Loading from "../error/Loading";
 
-function ProductCard({product, noButton=false, isOrder=false}) {
-    let quantity = useSelector(state => state.cart.products?.find(p =>
-        p.id === product.id)?.quantity || 0);
+function ProductCard({product, noButton=false, isOrder=false, orderItem=null}) {
+
     let price;
-    if (!product)
-            return;
+    if (!product || !product.product_line )
+        return
+
     if (product.price?.price_value){
             price = product.price.price_value;
-
     }
     else {
         price = product.price;
     }
     let img_src = process.env.PUBLIC_URL + '/img/line-page/no_photo.jpg';
-    if (product.images.length > 0){
+    if (product.images?.length > 0){
         img_src = product.images[0].image;
     }
+
 
     return (
         <div className="small-product-box">
@@ -36,7 +37,7 @@ function ProductCard({product, noButton=false, isOrder=false}) {
             <div className="small-product-main-box">
                 {noButton ? <div className="small-product-price">  </div>:
                     <div className="small-product-price">{price}</div>}
-                 <ManageProductInCart product={product} quantity={quantity} noButton={noButton} isOrder={isOrder}/>
+                 <ManageProductInCart product={product} noButton={noButton} isOrder={isOrder} orderItem={orderItem}/>
                 {/*<ManageProductInCart product={product} quantity={quantity} noButton={noButton} isOrder={isOrder}/>*/}
             </div>
         </div>

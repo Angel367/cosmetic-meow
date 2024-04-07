@@ -1,13 +1,14 @@
 import React, {useEffect} from "react";
-import HeaderLanding from "./HeaderLanding";
+import HeaderLanding from "./Header";
 import FooterLanding from "./FooterLanding";
 import NotificationContainer from "react-notifications/lib/NotificationContainer";
 import {useLocation} from "react-router-dom";
+import createSession from "../../requests/createSession";
 
 
 function LayoutLanding({children, title}) {
     const {hash } = useLocation();
-
+    createSession();
     useEffect(() => {
         if (title !== undefined) {
              document.title = title;

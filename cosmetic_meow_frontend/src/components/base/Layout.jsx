@@ -9,13 +9,7 @@ import Footer from "./Footer";
 
 function Layout({children, title, scrollX=0, scrollY=0}) {
 
-    useEffect(() => {
-        if (title !== undefined) {
-             document.title = title;
-        }
-        window.scrollTo(scrollX, scrollY);
-    });
-    createSession();
+    // createSession();
     return (
         <Navigate to={"/"} replace={true}/>
         // <div>
