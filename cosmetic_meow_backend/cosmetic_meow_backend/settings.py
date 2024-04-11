@@ -32,6 +32,7 @@ DEBUG = os.getenv('DEBUG')
 ALLOWED_HOSTS = ['*']
 
 
+
 # Application definition
 
 MY_APPS = ['cosmetic_meow_api']
@@ -56,6 +57,7 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': (
         'django_filters.rest_framework.DjangoFilterBackend',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
     'DEFAULT_PAGINATION_CLASS': 'cosmetic_meow_api.pagination.CustomPagination',
     'PAGE_SIZE': 10
 }
