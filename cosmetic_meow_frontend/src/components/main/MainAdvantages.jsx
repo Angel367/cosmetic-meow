@@ -58,7 +58,7 @@ function MainAdvantages() {
 
             </div>
             <Link to={"/contacts"}
-                  className="back">Узнать о больше компании
+                  className="back">Узнать больше о компании
 
                 <img alt="arrow" src={arrow}/>
             </Link>
