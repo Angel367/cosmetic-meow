@@ -205,3 +205,51 @@ class FeedBackSerializer(serializers.ModelSerializer):
     class Meta:
         model = FeedBack
         fields = ['id', 'name', 'email', 'message', 'type', 'created_at']
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = '__all__'
+
+class CourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = '__all__'
+
+class LessonSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Lesson
+        fields = '__all__'
+
+class UserCourseProgressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserCourseProgress
+        fields = '__all__'
+
+class UserLessonProgressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserLessonProgress
+        fields = '__all__'
+
+class QuizSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Quiz
+        fields = '__all__'
+
+class AnswerChoiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AnswerChoice
+        fields = '__all__'
+
+class UserQuizResultSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserQuizResult
+        fields = '__all__'
+
+class CoursePurchaseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CoursePurchase
+        fields = '__all__'
+
+

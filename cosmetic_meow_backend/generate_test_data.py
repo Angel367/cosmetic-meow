@@ -141,18 +141,109 @@ def generate_product_codes(num_codes=100):
         product = Product.objects.order_by('?').first()
         ProductCode.objects.create(code=code, product=product)
 
+# Function to generate fake data for Category model
+def generate_categories(num_categories=10):
+    for _ in range(num_categories):
+        name = fake.word()
+        description = fake.text()
+        Category.objects.create(name=name, description=description)
+
+# Function to generate fake data for Course model
+def generate_courses(num_courses=10):
+    for _ in range(num_courses):
+        title = fake.sentence(nb_words=6)
+        description = fake.text()
+        category = Category.objects.order_by('?').first()
+        product = Product.objects.create(
+            name=title,
+            description=description,
+            price=BasePrice.objects.order_by('?').first(),
+            discount_price=DiscountPrice.objects.order_by('?').first(),
+            short_description=description.split('.')[0]
+
+        )
+        Course.objects.create(title=title, description=description, category=category, product=product)
+
+# Function to generate fake data for Lesson model
+def generate_lessons(num_lessons=10):
+    for _ in range(num_lessons):
+        course = Course.objects.order_by('?').first()
+        title = fake.sentence(nb_words=6)
+        content = fake.text()
+        video_url = fake.url()
+        order = random.randint(1, 10)
+        Lesson.objects.create(course=course, title=title, content=content, video_url=video_url, order=order)
+
+# Function to generate fake data for Quiz model
+def generate_quizzes(num_quizzes=10):
+    for _ in range(num_quizzes):
+        lesson = Lesson.objects.order_by('?').first()
+        question = fake.sentence(nb_words=10)
+        correct_answer = fake.word()
+        Quiz.objects.create(lesson=lesson, question=question, correct_answer=correct_answer)
+
+# Function to generate fake data for AnswerChoice model
+def generate_answer_choices(num_choices=10):
+    for _ in range(num_choices):
+        quiz = Quiz.objects.order_by('?').first()
+        choice_text = fake.word()
+        AnswerChoice.objects.create(quiz=quiz, choice_text=choice_text)
+
+# Function to generate fake data for UserQuizResult model
+def generate_user_quiz_results(num_results=10):
+    for _ in range(num_results):
+        user = get_user_model().objects.order_by('?').first()
+        quiz = Quiz.objects.order_by('?').first()
+        selected_answer = fake.word()
+        correct = random.choice([True, False])
+        UserQuizResult.objects.create(user=user, quiz=quiz, selected_answer=selected_answer, correct=correct)
+
+# Function to generate fake data for UserCourseProgress model
+def generate_user_course_progress(num_progresses=10):
+    for _ in range(num_progresses):
+        user = get_user_model().objects.order_by('?').first()
+        course = Course.objects.order_by('?').first()
+        completed = random.choice([True, False])
+        progress = round(random.uniform(0, 100), 2)
+        UserCourseProgress.objects.create(user=user, course=course, completed=completed, progress=progress)
+
+# Function to generate fake data for UserLessonProgress model
+def generate_user_lesson_progress(num_progresses=10):
+    for _ in range(num_progresses):
+        user = get_user_model().objects.order_by('?').first()
+        lesson = Lesson.objects.order_by('?').first()
+        completed = random.choice([True, False])
+        UserLessonProgress.objects.create(user=user, lesson=lesson, completed=completed)
+
+# Function to generate fake data for CoursePurchase model
+def generate_course_purchases(num_purchases=10):
+    for _ in range(num_purchases):
+        user = get_user_model().objects.order_by('?').first()
+        course = Course.objects.order_by('?').first()
+        CoursePurchase.objects.create(user=user, course=course)
+
 
 # Call the functions to generate fake data
-generate_custom_users()
-generate_base_prices()
-generate_discount_prices()
-generate_clinical_testing_results()
-generate_clinical_testing_result_images()
-generate_base_price_histories()
-generate_product_partners()
-generate_product_advantages()
-generate_product_active_substances()
-generate_product_lines()
-generate_product_tags()
-generate_products()
-generate_product_codes()
+# generate_custom_users()
+# generate_base_prices()
+# generate_discount_prices()
+# generate_clinical_testing_results()
+# generate_clinical_testing_result_images()
+# generate_base_price_histories()
+# generate_product_partners()
+# generate_product_advantages()
+# generate_product_active_substances()
+# generate_product_lines()
+# generate_product_tags()
+# generate_products()
+# generate_product_codes()
+
+# generate_categories()  # New
+generate_courses()  # New
+generate_lessons()  # New
+generate_quizzes()  # New
+generate_answer_choices()  # New
+generate_user_quiz_results()  # New
+generate_user_course_progress()  # New
+generate_user_lesson_progress()  # New
+generate_course_purchases()  # New

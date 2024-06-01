@@ -11,7 +11,7 @@ from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from .filters import ProductFilter, FeedBackFilter
 from .serializers import *
 from .models import *
-from .permissions import AllCreateAdminAllAnother403, AllSafeAdminAllAnother403
+from .permissions import AllCreateAdminAllAnother403, AllSafeAdminAllAnother403, IsCoursePurchased
 
 
 class SetUserTokenGetView(APIView):
@@ -313,3 +313,50 @@ class PhoneVerifyCode(APIView):
                 {'error': 'Телефон или код не указаны'},
                 status=status.HTTP_400_BAD_REQUEST
             )
+
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+class CourseViewSet(viewsets.ModelViewSet):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+    permission_classes = [IsAuthenticated, IsCoursePurchased]
+
+class LessonViewSet(viewsets.ModelViewSet):
+    queryset = Lesson.objects.all()
+    serializer_class = LessonSerializer
+    permission_classes = [IsAuthenticated, IsCoursePurchased]
+
+class UserCourseProgressViewSet(viewsets.ModelViewSet):
+    queryset = UserCourseProgress.objects.all()
+    serializer_class = UserCourseProgressSerializer
+
+class UserLessonProgressViewSet(viewsets.ModelViewSet):
+    queryset = UserLessonProgress.objects.all()
+    serializer_class = UserLessonProgressSerializer
+
+class QuizViewSet(viewsets.ModelViewSet):
+    queryset = Quiz.objects.all()
+    serializer_class = QuizSerializer
+
+class AnswerChoiceViewSet(viewsets.ModelViewSet):
+    queryset = AnswerChoice.objects.all()
+    serializer_class = AnswerChoiceSerializer
+
+class UserQuizResultViewSet(viewsets.ModelViewSet):
+    queryset = UserQuizResult.objects.all()
+    serializer_class = UserQuizResultSerializer
+
+class CoursePurchaseViewSet(viewsets.ModelViewSet):
+    queryset = CoursePurchase.objects.all()
+    serializer_class = CoursePurchaseSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # Ограничиваем видимость покупок курсов только для текущего пользователя
+        return self.queryset.filter(user=self.request.user)
+
+    def perform_create(self, serializer):
+        # Устанавливаем текущего пользователя как владельца покупки
+        serializer.save(user=self.request.user)

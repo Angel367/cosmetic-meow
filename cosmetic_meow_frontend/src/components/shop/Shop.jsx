@@ -14,7 +14,7 @@ function Shop() {
 
     useEffect(() => {
         async function fetchDataProducts() {
-            let products = await fetchData(`product/`);
+            let products = await fetchData(`product/`, {is_active:true, is_ready_for_sale: true});
             setProducts(products.results);
         }
         fetchDataProducts();

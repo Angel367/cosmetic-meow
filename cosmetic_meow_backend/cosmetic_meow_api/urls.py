@@ -16,6 +16,15 @@ router.register(r'order_item', OrderItemViewSet, basename='order_item')
 router.register(r'pickup_point', PickUpPointViewSet, basename='pickup_point')
 router.register(r'product_partner', ProductPartnerViewSet, basename='product_partner')
 router.register(r'product_code', ProductCodeViewSet, basename='product_code')
+router.register(r'categories', CategoryViewSet)
+router.register(r'courses', CourseViewSet)
+router.register(r'lessons', LessonViewSet)
+router.register(r'user-course-progress', UserCourseProgressViewSet)
+router.register(r'user-lesson-progress', UserLessonProgressViewSet)
+router.register(r'quizzes', QuizViewSet)
+router.register(r'answer-choices', AnswerChoiceViewSet)
+router.register(r'user-quiz-results', UserQuizResultViewSet)
+router.register(r'course-purchases', CoursePurchaseViewSet)
 
 
 urlpatterns = [

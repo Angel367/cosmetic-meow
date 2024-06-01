@@ -820,3 +820,88 @@ class FeedBack(models.Model):
 
     def __str__(self):
         return f'{self.name} - {self.type} - {self.created_at}'
+
+
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+class Course(models.Model):
+    product= models.ForeignKey(Product, on_delete=models.CASCADE, related_name='courses')
+    title = models.CharField(max_length=200)
+    description = models.TextField()
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='courses')
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+
+    def __str__(self):
+        return self.title
+
+class Lesson(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='lessons')
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    video_url = models.URLField(blank=True, null=True)
+    order = models.PositiveIntegerField()
+
+    class Meta:
+        ordering = ['order']
+
+    def __str__(self):
+        return f'{self.course.title} - {self.title}'
+
+class UserCourseProgress(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='course_progress')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='user_progress')
+    completed = models.BooleanField(default=False)
+    progress = models.FloatField(default=0.0)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.course.title}'
+
+class UserLessonProgress(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='lesson_progress')
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='user_progress')
+    completed = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.lesson.title}'
+
+class Quiz(models.Model):
+    lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, related_name='quizzes')
+    question = models.CharField(max_length=500)
+    correct_answer = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f'{self.lesson.title} - {self.question}'
+
+class AnswerChoice(models.Model):
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='choices')
+    choice_text = models.CharField(max_length=200)
+
+    def __str__(self):
+        return f'{self.quiz.question} - {self.choice_text}'
+
+class UserQuizResult(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='quiz_results')
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='user_results')
+    selected_answer = models.CharField(max_length=200)
+    correct = models.BooleanField()
+
+    def __str__(self):
+        return f'{self.user.username} - {self.quiz.question}'
+
+class CoursePurchase(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='purchases')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='purchases')
+    purchased_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.user.username} - {self.course.title}'
+

@@ -25,7 +25,7 @@ function ProductCard({product, noButton=false, isOrder=false, orderItem=null}) {
 
     return (
         <div className="small-product-box">
-            <Link to={`/lines/${product.product_line.id}/products/${product.id}`}>
+            <Link to={`/lines/${product?.product_line.id }/products/${product.id}`}>
                 <div className="small-product-img-box">
                     <img alt="product" src={img_src} className="small-product-img"/>
                 </div>

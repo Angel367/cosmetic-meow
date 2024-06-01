@@ -31,10 +31,12 @@ const refreshAuthLogic = async (failedRequest) => {
     const {refresh} = refreshRes;
     const {access} = accessRes;
 
- return axios.post("token/refresh/", null, {
-  baseURL: getBaseUrl()+"auth/",
-     withCredentials: true,
-  headers: {
+ return axios.post("token/refresh/",
+     null,
+     {
+         baseURL: getBaseUrl()+"auth/",
+         withCredentials: true,
+         headers: {
 
   Authorization: `Bearer ${access}`,
   },body: {
