@@ -67,7 +67,7 @@ function Cart() {
             </main>
         );
     }
-    if (!products || products.length === 0 || productsInCart.length === 0) {
+    if (products === undefined || cart === undefined || productsInCart === undefined) {
         return (
             <Loading/>
         );
