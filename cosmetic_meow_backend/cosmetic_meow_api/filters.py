@@ -1,5 +1,5 @@
 from django_filters import rest_framework as filters
-from .models import Product, ProductTag, FeedBack
+from .models import Product, ProductTag, FeedBack, Order
 
 
 class ProductFilter(filters.FilterSet):
@@ -43,6 +43,25 @@ class ProductFilter(filters.FilterSet):
         fields = ['min_price', 'max_price', 'name', 'all_tags', 'any_tags', 'product_line', 'is_ready_for_sale',
                   'is_active']
 
+
+class OrderFilter(filters.FilterSet):
+    order_number = filters.CharFilter(
+        field_name='order_number',
+        lookup_expr='exact'
+    )
+    user = filters.NumberFilter(
+        field_name='user__id',
+        lookup_expr='exact'
+    )
+    status = filters.ChoiceFilter(
+        field_name='status',
+        choices=Order.ORDER_STATUS_CHOICES,
+        lookup_expr='exact'
+    )
+
+    class Meta:
+        model = Order
+        fields = ['order_number', 'user', 'status']
 
 class FeedBackFilter(filters.FilterSet):
     name = filters.CharFilter(

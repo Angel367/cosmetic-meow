@@ -33,12 +33,14 @@ function LayoutLanding({children, title}) {
         className = 'main-page';
     }
     return (
-        <div className={className}>
+        <div className={className + " d-flex flex-column min-vh-100"}>
             <HeaderLanding/>
             <div>
                 <NotificationContainer/>
             </div>
+            <div className="flex-grow-1">
             {children}
+            </div>
             <FooterLanding/>
         </div>
     );

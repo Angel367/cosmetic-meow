@@ -21,41 +21,34 @@ function Shop() {
     }, []);
     useEffect(() => {
         async function fetchDataCart() {
-            let cart = await fetchData(`order_item/`, {status: "cart"});
+            let cart = await fetchData(`order`, {status: "cart"});
             setCart(cart);
-
         }
-        fetchDataCart().then(r => console.log("cart", cart) );
+        fetchDataCart();
     }, []);
 
-        useEffect(() => {
-        if (cart && products) {
-            console.log("cart", cart);
-            if (cart.length === 0 ) {
+    useEffect(() => {
+        if (cart && products && cart !== undefined && products !== undefined) {
+            if (cart.length === 0 || cart[0] === undefined || cart[0].order_items === undefined || cart[0].order_items.length === 0) {
                 return;
             }
             let new_order_items = [];
-            for (let order_item of cart) {
+            for (let order_item of cart[0].order_items) {
                 let product = products.find(p => p.id === order_item.product);
-                console.log("product", product);
                 let new_order_item = {
                     id: product.id,
-                    id_in_cart: order_item.id,
                     quantity: order_item.quantity,
+                    id_in_cart: order_item.id,
                     price: product.price?.price_value || 100,
                 };
-                console.log("new_order_item", new_order_item);
                 new_order_items.push(new_order_item);
             }
             dispatch(initiateProducts(new_order_items));
-            }
-    }, [cart, products]);
+        }
+    }, [cart, products, dispatch]);
 
-    console.log("cart", cart);
-    console.log("products", products);
-    console.log("productsInCart", productsInCart);
-
-
+    console.log(cart);
+    console.log(productsInCart);
 
      if (!products || !cart )
         return (
@@ -68,7 +61,7 @@ function Shop() {
         <main className={'shop-module'}>
             <h1 className={'not-main-p'}>href</h1>
             <div className={'shop-module__content'}>
-                <FilterPanel/>
+                {/*<FilterPanel/>*/}
                 <div className={'shop-module__products'}>
                 {products.map((product, index=product.id) => (
                    <ProductCard key={index} product={product}

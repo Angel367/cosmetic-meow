@@ -15,19 +15,19 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class UserUpdateSerializer(serializers.ModelSerializer):
-    def update(self, instance, validated_data):
-        password = validated_data.pop('password', None)
-        if password:
-            instance.set_password(password)
-        for attr, value in validated_data.items():
-            setattr(instance, attr, value)
-        instance.save()
-        return instance
+    # def update(self, instance, validated_data):
+    #     password = validated_data.pop('password', None)
+    #     if password:
+    #         instance.set_password(password)
+    #     for attr, value in validated_data.items():
+    #         setattr(instance, attr, value)
+    #     instance.save()
+    #     return instance
 
     class Meta:
         model = CustomUser
-        fields = ['phone_number', 'password', 'first_name', 'last_name', 'middle_name', 'email', 'date_of_birth']
-        extra_kwargs = {'password': {'write_only': True}}
+        fields = ['phone_number',  'first_name', 'last_name', 'middle_name', 'email', 'date_of_birth']
+        # extra_kwargs = {'password': {'write_only': True}}
 
 
 class BasePriceSerializer(serializers.ModelSerializer):
@@ -173,6 +173,8 @@ class OrderItemSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
 
         if request.user.is_authenticated:
+            if request.session.session_key:
+                Order.objects.filter(session_key=request.session.session_key).update(user=request.user)
             cart = Order.objects.get_or_create(user=request.user, status='cart')[0]
         else:
             cart = Order.objects.get_or_create(session_key=request.session.session_key, status='cart')[0]

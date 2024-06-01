@@ -6,7 +6,7 @@ import getBaseUrl from "./baseUrl";
 import Cookies from 'js-cookie';
 
 const axiosService = axios.create({
- baseURL: getBaseUrl()+"auth/token/verify/",
+ baseURL: getBaseUrl(),
     withCredentials: true,
  headers: {
  "Content-Type": "application/json",
@@ -61,23 +61,5 @@ const refreshAuthLogic = async (failedRequest) => {
 }
 ;
 createAuthRefreshInterceptor(axiosService,  refreshAuthLogic);
-export function fetcherUser() {
- return axiosService.get(getBaseUrl() + 'auth/update/').then((res) => res.data)
-        .catch((error) => {
-            if (error.response.status === 401) {
-                logout();
-            }
-            return error.response.data;
-        });
 
-}
-export async function updateUser(data) {
- return await axiosService.put(getBaseUrl() + 'auth/update/', data).then((res) => res.data)
-     .catch((error) => {
-            if (error.response.status === 401) {
-                logout();
-            }
-         return error.response.data;
-     });
-}
 export default axiosService;

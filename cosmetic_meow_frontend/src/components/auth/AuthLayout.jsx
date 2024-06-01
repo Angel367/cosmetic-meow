@@ -1,29 +1,27 @@
-import React, {useEffect} from "react";
 
-import Cookies from "js-cookie";
-import NotificationContainer from "react-notifications/lib/NotificationContainer";
 
-import axios from "axios";
-import createSession from "../../requests/createSession";
-import {Navigate, useNavigate} from "react-router-dom";
+import React, { useEffect } from "react";
 
-function AuthLayout({children, title, scrollX=0, scrollY=0}) {
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Layout from "../base/Layout"; // Подключаем стили Bootstrap
 
+
+
+function AuthLayout({ children, title, scrollX = 0, scrollY = 0 }) {
     useEffect(() => {
         if (title !== undefined) {
-             document.title = title;
+            document.title = title;
         }
         window.scrollTo(scrollX, scrollY);
-    });
-    // createSession();
+    }, [title, scrollX, scrollY]); // Указываем зависимости для useEffect
+
     return (
-        // <Navigate to={"/"} replace={true}/>
-        <div>
-            <div>
-                <NotificationContainer/>
-            </div>
-            {children}
-        </div>
+        <Layout>
+                <div children={"d-flex align-items-center justify-content-center flex-column align-self-center"}>
+
+                {children}
+                </div>
+        </Layout>
     );
 }
 

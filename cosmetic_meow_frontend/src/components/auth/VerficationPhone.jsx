@@ -31,7 +31,7 @@ function VerificationPhone({phone_number}) {
             NotificationManager.success("Код отправлен", "Успешная отправка", 5000);
 
         } else {
-            NotificationManager.error("Произошла ошибка. Попробуйте позже", "Ошибка отправки", 5000);
+            NotificationManager.error(sendCode.data?.error, "Ошибка отправки", 5000);
         }
 
     }

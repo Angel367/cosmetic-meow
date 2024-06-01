@@ -1,4 +1,5 @@
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import ReactDOM from 'react-dom/client';
 import './styles/BaseStyles/BaseStyles.css';
 import './styles/BaseStyles/ButtonStyles.css';
@@ -25,7 +26,6 @@ import Line from "./components/line/Line";
 import LineProduct from "./components/product/LineProduct";
 import OnlyForAnonymousRoute from "./routes/OnlyForAnonymousRoute";
 import ProfileLayout from "./components/profile/ProfileLayout";
-import ProfileContent from "./components/profile/ProfileContent";
 import PersonalEdit from "./components/profile/PersonalEdit";
 import Personal from "./components/profile/Personal";
 import Layout from "./components/base/Layout";
@@ -134,78 +134,40 @@ const router = createBrowserRouter([
     {
         path: "/profile",
         element: <OnlyForAuthenticatedRoute>
+
             <Outlet/>
+
         </OnlyForAuthenticatedRoute>,
         errorElement: <ErrorLayout/>,
         children: [
             {
                 index: true,
-                element: <Layout
-                    children={<ProfileLayout content={<ProfileContent/>}/>}
-                    title={"Профиль"}/>,
-
+                element: <ProfileLayout content={<Personal/>} title={"Профиль"}/>,
                 errorElement: <ErrorLayout/>,
-
             },
             {
-                path: "personal/",
-                element: <Outlet/>,
-                children: [
-                    {
-                        index: true,
-                        element: <Layout children=
-                                             {
-                            <ProfileLayout content={<Personal/>}/>
-                        }
-                                         title={"Личные данные"}/>,
-
-                        errorElement: <ErrorLayout/>,
-                    },
-                    {
-                        path: "edit/",
-                        element: <Layout children=
-                                             {
-                            <ProfileLayout content={<PersonalEdit/>}/>
-                        }
-                                         title={"Редактирование"}/>,
-                        errorElement: <ErrorLayout/>,
-                    },
-                ],
+                path: "edit",
+                element: <ProfileLayout content={<PersonalEdit/>} title={"Редактирование профиля"}/>,
                 errorElement: <ErrorLayout/>,
             },
-
             {
-
-                path: "orders/",
-                element: <Outlet/>,
-                children: [
-                {
-                    index: true,
-                    element: <Layout children=
-                                         {
-                            <ProfileLayout content={<Orders/>}/>
-                        }
-                                     title={"Заказы"}/>,
-                    errorElement: <ErrorLayout/>,
-                },
-                {
-                    path: "order/:id_order",
-                    element: <Layout children=
-                                         {
-                            <ProfileLayout content={<Order/>}/>
-                        }
-                                     title={"Заказ"}/>,
-                    errorElement: <ErrorLayout/>,
-                },
-               ],
+                path: "orders",
+                element: <ProfileLayout content={<Orders/>} title={"История заказов"}/>,
                 errorElement: <ErrorLayout/>,
             },
+            {
+                path: "orders/:id_order",
+                element: <ProfileLayout content={<Order/>} title={"Заказ"}/>,
+                errorElement: <ErrorLayout/>,
+            },
+
 
         ],
+
     },
     {
         path: "/cart",
-        element: <LayoutLanding children={<Cart/>} title={"Корзина"}/>,
+        element: <Layout children={<Cart/>} title={"Корзина"}/>,
         errorElement: <ErrorLayout/>,
     },
     // ************auth pages***********

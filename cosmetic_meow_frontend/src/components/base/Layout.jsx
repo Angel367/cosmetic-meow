@@ -1,25 +1,26 @@
-import React, {useEffect} from "react";
-import Header from "./Header";
+import React from "react";
+import { Container } from "react-bootstrap"; // Импортируем компонент контейнера из Bootstrap
+import { NotificationContainer } from "react-notifications"; // Импортируем компонент уведомлений
+import Header from "./Header"; // Импортируем компонент шапки
+import Footer from "./Footer"; // Импортируем компонент подвала
 
-import NotificationContainer from "react-notifications/lib/NotificationContainer";
+function Layout({ children, title, scrollX = 0, scrollY = 0 }) {
+    // createSession(); // Создаем сессию
 
-import createSession from "../../requests/createSession";
-import {Navigate, useNavigate} from "react-router-dom";
-import Footer from "./Footer";
-
-function Layout({children, title, scrollX=0, scrollY=0}) {
-
-    // createSession();
     return (
-        <Navigate to={"/"} replace={true}/>
-        // <div>
-        //     <Header/>
-        //     <div>
-        //         <NotificationContainer/>
-        //     </div>
-        //     {children}
-        //     <Footer/>
-        // </div>
+        <div className={"d-flex flex-column min-vh-100"}>
+            <Header /> {/* Вставляем шапку */}
+            <Container
+                className={"flex-grow-1"}
+
+            >
+                <div>
+                    <NotificationContainer /> {/* Контейнер для уведомлений */}
+                </div>
+                {children}
+            </Container>
+            <Footer /> {/* Вставляем подвал */}
+        </div>
     );
 }
 

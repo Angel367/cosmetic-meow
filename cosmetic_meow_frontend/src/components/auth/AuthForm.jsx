@@ -46,16 +46,19 @@ function AuthForm({path="login/", buttonName="Войти"}) {
             navigate('/profile');
         }
         else {
-            NotificationManager.error("Произошла ошибка. Попробуйте позже", "Ошибка auth", 5000);
+            NotificationManager.error(authForm.data?.error,
+                "Ошибка", 5000);
         }
 
 
 
     }
     return (
-        <form className="auth" noValidate
-              validated={validated.toString()} onSubmit={handleSubmit} method="POST">
-            <p>
+        <form  noValidate
+              validated={validated.toString()} onSubmit={handleSubmit} method="POST"
+              className={"d-flex flex-column  auth gap-3"}
+              >
+            <p className={"d-flex  gap-2 align-items-center"}>
                 <label htmlFor={"phone_number"}>Телефон</label>
                 <input id={"phone_number"} type="tel" placeholder="Ваш телефон..." required={true}
                        autoCorrect={"off"}
@@ -63,29 +66,32 @@ function AuthForm({path="login/", buttonName="Войти"}) {
                        spellCheck={"false"}
                        autoComplete={"off"}
                        onChange={(e) => setForm({...form, phone_number: e.target.value})}/>
-
+{component}
             </p>
-            {component}
-            <p>
+
+            <p className={"d-flex  gap-2 align-items-center"}>
                 <label htmlFor={"password"}>Пароль</label>
-            <input id={"password"} type="password" placeholder="Ваш пароль..." required={true}
-                   minLength={8}
-                   autoCorrect={"off"}
-                   autoCapitalize={"off"}
-                   spellCheck={"false"}
-                   autoComplete={"off"}
-                onChange={(e) => setForm({...form, password: e.target.value})}/>
+                <input id={"password"} type="password" placeholder="Ваш пароль..." required={true}
+                       minLength={8}
+                       autoCorrect={"off"}
+                       autoCapitalize={"off"}
+                       spellCheck={"false"}
+                       autoComplete={"off"}
+                       onChange={(e) => setForm({...form, password: e.target.value})}/>
             </p>
-            <p>
-            <button type="submit"
-                    id={"submitAuth"}
 
-                    onSubmit={handleSubmit}>
-                {buttonName}
-            </button>
+            <p className={"d-flex gap-2 align-items-center"}>
+                <button type="submit"
+                        id={"submitAuth"}
+                        className={"button blue"}
+
+                        onSubmit={handleSubmit}>
+                    {buttonName}
+                </button>
             </p>
         </form>
     );
 
 }
+
 export default AuthForm;

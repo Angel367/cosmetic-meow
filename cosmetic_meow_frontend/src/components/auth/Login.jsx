@@ -5,7 +5,7 @@ import {Link} from "react-router-dom";
 
 function Login() {
     return (
-            <main>
+            <main className=" d-flex justify-content-center align-items-center flex-column">
                 <div>
                     <NotificationContainer/>
                 </div>

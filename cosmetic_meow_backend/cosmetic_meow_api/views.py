@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 
-from .filters import ProductFilter, FeedBackFilter
+from .filters import ProductFilter, FeedBackFilter, OrderFilter
 from .serializers import *
 from .models import *
 from .permissions import AllCreateAdminAllAnother403, AllSafeAdminAllAnother403, IsCoursePurchased
@@ -129,11 +129,18 @@ class ProductCodeViewSet(viewsets.ReadOnlyModelViewSet):
 class OrderViewSet(viewsets.ModelViewSet):
     queryset = Order.objects.all()
     serializer_class = OrderSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = OrderFilter
+
 
     def retrieve(self, request, *args, **kwargs):
         # check does user have access to this order
         order = self.get_object()
         if request.user.is_authenticated:
+            if order.session_key == request.session.session_key:
+                # order.session_key = None
+                order.user = request.user
+                order.save()
             if request.user.is_admin or order.user == request.user:
                 serializer = self.get_serializer(order)
                 return Response(serializer.data)
@@ -150,6 +157,10 @@ class OrderViewSet(viewsets.ModelViewSet):
         if not self.request.session.session_key:
             self.request.session.create()
         if Order.objects.filter(session_key=self.request.session.session_key, status='cart').exists():
+            if self.request.user.is_authenticated:
+                order = Order.objects.get(session_key=self.request.session.session_key, status='cart')
+                # order.session_key = None
+                order.user = self.request.user
             return Response({'error': 'You already have a cart'}, status=400)
         if self.request.user.is_authenticated and \
                 Order.objects.filter(user=self.request.user.id, status='cart').exists():
@@ -170,7 +181,14 @@ class OrderViewSet(viewsets.ModelViewSet):
                 serializer = OrderSerializer(queryset, many=True)
                 return Response(serializer.data)
             else:
+                queryset = Order.objects.filter(session_key=request.session.session_key)
+                for order in queryset:
+                    # order.session_key = None
+                    order.user = request.user
+                    order.save()
                 queryset = Order.objects.filter(user=request.user)
+                if request.query_params.get('status') == 'cart':
+                    queryset = queryset.filter(status='cart')
                 serializer = OrderSerializer(queryset, many=True)
                 return Response(serializer.data)
         else:
@@ -183,6 +201,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         order = self.get_object()
         order.clear_cart()
         return Response({'message': 'Cart cleared successfully'})
+
 
     @action(detail=True, methods=['get'])
     def total_price(self, request, pk=None):
@@ -207,7 +226,14 @@ class OrderItemViewSet(viewsets.ModelViewSet):
                 serializer = OrderItemSerializer(queryset, many=True)
                 return Response(serializer.data)
             else:
+                queryset = Order.objects.filter(session_key=request.session.session_key)
+                for order in queryset:
+                    # order.session_key = None
+                    order.user = request.user
+                    order.save()
                 queryset = OrderItem.objects.filter(order__user=request.user)
+                if request.query_params.get('status') == 'cart':
+                    queryset = queryset.filter(status='cart')
                 serializer = OrderItemSerializer(queryset, many=True)
                 return Response(serializer.data)
         else:
@@ -219,6 +245,10 @@ class OrderItemViewSet(viewsets.ModelViewSet):
         # check does user have access to this order item
         order_item = self.get_object()
         if request.user.is_authenticated:
+            if order_item.session_key == request.session.session_key:
+                order_item.session_key = None
+                order_item.user = request.user
+                order_item.save()
             if request.user.is_admin or order_item.order.user == request.user:
                 serializer = self.get_serializer(order_item)
                 return Response(serializer.data)

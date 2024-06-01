@@ -17,8 +17,10 @@ async function postUser(urlPart, data) {
     ).then((res) => {
 
         setUserData(res.data);
+
         return {
             status: res.status,
+            data: res.data
 
         };}
     ).catch((err) => {
