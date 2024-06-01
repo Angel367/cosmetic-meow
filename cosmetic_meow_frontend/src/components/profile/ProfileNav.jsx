@@ -25,6 +25,9 @@ function ProfileNav() {
                     <li className="nav-item">
                         <NavLink className="nav-link"  to="/profile/orders">Заказы</NavLink>
                     </li>
+                    <li className="nav-item">
+                        <NavLink className="nav-link"  to="/profile/courses">Мои курсы</NavLink>
+                    </li>
 
                     {/*<li className="nav-item">*/}
                     {/*    <NavLink className="nav-link" activeClassName="active" to="/profile/orders/history">История заказов</NavLink>*/}

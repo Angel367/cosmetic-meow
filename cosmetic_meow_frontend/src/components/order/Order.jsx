@@ -1,55 +1,57 @@
 import React from "react";
 import ProductCard from "../product/ProductCard";
+import OrderLine from "./OrderLine";
+import {useParams} from "react-router-dom";
+import axiosService from "../../requests/axiosService";
 
-const Order = ({ order }) => {
-    if (!order) {
-        order = {
-            id: 1,
-            dateOfLastStatus: "July 20, 2020",
-            orderNumber: "123456",
-            orderTotal: 100.00,
-            status: "Delivered",
-            address: "123 Main St, New York, NY 10001",
-            orderProducts: [
-                {
-                    id: 1,
-                    name: "Product 1",
-                    price: 10.00,
-                    quantity: 2
-                },
-                {
-                    id: 2,
-                    name: "Product 2",
-                    price: 20.00,
-                    quantity: 3
-                },
-                {
-                    id: 3,
-                    name: "Product 3",
-                    price: 30.00,
-                    quantity: 4
-                }
-            ]
+const Order = () => {
+    const {id_order} = useParams();
+    const [order, setOrder] = React.useState(null);
+    const [products, setProducts] = React.useState([]);
+
+    React.useEffect(() => {
+        const fetchOrder = async () => {
+            const response = await axiosService(`order/${id_order}/`);
+            setOrder(response.data);
         }
+        fetchOrder();
+    }, [id_order]);
+    React.useEffect(() => {
+        const fetchProducts = async () => {
+            const response = await axiosService('product/');
+            setProducts(response.data.results);
+        }
+        fetchProducts();
+    }, []);
+
+    if (order === undefined || order === null || products === undefined || products === null) {
+        return <h1>Loading...</h1>;
     }
+
     return (
-        <article>
+        <article className={"container mt-5"}>
         <section>
-            <h2>Order Details</h2>
-                <div className={"orders__container"}>
-                    {order.map(order => (
-                        <ProductCard product={order} noButton={true} isOrder={true} />
-                    ))}
-                </div>
+            <h2>Order Information</h2>
+            <div className={"orders__container d-flex gap-1"}>
+                <p>№{order.id}</p>
+                {order.status === "in_progress" ?
+                    <p>В процессе</p> :
+                    <p>Завершен</p>
+                    }
+                <p>{order.created_at}</p>
+            </div>
+        </section>
+            <section>
+            <h2>Order Items</h2>
+            <div className={"orders__container d-flex flex-wrap"}>
+                {order.order_items?.map(product => (
+                    <ProductCard key={product.id} product={products.find(p => p.id === product.product)}
+                                    noButton={true} />
+                ))}
+            </div>
         </section>
 
-        <section>
-            <p>Order Number: {order.orderNumber}</p>
-            <p>Order Total: {order.orderTotal}</p>
-            <p>Status: {order.status}</p>
-            <p>Date of Last Status: {order.dateOfLastStatus}</p>
-            <p>Address: {order.address}</p>
-        </section>
+
         </article>
     );
 }

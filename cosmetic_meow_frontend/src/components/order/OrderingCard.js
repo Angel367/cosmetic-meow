@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import axiosService from "../../requests/axiosService";
 import {NotificationManager} from "react-notifications";
 
-function OrderingCard({total, cart}) {
+function OrderingCard({total, cart, setCart}) {
     const productsInCart = useSelector(state => state.cart.products);
     const [name, setName] = useState(cart.receiver_full_name === null
         || cart.receiver_full_name === ""
@@ -57,6 +57,7 @@ function OrderingCard({total, cart}) {
         });
         if (order !== undefined && order.status === 200) {
             NotificationManager.success('Заказ успешно оформлен');
+            setCart(null);
         }
     }
 

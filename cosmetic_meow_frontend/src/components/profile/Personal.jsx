@@ -39,6 +39,10 @@ function Personal() {
                                 <li className="list-group-item">Дата рождения: {userData?.date_of_birth}</li>
 
                             </ul>
+                            <button onClick={() => logout()} className={"btn btn-primary"}
+                                    style={{position: "absolute", right: "10px", bottom: "10px"}}
+                            >Logout
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -47,4 +51,5 @@ function Personal() {
     );
 
 }
+
 export default Personal;

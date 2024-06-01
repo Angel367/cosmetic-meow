@@ -1,13 +1,20 @@
 import React from "react";
+import {Link} from "react-router-dom";
 
 const OrderLine = ({ order }) => {
+    let status = order.status;
+    if (order.status === 'in_progress') {
+        status = 'В обработке'
+    }
+    if (order.status === 'done') {
+        status = 'Завершен'
+    }
     return (
-        <div>
-            <p>Order Number: {order.orderNumber}</p>
-            <p>Order Total: {order.orderTotal}</p>
-            <p>Status: {order.status}</p>
-            <p>Date of Last Status: {order.dateOfLastStatus}</p>
-            <p>Address: {order.address}</p>
+        <div className={'d-flex justify-content-between align-items-center'}>
+            <p>{order.id}</p>
+            <p>{status}</p>
+            <p>{order.updated_at}</p>
+            <Link to={`${order.id}`} className="btn btn-primary">Подробнее</Link>
         </div>
     );
 }

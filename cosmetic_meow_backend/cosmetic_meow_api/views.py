@@ -143,6 +143,7 @@ class OrderViewSet(viewsets.ModelViewSet):
                 order.save()
             if request.user.is_admin or order.user == request.user:
                 serializer = self.get_serializer(order)
+
                 return Response(serializer.data)
             else:
                 return Response({'error': 'You do not have permission to access this order'}, status=403)
@@ -173,12 +174,16 @@ class OrderViewSet(viewsets.ModelViewSet):
         return super().create(request, *args, **kwargs)
 
     def list(self, request, *args, **kwargs):
+        status = request.query_params.get('status')
         if not request.session.session_key:
             request.session.create()
         if request.user.is_authenticated:
             if request.user.is_admin:
                 queryset = Order.objects.all()
+                if status:
+                    queryset = queryset.filter(status=status)
                 serializer = OrderSerializer(queryset, many=True)
+
                 return Response(serializer.data)
             else:
                 queryset = Order.objects.filter(session_key=request.session.session_key)
@@ -187,12 +192,15 @@ class OrderViewSet(viewsets.ModelViewSet):
                     order.user = request.user
                     order.save()
                 queryset = Order.objects.filter(user=request.user)
-                if request.query_params.get('status') == 'cart':
-                    queryset = queryset.filter(status='cart')
+                if status:
+                    queryset = queryset.filter(status=status)
                 serializer = OrderSerializer(queryset, many=True)
                 return Response(serializer.data)
         else:
-            queryset = Order.objects.filter(session_key=request.session.session_key, session_key__isnull=False)
+
+            queryset = Order.objects.filter(session_key=request.session.session_key)
+            if status:
+                queryset = queryset.filter(status=status)
             serializer = OrderSerializer(queryset, many=True)
             return Response(serializer.data)
 

@@ -24,14 +24,18 @@ const Header = () => {
                     <Link to={'/'}>Главная</Link>
                 }
 
-                {(window.location.pathname === '/lines/11' || window.location.pathname === '/lines/12')
-                    ? <Link to={'/lines'} className={'active'}>Каталог</Link> :
-                    <Link to={'/lines'}>Каталог</Link>
+                {(window.location.pathname === '/lines/11' || window.location.pathname === '/lines/12' || window.location.pathname === '/shop')
+                    ? <Link to={'/shop'} className={'active'}>Каталог</Link> :
+                    <Link to={'/shop'}>Каталог</Link>
                 }
-                {window.location.pathname === '/development' ?
-                    <Link to={'/development'} className={'active'}>Разработка</Link> :
-                    <Link to={'/development'}>Разработка</Link>
-                }
+                {/*{window.location.pathname === '/development' ?*/}
+                {/*    <Link to={'/development'} className={'active'}>Разработка</Link> :*/}
+                {/*    <Link to={'/development'}>Разработка</Link>*/}
+                {/*}*/}
+                {/*{window.location.pathname === '/education' ?*/}
+                {/*    <Link to={'/education'} className={'active'}>Обучение</Link> :*/}
+                {/*    <Link to={'/education'}>Обучение</Link>*/}
+                {/*}*/}
                 {window.location.pathname === '/contacts' ?
                     <Link to={'/contacts'} className={'active'}>Контакты</Link> :
                     <Link to={'/contacts'}>Контакты</Link>

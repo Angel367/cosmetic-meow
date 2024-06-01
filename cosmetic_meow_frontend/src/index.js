@@ -39,6 +39,9 @@ import Orders from "./components/order/Orders";
 import Order from "./components/order/Order";
 import LayoutLanding from "./components/base/LayoutLanding";
 import VerificationProduct from "./components/product/VerificationProduct";
+import MyCourses from "./components/profile/MyCourses";
+import Course from "./components/profile/Course";
+import Lesson from "./components/profile/Lesson";
 
 
 
@@ -152,14 +155,51 @@ const router = createBrowserRouter([
             },
             {
                 path: "orders",
-                element: <ProfileLayout content={<Orders/>} title={"История заказов"}/>,
+                element: <ProfileLayout content={<Outlet/>} title={"Заказы"}/>,
                 errorElement: <ErrorLayout/>,
+                children: [
+                    {
+                        index: true,
+                        element: <Orders/>,
+                        errorElement: <ErrorLayout/>,
+                    },
+                    {
+                        path: ":id_order",
+                        element: <Order/>,
+                        errorElement: <ErrorLayout/>,
+                    },
+                ],
             },
             {
-                path: "orders/:id_order",
-                element: <ProfileLayout content={<Order/>} title={"Заказ"}/>,
+                path: "courses",
+                element: <ProfileLayout content={<Outlet/>} title={"Курсы"}/>,
                 errorElement: <ErrorLayout/>,
-            },
+                children: [
+                    {
+                        index: true,
+                        element: <MyCourses/>,
+                        errorElement: <ErrorLayout/>,
+                    },
+                    {
+                        path: ":id_course",
+                        element: <Outlet/>,
+                        errorElement: <ErrorLayout/>,
+                        children: [
+                            {
+                                index: true,
+                                element: <Course/>,
+                                errorElement: <ErrorLayout/>,
+                            },
+                            {
+                                path: "lesson/:id_lesson",
+                                element: <Lesson/>,
+                                errorElement: <ErrorLayout/>,
+                            },
+                        ],
+                    },
+                ],
+            }
+
 
 
         ],

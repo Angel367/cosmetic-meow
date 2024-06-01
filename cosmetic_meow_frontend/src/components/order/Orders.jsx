@@ -11,15 +11,19 @@ const Orders = () => {
         }
         fetchOrders();
     }, []);
-  return <div className={"orders"}>
-    <h1>Orders</h1>
-      <div className={"orders__container"}>
-        {orders.map(order => (
-          <OrderLine key={order.id} order={order} />
-        ))}
-
+    return (<div className="orders container mt-5">
+        <h1 className="mb-4">Orders</h1>
+        <div className="orders__container row">
+            <div className="col-md-12 mb-3">
+                {/*<OrderLine order={{id: 'ID', status: 'Status', updated_at: 'Updated at'}}/>*/}
+            </div>
+            {orders.map(order => (
+                <div key={order.id} className="col-md-12 mb-3">
+                    <OrderLine order={order}/>
+                </div>
+            ))}
         </div>
-    </div>;
+    </div>);
 
 }
 export default Orders;

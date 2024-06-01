@@ -4,6 +4,10 @@ import ProductCard from "../product/ProductCard";
 import fetchData from "../../requests/fetchData";
 import {initiateProducts} from "../../redux/reduxCart";
 import FilterPanel from "./FilterPanel";
+import {isAuth} from "../../hooks/user.actions";
+import axios from "axios";
+import axiosService from "../../requests/axiosService";
+import Loading from "../error/Loading";
 
 
 function Shop() {
@@ -21,8 +25,23 @@ function Shop() {
     }, []);
     useEffect(() => {
         async function fetchDataCart() {
-            let cart = await fetchData(`order`, {status: "cart"});
-            setCart(cart);
+            if (isAuth()){
+                let cart = await axiosService('order/', {
+
+                  params: {
+                    status: 'cart'
+                  }
+                }
+                );
+                setCart(cart);
+            } else {
+                 let cart = await fetchData(`order/`, {status: 'cart'});
+                setCart(cart);
+            }
+
+
+
+        console.log(cart);
         }
         fetchDataCart();
     }, []);
@@ -48,19 +67,17 @@ function Shop() {
     }, [cart, products, dispatch]);
 
     console.log(cart);
-    console.log(productsInCart);
+    console.log(products);
 
      if (!products || !cart )
         return (
-            <div>
-                Загрузка
-            </div>
+            <Loading/>
         );
 
     return (
         <main className={'shop-module'}>
-            <h1 className={'not-main-p'}>href</h1>
-            <div className={'shop-module__content'}>
+            {/*<h1 className={'not-main-p'}>href</h1>*/}
+            <div className={'shop-module__content mt-5 mb-5'}>
                 {/*<FilterPanel/>*/}
                 <div className={'shop-module__products'}>
                 {products.map((product, index=product.id) => (

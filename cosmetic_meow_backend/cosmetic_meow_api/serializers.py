@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.generics import get_object_or_404
 
 from .models import *
 
@@ -191,6 +192,19 @@ class OrderItemSerializer(serializers.ModelSerializer):
 
 class OrderSerializer(serializers.ModelSerializer):
     order_items = OrderItemSerializer(many=True, read_only=True)
+
+    def update(self, instance, validated_data):
+        super().update(instance, validated_data)
+        order = instance
+        if order.status == 'in_progress':
+            for order_item in order.order_items.all():
+                product = order_item.product
+                if Course.objects.filter(product_id=product).exists():
+                    CoursePurchase.objects.create(
+                        user=order.user,
+                        course=Course.objects.filter(product_id=product)[0]
+                    )
+        return instance
 
     class Meta:
         model = Order

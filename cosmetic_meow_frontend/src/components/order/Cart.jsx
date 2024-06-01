@@ -26,7 +26,11 @@ function Cart() {
     useEffect(() => {
         async function fetchDataCart() {
             if (isAuth())
-               axiosService('order', {status: "cart"})
+               axiosService('order',{
+                   params: {
+                          status: "cart"
+                   }
+                })
 .then((response) => {
                     setCart(response.data);
                 })
@@ -73,7 +77,7 @@ function Cart() {
 
     if (!cart || cart?.length === 0) {
         return (
-            <div className="d-flex flex-column mt-5 mb-5 align-items-center justify-content-center gap-3">
+            <div className="d-flex flex-column mt-5 mb-5 align-items-center justify-content-center gap-3 flex-wrap">
 
                 <h1>Корзина</h1>
                 <h2>Корзина пуста</h2>
@@ -101,7 +105,7 @@ function Cart() {
                         ))}
                     </div>
                 </div>
-                <OrderingCard total={total} cart={cart[0]}/>
+                <OrderingCard total={total} cart={cart[0]} setCart={setCart}/>
             </div>
         </main>
     );
