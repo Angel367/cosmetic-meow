@@ -1,3 +1,5 @@
+Убери редирект на https, я сейчас запускаю без доменов, просто по ip адресу
+
 server {
     listen 80;
     server_name licsideris.online dr-sechenov.ru dr-sechenov.online лик-сидерис.рф licsideris.ru www.licsideris.online www.dr-sechenov.ru www.dr-sechenov.online www.лик-сидерис.рф www.licsideris.ru;
